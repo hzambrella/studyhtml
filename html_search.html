@@ -1,0 +1,218 @@
+﻿<!DOCUMENT HTML>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>hz初学html（看！head的title,在浏览器头上）</title>
+<style>
+.cities {
+    background-color:black;
+    color:white;
+    margin:20px;
+    padding:20px;
+} 
+span.red {color:red;}
+</style><!-- 展示div的用法所用,建议将其写成css-->
+</head>
+
+<body style="background-color:PowderBlue"><!--这里设置页面背景和字的格式-->
+<a name="tips">开头（锚的用法）</a>
+<br />
+<a href=#chapter1>chapter1：元素</a>
+<br />
+<a href=#chapter2>chapter2：布局</a>
+<br />
+<a href=#chapter3>chapter3：框架</a>
+<br />
+<a href=#chapter4>chapter4：js，head</a>
+<br/>
+<a href=#chapter5>chapter5: input,form,表单的用法</a>
+<br/>
+<a href=#chapter6>chapter6: object</a>
+<br/>
+<h1 style="text-align:center">这是标题(style="text-align:center:居中,align调整位置")</h1>
+<p>这是段落</p>
+<a href="www.baidu.com">这是链接</a>
+ <!--这是一段注释。注释不会在浏览器中显示。--> 
+ <!--
+ 这样注释一大段
+ -->
+ <br />  <!-- 这是个换行符？  -->
+<img src="www.baidu.picture" width="100"  height="100" /><!--这是图片不会换行-->  
+
+
+<p>  
+ 换行的<br/>用法
+</p>
+<hr />
+<!--第一章-->
+<a name="chapter1">chapter1：元素</a>
+<p>1.'hr/'的用法</p>
+<hr/>
+<p>注意！       连续的空格
+只会变成一个<p>
+<pre>pre就     是这么         任性</pre>
+<code>
+code:
+var person = {
+    firstName:"Bill",
+    lastName:"Gates",
+    age:50,
+    eyeColor:"blue"
+}
+
+<p>var的用法：<var>E</var> = <var>m</var> <var>c</var><sup>2</sup></p>
+
+</code>
+
+<p style="font-family:verdana;color:red">style样式的用法：style<p>
+<p style="font-family:verdana">font-family:字体<p>
+<p style="font-size:10px">font-size字体大小</p>
+<p><q>q:引号</q></p>
+<p>&lt; 或 &#60;</p>
+<a href="http://www.w3school.com.cn/html/html_entities.asp">更多字符实体<a>
+<br />
+
+<p><kbd>File | Open...</kbd></p>
+
+<a href="http://www.w3school.com.cn/html/html_formatting.asp" target="_blank">点击这里查看文本格式化标签(注意target="_blank"可以在新窗口打开)</p>
+<a href="#tips">回到开头（锚的用法）</a>
+<a href="http://www.baidu.com#tips">锚链接</a>
+<br/>
+<a href="http://www.w3school.com.cn/html/html_images.asp" target="_blank">点击这里查看图片用法</a>
+<a href="/example/"><img border="0" alt="百度" src="http://www.w3school.com.cn/html/html_images.asp">图片链接按钮（alt是个好东西）</a>
+<p>表格和列表的用法：使用时再说<p/>
+
+
+
+<br/>
+<!--第二章-->
+<hr/>
+<a name="chapter2">chapter2：布局</a>
+<hr />
+ <br>div的用法：class</br>
+<div class="cities">
+<h2>London</h2>
+<p>London is the capital city of England. 
+It is the most populous city in the United Kingdom, 
+with a metropolitan area of over 13 million inhabitants.</p>
+</div>
+
+<div class="cities">
+<h2>Paris</h2>
+<p>Paris is the capital and most<span class="red"> populous city</span> of France.</p>
+</div>
+<br/>
+<a href="http://www.w3school.com.cn/html/html_layout.asp" target="_blank">体验div分块</a>
+<br/>
+<a href="http://www.w3school.com.cn/html/html_responsive.asp" target="_blank">响应式和bootstrap</a>
+<hr/>
+<!--第三章-->
+<a name="chapter3">chapter3：框架</a>
+<br/>
+<hr/>
+
+<p>框架是为了内嵌页面和分栏等</p>
+<p>用到时再学习</p>
+
+<!--第四章-->
+<hr/>
+<a name="chapter4">chapter4：js</a>
+<hr/>
+
+<script type="text/javascript">
+<!--
+js显示的:document.write("Hello World!")
+-->
+
+</script>
+<p>注释js是为了防止老式浏览器不识别js后，将js显示出来的尴尬局面;noscript是在浏览器禁用脚本时，或浏览器不支持客户端脚本时显示内容</p>
+
+<p>HTML head元素
+head元素是所有头部元素的容器。head内的元素可包含脚本，指示浏览器在何处可以找到样式表，提供元信息，等等。
+以下标签都可以添加到 head 部分：title、base、link、meta、script 以及 style。</p>
+<p>结合已有项目研究</p>
+
+
+<!--第五章-->
+<hr>
+<a name="chapter5">chapter5: input,form,表单的用法</a>
+<hr/>
+
+<b style="background-color:green">表单 form的用法</b>
+<br/>
+<form>
+<p>form action属性定义提交表单执行的动作 method：GET、POST等请求方法 </p>
+<p>要使表单正确提交，input必须有name属性</p>
+<fieldset>
+<small>外面的框子和标题分别为fieldset 和legend</small>
+<br/>
+<legend>information</legend>
+<!-- 输入框-->
+<small>input元素：type:text（甚至不写）：输入</small>
+<br />
+<input type="text" name="firstname" value="firstName(type为text)">
+<input  name="lastname" value="lastName(type没有)">
+<br><!--选择题-->
+<small>select元素:下拉</small>
+<br />
+<input type="radio" name="sex" value="male" checked>male
+<br >
+<input type="radio" name="sex" value="female" checked>female
+<br /><!--提交按钮-->
+<small>input元素：type: submit 提交,根据form的action属性来定</small>
+<br/>
+<input type="submit" value="提交所有的form内容到服务器">
+<br/>
+
+<small>input元素：type:radio:单选</small>
+<br /><!-- 下拉菜单-->
+<select name="list">
+<option value="haha">哈哈</option>
+<option value="selected" selected>selected在option的用法</option>
+<option value="hehe" >呵呵</option>
+<option value="nani">纳尼</option>
+
+</select>
+<small>input元素：type:label checkbox:复选</small>
+<br /><!--复选框-->
+您喜欢的水果？<br /><br /> 
+<label><input name="Fruit" type="checkbox" value="" />苹果 </label> 
+<label><input name="Fruit" type="checkbox" value="" />桃子 </label> 
+<label><input name="Fruit" type="checkbox" value="" />香蕉 </label> 
+<label><input name="Fruit" type="checkbox" value="" />梨 </label> 
+
+<br/>
+
+<small>textarea</small>
+<br><!--输入文本框-->
+<textarea name="message" rows="10" cols="30">
+"这是一个输入文本框"
+</textarea>
+
+<br /><!--button-->
+<small>button ,出来的框子是js的alert()</small>
+<br/>
+<button type="button" onclick="alert('我是js的alert')">Click Me!</button>
+
+<br/><!--datalist:可选值的输入框,input list的值和datalist id要对应-->
+<input list="haozhao" name="browsers">
+<datalist id="haozhao">
+<option value="internet Explorer">
+<option value="firefox">
+</datalist>
+<input type="submit">
+<br/>
+</fieldset>
+</form>
+
+
+<a href="http://www.w3school.com.cn/html/html_forms.asp" target="_blank">更多表单属性见链接<a>
+
+<!--第六章-->
+<hr>
+<a name="chapter6">chapter6: object </a>
+<hr/>
+
+</body>
+</html>
