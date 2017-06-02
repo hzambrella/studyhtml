@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>form处理</title>
+  </head>
+  
+  <body>
+    <form name="myForm" action="demo_form.php" onsubmit="return validateForm()" method="post">名字: 
+    <input type="text" name="fname" /> 
+    <input type="submit" value="提交" /></form>
+	</br>
+	<p>required 关键字实现自动阻止空栏提交</p>
+	 <form name="reqform" action="demo_form.php" method="post">名字: 
+    <input type="text" name="fname"  required/> 
+    <input type="submit" value="提交" /></form>
+	
+	<p>email 格式校验</p>
+	<form name="email" action="demo_form.php" onsubmit="return validateEmailForm()" method="post">邮箱名字: 
+    <input type="text" name="ename"  /> 
+    <input type="submit" value="提交" /></form>
+	
+	
+	<p id="message"></p>
+  </body>
+  
+  
+  
+  <script src="form.js"></script>
+</html>

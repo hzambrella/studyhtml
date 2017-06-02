@@ -1,0 +1,65 @@
+<!DOCUMENT HTML>
+<html>
+
+<!--简单的计算器，加减乘除，来自菜鸟教程-->
+<!--checkbox的全选和全不选-->
+
+<!--https://c.runoob.com/codedemo/2815 -->
+
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>实验1</title>
+</head>
+
+<body>
+	
+ <p>来自：</p>
+ <a href="https://c.runoob.com/codedemo/2815" target="_blank">https://c.runoob.com/codedemo/2815</a>
+  </br>
+ <p>简单的计算器，加减乘除</p>
+	<table border="1" style="position:center;">
+  <tr>
+    <td>第一个数：</td>
+    <td><input type="text" id="first"/></td>
+  </tr>
+  <tr>
+    <td>第二个数：</td>
+    <td><input type="text" id="twice"/></td>
+  </tr>
+  <tr>
+    <td colspan="2" >
+      &nbsp;
+      <button style="width:inherit" onclick="add()">+</button>
+      &nbsp;
+      <button style="width:inherit" onclick="subtract()">-</button>
+      &nbsp;
+      <button style="width:inherit" onclick="ride()">*</button>
+      &nbsp;
+      <button style="width:inherit" onclick="devide()">/</button>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" rowspan="2">
+      <p id="result"></p>
+    </td>
+  </tr>
+</table>
+
+<p>checkbox的全选和全不选</p>
+看书：<input type="checkbox" name="checkbox" value=1><br>
+写字：<input type="checkbox" name="checkbox"value=2><br>
+打飞机：<input type="checkbox" name="checkbox"value=3><br>
+玩游戏：<input type="checkbox" name="checkbox"value=4><br>
+<button onclick="checkboxed('checkbox')">全选</button>
+<button onclick="uncheckboxed('checkbox')">取消选则</button>
+
+</body>
+
+
+<script src="caculater.js"></script>
+<script src="checkbox.js"></script>
+
+
+</html>
