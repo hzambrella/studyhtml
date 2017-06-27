@@ -1,66 +1,121 @@
-<!DOCUMENT HTML>
 <html>
 
-<!---->
-<!--¼òµ¥µÄ¼ÆËãÆ÷£¬¼Ó¼õ³Ë³ı£¬À´×Ô²ËÄñ½Ì³Ì-->
-<!--checkboxµÄÈ«Ñ¡ºÍÈ«²»Ñ¡-->
+<!--ç®€å•çš„è®¡ç®—å™¨ï¼ŒåŠ å‡ä¹˜é™¤ï¼Œæ¥è‡ªèœé¸Ÿæ•™ç¨‹-->
+<!--checkboxçš„å…¨é€‰å’Œå…¨ä¸é€‰-->
+<!--éªŒè¯ç æŒ‰é’® æ—¶é’Ÿ  ç§’è¡¨-->
 
 <!--https://c.runoob.com/codedemo/2815 -->
 
 
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>ÊµÑé1</title>
+  <meta charset="UTF-8">
+  <title>å®éªŒ1</title>
 </head>
 
 <body>
-	
- <p>À´×Ô£º</p>
- <a href="https://c.runoob.com/codedemo/2815" target="_blank">https://c.runoob.com/codedemo/2815</a>
-  </br>
- <p>¼òµ¥µÄ¼ÆËãÆ÷£¬¼Ó¼õ³Ë³ı</p>
-	<table border="1" style="position:center;">
-  <tr>
-    <td>µÚÒ»¸öÊı£º</td>
-    <td><input type="text" id="first"/></td>
-  </tr>
-  <tr>
-    <td>µÚ¶ş¸öÊı£º</td>
-    <td><input type="text" id="twice"/></td>
-  </tr>
-  <tr>
-    <td colspan="2" >
-      &nbsp;
-      <button style="width:inherit" onclick="add()">+</button>
-      &nbsp;
-      <button style="width:inherit" onclick="subtract()">-</button>
-      &nbsp;
-      <button style="width:inherit" onclick="ride()">*</button>
-      &nbsp;
-      <button style="width:inherit" onclick="devide()">/</button>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" rowspan="2">
-      <p id="result"></p>
-    </td>
-  </tr>
-</table>
 
-<p>checkboxµÄÈ«Ñ¡ºÍÈ«²»Ñ¡</p>
-¿´Êé£º<input type="checkbox" name="checkbox" value=1><br>
-Ğ´×Ö£º<input type="checkbox" name="checkbox"value=2><br>
-´ò·É»ú£º<input type="checkbox" name="checkbox"value=3><br>
-ÍæÓÎÏ·£º<input type="checkbox" name="checkbox"value=4><br>
-<button onclick="checkboxed('checkbox')">È«Ñ¡</button>
-<button onclick="uncheckboxed('checkbox')">È¡ÏûÑ¡Ôò</button>
+  <p>æ¥è‡ªï¼š</p>
+  <a href="https://c.runoob.com/codedemo/2815" target="_blank">https://c.runoob.com/codedemo/2815</a>
+  </br>
+  <p>ç®€å•çš„è®¡ç®—å™¨ï¼ŒåŠ å‡ä¹˜é™¤</p>
+  <table border="1" style="position:center;">
+    <tr>
+      <td>ç¬¬ä¸€ä¸ªæ•°ï¼š</td>
+      <td><input type="text" id="first" /></td>
+    </tr>
+    <tr>
+      <td>ç¬¬äºŒä¸ªæ•°ï¼š</td>
+      <td><input type="text" id="twice" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        &nbsp;
+        <button style="width:inherit" onclick="add()">+</button> &nbsp;
+        <button style="width:inherit" onclick="subtract()">-</button> &nbsp;
+        <button style="width:inherit" onclick="ride()">*</button> &nbsp;
+        <button style="width:inherit" onclick="devide()">/</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="2">
+        <p id="result"></p>
+      </td>
+    </tr>
+  </table>
+
+  <p>checkboxçš„å…¨é€‰å’Œå…¨ä¸é€‰</p>
+  çœ‹ä¹¦ï¼š<input type="checkbox" name="checkbox" value=1><br> å†™å­—ï¼š
+  <input type="checkbox" name="checkbox" value=2><br> æ‰“é£æœºï¼š
+  <input type="checkbox" name="checkbox" value=3><br> ç©æ¸¸æˆï¼š
+  <input type="checkbox" name="checkbox" value=4><br>
+  <button onclick="checkboxed('checkbox')">å…¨é€‰</button>
+  <button onclick="uncheckboxed('checkbox')">å–æ¶ˆé€‰åˆ™</button>
+
+  <p>éªŒè¯ç æŒ‰é’®</p>
+  <a href="http://www.cnblogs.com/Nbge/p/3857767.html">http://www.cnblogs.com/Nbge/p/3857767.html</a>
+  <input type="button" id="btn" value="å‘é€éªŒè¯ç " onclick="settime(this)" />
+
+
+  <p>æ—¶é’Ÿ</p>
+  <p id="demo"></p>
+  <button onclick="myStopFunction()">Stop time</button>
+
+  <p>ç§’è¡¨</p>
+  <a href="http://www.jb51.net/article/75108.htm">http://www.jb51.net/article/75108.htm</a>
+
+  <form action="somepage.asp">
+    <input type="text" value="0" name="txt1" />
+    <input type="button" value="start" name="btnStart" />
+    <input type="button" value="reset" name="btnReset" />
+  </form>
+
 
 </body>
 
 
+
 <script src="caculater.js"></script>
 <script src="checkbox.js"></script>
+<script src="miaobiao.js"></script>
+<script type="text/javascript">
+  var countdown = 5;
 
+  function settime(val) {
+    if (countdown == 0) {
+      val.removeAttribute("disabled");
+      val.value = "å‘é€éªŒè¯ç ";
+      countdown = 5;
+    } else {
+      daojishi(val)
+    }
+
+  }
+
+  function daojishi(val) {
+    val.setAttribute("disabled", true);
+    val.value = "é‡æ–°å‘é€(" + countdown + ")";
+    countdown--;
+    setTimeout(function () {
+      settime(val)
+    }, 1000)
+  }
+</script>
+
+<script>
+  var myVar = setInterval(function () {
+    myTimer()
+  }, 1000);
+
+  function myTimer() {
+    var d = new Date();
+    var t = d.toLocaleTimeString();
+    document.getElementById("demo").innerHTML = t;
+  }
+
+  function myStopFunction() {
+    clearInterval(myVar);
+  }
+</script>
 
 </html>
