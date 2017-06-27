@@ -1,0 +1,106 @@
+http://www.w3school.com.cn/ajax/ajax_xmlhttprequest_create.asp
+
+
+xmlHttpRequest对象
+
+创建对象
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+发送请求
+xmlhttp.open("GET","test1.txt",true);
+xmlhttp.send();
+
+xmlhttp.open("POST","ajax_test.asp",true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("fname=Bill&lname=Gates");
+
+注释：当您使用 async=false 时，请不要编写 onreadystatechange 函数 - 把代码放到 send() 语句后面即可：
+xmlhttp.open("GET","test1.txt",false);
+xmlhttp.send();
+document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+
+
+服务器响应
+请使用 XMLHttpRequest 对象的 responseText 或 responseXML 属性。
+如果来自服务器的响应并非 XML，请使用 responseText 属性。
+document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+
+
+onreadystatechange 事件
+当请求被发送到服务器时，我们需要执行一些基于响应的任务。
+每当 readyState 改变时，就会触发 onreadystatechange 事件。
+readyState 属性存有 XMLHttpRequest 的状态信息。
+下面是 XMLHttpRequest 对象的三个重要的属性：
+
+onreadystatechange	存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。
+readyState	
+存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。
+0: 请求未初始化
+1: 服务器连接已建立
+2: 请求已接收
+3: 请求处理中
+4: 请求已完成，且响应已就绪
+status	
+200: "OK"
+404: 未找到页面
+
+例子：
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+  }
+
+
+使用 Callback 函数（函数类型）
+callback 函数是一种以参数形式传递给另一个函数的函数。
+如果您的网站上存在多个 AJAX 任务，那么您应该为创建 XMLHttpRequest 对象编写一个标准的函数，并为每个 AJAX 任务调用该函数。
+该函数调用应该包含 URL 以及发生 onreadystatechange 事件时执行的任务（每次调用可能不尽相同）：
+
+<html>
+<head>
+<script type="text/javascript">
+var xmlhttp;
+function loadXMLDoc(url,cfunc)
+{
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=cfunc;
+xmlhttp.open("GET",url,true);
+xmlhttp.send();
+}
+function myFunction()
+{
+loadXMLDoc("/ajax/test1.txt",function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+  });
+}
+</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+<button type="button" onclick="myFunction()">通过 AJAX 改变内容</button>
+
+</body>
+</html>
