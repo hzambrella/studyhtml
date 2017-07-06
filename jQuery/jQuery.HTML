@@ -34,16 +34,21 @@
   </br>
   <a href=#chapter3>chapter3 :jqueryDOM</a>
   </br>
-   <a href=#chapter4>chapter4 :jqueryAjax</a>
+  <a href=#chapter4>chapter4 :jqueryAjax</a>
+  </br>
+  <a href=#chapter4>other :jquery plugin</a>
+  </br>
+  </br>
+  </br>
   </br>
   <!--锚 end -->
   <!--第一章-->
   <a style="color:blue;font-size:30px;" name="chapter1">1 jquery效果</a>
   <br />
   <br />
-  <b style="color:red">选择器和事件的概念！！！！</b>
+  <b style="color:red">选择器和事件的概念！！！！还有callback。若jQuery与其他框架有冲突，用noConflict。</b>
 
-  <p style="color:red;font-size:25px;">1隐藏/显示</p>
+  <p style="color:red;font-size:15px;">1隐藏/显示</p>
 
   <button type="button" id="id1">隐藏/显示</button>
   <button type="button" id="id2">缓慢隐藏/显示</button>
@@ -51,7 +56,7 @@
   <p id="p2">这是另外一个文本段落。</p>
 
   <br />
-  <p style="color:red;font-size:25px;">2淡出/淡入</p>
+  <p style="color:red;font-size:15px;">2淡出/淡入</p>
   <p>实例演示了 fadeToggle() 使用了不同的 speed(速度) 参数。</p>
   <button type="button" id="id3">点击淡入/淡出</button>
   <br><br>
@@ -63,18 +68,18 @@
 
 
   <br />
-  <p style="color:red;font-size:25px;">3焦点</p>
+  <p style="color:red;font-size:15px;">3焦点</p>
 
 
   Name: <input type="text" name="fullname"><br> Email: <input type="text" name="email">
 
   <br />
-  <p style="color:red;font-size:25px;">4面板</p>
+  <p style="color:red;font-size:15px;">4面板</p>
   <div id="flip">点我，显示或隐藏面板。</div>
   <div id="panel">Hello world!</div>
   <br />
   <br />
-  <p style="color:red;font-size:25px;">5动画</p>
+  <p style="color:red;font-size:15px;">5动画</p>
   <button id="id4">开始动画</button>
   <button type="button" id="stopb1">停止动画</button>
   <button type="button" id="stopb2">停止所有</button>
@@ -96,12 +101,12 @@
   <br />
   <br />
   <br />
-  <p style="color:red;font-size:25px;">6callback</p>
+  <p style="color:red;font-size:15px;">6callback</p>
   <p>以下实例没有回调函数，警告框会在隐藏效果完成前弹出</p>
   <button type="button" id="cbb1">开始</button>
   <p id="cbp1">我们段落内容，点击“隐藏”按钮我就会消失</p>
 
-  <p style="color:red;font-size:25px;">7链</p>
+  <p style="color:red;font-size:15px;">7链</p>
   <button id="lianb1">测试链</button>
   <pre id="lian1">直到现在，我们都是一次写一条 jQuery 语句（一条接着另一条）。
   不过，有一种名为链接（chaining）的技术，允许我们在相同的元素上运行多条 jQuery 命令，一条接着另一条。</pre>
@@ -109,7 +114,7 @@
   <!--第一章 end-->
   <!--第二章-->
   <a style="color:blue;font-size:30px;" name="chapter2">2 jquery HTML</a>
-  <p style="color:red;font-size:25px;">1内容</p>
+  <p style="color:red;font-size:15px;">1内容</p>
 
   <pre>text() - 设置或返回所选元素的文本内容
       html() - 设置或返回所选元素的内容（包括 HTML 标记）
@@ -131,7 +136,7 @@
   <pre>上面的三个 jQuery 方法：text()、html() 以及 val()，同样拥有回调函数。
 回调函数有两个参数：被选元素列表中当前元素的下标，以及原始（旧的）值。然后以函数新值返回您希望使用的字符串。</pre>
   <br/>
-  <p style="color:red;font-size:25px;">2元素</p>
+  <p style="color:red;font-size:15px;">2元素</p>
   <pre>append() - 在被选元素的结尾插入内容
     prepend() - 在被选元素的开头插入内容
     after() - 在被选元素之后插入内容
@@ -160,7 +165,7 @@
   <br/>
   <br/>
 
-  <p style="color:red;font-size:25px;">3CSS</p>
+  <p style="color:red;font-size:15px;">3CSS</p>
   <a href="http://www.runoob.com/jquery/jquery-dimensions.html"> 略，详情看菜鸟教程CSS-jQuery </a>
   <!--第二章 end-->
   <br />
@@ -171,7 +176,7 @@
   <br />
   <!--第三章-->
   <a style="color:blue;font-size:30px;" name="chapter3">3 jqueryDOM</a>
-  <p style="color:red;font-size:25px;">1DOM 遍历</p>
+  <p style="color:red;font-size:15px;">1DOM 遍历</p>
   <img src="http://www.runoob.com/images/img_travtree.png"></img>
   <pre>
     parent() 被选元素的直接父元素。
@@ -209,33 +214,72 @@
   $("div").find(); 什么都选不出来
 </pre>
   <a href="http://www.runoob.com/jquery/jquery-traversing-ancestors.html">遍历DOM</a>
+  <br />
   <!--第三章 end-->
 
-<!--第四章-->
+  <!--第四章-->
   <a style="color:blue;font-size:30px;" name="chapter4">4 jqueryAjax</a>
+  <p style="color:red;font-size:15px;">1基础</p>
   <pre>
   语法:
+  load() 方法从服务器<b style="color:red">加载</b>数据，并把返回的数据放入被选元素中。
 <b style="color:red">$(selector).load(URL,data,callback);</b>
   必需的 URL 参数规定您希望加载的 URL。
   可选的 data 参数规定与请求一同发送的查询字符串键/值对集合。
   可选的 callback 参数是 load() 方法完成后所执行的函数名称。
+
+  $.get() 方法通过 HTTP GET 请求从服务器上请求数据。
+  $.post() 方法通过 HTTP POST 请求从服务器上请求数据。
+  
+  <b style="color:red">.get(URL,callback);</b>
+  <b style="color:red">$.post(URL,data,callback);</b>
+  教程上的代码存在跨域问题。
   </pre>
 
 
-  <div id="div41"><h2>使用 jQuery AJAX 修改文本内容</h2></div>
+  <div id="div41">
+    <h2>使用 jQuery AJAX 修改文本内容</h2>
+  </div>
   <button id="btn41">获取外部内容</button>
+  <button id="btn421">get1</button>
+  <button id="btn422">get2</button>
+  <button id="btn423">get3</button>
+  <button id="btn43">post</button>
+  <p>上面的按钮都没用，因为跨域问题。</p>
+  <p style="color:red;font-size:15px;">2 JSONP</p>
+  <a href="http://www.runoob.com/json/json-jsonp.html">原生js和jQuery如何使用JSONP</a>
+  <p>下面数据是JSONP请求加载的数据：</p>
+  <br/>
 
-  <script>
-    $(btn41).click(function(){
-      $(div41).load("haha.txt");
-    })
-  </script>
-<!--第四章 end-->
+  <div id="divCustomers"></div>
 
+
+
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+
+  <!--第四章 end-->
+  <!--附录-->
+  <a style="color:blue;font-size:30px;" name="other">other: jquery plugin</a>
+  </br>
+  <a href="http://www.runoob.com/jquery/jquery-plugin-validate.html" target="_blank"> runoob插件</a>
+  <br />
+  <!--附录 end-->
   <script src="jQuery1.js"></Script>
   <script src="jQuery2.js"></Script>
   <script src="jQuery4.js"></Script>
 
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
 </body>
 
 </html>
