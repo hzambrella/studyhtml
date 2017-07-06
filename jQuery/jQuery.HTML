@@ -1,25 +1,241 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js">
-</script>
-<script>
-$(document).ready(function(){
-  $("#id1").click(function(){
-    $("p:first").toggle();
-  });
-});
- $("#id2").click(function(){
-    $("p").toggle(1000);
-  });
-</script>
+  <meta charset="utf-8">
+  <title>hz初学jQuery</title>
+  <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js">
+  </script>
+
+  <style type="text/css">
+    #panel,
+    #flip {
+      padding: 5px;
+      text-align: center;
+      background-color: #e5eecc;
+      border: solid 1px #c3c3c3;
+    }
+
+    #panel {
+      padding: 50px;
+      display: none;
+    }
+  </style>
+
+
 </head>
+
 <body>
 
-<button id="id1">隐藏/显示</button>
-<button id="id2">缓慢隐藏/显示</button>
-<p id="p1">这是一个可以隐藏的文本段落。</p>
-<p id="p2">这是另外一个文本段落。</p>
+  <!--锚-->
+  <a href=#chapter1>chapter1 :jquery效果</a>
+  </br>
+  <a href=#chapter2>chapter2 :jqueryHTML</a>
+  </br>
+  <a href=#chapter3>chapter3 :jqueryDOM</a>
+  </br>
+   <a href=#chapter4>chapter4 :jqueryAjax</a>
+  </br>
+  <!--锚 end -->
+  <!--第一章-->
+  <a style="color:blue;font-size:30px;" name="chapter1">1 jquery效果</a>
+  <br />
+  <br />
+  <b style="color:red">选择器和事件的概念！！！！</b>
+
+  <p style="color:red;font-size:25px;">1隐藏/显示</p>
+
+  <button type="button" id="id1">隐藏/显示</button>
+  <button type="button" id="id2">缓慢隐藏/显示</button>
+  <p id="p1">这是一个可以隐藏的文本段落。</p>
+  <p id="p2">这是另外一个文本段落。</p>
+
+  <br />
+  <p style="color:red;font-size:25px;">2淡出/淡入</p>
+  <p>实例演示了 fadeToggle() 使用了不同的 speed(速度) 参数。</p>
+  <button type="button" id="id3">点击淡入/淡出</button>
+  <br><br>
+  <div id="div1" style="width:80px;height:80px;background-color:red;"></div>
+  <br>
+  <div id="div2" style="width:80px;height:80px;background-color:green;"></div>
+  <br>
+  <div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
+
+
+  <br />
+  <p style="color:red;font-size:25px;">3焦点</p>
+
+
+  Name: <input type="text" name="fullname"><br> Email: <input type="text" name="email">
+
+  <br />
+  <p style="color:red;font-size:25px;">4面板</p>
+  <div id="flip">点我，显示或隐藏面板。</div>
+  <div id="panel">Hello world!</div>
+  <br />
+  <br />
+  <p style="color:red;font-size:25px;">5动画</p>
+  <button id="id4">开始动画</button>
+  <button type="button" id="stopb1">停止动画</button>
+  <button type="button" id="stopb2">停止所有</button>
+  <button type="button" id="stopb3">停止动画，但完成动作</button>
+
+  <p>默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!</p>
+  <p>点击 "开始" 按钮开始动画。</p>
+
+  <p>点击 "停止" 按钮停止当前激活的动画，但之后我们能再动画队列中再次激活。</p>
+
+  <p>点击 "停止所有" 按钮停止当前动画，并清除动画队列，所以元素的所有动画都会停止。</p>
+
+  <p>点击 "停止动画，但完成动作" 快速完成动作，并停止它。\n</p>
+  <div id="fang1" style="background:#98bf21;height:50px;width:50px;position:absolute;">Hello</div>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <p style="color:red;font-size:25px;">6callback</p>
+  <p>以下实例没有回调函数，警告框会在隐藏效果完成前弹出</p>
+  <button type="button" id="cbb1">开始</button>
+  <p id="cbp1">我们段落内容，点击“隐藏”按钮我就会消失</p>
+
+  <p style="color:red;font-size:25px;">7链</p>
+  <button id="lianb1">测试链</button>
+  <pre id="lian1">直到现在，我们都是一次写一条 jQuery 语句（一条接着另一条）。
+  不过，有一种名为链接（chaining）的技术，允许我们在相同的元素上运行多条 jQuery 命令，一条接着另一条。</pre>
+  <br />
+  <!--第一章 end-->
+  <!--第二章-->
+  <a style="color:blue;font-size:30px;" name="chapter2">2 jquery HTML</a>
+  <p style="color:red;font-size:25px;">1内容</p>
+
+  <pre>text() - 设置或返回所选元素的文本内容
+      html() - 设置或返回所选元素的内容（包括 HTML 标记）
+      val() - 设置或返回表单字段的值
+      attr()- 获取属性的值
+      </pre>
+  <br />
+  <button id="hp1b1">显示text、html、val</button>
+  <button id="hp1b2">显示text、html、val</button>
+  <button id="chp1b1">设置text</button>
+  <button id="chp1b2">html</button>
+  <button id="chp1b3">val</button>
+
+  <p id="htmlp1"> 这是<b>粗体文本:</b><input id="htmlp2" type="text" value="菜鸟教程"></p>
+
+  <a href="http://www.runoob.com/jquery/jquery-dom-set.html"> 三者的回调函数</a>
+  <br/>
+
+  <pre>上面的三个 jQuery 方法：text()、html() 以及 val()，同样拥有回调函数。
+回调函数有两个参数：被选元素列表中当前元素的下标，以及原始（旧的）值。然后以函数新值返回您希望使用的字符串。</pre>
+  <br/>
+  <p style="color:red;font-size:25px;">2元素</p>
+  <pre>append() - 在被选元素的结尾插入内容
+    prepend() - 在被选元素的开头插入内容
+    after() - 在被选元素之后插入内容
+    before() - 在被选元素之前插入内容
+    remove() - 删除被选元素（及其子元素）  <b style="color:aqua">remove() 方法也可接受一个参数，允许您对被删元素进行过滤。</b>
+    empty() - 从被选元素中删除子元素</pre>
+  <a href="http://www.runoob.com/jquery/jquery-dom-add.html"> 例子</a>
+  <button id="btn221">添加列表项(append())</button>
+  <ol id="ol221">
+    <li>List item 1</li>
+    <li>List item 2</li>
+    <li>List item 3</li>
+  </ol>
+
+  <button id="btn222">批量创建(append())</button>
+  <button id="btn223">删除div( remove)</button>
+  <button id="btn224">批量删除div中元素( empty())</button>
+  <br />
+  <button id="btn225">移除所有  class="haha" 的 li 元素。</button>
+  <div id="div222" style="height:200px;width:300px;border:1px solid black;background-color:#98bf21;">
+
+
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+  <p style="color:red;font-size:25px;">3CSS</p>
+  <a href="http://www.runoob.com/jquery/jquery-dimensions.html"> 略，详情看菜鸟教程CSS-jQuery </a>
+  <!--第二章 end-->
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <!--第三章-->
+  <a style="color:blue;font-size:30px;" name="chapter3">3 jqueryDOM</a>
+  <p style="color:red;font-size:25px;">1DOM 遍历</p>
+  <img src="http://www.runoob.com/images/img_travtree.png"></img>
+  <pre>
+    parent() 被选元素的直接父元素。
+    parents() 返回被选元素的所有祖先元素，它一路向上直到文档的根元素 (<html>)。
+    parentsUntil() 返回介于两个给定元素之间的所有祖先元素。
+    children() 返回被选元素的所有直接子元素。
+    find() 返回被选元素的后代元素，一路向下直到最后一个后代。
+
+    同胞:
+    siblings() 返回被选元素的所有同胞元素。使用可选参数来过滤对同胞元素的搜索。
+    next() 被选元素的下一个同胞元素。
+    nextAll()  返回被选元素的所有跟随的同胞元素。可用输入参数过滤。
+    nextUntil() 返回介于两个给定参数之间的所有跟随的同胞元素。
+    prev()   和next类似。只不过是上一个，向前。方向相反
+    prevAll()
+    prevUntil()
+
+    过滤： 
+    first() 返回被选元素的首个元素。
+    last() 方法返回被选元素的最后一个元素。  
+    filter() 方法允许您规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回。
+    not() 方法返回不匹配标准的所有元素。not() 方法与 filter() 相反。
+
+    如： $("h2").siblings().first().css({"color":"red","border":"2px solid red"});<i style="color:brown"> //h2所有同胞的第一个</i>
+        $("div p").last().css("background-color","yellow"); <i style="color:brown">//最后一个div p元素</i>
+        $("p").filter(".url");<i style="color:brown">//带有类名 "url" 的所有 p 元素</i>
+</pre>
+  <pre>
+
+  里面的可选参数可进行筛选。
+  如$("span").parents("ul");  选出ul 
+  $("div").children("p.1");  选出 p  且class为1
+  $("div").find("*");  所有后代
+  $("div").find("span"); 选出span
+  $("div").find(); 什么都选不出来
+</pre>
+  <a href="http://www.runoob.com/jquery/jquery-traversing-ancestors.html">遍历DOM</a>
+  <!--第三章 end-->
+
+<!--第四章-->
+  <a style="color:blue;font-size:30px;" name="chapter4">4 jqueryAjax</a>
+  <pre>
+  语法:
+<b style="color:red">$(selector).load(URL,data,callback);</b>
+  必需的 URL 参数规定您希望加载的 URL。
+  可选的 data 参数规定与请求一同发送的查询字符串键/值对集合。
+  可选的 callback 参数是 load() 方法完成后所执行的函数名称。
+  </pre>
+
+
+  <div id="div41"><h2>使用 jQuery AJAX 修改文本内容</h2></div>
+  <button id="btn41">获取外部内容</button>
+
+  <script>
+    $(btn41).click(function(){
+      $(div41).load("haha.txt");
+    })
+  </script>
+<!--第四章 end-->
+
+  <script src="jQuery1.js"></Script>
+  <script src="jQuery2.js"></Script>
+  <script src="jQuery4.js"></Script>
+
 </body>
+
 </html>
