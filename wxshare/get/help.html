@@ -1,0 +1,28 @@
+{{ define "ndcwx/jssdk/help" }}
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>{{.title}}</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/CoreResource/JS/json2.min.js"></script>
+    <!-- <script type="text/javascript" src="/public/shake/js/zepto.min.js"></script> -->
+</head>
+
+<body>
+    <p>help!!!!</p>
+    {{.appId}}
+    <input id="appId" value="{{.appId}}">
+    <button id="btnjssdk1">help it</button>
+    <script>
+        $(document).ready(function () {
+            $("#btnjssdk1").click(function () {
+                location.href = "/ndcwx/jssdk/index/test?id=" + appId;
+            });
+        })
+    </script>
+</body>
+{{ end }}

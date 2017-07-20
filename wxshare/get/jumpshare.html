@@ -1,0 +1,42 @@
+{{ define "ndcwx/jump/share" }}
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>{{.title}}</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="share.js"></script>
+    <!-- <script type="text/javascript" src="/public/shake/js/zepto.min.js"></script> -->
+</head>
+
+<body>
+    <p>test jssdk </p>
+    {{.appid}}
+    <!--tag-->
+    <input id="tag" type="hidden" value="{{.tag}}">
+    <!--id-->
+    <input id="id" type="hidden" value="{{.id}}">
+    <!--appid-->
+    <input id="appid" type="hidden" value="{{.appid}}">
+     <!--分享标题-->
+    <input id="share_title" type="hidden" value="{{.share_title}}">
+     <!--分享内容-->
+    <input id="share_content" type="hidden" value="{{.share_content}}">
+     <!--分享图标-->
+    <input id="share_img_url" type="hidden" value="{{.share_img_url}}">
+     <!--分享链接-->
+    <input id="share_click_url" type="hidden" value="{{.share_click_url}}">
+     <!--user_id-->
+    <input id="uid" type="hidden" value="{{.uid}}">
+     <!--微信昵称-->
+     <p id="nickname">{{.nickname}}</p>
+     <!--微信头像-->
+    <img id="headimg" src={{.headimg}}></img>
+    <button id="btnjssdk1">checkJsApi</button>
+    <button id="btnjssdk2">fenxiang</button>
+    
+</body>
+{{ end }}

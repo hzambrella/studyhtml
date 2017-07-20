@@ -1,0 +1,119 @@
+{{ define "ndcwx/jssdk/index" }}
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>{{.title}}</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/CoreResource/JS/json2.min.js"></script>
+    <!-- <script type="text/javascript" src="/public/shake/js/zepto.min.js"></script> -->
+</head>
+
+<body>
+    <p>test jssdk </p>
+    {{.appId}}
+    <input id="appId" value="{{.appId}}">
+    <button id="btnjssdk1">checkJsApi</button>
+    <button id="btnjssdk2">fenxiang</button>
+    <script>
+        $(document).ready(function () {
+            var appId = $("#appId").val();
+            alert(appId)
+            initPage();
+            $("#btnjssdk1").click(function () {
+                alert("hahaha");
+                wx.ready(
+                    wx.checkJsApi({
+                        jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                        success: function (res) {
+                                alert(JSON.stringify(res));
+                            // 以键值对的形式返回，可用的api值true，不可用为false
+                            // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                        }
+                    })
+                )
+            });
+
+            $("#btnjssdk2").click(function () {
+                var shareTitle = "一起分享吧！";
+                var shareImg =
+                    "http://imgsrc.baidu.com/baike/pic/item/509b9fcb7bf335ab52664fdb.jpg";
+                wx.ready(function () {
+                    var url = "/ndcwx/jssdk/index/test?id=" + appId;
+                    alert("准备分享");
+                    wx.onMenuShareTimeline({
+                        title: shareTitle, // 分享标题
+                        link: url, // 分享链接
+                        imgUrl: shareImg, // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                            alert("分享成功");
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                            alert("分享取消");
+                        }
+                    });
+                    //wx.hideOptionMenu();/***隐藏分享菜单****/
+                })
+
+                wx.error(function (res) {
+                    alert("出错了！");
+                    alert(JSON.stringify(res));
+                    var resObj = res
+                        console.log(resObj);
+                    $.ajax({
+                        type: "POST",
+                        url: "/ndcwx/jssdk/test/error",
+                        dataType: "json",
+                        data: {
+                            res: resObj
+                        },
+                        success: function (data) {
+                            alert("xinxi:" + data)
+                        },
+
+                        error: function (result) {
+                            alert(result.responseText);
+                        }
+                    });
+                });
+
+            });
+
+            function initPage() {
+                $.ajax({
+                    type: "GET",
+                    url: "/ndcwx/jssdk/jsapi/test",
+                    dataType: "json",
+                    data: {
+                        appid: appId
+                    },
+                    success: function (data) {
+                        wx.config({
+                            debug: true,
+                            appId: data.appId,
+                            timestamp: data.timestamp,
+                            nonceStr: data.nonceStr,
+                            signature: data.signature,
+                            jsApiList: [
+                                'checkJsApi',
+                                'onMenuShareTimeline',
+                                'hideOptionMenu',
+                            ]
+                        });
+
+                    },
+                    error: function (result) {
+                        alert(result.responseText);
+                        var url = "/ndcwx/jssdk/index/test?id=" + appId;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+{{ end }}
