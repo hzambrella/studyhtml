@@ -1,0 +1,42 @@
+<head>
+    <meta charset="utf-8">
+    <title>hz初学dom</title>
+
+    <style type="text/css">
+        #panel,
+        #flip {
+            padding: 5px;
+            text-align: center;
+            background-color: #e5eecc;
+            border: solid 1px #c3c3c3;
+        }
+
+        #panel {
+            padding: 50px;
+            display: none;
+        }
+    </style>
+    <script src=dom.js></script>
+</head>
+
+<body>
+    <a href="http://www.jb51.net/article/63740.htm">参考 http://www.jb51.net/article/63740.htm</a></br>
+    <p style="color:red"> HTML级(缺陷，耦合) </p>
+    <button onclick="showMessage1('hello')">HTML级</button>
+
+    <p style="color:red">DOM0级</p>
+    <button id="btn1">DOM0级</button>
+
+
+    <p style="color:red">DOM2级</p>
+    <button id="btn2">DOM2级</button>
+
+    <p style="color:red">DOM2级，注意浏览器兼容</p>
+    <button id="btn3">DOM2级浏览器兼容</button>
+
+
+    <p>在触发DOM上的事件时都会产生一个对象==event; 下面的event undefine 不知道为何</p>
+    <button id="btn4" onclick="showEvent()">event</button>
+
+
+</body>

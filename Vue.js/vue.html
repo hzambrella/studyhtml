@@ -28,8 +28,9 @@
 
 <body>
   <!--锚-->
+
   <div id="mao">
-    <a v-for="item in brlist" v-bind:href="char+item.id">{{char}}{{item.id}} :{{item.title}}</a>
+    <a v-for="(item,index) in brlist" v-bind:href="char+index">{{char}}{{index}}:{{item.title}}</a>
     </br>
   </div>
   <!--
@@ -48,12 +49,17 @@
 
 
   <!--第一章-->
+
   <a style="color:blue;font-size:30px;" name="chapter1">1 vue基础</a>
   <p style="color:red;font-size:15px;">1 vue实例</p>
-  <p id="p1" v-bind:title="a">nihao2</p>
-  <p>这些被代理的属性是响应的，也就是说值的任何改变都是触发视图的重新渲染。</p>
-  <button id="btn11" onclick="changenihao2()">change nihao2</button>
-  </br>
+
+  <div style="border:1px solid #999;">
+    <p id="p1" v-bind:title="a">nihao2</p>
+    <p>这些被代理的属性是响应的，也就是说值的任何改变都是触发视图的重新渲染。</p>
+    <button id="btn11" onclick="changenihao2()">change nihao2</button>
+    </br>
+  </div>
+
   <!--答案-->
   <p>$的作用，抽出属性</p>
   <div id="ans11" style="border:1px solid #999;">
@@ -79,19 +85,28 @@
   <pre>
 通过使用 v-once 指令，你也能执行一次性地插值，当数据改变时，插值处的内容不会更新。但请留心这会影响到该节点上所有的数据绑定
   </pre>
-  <p id="p121" v-once v-bind:title="a">nihao v-once,数据：{{a}}</p>
-  <button id="btn12" onclick="changenihaovonce()">change nihao v-once</button>
-  </br>
-  <p id="p122" v-if="seen"> Vue.js 提供了完全的 JavaScript 表达式支持。{{ ok ? 'YES' : 'NO' }} </p>
 
-  <input id="btn13" type="button" value="模板支持js表达式 NO" onclick="changeok()">
-  <input id="btn14" type="button" value="v-if的用法： 隐藏" onclick="changevif()">
+  <div style="border:1px solid #999;">
+    <p id="p121" v-once v-bind:title="a">nihao v-once,数据：{{a}}</p>
+    <button id="btn12" onclick="changenihaovonce()">change nihao v-once</button>
+    </br>
+  </div>
+
+  <div style="border:1px solid #999;">
+    <p id="p122" v-if="seen"> Vue.js 提供了完全的 JavaScript 表达式支持。{{ ok ? 'YES' : 'NO' }} </p>
+
+    <input id="btn13" type="button" value="模板支持js表达式 NO" onclick="changeok()">
+    <input id="btn14" type="button" value="v-if的用法： 隐藏" onclick="changevif()">
+  </div>
+
   <p style="color:green;">过滤器TODO</p>
 
   <p style="color:red;font-size:15px;">3 vue计算属性computed (注意官方文档对其与methods,watch区别的说明)</p>
-  <div id="comp1">
-    <p>Original message: "{{ message }}"</p>
-    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+  <div style="border:1px solid #999;">
+    <div id="comp1">
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
   </div>
 
   <a href="https://cn.vuejs.org/v2/guide/computed.html" target="blank">官文watch method的对比</a>
@@ -104,23 +119,105 @@
 
   <p>computed 的getter和setter</p>
   <p>firstname lastname 和fullName产生了联系</p>
-  <div id="v1name">
-    <p><b style="color:aqua">fullName:</b>{{fullName}} </p>
-    <p><b style="color:aqua">firstname:</b>{{firstName}} </p>
-    <p><b style="color:aqua">lastName:</b> {{lastName}}</p>
 
-    firstname <input id="v1firstname" name="firstname"></br>
-    lastname <input id="v1lastname" name="lastname"></br>
+  <div style="border:1px solid #999;">
+    <div id="v1name">
+      <p><b style="color:aqua">fullName:</b>{{fullName}} </p>
+      <p><b style="color:aqua">firstname:</b>{{firstName}} </p>
+      <p><b style="color:aqua">lastName:</b> {{lastName}}</p>
 
-    <button v-on:click="v1setname">submit</button>
+      firstname <input id="v1firstname" name="firstname"></br>
+      lastname <input id="v1lastname" name="lastname"></br>
+
+      <button v-on:click="v1setname">submit</button>
+
+    </div>
     <pre>
       Vue 提供一个更通用的方法通过 watch 选项，来响应数据的变化。当你想要在数据变化响应时，执行异步操作或开销较大的操作，这是很有用的。例子见官网yesno。
     </pre>
   </div>
 
 
-<p style="color:red;font-size:15px;">4 vue class style 略</p>
-<p style="color:red;font-size:15px;">5 vue 条件渲染</p>
+  <p style="color:red;font-size:15px;">4 vue class style 略</p>
+  <p style="color:red;font-size:15px;">5 vue 条件渲染</p>
+
+  <a href="http://www.cnblogs.com/wmhuang/p/5420344.html" target="blank">v-if 和v-show的区别</a>
+  <pre>
+手段：v-if是动态的向DOM树内添加或者删除DOM元素；v-show是通过设置DOM元素的display样式属性控制显隐；
+使用场景：v-if适合运营条件不大可能改变；v-show适合频繁切换。
+用template可以v-if整个组
+2.1版本新增了 v-else-if可满足条件控制的需求
+</pre>
+
+  <div style="border:1px solid #999;" id="v1login">
+    <p>{{indexlogin}}{{logintype}}</p>
+
+    <template v-if="logintype=='user'">
+      <label>用户名登陆</label>
+      <input placeholder="Enter you name">
+    </template>
+
+    <template v-if="logintype=='QQemail'">
+      <label>QQ邮箱登陆</label>
+      <input placeholder="Enter your QQemail">
+    </template>
+
+    <template v-if="logintype=='sinaemail'">
+      <label>sina邮箱登陆</label>
+      <input placeholder="Enter your sinaemail">
+    </template>
+    </br>
+
+    <p style="color:coral">试验时写错的地方 1.&lt/template&gt &lt/template&gt 2.logintype='sinaemail' </p>
+
+
+    <button v-on:click="changelogintype">toggle login type</button>
+
+    <p>那么在上面的代码中切换 loginType 将不会清除用户已经输入的内容。因为两个模版使用了相同的元素，&ltinput&gt 不会被替换掉——仅仅是替换了它的 placeholder。</p>
+    <p>这样也不总是符合实际需求，所以 Vue 为你提供了一种方式来声明“这两个元素是完全独立的——不要复用它们”。只需添加一个具有唯一值的 key 属性即可：</p>
+    <p> &ltinput placeholder="Enter you phone" <a style="color:red">key="phone"&gt</a></p>
+
+    <p>联系方式</p>
+    <template v-if="connect=='phone'">
+      <label>电话号码</label>
+      <input placeholder="Enter you phone" key="phone">
+    </template>
+
+    <template v-if="connect=='email'">
+      <label>邮箱</label>
+      <input placeholder="Enter you email" key="email">
+    </template>
+    <button v-on:click="changeconnect">toggle connect type</button>
+  </div>
+
+
+  <p style="color:red;font-size:15px;">6 vue 列表渲染</p>
+  <p>看标题锚的例子：</p>
+  <p>(item,index) in brlist的index是个索引</p>
+  <div style="border:1px solid #999;" id="v1login">
+    <p>&lta&gtv-for="(item,index) in brlist" v-bind:href="char+index">{{char}}{{index}}:{{item.title}}&lt/a&gt</p>
+  </div>
+
+  <p>如同 v-if 模板，你也可以用带有 v-for 的 &lttemplate&gt 标签来渲染多个元素块。</p>
+  <p>整数迭代：&ltspan&gt v-for="n in 10">{{ n }} &lt/span&gt(失败了。。。)</p>
+  <div>
+    <p v-for="n in 10">{{ n }} </p>
+  </div>
+
+  <p>你也可以用 v-for 通过一个对象的属性来迭代。</p>
+
+  <p style="color:red;font-size:15px;">7 vue 事件</p>
+
+  <p>v-on基础，见上面按钮的实现</p>
+  <p>内联处理器  </p>
+  <p>有时也需要在内联语句处理器中访问原生 DOM 事件。可以用特殊变量 $event 把它传入方法：</p>
+  <div style="border:1px solid #999;" id="v1neilian">
+    <p>&ltbutton v-on:click="say('hi')"&gtSay hi&lt/button&gt </p>
+    <p>&ltbutton v-on:click="warn('Form cannot be submitted yet.', $event)"&gtSubmit&lt/button&gt</p>
+    <button v-on:click="say('hi')">Say hi</button>
+    <button v-on:click="warn('Form cannot be submitted yet.', $event)">Submit</button>
+  </div>
+<a href="https://cn.vuejs.org/v2/guide/events.html" target="blank">事件修饰符,官网，重要</a></br>
   <!--第一章end-->
   </br>
   </br>

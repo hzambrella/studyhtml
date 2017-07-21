@@ -55,7 +55,7 @@ var vm3 = new Vue({ // Vue是构造函数，会创建vue 实例
 //改变a
 function changenihaovonce() {
     vm3.a++ //这些被代理的属性是响应的，也就是说值的任何改变都是触发视图的重新渲染。
-    alert("data2.a变成了" + data2.a)
+        alert("data2.a变成了" + data2.a)
     alert("vm3.a变成了" + vm3.a)
     alert("nihaov-once还是1")
 }
@@ -111,7 +111,7 @@ var v1name = new Vue({
     data: {
         firstName: 'Foo',
         lastName: 'Bar',
-      //  fullName: 'Foo Bar'
+        //  fullName: 'Foo Bar'
     },
     /*
       watch: {
@@ -123,7 +123,7 @@ var v1name = new Vue({
         }
       }
       */
-    
+
     computed: {
         fullName: { // getter
             get: function () {
@@ -138,17 +138,61 @@ var v1name = new Vue({
         }
     },
 
-
-    watch:{
-
-    },
-
     methods: {
         v1setname: function (event) {
-           this.fullName = document.getElementById("v1firstname").value + ' ' + document.getElementById("v1lastname").value;
-   
+            this.fullName = document.getElementById("v1firstname").value + ' ' + document.getElementById("v1lastname").value;
         }
     }
-    
-    
 })
+
+var logintypelist = new Array("user", "QQemail", "sinaemail")
+var connectlist = new Array("phone", "email")
+v1login = new Vue({
+    el: "#v1login",
+    data: {
+        indexlogin: 0,
+        indexconn: 0,
+        logintype: logintypelist[0],
+        connect: connectlist[0],
+    },
+    methods: {
+        changelogintype: function (event) {
+            if (this.indexlogin < logintypelist.length - 1) {
+                this.indexlogin++;
+            } else {
+                this.indexlogin = 0;
+            }
+
+            this.logintype = logintypelist[this.indexlogin];
+            //alert(this.logintype)
+        },
+
+        changeconnect: function (event) {
+            if (this.indexconn < connectlist.length - 1) {
+                this.indexconn++;
+            } else {
+                this.indexconn = 0;
+            }
+
+            this.connect = connectlist[this.indexconn];
+            //alert(this.logintype)
+        }
+    }
+
+})
+
+v1neilian = new Vue({
+    el: "#v1neilian",
+    methods: {
+        say: function (content) {
+            alert(content)
+        },
+
+        warn: function (message, event) {
+            // 现在我们可以访问原生事件对象 
+            if (event) event.preventDefault()
+            alert(message)
+        }
+    }
+})
+
