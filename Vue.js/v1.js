@@ -196,3 +196,10 @@ v1neilian = new Vue({
     }
 })
 
+v1mtext=new Vue({
+    el:"#v1mtext",
+    data:{
+        message:"",
+    }
+})
+

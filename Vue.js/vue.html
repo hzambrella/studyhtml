@@ -44,7 +44,9 @@
   <div id="pre2">
     <pre2 v-for="item in pre2list" v-bind:mao="item"></pre2>
   </div>
-
+  <p>v-bind:实现属性和数据的绑定</p>
+  <p>v-bind：可以缩写成 ：</p>
+  <p>下面的title属性被绑定成数据message=hello vue</p>
   <p id="haha" v-bind:title="message">nihao</p>
 
 
@@ -52,6 +54,8 @@
 
   <a style="color:blue;font-size:30px;" name="chapter1">1 vue基础</a>
   <p style="color:red;font-size:15px;">1 vue实例</p>
+  <p> new Vue()，这叫<strong style="color:coral">构造器</strong></p>
+
 
   <div style="border:1px solid #999;">
     <p id="p1" v-bind:title="a">nihao2</p>
@@ -139,7 +143,7 @@
 
 
   <p style="color:red;font-size:15px;">4 vue class style 略</p>
-  <p style="color:red;font-size:15px;">5 vue 条件渲染</p>
+  <p style="color:red;font-size:15px;">5 vue 条件渲染v-if v-show</p>
 
   <a href="http://www.cnblogs.com/wmhuang/p/5420344.html" target="blank">v-if 和v-show的区别</a>
   <pre>
@@ -191,7 +195,7 @@
   </div>
 
 
-  <p style="color:red;font-size:15px;">6 vue 列表渲染</p>
+  <p style="color:red;font-size:15px;">6 vue 列表渲染v-for</p>
   <p>看标题锚的例子：</p>
   <p>(item,index) in brlist的index是个索引</p>
   <div style="border:1px solid #999;" id="v1login">
@@ -206,10 +210,10 @@
 
   <p>你也可以用 v-for 通过一个对象的属性来迭代。</p>
 
-  <p style="color:red;font-size:15px;">7 vue 事件</p>
+  <p style="color:red;font-size:15px;">7 vue 事件v-on（可缩写v-on:click ---> @click）</p>
 
   <p>v-on基础，见上面按钮的实现</p>
-  <p>内联处理器  </p>
+  <p>内联处理器 </p>
   <p>有时也需要在内联语句处理器中访问原生 DOM 事件。可以用特殊变量 $event 把它传入方法：</p>
   <div style="border:1px solid #999;" id="v1neilian">
     <p>&ltbutton v-on:click="say('hi')"&gtSay hi&lt/button&gt </p>
@@ -217,8 +221,107 @@
     <button v-on:click="say('hi')">Say hi</button>
     <button v-on:click="warn('Form cannot be submitted yet.', $event)">Submit</button>
   </div>
-<a href="https://cn.vuejs.org/v2/guide/events.html" target="blank">事件修饰符,官网，重要</a></br>
+  <a href="https://cn.vuejs.org/v2/guide/events.html" target="blank">事件修饰符,键盘鼠标事件修饰符,官网,重要</a></br>
+
+  <p style="color:red;font-size:15px;">8 vue 表单渲染v-model</p>
+  <pre>
+  你可以用 v-model 指令在表单控件元素上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。
+  尽管有些神奇，但 v-model 本质上不过是语法糖，它负责监听用户的输入事件以更新数据，并特别处理一些极端的例子。
+    </pre>
+  <div style="border:1px solid #999;" id="v1mtext">
+    <p>多行文本</p>
+    <span>Multiline message is:</span>
+    <p style="white-space: pre-line">{{ message }}</p>
+    <br>
+    <textarea v-model="message" placeholder="add multiple lines"></textarea>
+  </div>
+  <p>官网上check box 等控件：</p><a href="https://cn.vuejs.org/v2/guide/forms.html" target="blank">https://cn.vuejs.org/v2/guide/forms.html<a></br>
   <!--第一章end-->
+ </br>
+  </br>
+  </br>
+
+  <!--第二章 -->
+  <a style="color:blue;font-size:30px;" name="chapter1">2 vue组件（重复的东西就该用组件）</a>
+
+  <p style="color:red;font-size:15px;">1 vue 组件基础</p>
+  <p>全剧组件的声明：Vue.components('my-comp',{})</p>
+  <p>在v2.js创建父实例（new Vue（）），下面的<a style="color:#590">绿框</a>是父实例对应的div</p>
+  <p> 注意：一定要在父实例实例化 <strong style="color:coral">之前</strong>完成对组件的注册！！否则报错</p>
+
+  <div style="border:1px solid #590;" id="father1">
+    <my-component></my-component>
+  </div>
+
+  <p>局部组件声明,将component放在Vue实例中</p>
+  <div style="border:1px solid #FFA500;" id="father2">
+    <jubu-comp></jubu-comp>
+  </div>
+
+  <p style="color:#FFA500">dom一些限制请查看官网。</p>
+  <p>vue.components的data选项若用在组件当中,则其必须是<strong style="color:coral">函数</strong>！！ </p>
+
+
+  <div id="v2-compdata">
+    <p>一起变化</p>
+    <simple-counter></simple-counter>
+    <simple-counter></simple-counter>
+    <simple-counter></simple-counter>
+    </br>
+    <p>单独变化</p>
+    <simple-counter2></simple-counter2>
+    <simple-counter2></simple-counter2>
+    <simple-counter2></simple-counter2>
+  </div>
+  </br>
+  </br>
+  <p style="color:red;font-size:15px;">2 vue prop（子组件接受父组件的值）</p>
+  <p>props选线代表组件需要的数据，这个选项可用于子组件使用父组件的数据。它可以理解成自定义组件的自定义属性</p>
+  <p><strong>注意：</strong>如果犯贱地使用camelCased (驼峰式) 命名的 prop ，当使用的不是字符串模版， 需要转换为相对应的 kebab-case (短横线隔开式) 命名 （详细见官文：组件camelCase
+    vs. kebab-case）</p>
+
+  <p>动态prop</p>
+  <div style="border:1px solid #999;" id="father3">
+    <p>父组件 v-model使得input的value和data.parentMsg双向绑定</p>
+    <input v-model="parentMsg">
+    <br>
+    <p>子组件，v-bind将props自定义属性mymessage绑定到parentMsg</p>
+    <v2child1 v-bind:mymessage="parentMsg"></v2child1>
+    </br>
+    <p>下面的没使用v-bind，不是动态绑定，是字面量绑定，传入的不是parentMsg的值，只是个字符串。</p>
+    <v2child1 mymessage="parentMsg"></v2child1>
+
+    <p>prop是单向的，更多用法请仔细阅读官文：单向数据流</p>
+    <a href="https://cn.vuejs.org/v2/guide/components.html" target="blank">https://cn.vuejs.org/v2/guide/components.html</a></p>
+  </div>
+  </br>
+  <p>props里面的属性数据类型验证（定义属性的格式，甚至输入规则）。不符合规则使用空间会报错。 注意 props 会在组件实例创建之前进行校验，所以在 default 或 validator 函数里，诸如 data、computed 或 methods
+    等实例属性还无法使用。
+  </p>
+  <div style="border:1px solid #999;" id="father4">
+    <yanzheng v-bind:prop-c="string" v-bind:prop-f="int"> </yanzheng>
+  </div>
+
+  </br>
+  <p>所谓非 prop 属性，就是它可以直接传入组件，而不需要定义相应的 prop。即需要什么属性，直接在组件的html上面用字面量绑定即可</p>
+
+  <p style="color:red;font-size:15px;">3 vue 自定义事件（子组件发送值到父组件）</p>
+  <pre>
+  每个 Vue 实例都实现了<strong>事件接口 (Events interface)</strong>，即：
+    使用 $on(eventName) 监听事件
+    使用 $emit(eventName) 触发事件
+    Vue 的事件系统分离自浏览器的 EventTarget API。尽管它们的运行类似，但是 $on 和 $emit 不是addEventListener 和 dispatchEvent 的别名。
+    给组件绑定原生事件：可以使用 .native 修饰 v-on。例如：
+    &ltmy-component v-on:click.native="doTheThing"&gt&lt/my-component&gt
+</pre>
+  <div style="border:1px solid #999;" id="counter-event-example">
+
+    <p>父组件{{ total }}</p>
+    <button-counter v-on:report="incrementTotal"></button-counter>
+    <!--监听到report时间时，调用父组件的方法-->
+    <button-counter v-on:report="incrementTotal"></button-counter>
+  </div>
+  <!--第二章end -->
   </br>
   </br>
   </br>
@@ -227,6 +330,7 @@
 
   <script src="v0.js"></script>
   <script src="v1.js"></script>
+  <script src="v2.js"></script>
 
   <scripr src="jQueryVue.js">
     </script>
