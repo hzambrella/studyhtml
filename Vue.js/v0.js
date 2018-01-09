@@ -6,17 +6,21 @@ var haha = new Vue({
 })
 
 
+
+Vue.component('fmao', {
+    props: ['anchor', 'title','fuhao'],
+    template: '<div >\
+     <a  v-bind:href=anchor>{{anchor}}:{{title}}</a>\
+     </br>\
+     </div>'
+})
+
 var br = new Vue({
     el: "#mao",
     data: {
+        fuhao:'#',
         char: 'chapter',
-        brlist: [{
-            id: 1,
-            title: '学习vue'
-        }, {
-            id: 2,
-            title: '学习vue2'
-        }]
+        brlist: ['学习vue', 'vue基础','vue组件','vue自定义指令','vue路由']
     },
 
 })
@@ -69,5 +73,3 @@ var pre2 = new Vue({
     },
 
 })
-
-

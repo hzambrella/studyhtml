@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>vfor</title>
+      <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" v-cloak >
+        <div v-for="item in items" style="border:1px solid #999;">
+            <p style="color:red;font-size:15px;">{{item.name}}<p>
+         <p style="color:green;">{{item.phone}}</p>
+            <input type="checkbox" :value=item.id v-model="item.select" @click="xuanze(items,item)">
+        </div>
+         <button @click="commit">确定</button>
+    </div>
+</body>
+
+<script>
+
+  // 定义数据域 
+var commit=function(){
+    emptyflag=true
+     for (i=0;i<vdata.items.length;i++){
+       if (vdata.items[i].select){
+           alert("选中数据："+vdata.items[i].id)
+            emptyflag=false
+       }
+   }
+   if (emptyflag){
+       alert("没有选择数据")
+   } 
+}
+
+var xuanze=function(items,item){
+  // alert("选择:"+item.id)
+   for (i=0;i<items.length;i++){
+       if (items[i].id!=item.id){
+           items[i].select=false
+       }
+   }
+}
+
+var vdata = {
+    selectdata:0,
+    items:[{
+        id:"1",
+        name:"弹性1",
+        phone:"123131",
+        select:false,
+    },
+    {
+        id:"2",
+        name:"谈心",
+        phone:"123131",
+        select:false,
+    },
+    {
+        id:"3",
+        name:"贪心",
+        phone:"123131",
+        select:false,
+    }]
+}; 
+
+
+
+
+var vbind = new Vue({
+    el: "#app",
+    data: vdata,
+    methods: {
+        // 跳转回主页
+
+        xuanze:xuanze,
+        commit:commit,
+    }
+})
+
+</script>
+
+</html>
+
+<!---->
+<!---->
+
+
+<!--<input type="text" v-model="nickName" placeholder="请输入昵称">-->
