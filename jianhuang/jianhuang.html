@@ -26,13 +26,18 @@
         });
 
         function scan(fileName) {
+            if (undefined == fileName) {
+                return
+            }
+           
             $("#scan").addClass("scan_red")
             $("#scan").animate({
-                left: "+=1000px"
-            }, 500, "linear", function () {
-                $(this).css({
-                    left: "-100px"
-                });
+                left: "+=250px"
+            }, 1000, "linear", function () {
+                $("#scan").removeClass("scan_green");
+                $("#scan").removeClass("scan_red");
+                $(this).removeAttr("style")
+                $(this).addClass("scan")
             });
             /*
             setInterval(function () {
@@ -47,22 +52,22 @@
             */
             setTimeout(function () {
                 $("#scan").addClass("scan_yellow");
-            }, 250)
-            setTimeout(function () {
-                $("#scan").removeClass("scan_yellow");
-                $("#scan").removeClass("scan_red");
             }, 500)
-             setTimeout(function () {
-                $("#scan").removeClass("scan_yellow");
-                $("#scan").removeClass("scan_red");
+            setTimeout(function () {
+              $("#scan").removeClass("scan_yellow");
+              $("#scan").addClass("scan_green");
+            }, 750)
+            setTimeout(function () {
+                //$("#scan").removeClass("scan_yellow");
+                //$("#scan").removeClass("scan_red");
                 showMessage(fileName)
             }, 1500)
         }
         /*使用js实现文件上传图片的预览  
          */
         function showPreview(obj) {
-             $("#message").html("")
-             document.body.style.backgroundColor = "#ffffff"
+            $("#message").html("")
+            document.body.style.backgroundColor = "#ffffff"
             var pic = document.getElementById("previewImg");
             var file = document.getElementById("myfile");
             html5Reader(file, pic);
@@ -75,9 +80,10 @@
             var file = file.files[0];
             var mess = ""
             var reader = new FileReader();
-          
+            if (undefined==file.name){
+                return
+            }
             scan(file.name)
-            
             reader.readAsDataURL(file);
             reader.onload = function (e) {
                 pic.src = this.result;
@@ -114,20 +120,29 @@
     <div>
         <h2>剑皇霸业！！</h2>
     </div>
-    <div id="scan" width="300" height="300"></div>
-    <div>
-        <img id="previewImg" src="nopic.png" width="300" height="300" style="border-style:solid;border-color:black;" />
+
+    <div style="position:relative;">
+        <div id="scan" class="scan"></div>
+        <div>
+            <img id="previewImg" src="nopic.png" width="300" height="300" style="border-style:solid;border-color:black;" />
+        </div>
     </div>
-    <form action="uploadServlet.do" method="post" enctype="multipart/form-data" style="font-size:20px">
-        请选择图片：<input id="myfile" name="myfile" type="file" onchange="showPreview(this)" />
-    </form>
+
+    <div style="position:relative">
+        <form action="uploadServlet.do" method="post" enctype="multipart/form-data" style="font-size:20px">
+            请选择图片：<input id="myfile" name="myfile" type="file" onchange="showPreview(this)" />
+        </form>
+    </div>
 
     <div id="large"></div>
-    <div id="mess">
-        <p id="message"></p>
-    </div>
 
-    <p style="text-align:right">auth:ambrella</p>
+    <div style="position:relative" id="mess">
+        <p style="text-align:center" id="message"></p>
+    </div>
+    
+    <div style="position:absolute;right:0px;bottom:0px">
+        <p style="text-align:right">auth:ambrella</p>
+    </div>
 </body>
 
 </html>
