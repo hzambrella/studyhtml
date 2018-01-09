@@ -1,118 +1,10 @@
 <html>
 
 <head>
-
-
     <title>剑皇网站</title>
 
     <link rel="stylesheet" type="text/css" href="css/common.css?v=19" />
     <script type="text/javascript" src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            //scan()
-            var la = $("#large");
-            la.hide();
-            /*  
-            鼠标移至预览图显示大图  
-            */
-            $("#previewImg").mousemove(function (e) {
-                la.css({
-                    top: e.pageY,
-                    left: e.pageX
-                }).html('<img src = "' + this.src + '" />').show();
-            }).mouseout(function () {
-                la.hide();
-            });
-        });
-
-        function scan(fileName) {
-            if (undefined == fileName) {
-                return
-            }
-           
-            $("#scan").addClass("scan_red")
-            $("#scan").animate({
-                left: "+=250px"
-            }, 1000, "linear", function () {
-                $("#scan").removeClass("scan_green");
-                $("#scan").removeClass("scan_red");
-                $(this).removeAttr("style")
-                $(this).addClass("scan")
-            });
-            /*
-            setInterval(function () {
-                $("#scan").animate({
-                    left: "+=5000px"
-                }, 1000, function () {
-                    $(this).css({
-                        left: "-300px"
-                    });
-                });
-            }, 1000 * 20);
-            */
-            setTimeout(function () {
-                $("#scan").addClass("scan_yellow");
-            }, 500)
-            setTimeout(function () {
-              $("#scan").removeClass("scan_yellow");
-              $("#scan").addClass("scan_green");
-            }, 750)
-            setTimeout(function () {
-                //$("#scan").removeClass("scan_yellow");
-                //$("#scan").removeClass("scan_red");
-                showMessage(fileName)
-            }, 1500)
-        }
-        /*使用js实现文件上传图片的预览  
-         */
-        function showPreview(obj) {
-            $("#message").html("")
-            document.body.style.backgroundColor = "#ffffff"
-            var pic = document.getElementById("previewImg");
-            var file = document.getElementById("myfile");
-            html5Reader(file, pic);
-        }
-        /*  
-        firefox3.6+ chrome6+ Safari5.2+ Opera11+及IE10浏览器支持FileReader对象  
-        其他兼容方法 http://www.2cto.com/kf/201402/281430.html  
-        */
-        function html5Reader(file, pic) {
-            var file = file.files[0];
-            var mess = ""
-            var reader = new FileReader();
-            if (undefined==file.name){
-                return
-            }
-            scan(file.name)
-            reader.readAsDataURL(file);
-            reader.onload = function (e) {
-                pic.src = this.result;
-            }
-        }
-
-        function showMessage(mess) {
-            if (checkname(mess)) {
-                document.body.style.backgroundColor = "#ff0000"
-                mess = "警告！！黄图！！"
-                $("#message").addClass("white")
-            } else {
-                document.body.style.backgroundColor = "#ffffff"
-                mess = "正经图"
-                $("#message").removeClass("white")
-            }
-            $("#message").html(mess)
-        }
-
-        function checkname(name) {
-            var reg = /.*[\u4e00-\u9fa5]+.*$/
-            var strExp = new RegExp(reg);
-            if (strExp.test(name)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -144,5 +36,127 @@
         <p style="text-align:right">auth:ambrella</p>
     </div>
 </body>
+ <script type="text/javascript">
+        $(function () {
+            //大图
+            var la = $("#large");
+            la.hide();
+            /*  
+            鼠标移至预览图显示大图  
+            */
+            $("#previewImg").mousemove(function (e) {
+                la.css({
+                    top: e.pageY,
+                    left: e.pageX
+                }).html('<img src = "' + this.src + '" />').show();
+            }).mouseout(function () {
+                la.hide();
+            });
+        });
 
+        //扫描特效和结果显示
+        function scan(fileName) {
+            if (undefined == fileName) {
+                return
+            }
+           
+            $("#scan").addClass("scan_red")
+            //animate:执行动画
+            $("#scan").animate({
+                height: "310px"
+            }, 1000, "linear", function () {
+                $("#scan").removeClass("scan_green");
+                $("#scan").removeClass("scan_red");
+                $(this).removeAttr("style")
+                $(this).addClass("scan")
+            });
+            //循环
+            /*
+            setInterval(function () {
+                $("#scan").animate({
+                    left: "+=5000px"
+                }, 1000, function () {
+                    $(this).css({
+                        left: "-300px"
+                    });
+                });
+            }, 1000 * 20);
+            */
+            // 变色
+            setTimeout(function () {
+                $("#scan").addClass("scan_yellow");
+            }, 500)
+            setTimeout(function () {
+              $("#scan").removeClass("scan_yellow");
+              $("#scan").addClass("scan_green");
+            }, 750)
+
+            //最终结果
+            setTimeout(function () {
+                //$("#scan").removeClass("scan_yellow");
+                //$("#scan").removeClass("scan_red");
+                showMessage(fileName)
+            }, 1500)
+        }
+
+        /*使用js实现文件上传图片的预览  
+         */
+        function showPreview(obj) {
+            $("#message").html("")
+            document.body.style.backgroundColor = "#ffffff"
+            var pic = document.getElementById("previewImg");
+            var file = document.getElementById("myfile");
+            html5Reader(file, pic);
+        }
+
+        //小预览图
+        /*  
+        firefox3.6+ chrome6+ Safari5.2+ Opera11+及IE10浏览器支持FileReader对象  
+        其他兼容方法 http://www.2cto.com/kf/201402/281430.html  
+        */
+        function html5Reader(file, pic) {
+            if (undefined==file){
+                return
+            }
+            var file = file.files[0];
+            if (undefined==file){
+                return
+            }
+            var mess = ""
+            var reader = new FileReader();
+            if (undefined==file.name){
+                return
+            }
+            scan(file.name)
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                pic.src = this.result;
+            }
+        }
+
+        //显示结果
+        function showMessage(mess) {
+            if (checkname(mess)) {
+                document.body.style.backgroundColor = "#ff0000"
+                mess = "警告！！黄图！！"
+                $("#message").addClass("white")
+            } else {
+                document.body.style.backgroundColor = "#ffffff"
+                mess = "正经图"
+                $("#message").removeClass("white")
+            }
+            $("#message").html(mess)
+        }
+
+        //检查string是否包含汉字
+        function checkname(name) {
+            var reg = /.*[\u4e00-\u9fa5]+.*$/
+            var strExp = new RegExp(reg);
+            if (strExp.test(name)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </html>
