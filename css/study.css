@@ -1,5 +1,4 @@
 /*按钮链接 TODO 想办法居中*/
-
 a.anniu:link,a.anniu:visited
 {
 	display:block;
@@ -18,7 +17,7 @@ a.anniu:hover,a.anniu:active
 
 
 /*表格*/
-
+/*有个伪类可以实现交替变色n-th*/
 #customers
 {
 	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -46,7 +45,7 @@ a.anniu:hover,a.anniu:active
 	background-color:#EAF2D3;
 }
 
-/*图片*/
+/*图片div*/
 div.img {
     margin: 5px;
     border: 1px solid #ccc;
@@ -54,15 +53,18 @@ div.img {
     width: 180px;
 }
 
+/*图片hover*/
 div.img:hover {
     border: 1px solid #777;
 }
 
+/*图片*/
 div.img img {
     width: 100%;
     height: auto;
 }
 
+/*图片描述写死*/
 div.desc {
     padding: 15px;
 	/*当不固定呢宽高时，缩小浏览器，字就会撑出来*/
@@ -72,12 +74,12 @@ div.desc {
 	overflow: hidden;
 }
 
-/*输入框*/
+/*图片描述输入框*/
 div.desc input {
 	display: block;
 	width:150px;
 	height:40px;
-	border-style:none;
+	border-style:none;/*隐藏input边框*/
 	margin: -10px,-10px,10px,-10px;
 	text-align: center;
 

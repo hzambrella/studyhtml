@@ -2,23 +2,21 @@
      margin: 0;
      padding: 0;
  }
+  /*顶头导航栏*/
  /*
      ul class名字daohanglan   
   */
 
  .daohanglan {
-     list-style-type: none;
-     /*列表的标致：无。默认是点*/
+     list-style-type: none; /*列表的标致：无。默认是点*/
      margin: 0;
      padding: 0;
      overflow: hidden;
-     /*溢出的内容，隐藏*/
-     background-color: #333;
+     background-color: #333; /*溢出的内容，隐藏*/
  }
 
  .daohanglan li {
-     float: left;
-     /*这个让每个li都横着排列*/
+     float: left;  /*这个让每个li都横着排列，去调后就竖着了*/
  }
  /* 定义li*/
 
