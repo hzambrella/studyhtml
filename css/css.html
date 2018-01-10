@@ -5,108 +5,164 @@
     <meta charset="utf-8">
     <title>菜鸟教程(runoob.com)</title>
     <link rel="stylesheet" type="text/css" href="study.css?v=113231">
+    <link rel="stylesheet" type="text/css" href="daohanglan.css?v=113231">
+    <link rel="stylesheet" type="text/css" href="chuizhidhl.css?v=113231">
 </head>
 
 <body>
- <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+    <!--上导航栏 -->
+    <div class="top-guide">
+        <ul class="daohanglan">
+            <div class="dropdown">
+                <a href="#" class="dropbtn">下拉菜单前1</a>
+                <div class="dropdown-content">
+                    <a href="#">链接 1</a>
+                    <a href="#">链接 2</a>
+                    <a href="#">链接 3</a>
+                </div>
+            </div>
 
-     <table id="customers">
-        <caption >Table 1.1 Customers</caption>
-        <tr>
-            <th>Company</th>
-            <th>Contact</th>
-            <th>Country</th>
-        </tr>
-        <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-        </tr>
-        <tr class="alt">
-            <td>Berglunds snabbköp</td>
-            <td>Christina Berglund</td>
-            <td>Sweden</td>
-        </tr>
-        <tr>
-            <td>Centro comercial Moctezuma</td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
-        </tr>
-        <tr class="alt">
-            <td>Ernst Handel</td>
-            <td>Roland Mendel</td>
-            <td>Austria</td>
-        </tr>
-        <tr>
-            <td>Island Trading</td>
-            <td>Helen Bennett</td>
-            <td>UK</td>
-        </tr>
-        <tr class="alt">
-            <td>Königlich Essen</td>
-            <td>Philip Cramer</td>
-            <td>Germany</td>
-        </tr>
-        <tr>
-            <td>Laughing Bacchus Winecellars</td>
-            <td>Yoshi Tannamuri</td>
-            <td>Canada</td>
-        </tr>
-        <tr class="alt">
-            <td>Magazzini Alimentari Riuniti</td>
-            <td>Giovanni Rovelli</td>
-            <td>Italy</td>
-        </tr>
-        <tr>
-            <td>North/South</td>
-            <td>Simon Crowther</td>
-            <td>UK</td>
-        </tr>
-        <tr class="alt">
-            <td>Paris spécialités</td>
-            <td>Marie Bertrand</td>
-            <td>France</td>
-        </tr>
-    </table>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">下拉菜单前2</a>
+                <div class="dropdown-content">
+                    <a href="#">链接 1</a>
+                    <a href="#">链接 2</a>
+                    <a href="#">链接 3</a>
+                </div>
+            </div>
+            <li><a class="active" href="#home">主页</a></li>
+            <li><a href="#news">新闻</a></li>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">下拉菜单后3</a>
+                <div class="dropdown-content">
+                    <a href="#">链接 1</a>
+                    <a href="#">链接 2</a>
+                    <a href="#">链接 3</a>
+                </div>
+            </div>
+        </ul>
+    </div>
 
-<div class="responsive">
-  <div class="img">
-    <a target="_blank" href="http://static.runoob.com/images/demo/demo1.jpg">
+    <div class="bottom-content">
+        <!--左边导航 -->
+        <div class="left-guide" style="float:left">
+            <ul class="chuizhi">
+                <li><a class="active" href="#home">主页</a></li>
+                <li><a href="#news">新闻</a></li>
+                <li><a href="#contact">联系</a></li>
+                <li><a href="#about">关于</a></li>
+            </ul>
+        </div>
+          <div class="left-guide" style="float:left">
+            <ul class="chuizhi">
+                <li><a class="active" href="#home">主页</a></li>
+                <li><a href="#news">新闻</a></li>
+                <li><a href="#contact">联系</a></li>
+                <li><a href="#about">关于</a></li>
+            </ul>
+        </div>
+        <!--正文 -->
+        <div class="main-content" style="margin-left:25%;padding:10px 16px">
+            <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+
+            <table id="customers">
+                <caption>Table 1.1 Customers</caption>
+                <tr>
+                    <th>Company</th>
+                    <th>Contact</th>
+                    <th>Country</th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                </tr>
+                <tr class="alt">
+                    <td>Berglunds snabbköp</td>
+                    <td>Christina Berglund</td>
+                    <td>Sweden</td>
+                </tr>
+                <tr>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                </tr>
+                <tr class="alt">
+                    <td>Ernst Handel</td>
+                    <td>Roland Mendel</td>
+                    <td>Austria</td>
+                </tr>
+                <tr>
+                    <td>Island Trading</td>
+                    <td>Helen Bennett</td>
+                    <td>UK</td>
+                </tr>
+                <tr class="alt">
+                    <td>Königlich Essen</td>
+                    <td>Philip Cramer</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td>Laughing Bacchus Winecellars</td>
+                    <td>Yoshi Tannamuri</td>
+                    <td>Canada</td>
+                </tr>
+                <tr class="alt">
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>North/South</td>
+                    <td>Simon Crowther</td>
+                    <td>UK</td>
+                </tr>
+                <tr class="alt">
+                    <td>Paris spécialités</td>
+                    <td>Marie Bertrand</td>
+                    <td>France</td>
+                </tr>
+            </table>
+
+            <div class="responsive">
+                <div class="img">
+                    <a target="_blank" href="http://static.runoob.com/images/demo/demo1.jpg">
       <img src="http://static.runoob.com/images/demo/demo1.jpg" alt="图片文本描述" width="300" height="200">
     </a>
-    <div class="desc">这里添加图片文本描述</div>
-  </div>
-</div>
- 
-<div class="responsive">
-  <div class="img">
-    <a target="_blank" href="http://static.runoob.com/images/demo/demo2.jpg">
+                    <div class="desc">这里添加图片文本描述</div>
+                </div>
+            </div>
+
+            <div class="responsive">
+                <div class="img">
+                    <a target="_blank" href="http://static.runoob.com/images/demo/demo2.jpg">
       <img src="http://static.runoob.com/images/demo/demo2.jpg" alt="图片文本描述" width="300" height="200">
     </a>
-    <div class="desc">这里添加图片文本描述</div>
-  </div>
-</div>
- 
+                    <div class="desc">这里添加图片文本描述</div>
+                </div>
+            </div>
 
-<div class="responsive">
-  <div class="img">
-    <a target="_blank" href="http://static.runoob.com/images/demo/demo3.jpg">
+
+            <div class="responsive">
+                <div class="img">
+                    <a target="_blank" href="http://static.runoob.com/images/demo/demo3.jpg">
       <img src="http://static.runoob.com/images/demo/demo3.jpg" alt="图片文本描述" width="300" height="200">
     </a>
-    <div class="desc"><input value="这里添加图片文本描述" /></div>
-  </div>
-</div>
- 
-<div class="responsive">
-  <div class="img">
-    <a target="_blank" href="http://static.runoob.com/images/demo/demo4.jpg">
+                    <div class="desc"><input placeholder="这里添加图片文本描述" /></div>
+                </div>
+            </div>
+
+            <div class="responsive">
+                <div class="img">
+                    <a target="_blank" href="http://static.runoob.com/images/demo/demo4.jpg">
       <img src="http://static.runoob.com/images/demo/demo4.jpg" alt="图片文本描述" width="300" height="200">
     </a>
-    <div class="desc"><input value="这里添加图片文本描述" /></div>
-  </div>
-</div>
+                    <div class="desc"><input placeholder="这里添加图片文本描述" /></div>
+                </div>
+            </div>
 
-
+        </div>
+    </div>
 </body>
 
 </html>

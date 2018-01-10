@@ -65,16 +65,20 @@ div.img img {
 
 div.desc {
     padding: 15px;
+	/*当不固定呢宽高时，缩小浏览器，字就会撑出来*/
+	/*width:150px;
+	/*height:30px;*/   
     text-align: center;
+	overflow: hidden;
 }
 
-div.desc.input {
+/*输入框*/
+div.desc input {
 	display: block;
-	margin-bottom:-14px;
-
-	position:absolute;
-    left:-7px;
-	top:-6px;
+	width:150px;
+	height:40px;
 	border-style:none;
-	text-align:center;
+	margin: -10px,-10px,10px,-10px;
+	text-align: center;
+
 }

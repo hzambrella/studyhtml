@@ -1,0 +1,82 @@
+ * {
+     margin: 0;
+     padding: 0;
+ }
+ /*
+     ul class名字daohanglan   
+  */
+
+ .daohanglan {
+     list-style-type: none;
+     /*列表的标致：无。默认是点*/
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     /*溢出的内容，隐藏*/
+     background-color: #333;
+ }
+
+ .daohanglan li {
+     float: left;
+     /*这个让每个li都横着排列*/
+ }
+ /* 定义li*/
+
+ .daohanglan li a,
+ .dropbtn
+ /*ul的li子类的a子类，和class=dropbtn子类*/
+
+ {
+     display: inline-block;
+     /*宽度随内容变化的块*/
+     color: white;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+ }
+ /*hover效果*/
+
+ .daohanglan li a:hover,
+ .dropdown:hover,
+ .dropbtn
+ /*ul的li子类的a子类，dropdown类，dropbtn类*/
+
+ {
+     background-color: #111;
+ }
+ /*有下拉项的“按钮”*/
+
+ .dropdown {
+     display: inline-block;
+     float: left;/*加上去后，按钮才能按正常顺序*/
+ }
+ /*下拉菜单的菜单项*/
+ .dropdown-content {
+     display: none;
+     /*隐藏*/
+     position: absolute;
+     /*对于已定位父元素固定*/
+     background-color: #f9f9f9;
+     min-width: 160px;
+     z-index: 1;/*堆叠顺序在上面*/
+     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+     /*加上阴影*/
+ }
+ /*下拉菜单的a*/
+
+ .dropdown-content a {
+     color: black;
+     padding: 12px 16px;
+     text-decoration: none;
+     display: block;
+ }
+ /*菜单项里面a 标签hover时变色*/
+
+ .dropdown-content a:hover {
+     background-color: #f1f1f1
+ }
+ /*dropdown hover时显示菜单项*/
+
+ .dropdown:hover .dropdown-content {
+     display: block;
+ }
