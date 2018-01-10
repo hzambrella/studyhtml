@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="study.css?v=113231">
     <link rel="stylesheet" type="text/css" href="daohanglan.css?v=113231">
     <link rel="stylesheet" type="text/css" href="chuizhidhl.css?v=113231">
+    <link rel="stylesheet" type="text/css" href="tipText.css?v=113231">
 </head>
 
 <body>
@@ -53,7 +54,7 @@
                 <li><a href="#about">关于</a></li>
             </ul>
         </div>
-          <div class="left-guide" style="float:left">
+        <div class="left-guide" style="float:left">
             <ul class="chuizhi">
                 <li><a class="active" href="#home">主页</a></li>
                 <li><a href="#news">新闻</a></li>
@@ -64,101 +65,192 @@
         <!--正文 -->
         <!--注意：margin-left:25%;padding:10px 16px，这就不会被左侧导航栏遮挡-->
         <div class="main-content" style="margin-left:25%;padding:10px 16px">
-            <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+            <!--上部按钮1-->
+            <div class="tipbutton" style="position:relative">
+                <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                <span class="tooltiptext">这是一个像按钮的链接</span>
+            </div>
+            <!--上部按钮1-->
+            <div class="tipbutton" style="position:relative">
+                <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                <span class="tooltiptext">这是一个像按钮的链接</span>
+            </div>
 
-            <table id="customers">
-                <caption>Table 1.1 Customers</caption>
-                <tr>
-                    <th>Company</th>
-                    <th>Contact</th>
-                    <th>Country</th>
-                </tr>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                </tr>
-                <tr class="alt">
-                    <td>Berglunds snabbköp</td>
-                    <td>Christina Berglund</td>
-                    <td>Sweden</td>
-                </tr>
-                <tr>
-                    <td>Centro comercial Moctezuma</td>
-                    <td>Francisco Chang</td>
-                    <td>Mexico</td>
-                </tr>
-                <tr class="alt">
-                    <td>Ernst Handel</td>
-                    <td>Roland Mendel</td>
-                    <td>Austria</td>
-                </tr>
-                <tr>
-                    <td>Island Trading</td>
-                    <td>Helen Bennett</td>
-                    <td>UK</td>
-                </tr>
-                <tr class="alt">
-                    <td>Königlich Essen</td>
-                    <td>Philip Cramer</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td>Laughing Bacchus Winecellars</td>
-                    <td>Yoshi Tannamuri</td>
-                    <td>Canada</td>
-                </tr>
-                <tr class="alt">
-                    <td>Magazzini Alimentari Riuniti</td>
-                    <td>Giovanni Rovelli</td>
-                    <td>Italy</td>
-                </tr>
-                <tr>
-                    <td>North/South</td>
-                    <td>Simon Crowther</td>
-                    <td>UK</td>
-                </tr>
-                <tr class="alt">
-                    <td>Paris spécialités</td>
-                    <td>Marie Bertrand</td>
-                    <td>France</td>
-                </tr>
-            </table>
+            <!--表格-->
+            <div style="margin-top:5px;margin-bottom:5px;">
+                <table id="customers">
+                    <caption>Table 1.1 Customers</caption>
+                    <tr>
+                        <th>Company</th>
+                        <th>Contact</th>
+                        <th>Country</th>
+                    </tr>
+                    <tr>
+                        <td>Alfreds Futterkiste</td>
+                        <td>Maria Anders</td>
+                        <td>Germany</td>
+                    </tr>
+                    <tr class="alt">
+                        <td>Berglunds snabbköp</td>
+                        <td>Christina Berglund</td>
+                        <td>Sweden</td>
+                    </tr>
+                    <tr>
+                        <td>Centro comercial Moctezuma</td>
+                        <td>Francisco Chang</td>
+                        <td>Mexico</td>
+                    </tr>
+                    <tr class="alt">
+                        <td>Ernst Handel</td>
+                        <td>Roland Mendel</td>
+                        <td>Austria</td>
+                    </tr>
+                    <tr>
+                        <td>Island Trading</td>
+                        <td>Helen Bennett</td>
+                        <td>UK</td>
+                    </tr>
+                    <tr class="alt">
+                        <td>Königlich Essen</td>
+                        <td>Philip Cramer</td>
+                        <td>Germany</td>
+                    </tr>
+                    <tr>
+                        <td>Laughing Bacchus Winecellars</td>
+                        <td>Yoshi Tannamuri</td>
+                        <td>Canada</td>
+                    </tr>
+                    <tr class="alt">
+                        <td>Magazzini Alimentari Riuniti</td>
+                        <td>Giovanni Rovelli</td>
+                        <td>Italy</td>
+                    </tr>
+                    <tr>
+                        <td>North/South</td>
+                        <td>Simon Crowther</td>
+                        <td>UK</td>
+                    </tr>
+                    <tr class="alt">
+                        <td>Paris spécialités</td>
+                        <td>Marie Bertrand</td>
+                        <td>France</td>
+                    </tr>
+                </table>
+            </div>
 
-            <div class="responsive">
-                <div class="img">
-                    <a target="_blank" href="http://static.runoob.com/images/demo/demo1.jpg">
+            <!--图片-->
+            <div>
+                <div class="responsive">
+                    <div class="img">
+                        <a target="_blank" href="http://static.runoob.com/images/demo/demo1.jpg">
       <img src="http://static.runoob.com/images/demo/demo1.jpg" alt="图片文本描述" width="300" height="200">
     </a>
-                    <div class="desc">这里添加图片文本描述</div>
+                        <div class="desc">这里添加图片文本描述</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="responsive">
-                <div class="img">
-                    <a target="_blank" href="http://static.runoob.com/images/demo/demo2.jpg">
+                <div class="responsive">
+                    <div class="img">
+                        <a target="_blank" href="http://static.runoob.com/images/demo/demo2.jpg">
       <img src="http://static.runoob.com/images/demo/demo2.jpg" alt="图片文本描述" width="300" height="200">
     </a>
-                    <div class="desc">这里添加图片文本描述</div>
+                        <div class="desc">这里添加图片文本描述</div>
+                    </div>
                 </div>
-            </div>
 
 
-            <div class="responsive">
-                <div class="img">
-                    <a target="_blank" href="http://static.runoob.com/images/demo/demo3.jpg">
+                <div class="responsive">
+                    <div class="img">
+                        <a target="_blank" href="http://static.runoob.com/images/demo/demo3.jpg">
       <img src="http://static.runoob.com/images/demo/demo3.jpg" alt="图片文本描述" width="300" height="200">
     </a>
-                    <div class="desc"><input placeholder="这里添加图片文本描述" /></div>
+                        <div class="desc"><input placeholder="这里添加图片文本描述" /></div>
+                    </div>
+                </div>
+
+                <div class="responsive">
+                    <div class="img">
+                        <a target="_blank" href="http://static.runoob.com/images/demo/demo4.jpg">
+      <img src="http://static.runoob.com/images/demo/demo4.jpg" alt="图片文本描述" width="300" height="200">
+    </a>
+                        <div class="desc"><input placeholder="这里添加图片文本描述" /></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="responsive">
-                <div class="img">
-                    <a target="_blank" href="http://static.runoob.com/images/demo/demo4.jpg">
+            <!--中部按钮-->
+            <div style="clear:both;bottom:200px;margin-bottom:10px">
+                <div class="tipbutton" style="position:relative">
+                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <span class="tooltiptext">这是一个像按钮的链接</span>
+                </div>
+
+                <div class="tipbutton" style="position:relative;margin-bottom:10px">
+                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <span class="tooltiptext">这是一个像按钮的链接</span>
+                </div>
+
+                <div class="tipbutton" style="position:relative;margin-bottom:10px">
+                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <span class="tooltiptext">这是一个像按钮的链接</span>
+                </div>
+            </div>
+
+            <!--图片2区-->
+            <div>
+                <div class="responsive">
+                    <div class="img">
+                        <a target="_blank" href="http://static.runoob.com/images/demo/demo1.jpg">
+      <img src="http://static.runoob.com/images/demo/demo1.jpg" alt="图片文本描述" width="300" height="200">
+    </a>
+                        <div class="desc">这里添加图片文本描述</div>
+                    </div>
+                </div>
+
+                <div class="responsive">
+                    <div class="img">
+                        <a target="_blank" href="http://static.runoob.com/images/demo/demo2.jpg">
+      <img src="http://static.runoob.com/images/demo/demo2.jpg" alt="图片文本描述" width="300" height="200">
+    </a>
+                        <div class="desc">这里添加图片文本描述</div>
+                    </div>
+                </div>
+
+
+                <div class="responsive">
+                    <div class="img">
+                        <a target="_blank" href="http://static.runoob.com/images/demo/demo3.jpg">
+      <img src="http://static.runoob.com/images/demo/demo3.jpg" alt="图片文本描述" width="300" height="200">
+    </a>
+                        <div class="desc"><input placeholder="这里添加图片文本描述" /></div>
+                    </div>
+                </div>
+
+                <div class="responsive">
+                    <div class="img">
+                        <a target="_blank" href="http://static.runoob.com/images/demo/demo4.jpg">
       <img src="http://static.runoob.com/images/demo/demo4.jpg" alt="图片文本描述" width="300" height="200">
     </a>
-                    <div class="desc"><input placeholder="这里添加图片文本描述" /></div>
+                        <div class="desc"><input placeholder="这里添加图片文本描述" /></div>
+                    </div>
+                </div>
+            </div>
+
+              <!--底部按钮-->
+            <div style="clear:both;bottom:200px">
+                <div class="tipbutton" style="position:relative">
+                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <span class="tooltiptext">这是一个像按钮的链接</span>
+                </div>
+
+                <div class="tipbutton" style="position:relative">
+                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <span class="tooltiptext">这是一个像按钮的链接</span>
+                </div>
+
+                <div class="tipbutton" style="position:relative">
+                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <span class="tooltiptext">这是一个像按钮的链接</span>
                 </div>
             </div>
 

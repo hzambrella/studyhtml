@@ -1,0 +1,47 @@
+/*提示框div*/
+.tipbutton{
+    margin: 10px 50px 0px 0px;
+    width: 100px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+/*提示框*/
+.tooltiptext{
+    visibility: hidden;
+    width: 220px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* 定位 */
+    position: absolute;
+    z-index: 1;
+    /*top: -5px;*/
+    left: 120%;
+    top:15%;
+    /*淡入效果*/
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+/*三角*/
+.tipbutton .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent  black transparent transparent;
+}
+
+/*显示*/
+.tipbutton:hover .tooltiptext {
+    /*淡入效果*/
+    opacity: 1;
+    visibility: visible;
+}
