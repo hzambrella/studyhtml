@@ -3,11 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <title>菜鸟教程(runoob.com)</title>
+    <title>三边栏网页css</title>
     <link rel="stylesheet" type="text/css" href="study.css?v=113231">
     <link rel="stylesheet" type="text/css" href="daohanglan.css?v=113231">
-    <link rel="stylesheet" type="text/css" href="chuizhidhl.css?v=113231">
+    <link rel="stylesheet" type="text/css" href="leftDaohang.css?v=113231">
     <link rel="stylesheet" type="text/css" href="tipText.css?v=113231">
+    <style>
+        .main-content{
+            margin-left:25%;
+            padding:50px 10px 16px 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,29 +48,21 @@
                 </div>
             </div>
         </ul>
+          <!--左边导航 -->
+        <div class="left-guide">
+            <ul class="chuizhi">
+                <li><a class="active" href="#home">主页</a></li>
+                <li><a href="#news">新闻</a></li>
+                <li><a href="#contact">联系</a></li>
+                <li><a href="#about">关于</a></li>
+            </ul>
+        </div>
     </div>
 
     <div class="bottom-content">
-        <!--左边导航 -->
-        <div class="left-guide" style="float:left">
-            <ul class="chuizhi">
-                <li><a class="active" href="#home">主页</a></li>
-                <li><a href="#news">新闻</a></li>
-                <li><a href="#contact">联系</a></li>
-                <li><a href="#about">关于</a></li>
-            </ul>
-        </div>
-        <div class="left-guide" style="float:left">
-            <ul class="chuizhi">
-                <li><a class="active" href="#home">主页</a></li>
-                <li><a href="#news">新闻</a></li>
-                <li><a href="#contact">联系</a></li>
-                <li><a href="#about">关于</a></li>
-            </ul>
-        </div>
         <!--正文 -->
         <!--注意：margin-left:25%;padding:10px 16px，这就不会被左侧导航栏遮挡-->
-        <div class="main-content" style="margin-left:25%;padding:10px 16px">
+        <div class="main-content" >
             <!--上部按钮1-->
             <div class="tipbutton" style="position:relative">
                 <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
@@ -181,17 +179,17 @@
             <!--中部按钮-->
             <div style="clear:both;bottom:200px;margin-bottom:10px">
                 <div class="tipbutton" style="position:relative">
-                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <a class="anniu" style="box-shadow: 10px 10px 5px #888888;" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
                     <span class="tooltiptext">这是一个像按钮的链接</span>
                 </div>
 
                 <div class="tipbutton" style="position:relative;margin-bottom:10px">
-                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <a class="anniu" style="box-shadow: 10px 10px 5px #888888;" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
                     <span class="tooltiptext">这是一个像按钮的链接</span>
                 </div>
 
                 <div class="tipbutton" style="position:relative;margin-bottom:10px">
-                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <a class="anniu" style="box-shadow: 10px 10px 5px #888888;" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
                     <span class="tooltiptext">这是一个像按钮的链接</span>
                 </div>
             </div>
@@ -239,17 +237,17 @@
               <!--底部按钮-->
             <div style="clear:both;bottom:200px">
                 <div class="tipbutton" style="position:relative">
-                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <a class="anniu" style="border-radius:15px;" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
                     <span class="tooltiptext">这是一个像按钮的链接</span>
                 </div>
 
                 <div class="tipbutton" style="position:relative">
-                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                    <a class="anniu" style="border-radius:15px;" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
                     <span class="tooltiptext">这是一个像按钮的链接</span>
                 </div>
 
-                <div class="tipbutton" style="position:relative">
-                    <a class="anniu" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
+                <div class="tipbutton" style="position:relative;">
+                    <a class="anniu" style="border-radius:15px;" href="http://www.baidu.com" target="_blank">这是一个像按钮的链接</a>
                     <span class="tooltiptext">这是一个像按钮的链接</span>
                 </div>
             </div>

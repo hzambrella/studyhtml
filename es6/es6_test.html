@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>es6 test</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!--高亮code标签-->
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+      <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <!--Traceur 允许将 ES6 代码直接插入网页,没有的话 module的script代码不会执行-->
+    <script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
+    <script src="https://google.github.io/traceur-compiler/bin/BrowserSystem.js"></script>
+    <script src="https://google.github.io/traceur-compiler/src/bootstrap.js"></script>
+    <!--测试用export_test.js，traceur不支持本地js-->
+    <!--<script src="export_test.js" type="module"></script>-->
+    <!--app css-->
+    <link rel="stylesheet" type="text/css" href="base.css?v=1">
+</head>
+
+<body>
+    <div class="part">
+        <p id="isSupportEs6" style="margin-bottom:10px">浏览器是否支持es6:<span style="color:brown">否</span></p>
+        <a href="https://www.cnblogs.com/xkloveme/p/7456656.html">参考：前端开发者必须知道的10大 Es6属性</a>
+    </div>
+
+    <div class="part">
+        <h2>函数默认值</h2>
+        <!--长(html5): <input id="default_param_height" type="number" name="height" min="0" max="10" />
+        宽(html5): <input id="default_param_width" type="number" name="weight" min="0" max="10" />-->
+        <button id="default_param">按我</button>
+        <p>函数默认值的结果(计算面积，函数没有任何输入。):<span id="default_param_result"></span></p>
+    </div>
+
+    <div class="part">
+        <h2>字符串语法糖:无效</h2>
+    </div>
+
+    <div class="part">
+        <h2>箭头函数</h2>
+        <button id="arrow">按我</button>
+        <p>箭头函数的结果:<span id="result_Arrow"></span></p>
+    </div>
+
+    <div class="part">
+        <h2>let</h2>
+        <p>let是一个更新的var，可以让你把变量作用域限制在当前块里。我们用{}来定义块，但是在ES5中这些花括号起不到任何作用。</p>
+        <div class="code">
+            <pre>
+            <code class="lang-javascript">
+            function calculateTotalAmount(vip) {
+            var amount = 0
+            if (vip) {
+                var amount = 1
+            }
+            //块
+            { // 让块来的更疯狂
+                var amount = 100
+                //块
+                {
+                    var amount = 1000
+                }
+            }
+            return amount
+        }   
+            </code>
+            </pre>
+        </div>
+
+        <div class="code">
+            <pre>
+            <code  class="lang-javascript">
+            function calculateTotalAmount(vip) {
+            var amount = 0
+            if (vip) {
+                var amount = 1
+            }
+            //块
+            { // 让块来的更疯狂
+                let amount = 100
+                //块
+                {
+                    let amount = 1000
+                }
+            }
+            return amount
+        }
+                
+            </code>
+            </pre>
+        </div>
+        <button id="let_js" class="orange">按我运行js</button>
+        <button id="let_es6">按我运行es6</button>
+        <p>js的结果:<span id="result_let_js"></span></p>
+        <p>es6的结果:<span id="result_let_es6"></span></p>
+    </div>
+    <div class="part">
+        <h2>const</h2>
+        <p>说到const，事情就简单多了。他仅仅产生是一个不可变的变量，并且他的作用域也像let一样只有块级。为了演示，这里有定义了一堆常量，并且由于作用域的原因，这些定义都是有效的。</p>
+        <button id="const_es6">按我运行es6</button>
+        <p>const的结果:<span id="result_const_es6"></span></p>
+    </div>
+    <div class="part">
+        <h2>export and import</h2>
+        <p>这个直接浏览器貌似看不到效果</p>
+        <button id="export_import">按我s</button>
+        <p>export_import:<span id="result_export_import"></span></p>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        //是否支持es6
+        const isSupportEs6="是"
+        $("#isSupportEs6").children("span").text(isSupportEs6)
+        //高亮代码
+        $('pre code').each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
+    });
+    //默认变量
+    $("#default_param").click(() => {
+        //实验了input 没有达到效果
+        // var height=$("#default_param_height").val()
+        // var width=$("#default_param_width").val()
+
+        var area_result = function (height = 10, width = 10) {
+            /*G
+            console.log("input height:",$("#default_param_height").val())
+            console.log("input width:",$("#default_param_width").val())
+            console.log("height:",height)
+            console.log("width:",width)
+            */
+            return height * width
+        }
+
+
+        $("#default_param_result").text(area_result())
+    })
+    //字符串语法糖:无效
+    //  $("#string_sweet").click((event) => {
+    //     var fourAgreements = 'You have the right to be you.n
+    //     You can only be you when you do your best.'
+    //     $("#result_string_sweet").text(fourAgreements)
+    // })
+
+    //箭头函数
+    $("#arrow").click((event) => {
+        //console.log(event)
+        var ids = ['5632953c4e345e145fdf2df8', '563295464e345e145fdf2df9']
+        //js
+        /*
+        var messages = ids.map(function (value) {
+            return 'ID is ' + value // 显式返回
+        });
+        */
+        //es6
+        var messages = ids.map(value => `id is ${value}`)
+        console.log($("#result_Arrow").text())
+        $("#result_Arrow").text(messages)
+    })
+    //let
+    $("#let_js").click((event) => {
+        function calculateTotalAmount(vip) {
+            var amount = 0
+            if (vip) {
+                var amount = 1
+            }
+            //块
+            { // 让块来的更疯狂
+                var amount = 100
+                //块
+                {
+                    var amount = 1000
+                }
+            }
+            return amount
+        }
+
+        $("#result_let_js").text(calculateTotalAmount(true))
+    })
+
+    $("#let_es6").click((event) => {
+        function calculateTotalAmount(vip) {
+            var amount = 0
+            if (vip) {
+                var amount = 1
+            }
+            //块
+            { // 让块来的更疯狂
+                let amount = 100
+                //块
+                {
+                    let amount = 1000
+                }
+            }
+            return amount
+        }
+
+        $("#result_let_es6").text(calculateTotalAmount(true))
+    })
+    //const
+    $("#const_es6").click((event) => {
+        function calculateTotalAmount(vip) {
+            var amount = 0
+            if (vip) {
+                var amount = 1
+            }
+            //块
+            { // 让块来的更疯狂
+                const amount = 100
+                //块
+                {
+                    const amount = 1000
+                }
+            }
+            return amount
+        }
+
+        $("#result_const_es6").text(calculateTotalAmount(true))
+    })
+</script>
+<script type="module">
+
+//    alert(firstName) // 报错，块作用域
+//     import {firstName,lastName}// import有提升功能
+    $("#result_export_import").text("module可用,但是不支持本地加载js")
+</script>
+
+<!--这里面定义,import也报错。。。-->
+<!--<script type="module">
+    // export var hz_test_export =function hz_test(){
+    //     alert("试试export")
+    // };
+    var firstName = 'Michael';
+    var lastName = 'Jackson';
+    var year = 1958;
+
+export {firstName, lastName, year};
+ </script>-->
+</html>

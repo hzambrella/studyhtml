@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>require.js hello world</title>
+    <!--data-main 指定main.js  src指定require.js-->
+    <script src="../js/vendor/require.js"></script>
+    <script src="../js/main.js"></script>
+    <style>
+        *{margin:0;padding:0}
+        div.dotte{
+            border-style:dotted;padding:10px;margin: 10px;
+        }
+        p{
+            font-size: 0.5em;  
+        }
+        p.sub_title{
+            color: blue;
+            font-size: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>this is a page.</h1>
+     <div class="dotte">
+         <p class="sub_title">符合AMD的</p>
+        <p id="result_math">1+1= </p>
+    </div>
+    
+    <div class="dotte">
+         <p class="sub_title">导入jquery</p>
+        <p id="result_jquery">"hello world jquery"</p>
+    </div>
+
+    <div class="dotte">
+         <p class="sub_title">在main.js中换名字</p>
+        <p id="change_name"></p>
+    </div>
+
+     <div class="dotte">
+         <p class="sub_title">app文件夹的</p>
+        <p id="app_hello">"hello world"</p>
+    </div>
+
+    <div class="dotte">
+        <p class="sub_title">不符合amd的，内容</p>
+        <p id="hello2" ></p>
+        <p class="sub_title">结果</p>
+        <p id="hello_unAMD"></p>
+    </div>
+    
+</body>
+<script>
+    // 第一个参数是数组,指定依赖。第二个是加载js成功的回调。第三个是加载失败的回调。
+    require(["math","jquery","hello","app/helloWorld_p","hello2","BMap"], function (math,$,hello) {
+        // alert($)
+        //var mess=$("#p").html()
+        // alert("mess:",mess)
+        //math
+        var math_p_content=document.getElementById("result_math").innerHTML
+        document.getElementById("result_math").innerHTML=math_p_content+math.add(1, 1)
+        //jquery
+        $("#result_jquery").css("background-color","red");
+        //hello
+        hello.hello()
+        //hello2
+        document.getElementById("hello2").innerHTML="hello2的内容："+"<br/>"+hello_unAMD
+        var e=hello_unAMD()
+        e()
+        //end
+        console.log("当js加载成功后会执行的函数");
+    }, function () {
+        console.log("当js加载失败后会执行的函数");
+    });
+</script>
+
+</html>

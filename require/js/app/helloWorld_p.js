@@ -1,0 +1,1 @@
+document.getElementById("app_hello").innerHTML="from app/js:hello world"

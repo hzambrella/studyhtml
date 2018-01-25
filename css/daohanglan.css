@@ -2,10 +2,16 @@
      margin: 0;
      padding: 0;
  }
+ /*导航栏*/
   /*顶头导航栏*/
  /*
      ul class名字daohanglan   
   */
+.top-guide{
+    position:fixed;
+    z-index:1;
+    width:100%
+}
 
  .daohanglan {
      list-style-type: none; /*列表的标致：无。默认是点*/
@@ -78,3 +84,36 @@
  .dropdown:hover .dropdown-content {
      display: block;
  }
+
+
+ /*垂直导航栏*/
+ .left-guide{
+
+ }
+ 
+.chuizhi {
+    list-style-type: none;
+    padding: 0;
+    width: 25%;
+    background-color: #f1f1f1;
+    position: fixed;/*能实现下拉时不动*/
+    height: 100%;
+    overflow: auto;/*内容溢出时*/
+}
+
+.chuizhi li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;/*去调a标签的下划线*/
+}
+
+.chuizhi li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.chuizhi li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
