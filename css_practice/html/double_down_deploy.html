@@ -1,0 +1,143 @@
+<!DOCUMENT HTML>
+<html>
+
+<head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+    <title>双列竖着布局</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../js/plugin_test/toast_alert.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/plugin_test/toast_alert.css">
+</head>
+
+<body>
+    <div class="toast">
+        <div class="toast_text"></div>
+    </div>
+    <div class="app">
+        <div class="banner">
+            <p class="text">banner图</p>
+        </div>
+        <div class="main">
+            <div style="border-style:solid;border-color:blue;">
+                <p class="text">内容</p>
+            </div>
+            <div class="item">
+                <div class="picture">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <div class="picture">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <div class="picture">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <div class="picture">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <div class="picture">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <div class="picture">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <div class="picture">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <div class="picture">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <div class="picture">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-size: 1.5em;
+    }
+
+    .banner {
+        background-color: firebrick;
+        float: top;
+        height: 25%;
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .main {
+        background-color: lightgoldenrodyellow;
+        float: bottom;
+        /*height: 75%;去掉！！！*/
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .item {
+        position: relative;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        height: 150px;
+        width: 670px;
+        margin: 10px auto;
+    }
+
+    .picture {
+        position: absolute;
+        background-color: gold;
+        margin: 10px 10px;
+        width: 140px;
+        height: 130px;
+    }
+
+
+    .content {
+        position: absolute;
+        background-color: lawngreen;
+        margin: 10px 10px 10px 160px;
+        width: 500px;
+        height: 130px;
+    }
+
+    .text {
+        text-align: center;
+    }
+</style>
+<script>
+    $.toast("考试:测试toast",{
+        fontSize:"0.8em"
+    })
+</script>
+
+</html>

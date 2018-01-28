@@ -1,0 +1,88 @@
+<!DOCUMENT HTML>
+<html>
+
+<head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+    <title>三列布局</title>
+</head>
+
+<body>
+    <div class="single-head">
+        head
+    </div>
+    <div class="single-main">
+        <div class="single-left">
+            <div class="sub-left">
+                    sub-left
+            </div>
+            <div class="sub-right">
+                <p style="position:absolute;top:10%;font-size:10px;">sub-right</p>
+            </div>
+        </div>
+        <div class="single-right">
+            right
+        </div>
+    </div>
+    <div class="single-foot">
+        foot
+    </div>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-size:1.2em;
+    }
+
+    .single-head {
+        background-color: aqua;
+        width: 100%;
+        height: 10%;
+    }
+
+    .single-main {
+        background-color: bisque;
+        width: 70%;
+        height: 80%;
+        margin: 0px auto;
+    }
+
+    .single-foot {
+        background-color: aquamarine;
+        width: 70%;
+        height: 10%;
+        margin: 0px auto;
+    }
+
+    .single-left {
+        float: left;
+        position: relative;
+        background-color: brown;
+        width: 70%;
+        height: 100%;
+    }
+
+    .single-right {
+        float: right;
+        
+        background-color: greenyellow;
+        width: 30%;
+        height: 100%;
+    }
+
+    .sub-left {
+        float: left;
+        background-color: powderblue;
+        width: 30%;
+        height: 100%;
+    }
+
+    .sub-right {
+        float: right;
+        background-color: yellow;
+        width: 70%;
+        height: 100%;
+    }
+</style>
+
+</html>

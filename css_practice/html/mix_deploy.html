@@ -1,0 +1,95 @@
+<!DOCUMENT HTML>
+<html>
+
+<head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+    <title>混合布局</title>
+</head>
+
+<body>
+    <div class="single-head">
+        header
+    </div>
+    <div class="single-main">
+        <div class="single-left">
+            <div class="left-one">
+                left-one
+            </div>
+            <div class="left-two">
+                left-two
+            </div>
+            <div class="left-three">
+                left-three
+            </div>
+        </div>
+        <div class="single-right">
+            right
+        </div>
+    </div>
+    <div class="single-foot">
+        footer
+    </div>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-size: 1.2em;
+    }
+
+    .single-head {
+        background-color: aqua;
+        width: 100%;
+        height: 10%;
+    }
+
+    .single-main {
+        background-color: bisque;
+        width: 70%;
+        height: 80%;
+        margin: 0px auto;
+        position: relative;
+    }
+
+    .single-left {
+        float: left;
+        background-color: brown;
+        width: 70%;
+        height: 100%;
+    }
+
+    .left-one {
+        background-color:yellow;
+        width: 100%;
+        height: 30%;
+    }
+
+    .left-two {
+        background-color: blueviolet;
+        width: 100%;
+        height: 50%;
+    }
+
+    
+    .left-three {
+        background-color: peru;
+        width: 100%;
+        height: 20%;
+    }
+
+    .single-right {
+        float: right;
+        background-color: greenyellow;
+        width: 30%;
+        height: 100%;
+    }
+
+    .single-foot {
+        background-color: aquamarine;
+        width: 70%;
+        height: 10%;
+        margin: 0px auto;
+    }
+</style>
+
+</html>
