@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>hz初学jQuery挂件(部件)</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!--<link rel="stylesheet" type="text/css" href="css/plugin.css">-->
+    <link rel="stylesheet" type="text/css" href="css/button.css">
+    <script src="js/toast_alert.js"></script>
+    <script src="plugin.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/toast_alert.css">
+</head>
+
+<body>
+    <div id="toastId2" class="toast_alert">
+        <div class="toast_alert_text"></div>
+    </div>
+    <div class="main">
+        <p>挂件(部件)</p>
+    </div>
+    <div id="progressbar"></div>
+    <button class="norm_button" id="create_progressbar">点我创建部件</button>
+    <button class="norm_button" id="add_progressbar">点我加进度</button>
+    <button class="norm_button" id="complete_progressbar">点我直接完成</button>
+    <button class="norm_button" id="complete_progressbar_direct">点我强行完成</button>
+    <button class="norm_button" id="destroy_progressbar">点我销毁</button>
+    <button class="norm_button" id="data_progressbar">点我看progressbar的实例</button>
+</body>
+
+<script src="widget.js"></script>
+<script>
+    var createProgressBar = function () {
+        var bar = $("#progressbar")
+            // .appendTo( "body" )
+            .progressbar({
+                value: 12,
+                //给progressbar实例新定义complete方法
+                complete: function (event, data) {
+                    $.log("Callback complete is complete!");
+                }
+                //bind 绑定事件。命名空间+方法名。当progressbarcomplete被触发时，执行下面函数。
+            }).bind("progressbarcomplete", function (event, data) {
+                $.log(
+                    "Events bubble and support many handlers for extreme flexibility.The progress bar value is " +
+                    data.value);
+                alert("100% 了，恭喜恭喜！！")
+            });
+
+        $('button').removeAttr("disabled");
+        $('button').removeClass("disabled");
+        $('#create_progressbar').attr('disabled', "true");
+        $('#create_progressbar').addClass('disabled');
+        return bar
+    }
+    //挂载
+    bar = createProgressBar()
+    $("#create_progressbar").click(function () {
+        bar = createProgressBar()
+    })
+
+    $("#add_progressbar").click(function () {
+        //调用方法：把方法名称以字符串形式进行传递。方法要求参数 ，请作为额外的参数传递给插件。
+        var value = bar.progressbar("value")
+        value = value + 2
+        bar.progressbar("value", value);
+    })
+
+    $("#complete_progressbar").click(function () {
+        bar.progressbar("value", 100);
+    })
+
+    //destory后会报错，cannot call methods on progressbar prior to initialization; attempted to call method 'value'
+    $("#complete_progressbar_direct").click(function () {
+        bar.progressbar("value", 100);
+    })
+
+    $("#destroy_progressbar").click(function () {
+        //销毁
+        bar.progressbar("destroy")
+        $('button').attr('disabled', "true");
+        $('button').addClass('disabled');
+        $('#create_progressbar').removeAttr("disabled");
+        $('#create_progressbar').removeClass('disabled');
+        $('#complete_progressbar_direct').removeAttr("disabled");
+        $('#complete_progressbar_direct').removeClass('disabled');
+        // $("#destroy_progressbar").css('background-color','gainsboro')s
+
+        //bar=null
+    })
+
+    $("#data_progressbar").click(function () {
+        alert("写法:驼峰，$('#progressbar').data('customProgressbar')")
+        var aa=$("#progressbar").data("customProgressbar")
+        //instance 方法获得实例。可以直接实例.方法名调用。如aaa.value
+        var aaa=$("#progressbar").progressbar("instance")
+        console.log(aa,aaa)
+        $.log("value is:"+aaa.value())
+    })
+
+
+    
+</script>
+
+</html>
