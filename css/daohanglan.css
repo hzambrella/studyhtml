@@ -79,8 +79,9 @@
  .dropdown-content a:hover {
      background-color: #f1f1f1
  }
- /*dropdown hover时显示菜单项*/
 
+ /*dropdown hover时显示菜单项  重点！！*/
+ /*.dropdown:hover的子类.dropdown-content为块*/
  .dropdown:hover .dropdown-content {
      display: block;
  }

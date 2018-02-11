@@ -28,6 +28,8 @@
     <button class="norm_button" id="complete_progressbar_direct">点我强行完成</button>
     <button class="norm_button" id="destroy_progressbar">点我销毁</button>
     <button class="norm_button" id="data_progressbar">点我看progressbar的实例</button>
+    <h2>bridge的用法：点下面的forgive</h2>
+    <p id="toGreen" style="font-size:1.1em">点我 forgive her</p>
 </body>
 
 <script src="widget.js"></script>
@@ -93,15 +95,37 @@
 
     $("#data_progressbar").click(function () {
         alert("写法:驼峰，$('#progressbar').data('customProgressbar')")
-        var aa=$("#progressbar").data("customProgressbar")
+        var aa = $("#progressbar").data("customProgressbar")
         //instance 方法获得实例。可以直接实例.方法名调用。如aaa.value
-        var aaa=$("#progressbar").progressbar("instance")
-        console.log(aa,aaa)
-        $.log("value is:"+aaa.value())
+        var aaa = $("#progressbar").progressbar("instance")
+        console.log(aa, aaa)
+        $.log("value is:" + aaa.value())
     })
+</script>
 
+<!--bridge部分-->
+<script>
+    //先定义一个小插件
+    //构造方法
+    var greenText = function (options, element) {
+        this.options = options;
+        this.element = $(element);
+    }
 
-    
+    //定义方法
+    greenText.prototype = {
+        toGreen: function () {
+            this.element.css("color", "green")
+            this.element.text("of course choose to forgive her")
+        }
+    }
+
+    // bridge的作用:Hook up the plugin 
+    //jQuery.widget.bridge( name, constructor )
+    $.widget.bridge("changeGreen", greenText);
+    $("#toGreen").changeGreen().click(function () {
+        $(this).changeGreen("instance").toGreen()
+    });
 </script>
 
 </html>

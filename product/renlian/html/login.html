@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signin</title>
+    <link href="../css/style.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/toast_alert.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/toast_alert.css">
+</head>
+
+<body>
+    <h1>Sweep Face Online</h1>
+    <div class="app-cam">
+        <div class="cam"><img src="../images/cam.png" class="img-responsive" alt="" /></div>
+        <form id="login">
+            <input id="account" type="text" class="text" value="your account" onfocus="if (this.value == 'your account'){this.value = '';}" onblur="if (this.value == '') {this.value = 'your account';}">
+            <input id="password" type="password" value="Password" onfocus="if (this.value == 'Password'){this.value = '';}" onblur="if (this.value == '') {this.value = 'Password';}">
+            <div class="submit"><input type="submit" value="Sign in"></div>
+            <div class="clear"></div>
+            <div class="buttons">
+                <ul>
+                    <li><a href="#" id="testAccount" class="hvr-sweep-to-right">test account</a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="new">
+                <p><a href="#" id="forgetPass">Forgot Password ?</a></p>
+                <p class="sign">New here ?<a href="#" id="register"> Sign Up</a></p>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+
+    <div class="toast">
+        <div class="toast_text"></div>
+    </div>
+
+</body>
+
+
+<script>
+    $(function () {
+        var account = $("#account"),
+            password = $("#password");
+        var testAccount = "123";
+        var testPassWord = "123";
+
+        var form = $("#login").submit(function (event) {
+            login()
+            event.preventDefault(); //取消事件的默认动作。
+        }).click(function (event) {
+            var $target = $(event.target);
+            if ($target.is("a#testAccount.hvr-sweep-to-right")) {
+                tryToUse()
+            } else if ($target.is("a#forgetPass")) {
+                forgetPass()
+            } else if ($target.is("a#register")) {
+                register()
+            }
+        });
+
+        function login() {
+            //TODO ajax
+            console.log(account.val(), password.val())
+        }
+
+        function tryToUse() {
+            account.val(testAccount)
+            password.val(testPassWord)
+            console.log(account.val(), password.val())
+            $.toast("testAccount")
+        }
+
+        function forgetPass() {
+            $.toast("TODO")
+        }
+
+        function register() {
+            $.toast("register")
+        }
+    })
+</script>
+
+</html>

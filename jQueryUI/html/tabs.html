@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI 标签页（Tabs） - 简单的操作</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <div id="dialog" title="Tab data">
+        <form>
+            <!--fieldset 元素可将表单内的相关元素分组。-->
+            <!--当一组表单元素放到 fieldset 标签内时，浏览器会以特殊方式来显示它们，
+            它们可能有特殊的边界、3D 效果，或者甚至可创建一个子表单来处理这些元素。-->
+            <fieldset class="ui-helper-reset">
+                <!--label标签为 input 元素定义标注（标记）。
+label 元素不会向用户呈现任何特殊效果。不过，它为鼠标用户改进了可用性。
+如果您在 label 元素内点击文本，就会触发此控件。就是说，当用户选择该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上。
+ for 属性应当与相关元素的 id 属性相同。-->
+                <label for="tab_title">标题</label>
+                <input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+                <label for="tab_content">内容</label>
+                <textarea name="tab_content" id="tab_content" class="ui-widget-content ui-corner-all"></textarea>
+            </fieldset>
+        </form>
+    </div>
+
+    <button id="add_tab">添加标签页</button>
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Nunc tincidunt</a> <span class="ui-icon ui-icon-close" role="presentation">移除标签页</span></li>
+        </ul>
+        <div id="tabs-1">
+            <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi
+                sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus
+                auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci.
+                Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius
+                sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+        </div>
+    </div>
+
+
+</body>
+
+<style>
+    #dialog label,
+    #dialog input {
+        display: block;
+    }
+
+    #dialog label {
+        margin-top: 0.5em;
+    }
+
+    #dialog input,
+    #dialog textarea {
+        width: 95%;
+    }
+
+    #tabs {
+        margin-top: 1em;
+    }
+
+    #tabs li .ui-icon-close {
+        float: left;
+        margin: 0.4em 0.2em 0 0;
+        cursor: pointer;
+    }
+
+    #add_tab {
+        cursor: pointer;
+    }
+</style>
+<script>
+    $(function () {
+        
+
+        var tabTitle = $("#tab_title"),
+            tabContent = $("#tab_content"),
+            //模板 label是a显示的东西。href就是href
+            tabTemplate =
+            "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
+            //id
+            tabCounter = 2;
+
+        var tabs = $("#tabs").tabs();
+  
+
+        // 模态对话框的初始化：自定义按钮和一个重置内部表单的 "close" 回调
+        var dialog = $("#dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                Add: function () {
+                    addTab();
+                    $(this).dialog("close");
+                },
+                Cancel: function () {
+                    form[0].reset();//清空form
+                    $(this).dialog("close");
+                },
+            },
+            close: function () {
+                //form[0].reset();
+            }
+        });
+
+        // addTab 表单：当提交时调用 addTab 函数，并关闭对话框
+        var form = dialog.find("form").submit(function (event) {
+            addTab();
+            dialog.dialog("close");
+            event.preventDefault(); //取消事件的默认动作。
+        });
+
+        // 实际的 addTab 函数：使用上面表单的输入添加新的标签页
+        function addTab() {
+            var label = tabTitle.val() || "Tab " + tabCounter, //是否存在标题，不存在的话就用  "Tab " + tabCounter        
+                id = "tabs-" + tabCounter,
+                li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+                tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+            //内容不存在的话就用 "Tab " + tabCounter + " content.";
+
+            tabs.find(".ui-tabs-nav").append(li); //添加tabs头。
+            tabs.append("<div id='" + id + "'><p>" + tabContentHtml + "</p></div>"); //添加tabs的内容
+            tabs.tabs("refresh");
+            tabCounter++;
+            //sortable()
+        }
+
+        // addTab 按钮：值打开对话框
+        $("#add_tab")
+            .button()
+            .click(function () {
+                dialog.dialog("open");
+            });
+
+        // 关闭图标：当点击时移除标签页
+        //delegate 1.7版本起，可改用on方法来绑定事件。
+        //aria-controls这个真奇怪
+        tabs.delegate("span.ui-icon-close", "click", function () {
+            console.log($(this).closest("li"))
+            var panelId = $(this).closest("li").remove().attr("aria-controls"); // 删掉头
+            $("#" + panelId).remove(); //删掉内容
+            tabs.tabs("refresh");
+        });
+
+        tabs.bind("keyup", function (event) {
+            //按alt+后退键也可删除
+            if (event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE) {
+                var panelId = tabs.find(".ui-tabs-active").remove().attr("aria-controls");
+                $("#" + panelId).remove();
+                tabs.tabs("refresh");
+            }
+        });
+
+        //头可排序。貌似使用了key-up事件，所以这里就不演示了。
+        function sortable() {
+            tabs.find(".ui-tabs-nav").sortable({
+                axis: "x",
+                stop: function () {
+                    tabs.tabs("refresh");
+                }
+            });
+        }
+    });
+</script>
+
+</html>

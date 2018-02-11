@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI 放置（Droppable） - 简单的照片管理器</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+    <!--外部容器和浮动包装-->
+    <div class="ui-widget ui-helper-clearfix">
+        <!--ui-helper-reset UI 元素的基本样式重置。重置的元素比如：padding、margin、text-decoration、list-style，等等。-->
+        <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+            <!--ui-widget-content配合ui-widget-->
+            <!--ui-corner-tr右上角圆角-->
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">High Tatras</h5>
+                <img src="../img/photo/high_tatras_min.jpg" alt="High Tatras 的最高峰" width="96" height="72">
+                <!--ui-icon 声明使用图标 后面接上要用图标的class -->
+                <a href="../img/photo/high_tatras.jpg" title="查看大图" class="ui-icon ui-icon-zoomin">查看大图</a>
+                <a href="" title="删除图像" class="ui-icon ui-icon-trash">删除图像</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">High Tatras 2</h5>
+                <img src="../img/photo/high_tatras2_min.jpg" alt="绿山湖畔的小屋" width="96" height="72">
+                <a href="../img/photo/high_tatras2.jpg" title="查看大图" class="ui-icon ui-icon-zoomin">查看大图</a>
+                <a href="" title="删除图像" class="ui-icon ui-icon-trash">删除图像</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">High Tatras 3</h5>
+                <img src="../img/photo/high_tatras3_min.jpg" alt="计划登高" width="96" height="72">
+                <a href="../img/photo/high_tatras3.jpg" title="查看大图" class="ui-icon ui-icon-zoomin">查看大图</a>
+                <a href="" title="删除图像" class="ui-icon ui-icon-trash">删除图像</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">High Tatras 4</h5>
+                <img src="../img/photo/high_tatras4_min.jpg" alt="在 Kozi kopka 的顶部" width="96" height="72">
+                <a href="../img/photo/high_tatras4.jpg" title="查看大图" class="ui-icon ui-icon-zoomin">查看大图</a>
+                <a href="" title="删除图像" class="ui-icon ui-icon-trash">删除图像</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">High Tatras 4</h5>
+                <img src="../img/photo/high_tatras4_min.jpg" alt="在 Kozi kopka 的顶部" width="96" height="72">
+                <a href="../img/photo/high_tatras4.jpg" title="查看大图" class="ui-icon ui-icon-zoomin">查看大图</a>
+                <a href="" title="删除图像" class="ui-icon ui-icon-trash">删除图像</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">High Tatras 4</h5>
+                <img src="../img/photo/high_tatras4_min.jpg" alt="在 Kozi kopka 的顶部" width="96" height="72">
+                <a href="../img/photo/high_tatras4.jpg" title="查看大图" class="ui-icon ui-icon-zoomin">查看大图</a>
+                <a href="" title="删除图像" class="ui-icon ui-icon-trash">删除图像</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">High Tatras 4</h5>
+                <img src="../img/photo/high_tatras4_min.jpg" alt="在 Kozi kopka 的顶部" width="96" height="72">
+                <a href="../img/photo/high_tatras4.jpg" title="查看大图" class="ui-icon ui-icon-zoomin">查看大图</a>
+                <a href="" title="删除图像" class="ui-icon ui-icon-trash">删除图像</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">High Tatras 4</h5>
+                <img src="../img/photo/high_tatras4_min.jpg" alt="在 Kozi kopka 的顶部" width="96" height="72">
+                <a href="../img/photo/high_tatras4.jpg" title="查看大图" class="ui-icon ui-icon-zoomin">查看大图</a>
+                <a href="" title="删除图像" class="ui-icon ui-icon-trash">删除图像</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">High Tatras 4</h5>
+                <img src="../img/photo/high_tatras4_min.jpg" alt="在 Kozi kopka 的顶部" width="96" height="72">
+                <a href="../img/photo/high_tatras4.jpg" title="查看大图" class="ui-icon ui-icon-zoomin">查看大图</a>
+                <a href="" title="删除图像" class="ui-icon ui-icon-trash">删除图像</a>
+            </li>
+        </ul>
+        <!--ui-state-default不知道啥用-->
+        <div id="trash" class="ui-widget-content ui-state-default">
+            <h4 class="ui-widget-header"><span class="ui-icon ui-icon-trash">回收站</span> 回收站</h4>
+        </div>
+
+    </div>
+
+
+</body>
+<style>
+    #gallery {
+        float: left;
+        width: 65%;
+        /*宽度*/
+        min-height: 12em;
+        /*最小高度*/
+    }
+
+    /*用于下面的js*/
+
+    .gallery.custom-state-active {
+        background: #eee;
+    }
+
+    .gallery li {
+        float: left;
+        width: 96px;
+        padding: 0.4em;
+        margin: 0 0.4em 0.4em 0;
+        text-align: center;
+    }
+
+    .gallery li h5 {
+        margin: 0 0 0.4em;
+        cursor: move;
+    }
+
+    .gallery li a {
+        float: right;
+    }
+
+    .gallery li a.ui-icon-zoomin {
+        float: left;
+    }
+
+    .gallery li img {
+        width: 100%;
+        cursor: move;
+        /*鼠标指向时变为移动光标*/
+    }
+
+    #trash {
+        float: left;
+        width: 32%;
+        min-height: 18em;
+        padding: 1%;
+    }
+
+    #trash h4 {
+        /*行高*/
+        line-height: 16px;
+        margin: 0 0 0.4em;
+    }
+
+    #trash h4 .ui-icon {
+        float: left;
+    }
+
+    #trash .gallery h5 {
+        display: none;
+    }
+</style>
+<script>
+    $(function () {
+        // 这是相册和回收站
+        var $gallery = $("#gallery"),
+            $trash = $("#trash");
+
+        // 让相册的条目可拖拽
+        $("li", $gallery).draggable({
+            cancel: "a.ui-icon", // 点击一个图标不会启动拖拽
+            revert: "invalid", // 当未被放置到droppable时，条目会还原回它的初始位置
+            containment: "document", //拖动范围：dom
+            helper: "clone", //拖动是显示复制。
+            cursor: "move"
+        });
+
+        // 让回收站可放置，接受相册的条目
+        // ui.draggable表示放进的draggable交互对象
+        $trash.droppable({
+            accept: "#gallery > li",
+            activeClass: "ui-state-highlight",
+            drop: function (event, ui) {
+                deleteImage(ui.draggable);
+            }
+        });
+
+        // 让相册可放置，接受回收站的条目
+        $gallery.droppable({
+            accept: "#trash li",
+            activeClass: "custom-state-active",
+            drop: function (event, ui) {
+                recycleImage(ui.draggable);
+            }
+        });
+
+        // fadeOut,fadeIn是jquery的效果方法.animate是动画方法。
+        // 图像删除功能
+        var recycle_icon =
+            "<a href='' title='还原图像' class='ui-icon ui-icon-refresh'>还原图像</a>";
+
+        function deleteImage($item) {
+      
+            $item.fadeOut(function () {
+                //是否存在ul,不存在就创造一个。
+                var $list = $("ul", $trash).length ?
+                    $("ul", $trash) :
+                    $("<ul class='gallery ui-helper-reset'/>").appendTo($trash);
+                
+                //删掉删除键
+                $item.find("a.ui-icon-trash").remove();
+                //添加还原键。将图片appendTo 垃圾桶的ul，并缩小。
+                $item.append(recycle_icon).appendTo($list).fadeIn(function () {
+                    $item
+                        .animate({
+                            width: "48px"
+                        })
+                        .find("img")
+                        .animate({
+                            height: "36px"
+                        });
+                });
+            });
+        }
+
+        // 图像还原功能
+        var trash_icon =
+            "<a href='' title='删除图像' class='ui-icon ui-icon-trash'>删除图像</a>";
+        //end 是jquery的筛选方法
+        //作用是：结束当前链中最近的一次筛选操作，并把匹配元素集合返回到前一次的状态
+        function recycleImage($item) {
+            $item.fadeOut(function () {
+                $item
+                    .find("a.ui-icon-refresh")
+                    .remove()
+                    .end()
+                    .css("width", "96px")
+                    .append(trash_icon)
+                    .find("img")
+                    .css("height", "72px")
+                    .end()
+                    .appendTo($gallery)
+                    .fadeIn();
+            });
+        }
+
+        // 图像预览功能，演示 ui.dialog 作为模态窗口使用
+        // dialog是jqueryui的对话框
+        function viewLargerImage($link) {
+            var src = $link.attr("href"),//查看大图的href有图片的链接
+                title = $link.siblings("img").attr("alt"),//选择兄弟节点是img的。alt属性含有图片的title
+                $modal = $("img[src$='" + src + "']");
+
+            if ($modal.length) {
+                $modal.dialog("open");
+            } else {
+                var img = $("<img alt='" + title +
+                        "' width='384' height='288' style='display: none; padding: 8px;' />")
+                    .attr("src", src).appendTo("body");
+                setTimeout(function () {
+                    img.dialog({
+                        title: title,
+                        width: 400,
+                        modal: true
+                    });
+                }, 1);
+            }
+        }
+
+        // 通过事件代理解决图标行为!!!!
+        $("ul.gallery > li").click(function (event) {
+            console.log("ul.gallery > li 被点击了！！")
+
+            var $item = $(this),//li元素
+                $target = $(event.target);//直接获得触发event的元素
+            // console.log($item)
+            // console.log($target)
+            if ($target.is("a.ui-icon-trash")) {
+                deleteImage($item);
+            } else if ($target.is("a.ui-icon-zoomin")) {
+                viewLargerImage($target);
+            } else if ($target.is("a.ui-icon-refresh")) {
+                recycleImage($item);
+            }
+
+            return false;
+        });
+    });
+</script>
+
+</html>
