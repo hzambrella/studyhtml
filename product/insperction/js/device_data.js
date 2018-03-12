@@ -31,16 +31,16 @@ function getDeviceData() {
             desc: "地址：黄家湖",
         },
         {
-            lat: 30.543269,
-            lng: 114.256122,
-            title: "动物园电力设备",
-            desc: "地址：武汉动物园",
-        },
-        {
             lat: 30.53232,
             lng: 114.330573, 
             title: "武昌站电力设备",
             desc: "地址：武昌站",
+        },
+        {
+            lat: 30.543269,
+            lng: 114.256122,
+            title: "动物园电力设备",
+            desc: "地址：武汉动物园",
         },
         {
             lat: 30.486707,
@@ -54,6 +54,7 @@ function getDeviceData() {
             title: "金银湖电力设备",
             desc: "地址：金银湖",
         },
+
     ];
     return device_data;
 }

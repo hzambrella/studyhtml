@@ -60,12 +60,12 @@
     var $default_cen_lat = 30.63299;
     var map = new BMap.Map("map");
     var $start_end_point = new BMap.Point($default_cen_lng, $default_cen_lat);
+    var $start_end_marker= null;
 
     //地图初始化
     map.centerAndZoom($start_end_point, $default_zoom);
     map.enableScrollWheelZoom(true);
-    addStartEndMarker();
-
+    $start_end_marker=addStartEndMarker();
     //生成起/终点
     function addStartEndMarker() {
         var title = "起/终",
@@ -78,6 +78,7 @@
         });
         center_marker.setLabel(cen_label);
         map.addOverlay(addWindowsInfo(center_marker, title, desc))
+        return center_marker
     }
 
     //生成maker
@@ -86,6 +87,7 @@
             title: title
         });
         map.addOverlay(addWindowsInfo(marker, title, desc));
+        return marker
     }
 
 

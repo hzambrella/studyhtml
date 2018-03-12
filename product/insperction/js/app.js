@@ -1,6 +1,10 @@
 $(function () {
 
     var device_array = [];
+    var cached_result = false;
+    var cached_adjacency = new Array();
+    var cached_route = new Array();
+    var device_marker_array = new Array();
 
     $(".operate-container").on("click", function (event) {
         var $target = $(event.target);
@@ -18,16 +22,21 @@ $(function () {
 
     //这里是自动移动回武科大青山校区。原本应该是自己的位置。
     function my_position() {
+        deleteCachedData()
         map.panTo($start_end_point);
         map.setZoom($default_zoom);
-        addStartEndMarker();
+        $start_end_marker = addStartEndMarker();
     }
 
     function get_device() {
+        map.clearOverlays();
+        $start_end_marker = addStartEndMarker();
         $("button").disabledButton();
         //前端mock的数据
         //TODO：有兴趣的话，将这里改为ajax获取后端持久化的数据。
+        deleteCachedData()
         device_array.splice(0)
+        device_marker_array.splice(0)
 
         device_array.push({
             lat: $default_cen_lat,
@@ -41,9 +50,10 @@ $(function () {
         for (i = 0; i < deviceDatas.length; i++) {
             var deviceData = deviceDatas[i]
             var point = new BMap.Point(deviceData.lng, deviceData.lat)
-            addMarker(point, deviceData.title, deviceData.desc)
+            marker = addMarker(point, deviceData.title, deviceData.desc)
             deviceData.point = point
             device_array.push(deviceData)
+            device_marker_array.push(marker)
         }
 
         map.setZoom(11.1);
@@ -53,22 +63,47 @@ $(function () {
 
     function get_route() {
         $("button").disabledButton();
+        if ($start_end_marker == null || $start_end_marker == undefined) {
+            $.toast("请先确定起/终点")
+            $("button").enableButton();
+            return
+        }
+
+
         if (device_array.length == 0) {
             $.toast("请先点击获取设备信息")
             $("button").enableButton();
             return
         }
+
         console.log(device_array)
 
         //计算邻接矩阵，由驾驶车辆的路程所组成，单位米。
         var adjacency = new Array(); //声明一维数组        
-        for (var x = 0; x < device_array.length; x++) {
-            adjacency[x] = new Array(); //声明二维数组
-            for (var y = 0; y < device_array.length; y++) {
-                adjacency[x][y] = 0; //数组初始化为0
+
+        //对route缓存
+        var route_cached = new Array();
+
+        if (cached_result) {
+            adjacency = cached_adjacency;
+            route_cached = cached_route;
+            getBestRoute()
+            return
+        } else {
+            for (var x = 0; x < device_array.length; x++) {
+                adjacency[x] = new Array(); //声明二维数组
+                for (var y = 0; y < device_array.length; y++) {
+                    adjacency[x][y] = 0; //数组初始化为0
+                }
+            }
+
+            for (var x = 0; x < device_array.length; x++) {
+                route_cached[x] = new Array(); //声明二维数组
+                for (var y = 0; y < device_array.length; y++) {
+                    route_cached[x][y] = null; //数组初始化为0
+                }
             }
         }
-        // console.log(adjacency)
 
         var cacu = getAdjacency(device_array.length, device_array.length);
         var searchComplete = function (results) {
@@ -77,10 +112,10 @@ $(function () {
                 return;
             }
 
-            var plan = results.getPlan(0);
-            var distance = plan.getDistance(false);
+            var route = results.getPlan(0).getRoute(0);
+            var distance = route.getDistance(false);
             // console.log(distance); //获取距离
-            cacu(distance)
+            cacu(distance, route)
         }
 
         var transit = new BMap.DrivingRoute(map, {
@@ -104,36 +139,113 @@ $(function () {
             var x = 0,
                 y = 0,
                 length = length;
-            var mess_cacu_distance="计算距离中:"
+            var mess_cacu_distance = "计算距离中:"
 
-            return function (distance) {
+            return function (distance, route) {
                 adjacency[x][y] = distance
-
+                route_cached[x][y] = route
                 // console.log(x, y)
+                // console.log(adjacency)
                 y++;
+
                 if (y >= length) {
                     x++;
                     y = 0;
                     if (x >= length) {
-                        $.toast("get_route")
-                        $("button").enableButton();
                         for (i = 0; i < length; i++) {
                             adjacency[i][i] = 0;
                         }
-                        console.log(adjacency)
-                         $("#message").html("");   
+
+                        $("#message").html("");
+
+                        getBestRoute()
                         return
                     }
-                } 
+                }
 
-                // console.log("now:", x, y)
-                transit.search(device_array[x].point, device_array[y].point);  
-                $("#message").html("计算距离中..(已完成:"+(x*10+y)/length*length+"%)");   
+                transit.search(device_array[x].point, device_array[y].point);
+                $("#message").html("计算距离中..(已完成:" + (100 * (x * length + y)) / (length * length) + "%)");
             }
+        }
+
+        // 
+        function getBestRoute() {
+            $("#message").html("获取最佳路线中");
+
+            console.log(adjacency, route_cached)
+            
+            // ajax
+            //  array=[0,1,2,3,4,5,6,7,8,9];
+            cb()
+            return
+
+            function cb() {
+                array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+                //   array = [0, 1,0];
+                routeLine(array)
+
+                $("button").enableButton();
+            }
+
+        }
+        //画线
+        function routeLine(array) {
+            var allOverlay = map.getOverlays();
+            if (array.length - 1 != device_array.length) {
+                $.toast("路径规划服务出错")
+                console.log(array)
+                return
+            }
+
+            for (i = 0; i < array.length - 1; i++) {
+                var index_start = array[i]
+                var index_end = array[i + 1]
+
+                route = route_cached[index_start][index_end];
+
+                if (!cached_result) {
+                    map.addOverlay(new BMap.Polyline(route.getPath(), {
+                        strokeColor: "#0030ff",
+                        strokeOpacity: 0.45,
+                        strokeWeight: 6,
+                        enableMassClear: true
+                    }));
+                }
+
+                if (index_end != 0) {
+                    var overlay = device_marker_array[index_end - 1]
+                    var label = new BMap.Label(i + 1, {
+                        offset: new BMap.Size(20, -10)
+                    });
+                    overlay.setLabel(label);
+                }
+
+            }
+
+            cachedData()
+            $("#message").html("完成");
+            $.toast("路径规划完成")
+        }
+
+        //缓存数据
+        function cachedData() {
+            cached_adjacency = adjacency;
+            cached_route = route_cached;
+            cached_result = true;
         }
     }
 
+    //清除缓存
+    function deleteCachedData() {
+
+        cached_result = false;
+        cached_adjacency = new Array();
+        cached_route = new Array();
+    }
+
     function clear_layout() {
+        $start_end_marker = null;
+        deleteCachedData()
         map.clearOverlays();
         device_array.splice(0)
         $.toast("清除完毕")
