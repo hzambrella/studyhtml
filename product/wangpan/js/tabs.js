@@ -1,6 +1,5 @@
 
-$(function () {
-        //获取id封装成一个函数$()方便调用
+    //获取id封装成一个函数$()方便调用
     function $(id){
     //如果传入的参数类型为字符串则获取当前ID元素，否则返回id
         return typeof id==="string"?document.getElementById(id):id;
@@ -29,5 +28,5 @@ $(function () {
             }
         }
     }
-});
+
 
