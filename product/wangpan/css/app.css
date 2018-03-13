@@ -1,3 +1,150 @@
-body{
-    background-color:#CCCCCC ;
+/*layout*/
+/*body{
+    background-color: #CCCCCC;
+}*/
+
+
+.top{
+    width:100%;
+    height:62px;
+    background-color:#99CCFF;
+    position: fixed;
+    z-index: 999;
+}
+
+.con{
+    width:100%;
+    margin-top: 70px;
+    font-size:1em;
+    /*position: relative;*/
+}
+
+.con-left{
+  position:relative; 
+  width: 200px;
+  height: 650px;
+  background:rgba(239, 244, 248, 1);
+  float: left;
+  display: table;
+  text-align: left;
+  color: #fff;
+}
+
+.con-right{
+  margin-left: 210px;
+  height: 650px;
+  /*background: #CCCCFF;*/
+  background-color: white;
+  text-align: center;
+}
+
+.disk-size{
+    height: 120px;
+    background-color:#99CCCC ;
+    bottom:0;
+}
+
+/*element father*/
+.con a{
+    display:block;
+    text-decoration: none;
+}
+
+.con ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/*left*/
+.con-left a{
+    color: #000;
+    padding: 8px 20px 8px 50px;
+    font-size: 1.2em;
+}
+
+.con-left a:hover {
+    background-color: #555;
+    color: white;
+}
+
+/*right*/
+.operate{
+    width:100%;
+    height:50px;
+}
+
+.operate a{
+    margin: 10px;
+    height: 30px;
+    padding:5px 0;
+    font-size: 1.2em;
+    border-style: solid;
+    border-width: 1.5px;
+    border-radius: 4px;
+    display: block;
+    float:left;
+}
+
+#uploadFile{
+    width: 100px;
+    border-color: #0066CC;
+    background-color: #0066CC;
+    color: white;
+}
+
+#uploadFile:hover{
+    background-color: #0099CC;
+}
+
+#uploadFile:active{
+    background-color: #333399;
+}
+
+#newFolder{
+    width: 150px;
+    color: #0066CC;
+    border-color: #0066CC;
+    border-width: 1.8px;
+}
+
+#newFolder:hover{
+    border-color: #0099CC;
+    color:#0099CC;
+}
+
+.item-title{
+    margin: 10px 5px;
+    padding: 10px;
+    width:95%;
+    /*text-align: left;*/
+}
+
+/*table*/
+.file-list{
+    width: 100%;
+    height: 700px;
+    overflow:auto;
+}
+
+.file-list input[type="checkbox"] {
+    width:16px;
+    height: 16px;
+}
+
+#file-list-table{
+    text-align: left;
+    padding-left:20px;
+    padding-bottom: 20px;
+    width:100%;
+    border-collapse:collapse;
+}
+
+#file-list-table th{
+    padding:10px 0px;
+}
+
+#file-list-table tr, #file-list-table td{
+    padding:18px 0;
+    border-bottom: 1px #cccccc solid;
 }

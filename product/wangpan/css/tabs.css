@@ -6,7 +6,7 @@
 .notice {
     background-color: white;
     width: 550px;
-    height: 398px;
+    height: 430px;
     margin: 10px;
     border-radius: 3px;
     border: 1px solid #999999;
@@ -76,18 +76,45 @@
 }
 
 .notice-con .inputlabel{
+    margin: 10px;
     font-size: 1.5em;
+    text-align: right;
+    width:140.8px;
+    display: block;
+    float:left;
 }
+
+#loginForm .inputlabel{
+    width:90.8px;
+}
+
 
 .notice-con .input{
     margin: 10px;
     height: 30px;
     width: 200px;
     font-size: 1.2em;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: grey;
+    display: block;
+    float:left;
 }
 
-#login,#regist{
-    width: 260px;
+/*
+.notice-con .checkbox{
+    display: block;
+    clear: both;
+ 
+}*/
+
+.notice-con .input.red{
+    border-width: 2px;
+    border-color: red;
+}
+
+#login,#register{
+    width: 200px;
     background-color: #4CAF50;
     border:none;
     border-radius: 2px;
@@ -97,7 +124,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 0.5em;
-    margin-left:20px;
+    margin-top:20px;
     -webkit-transition-duration: 0.4s;
     /* Safari */
     transition-duration: 0.4s;
@@ -105,12 +132,12 @@
 }
 
 
-#login:hover,#regist:hover {
+#login:hover,#register:hover {
     background-color: #99CC99;
     color: white;
 }
 
-#login:active ,#regist:active {
+#login:active ,#register:active {
     background-color: #99CC00;
     color: white;
 }
