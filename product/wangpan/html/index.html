@@ -21,6 +21,9 @@
     <!--<link rel="stylesheet" type="text/css" href="../plugin/toast_alert/css/toast_alert.css">
     <script src="../plugin/toast_alert/js/toast_alert.js"></script>-->
 
+    <!--template.js-->
+    <script src="../js/vendor/template.js"></script>
+
     <!--css-->
     <link href="../css/main.css" rel="stylesheet" type="text/css" />
     <link href="../css/app.css" rel="stylesheet" type="text/css" />
@@ -33,69 +36,111 @@
 <body>
     <div class="top">
         <img style="height:60px;margin-left:10px" src="../images/logo.png" onclick="alert('hz网盘!!')" />
+
     </div>
     <div class="con">
+        <!--left-->
         <div class="con-left">
             <div style="height:480px;width:100%">
                 <ul class="item-list">
-                    <li class="select"><a href="#"><i class="fa fa-files-o"></i> 全部文件</a></li>
-                    <li><a href="#"><i class="fa fa-file-text-o"></i> 文档</a></li>
-                    <li><a href="#"><i class="fa fa-photo"></i> 图片</a></li>
-                    <li><a href="#"><i class="fa fa-trash"></i> 回收站</a></li>
+                    <li class="select"><a href="javascript:void(0)" id="allFile"><i class="fa fa-files-o"></i> 全部文件</a></li>
+                    <li><a href="javascript:void(0)" id="textFile"><i class="fa fa-file-text-o"></i> 文档</a></li>
+                    <li><a href="javascript:void(0)" id="imageFile"><i class="fa fa-photo"></i> 图片</a></li>
+                    <li><a href="javascript:void(0)" id="recycleFile"><i class="fa fa-trash"></i> 回收站</a></li>
                 </ul>
             </div>
             <div class="disk-size"></div>
         </div>
+        <!--right-->
         <div class="con-right">
-
+            <!--操作栏-->
             <div class="operate">
-                <a href="#" id="uploadFile"><i class="fa fa-upload"></i> 上传</a>
-                <a href="#" id="newFolder"><i class="fa fa-plus"></i> 新建文件夹</a>
+                <a class="operate-common" href="javascript:void(0)" id="uploadFile"><i class="fa fa-upload"></i> 上传</a>
+                <a class="operate-common" href="javascript:void(0)" id="newFolder"><i class="fa fa-plus"></i> 新建文件夹</a>
+                <ul class="operate-file hide">
+                    <li><a id="downloadFile" href="javascript:void(0)"><i class="fa fa-download"></i> 下载</a></li>
+                    <li><a id="deleteFile" href="javascript:void(0)"><i class="fa fa-trash"></i> 删除</a></li>
+                    <li><a id="renameFile" href="javascript:void(0)">重命名</a></li>
+                    <li><a id="copyFile" href="javascript:void(0)">复制到</a></li>
+                    <li><a id="moveFile" href="javascript:void(0)">移动到</a></li>
+                </ul>
             </div>
             <p></p>
+            <!--信息栏-->
             <div class="item-title">
                 <span style="display:block;text-align:left;float:left">全部文件</span>
-                <span style="display:block;text-align:left;float:left">(已选中0个)</span>
+                <span id="selectFileNum" style="display:block;text-align:left;float:left">(已选中0个)</span>
                 <span style="display:block;text-align:right;float:right">正在获取中...</span></div>
             <div class="file-list">
+                <!--文件列表-->
                 <table id="file-list-table">
-                    <tr style="color: grey;">
-                        <th style="width:50%"><input type="checkbox"/>文件名</th>
+                    <tr class="table-title" style="color: grey;">
+                        <th style="width:50%"><input id="selectAllList" type="checkbox" />文件名</th>
                         <th style="width:20%">大小</th>
                         <th style="width:30%">修改时间</th>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td>
                             <div class="tbcol-1">
-                                <input type="checkbox"/>
+                                <input type="checkbox" class="selectFile" />
                                 <i class="fa fa-folder-o"></i>
+                                <div class="rename">
+                                    <input type="text" value="dsafasf" />
+                                    <button class="confirm"><i class="fa fa-close"></i></button>
+                                    <button class="confirm"><i class="fa fa-check"></i></button>
+                                </div>
                                 <span>row 1, cell 1123133333333333333333333333333333333</span>
                             </div>
                         </td>
                         <td>-</td>
                         <td>2018-9-12</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="tbcol-1">
-                                <input type="checkbox"/>
-                                <i class="fa fa-folder-o"></i>
-                                <span>row 1, cell 1123133333333333333333333333333333333</span>
-                            </div>
-                        </td>
-                        <td>100KB</td>
-                        <td>2017-8-12</td>
-                    </tr>
+                    </tr>-->
                 </table>
             </div>
         </div>
     </div>
+
+
+    <script id="table_tpl" type="text/html">
+        <%for(var i = 0; i < resultList.length; i++) {%>
+            <tr>
+                <td>
+                    <div class="tbcol-1">
+                        <input type="checkbox" class="selectFile" />
+                        <i class="fa fa-folder-o"></i>
+                        <span><%:=resultList[i].name%></span>
+                    </div>
+                </td>
+                <td><span><%:=resultList[i].size%></span></td>
+                <td><span><%:=resultList[i].modified_time%></span></td>
+            </tr>
+            <%}%>
+    </script>
+
+    <script id="table_rename" type="text/html">
+        <div class="rename">
+            <input type="text" value="<%:=name%>" />
+            <button class="confirm"><i class="fa fa-close"></i></button>
+            <button class="confirm"><i class="fa fa-check"></i></button>
+        </div>
+    </script>
+
+
 </body>
 <!--js-->
 <script src="../js/main.js"></script>
 <script>
+    // window.onload=function(){
+    //      if ("WebSocket" in window)
+    //         {
+    //            alert("您的浏览器支持 WebSocket!");
+    //         }
+    //     }
+    // alert(1)
 </script>
 <script src="../js/app.js"></script>
+<!--mock-->
+<script src="../js/mock.js"></script>
 
 <!--fontAwesome-->
 <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
