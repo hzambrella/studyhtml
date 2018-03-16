@@ -28,7 +28,140 @@ function getMockData(type) {
                 name: "1232131",
                 size: "100KB",
                 modified_time: "2018-03-14",
-            }, ]
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            },
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            },  
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+             {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            },  {
+                name: "1232131",
+                size: "100KB",
+                modified_time: "2018-03-14",
+            }, 
+            
+            ]
         };
         return device_data;
     }

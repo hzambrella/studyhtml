@@ -42,6 +42,10 @@ body {
 .app-title {
     line-height: 50px;
 }
+
+a.disabled{
+    pointer-events:none;
+}
 /*
 button {
     background-color: white;

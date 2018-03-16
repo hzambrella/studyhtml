@@ -17,10 +17,6 @@
     <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>-->
 
-    <!--toast_alert-->
-    <!--<link rel="stylesheet" type="text/css" href="../plugin/toast_alert/css/toast_alert.css">
-    <script src="../plugin/toast_alert/js/toast_alert.js"></script>-->
-
     <!--template.js-->
     <script src="../js/vendor/template.js"></script>
 
@@ -35,21 +31,45 @@
 
 <body>
     <div class="top">
-        <img style="height:60px;margin-left:10px" src="../images/logo.png" onclick="alert('hz网盘!!')" />
+        <img style="float:left;height:60px;margin:10px 10px" src="../images/logo.png" onclick="alert('hz网盘!!')" />
+        <div class="top_navigation" style="display:block;height:60px;width:1000px;margin:10px 10px;float:left;"></div>
+        <div class="user_info">
+            <img id="head_img" class="head_img" src="../images/head_default.png" />
+            <span class="nickname">no_name21312313</span>
 
+            <div id="user_info_detail" class="user_info_detail">
+                <div class="user_info_detail_head">
+                    <img class="head_img" src="../images/head_default.png" />
+                    <span class="nickname">no_name21312313</span>
+                </div>
+                <!--<div class="user_info_detail_middle"></div>-->
+                <ul>
+                    <li><a id="personal_info" href="javascript:void(0)">个人资料</a></li>
+                    <li><a id="help_center" href="javascript:void(0)">帮助中心</a></li>
+                    <li><a id="logout" href="javascript:void(0)">退出</a></li>
+                </ul>
+            </div>
+
+        </div>
     </div>
+
     <div class="con">
         <!--left-->
         <div class="con-left">
             <div style="height:480px;width:100%">
                 <ul class="item-list">
-                    <li class="select"><a href="javascript:void(0)" id="allFile"><i class="fa fa-files-o"></i> 全部文件</a></li>
+                    <li><a href="javascript:void(0)" id="allFile"><i class="fa fa-files-o"></i> 全部文件</a></li>
                     <li><a href="javascript:void(0)" id="textFile"><i class="fa fa-file-text-o"></i> 文档</a></li>
                     <li><a href="javascript:void(0)" id="imageFile"><i class="fa fa-photo"></i> 图片</a></li>
                     <li><a href="javascript:void(0)" id="recycleFile"><i class="fa fa-trash"></i> 回收站</a></li>
                 </ul>
             </div>
-            <div class="disk-size"></div>
+            <div class="disk-size">
+                <div id="size_progress_bar">
+                    <!--<div id="size_progress_water" class="progress_water"></div>
+                     <span style="color:black;display:inline-block;margin-top:6px;margin-left:2px">7.6G/100G</span>-->
+                </div>
+            </div>
         </div>
         <!--right-->
         <div class="con-right">
@@ -68,9 +88,9 @@
             <p></p>
             <!--信息栏-->
             <div class="item-title">
-                <span style="display:block;text-align:left;float:left">全部文件</span>
-                <span id="selectFileNum" style="display:block;text-align:left;float:left">(已选中0个)</span>
-                <span style="display:block;text-align:right;float:right">正在获取中...</span></div>
+                <span id="itemTitle" class="tab_info" style="float:left">全部文件</span>
+                <span class="tab_info" id="selectFileNum" style="float:left">(已选中0个)</span>
+                <span class="tab_info" style="float:right">正在获取中...</span></div>
             <div class="file-list">
                 <!--文件列表-->
                 <table id="file-list-table">
@@ -86,8 +106,8 @@
                                 <i class="fa fa-folder-o"></i>
                                 <div class="rename">
                                     <input type="text" value="dsafasf" />
-                                    <button class="confirm"><i class="fa fa-close"></i></button>
-                                    <button class="confirm"><i class="fa fa-check"></i></button>
+                                    <button class="rename-cancel"><i class="fa fa-close"></i></button>
+                                    <button class="rename-confirm"><i class="fa fa-check"></i></button>
                                 </div>
                                 <span>row 1, cell 1123133333333333333333333333333333333</span>
                             </div>
@@ -100,6 +120,21 @@
         </div>
     </div>
 
+    <div id="modal">
+        <!--<div id="box_alert">
+            <div class="alert_title">
+                <p>确认删除?<span class="box_alert_cancel" style="float:right;cursor:pointer;padding-right:15px">X</span></p>
+            </div>
+            <div class="alert_con">
+                确认要把所选文件放入回收站吗?
+                <br/> 删除的文件可在10天内通过回收站还原
+            </div>
+            <div class="alert_button">
+                <a href="javascript:void(0)" id="alertConfirm">确认</a>
+                <a class="box_alert_cancel" href="javascript:void(0)" id="alertCancel">取消</a>
+            </div>
+        </div>-->
+    </div>
 
     <script id="table_tpl" type="text/html">
         <%for(var i = 0; i < resultList.length; i++) {%>
@@ -119,16 +154,19 @@
 
     <script id="table_rename" type="text/html">
         <div class="rename">
-            <input type="text" value="<%:=name%>" />
-            <button class="confirm"><i class="fa fa-close"></i></button>
-            <button class="confirm"><i class="fa fa-check"></i></button>
+            <input class="rename_input" type="text" value="<%:=name%>" autofocus/>
+            <button class="rename_cancel"><i class="fa fa-close"></i></button>
+            <button class="rename_confirm"><i class="fa fa-check"></i></button>
         </div>
     </script>
-
 
 </body>
 <!--js-->
 <script src="../js/main.js"></script>
+<script src="../js/lib/jquery.hoverdelay.js"></script>
+<!--进度条-->
+<link rel="stylesheet" type="text/css" href="../plugin/progress_bar/css/progress_bar.css">
+<script src="../plugin/progress_bar/js/progress_bar.js"></script>
 <script>
     // window.onload=function(){
     //      if ("WebSocket" in window)
@@ -137,12 +175,58 @@
     //         }
     //     }
     // alert(1)
+    
+    //控制hover的显示
+    $(function () {
+        var userDetailIsHover = false;
+        $("#user_info_detail").hoverDelay({
+            hoverEvent: function () {
+                userDetailIsHover = true;
+            },
+            outEvent: function () {
+                userDetailIsHover = false;
+                $("#user_info_detail").css("display", "none")
+            }
+        })
+
+        $("#head_img").hoverDelay({
+            hoverEvent: function () {
+                $("#user_info_detail").css("display", "block")
+            },
+            outDuring: 2000,
+            outEvent: function () {
+                if (!userDetailIsHover) {
+                    $("#user_info_detail").css("display", "none")
+                }
+                //$("#user_info_detail").css("display", "none")
+            }
+        });
+    })
 </script>
 <script src="../js/app.js"></script>
+<script src="../js/tree.js"></script>
 <!--mock-->
 <script src="../js/mock.js"></script>
 
 <!--fontAwesome-->
 <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+
+<!--modal-->
+<link rel="stylesheet" type="text/css" href="../plugin/modal/css/modal.css">
+<script src="../plugin/modal/js/modal.js"></script>
+
+
+<!--box_alert-->
+<link rel="stylesheet" type="text/css" href="../plugin/box_alert/css/box_alert.css">
+<script src="../plugin/box_alert/js/box_alert.js"></script>
+
+<!--scroll beauty-->
+<!--<link rel="stylesheet" type="text/css" href="../plugin/scroll_beauty/css/scroll_beauty.css">
+<script src="../plugin/scroll_beauty/js/scroll_beauty.js"></script>-->
+
+<script>
+</script>
+
 
 </html>
