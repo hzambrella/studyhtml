@@ -1,4 +1,4 @@
-#box_alert {
+.box_alert {
     position: absolute;
     width: 650px;
     height: 350px;
@@ -10,14 +10,14 @@
     left: 35%;
 }
 
-#box_alert .alert_title {
+.box_alert .alert_title {
     border-radius: 9px 9px 0 0;
     width: 650px;
     height: 60px;
     background-color: #CCCCFF;
 }
 
-#box_alert p {
+.box_alert p {
     padding: 15px 10px;
     /*首行缩进*/
     text-indent: 1em;
@@ -26,7 +26,7 @@
     text-overflow: ellipsis;
 }
 
-#box_alert .alert_con {
+.box_alert .alert_con {
     width: 630px;
     height: 70px;
     text-align: center;
@@ -34,7 +34,7 @@
     font-size: 1.2em;
 }
 
-#box_alert .alert_button {
+.box_alert .alert_button {
     height: 50px;
     /*css3 弹性盒子*/
     display:-webkit-flex;
@@ -42,7 +42,7 @@
     justify-content:center;
 }
 
-#box_alert a {
+.box_alert .alert_button a {
     display: block;
     height: 30px;
     width:150px;
@@ -57,21 +57,21 @@
     /*padding: 30px 10px;*/
 }
 
-#box_alert a.box_alert_confirm{
+.box_alert .alert_button a.box_alert_confirm{
     border-color: #3b8cff;
     background-color: #3b8cff;
     color: white;
 }
 
-#box_alert a.box_alert_confirm:hover{
+.box_alert .alert_button a.box_alert_confirm:hover{
     opacity: 0.8;
 }
 
-#box_alert a.box_alert_cancel:hover{
+.box_alert .alert_button a.box_alert_cancel:hover{
     opacity: 0.5;
 }
 
-#box_alert a.box_alert_cancel{
+.box_alert .alert_button a.box_alert_cancel{
     background-color: white;
     border-color: #3b8cff;
     border-style: solid;
@@ -79,11 +79,11 @@
     color: #3b8cff;
 }
 
-#box_alert a:not(:first-child) {
+.box_alert a:not(:first-child) {
     margin-left:20px;
 }
 
-/*#box_alert ul {
+/*.box_alert ul {
     display: inline-block;
     list-style: none;
     list-style-type: none;
@@ -91,6 +91,6 @@
     margin: 0 auto;
 }
 
-#box_alert li {
+.box_alert li {
     display: inline;
 }*/

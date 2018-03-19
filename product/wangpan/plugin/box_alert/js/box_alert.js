@@ -7,8 +7,8 @@ $.fn.boxAlert = function (options) {
         'content': defaults_con,
         'needConfirm': true,
         'needCancel': true,
-        'confirmFunc':function(){$("#box_alert").hide()},
-        'cancelFunc':function(){$("#box_alert").hide()}
+        'confirmFunc':function(){$(".box_alert").hide()},
+        'cancelFunc':function(){$(".box_alert").hide()}
     };
 
 
@@ -24,7 +24,7 @@ $.fn.boxAlert = function (options) {
         _button_HTML = _button_HTML + _cancel_button_HTML
     }
 
-    _HTML = "<div id='box_alert'>" +
+    _HTML = "<div class='box_alert'>" +
         "<div class='alert_title'>" +
         "<p>" + setting.title + "<span class='box_alert_cancel' style='float:right;cursor:pointer;padding-right:15px'>X</span></p>" +
         "</div>" +

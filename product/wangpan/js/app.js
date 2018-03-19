@@ -6,9 +6,53 @@ $(function () {
         "recycleFile": "回收站",
     }
 
+    mockDirData = getDirData()
+    console.log(mockDirData)
     var disabledButtonFlag = false;
     //初始化模态modal (蒙版)
-    var $modal = $("#modal").modal();
+    //弹框
+
+    var $modal = $("#modal").modal()
+    //文件树
+
+    function initModalDirTree() {
+        //TODO:based on data
+        var __dirTreeButtonHTML = $("#mock_dir_tree_button").html()
+        //TODO:based on data
+        var _dirTreeHTML = $("#mock_dir_tree").html()
+
+        var $modalDirTree = $("#modalDirTree").modal()
+        $modalDirTree.boxContainer({
+            closeFunc: function () {
+                $modalDirTree.hide();
+                $(".box_container").hide();
+            }
+        }, _dirTreeHTML, __dirTreeButtonHTML);
+        jqueryTreeScroll()
+        $modalDirTree.changeTitle("移动到")
+        $(".box_container .box_container_con").addClass("border_grey_solid")
+        $(".box_container .box_container_button").addClass("box_container_button_dirTree")
+        $("#dirTreeNewFolder").bind("click", function () {
+            //TODO：new folder
+            alert("新建文件夹")
+        })
+
+        $("#dirTreeConfirm").bind("click", function () {
+            //TODO ajax
+            $modalDirTree.hide();
+            $(".box_container").hide();
+        })
+
+        $("#dirTreeCancel").bind("click", function () {
+            $modalDirTree.hide();
+        })
+
+        return $modalDirTree
+    }
+
+    var $modalDirTree = initModalDirTree().show();
+
+
     //初始化化容量条
     var $sizeBar = $("#size_progress_bar").progressbar({
         text_default: "0G/100G",
@@ -69,7 +113,6 @@ $(function () {
         var itemTitle = titleMap[getItemId()];
         $("#itemTitle").html(itemTitle)
     }
-
 
     //...左边...
     $(".item-list").click(function (event) {
@@ -184,7 +227,7 @@ $(function () {
             resultList: [{
                 name: dealDupName("新建文件夹"),
                 size: "0KB",
-                modified_time: dateStr,
+                modifiedTime: dateStr,
             }]
         }
 
@@ -243,14 +286,14 @@ $(function () {
                     tbcolToDelete[i].remove();
                 }
 
-                $modal.children().remove()
-                $("#modal").hide();
+                //$modal.children().remove()
+                $modal.hideModal();
                 showSelectNum();
                 showOrHideOperateBar(false);
             },
             'cancelFunc': function () {
-                $modal.children().remove()
-                $("#modal").hide();
+                //$modal.children().remove()
+                $modal.hideModal();
             }
         }
         $modal.boxAlert(modalOpt);
@@ -297,6 +340,7 @@ $(function () {
         }
     }
     //复制到按钮
+
     //移动到按钮
 
     //还原按钮
@@ -320,14 +364,14 @@ $(function () {
                     tbcolToDelete[i].remove();
                 }
 
-                $modal.children().remove()
-                $("#modal").hide();
+                //$modal.children().remove()
+                $modal.hideModal();
                 showSelectNum();
                 $("#doRecycle").remove();
             },
             'cancelFunc': function () {
-                $modal.children().remove()
-                $("#modal").hide();
+                //$modal.children().remove()
+                $modal.hideModal();
             }
         }
         $modal.boxAlert(modalOpt);

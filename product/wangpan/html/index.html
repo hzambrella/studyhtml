@@ -121,19 +121,9 @@
     </div>
 
     <div id="modal">
-        <!--<div id="box_alert">
-            <div class="alert_title">
-                <p>确认删除?<span class="box_alert_cancel" style="float:right;cursor:pointer;padding-right:15px">X</span></p>
-            </div>
-            <div class="alert_con">
-                确认要把所选文件放入回收站吗?
-                <br/> 删除的文件可在10天内通过回收站还原
-            </div>
-            <div class="alert_button">
-                <a href="javascript:void(0)" id="alertConfirm">确认</a>
-                <a class="box_alert_cancel" href="javascript:void(0)" id="alertCancel">取消</a>
-            </div>
-        </div>-->
+    </div>
+    <div id="modalDirTree">
+
     </div>
 
     <script id="table_tpl" type="text/html">
@@ -175,7 +165,7 @@
     //         }
     //     }
     // alert(1)
-    
+
     //控制hover的显示
     $(function () {
         var userDetailIsHover = false;
@@ -221,6 +211,14 @@
 <link rel="stylesheet" type="text/css" href="../plugin/box_alert/css/box_alert.css">
 <script src="../plugin/box_alert/js/box_alert.js"></script>
 
+<!--box_container-->
+<link rel="stylesheet" type="text/css" href="../plugin/box_container/css/box_container.css">
+<script src="../plugin/box_container/js/box_container.js"></script>
+<link href="../css/box_container_app.css" rel="stylesheet" type="text/css" />
+
+<!--jqueryTreeScroll-->
+<link rel="stylesheet" type="text/css" href="../plugin/jqueryTreeScroll/css/jqueryTreeScroll.css">
+<script src="../plugin/jqueryTreeScroll/js/jqueryTreeScroll.js"></script>
 <!--scroll beauty-->
 <!--<link rel="stylesheet" type="text/css" href="../plugin/scroll_beauty/css/scroll_beauty.css">
 <script src="../plugin/scroll_beauty/js/scroll_beauty.js"></script>-->
@@ -228,5 +226,108 @@
 <script>
 </script>
 
+
+<script id="mock_dir_tree" type="text/html">
+    <!--<div class='dirtree_centent'>-->
+    <div class='treebox scrollXY' style="height:200px">
+        <div class='tree'>
+            <ul>
+                <!--一级菜单栏-->
+                <li>
+                    <div class='close_menu'><span></span><a title='一级菜单'>一级菜单</a></div>
+                    <ul>
+                        <li>
+                            <div class='close_menu'><span></span><a title='二级菜单'>二级菜单</a></div>
+                            <ul>
+                                <div class='close_menu'><span></span><a title='二级菜单'>二级菜单</a></div>
+                                <ul>
+                                    <li>
+                                        <div class='close_menu'><span></span><a title='二级菜单'>二级菜单</a></div>
+                                        <ul>
+                                            <li>
+                                                <div class='close_menu'><span></span><a title='二级菜单'>二级菜单</a></div>
+                                                <ul>
+                                                    <li>
+                                                        <div class='close_menu'><span></span><a title='二级菜单'>二级菜单</a></div>
+                                                        <ul>
+                                                            <li>
+                                                                <a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class='close_menu'><span></span><a title='二级菜单'>二级菜单</a></div>
+                            <ul>
+                                <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <!--一级菜单栏end-->
+
+                <!--一级菜单栏-->
+                <li>
+                    <div class='close_menu'><span></span><a title='一级菜单'>一级菜单</a></div>
+                    <ul>
+                        <li>
+                            <div class='close_menu'><span></span><a title='二级菜单'>二级菜单</a></div>
+                            <ul>
+                                <li>
+                                    <div class='close_menu'><span></span><a title='三级菜单'>三级菜单</a></div>
+                                    <ul>
+                                        <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                        <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                        <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class='close_menu'><span></span><a title='二级菜单'>二级菜单</a></div>
+                            <ul>
+                                <li>
+                                    <div class='close_menu'><span></span><a title='三级菜单'>三级菜单</a></div>
+                                    <ul>
+                                        <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                        <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                        <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class='close_menu'><span></span><a title='三级菜单'>三级菜单</a></div>
+                                    <ul>
+                                        <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                        <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                        <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
+                <!--一级菜单栏end-->
+            </ul>
+        </div>
+    </div>
+    <!--</div>-->
+</script>
+
+<script id="mock_dir_tree_button" type="text/html">
+    <a href='javascript:void(0)' id="dirTreeNewFolder" class='box_container_a white floatleft'>新建文件夹</a>
+
+    <a href='javascript:void(0)' id="dirTreeCancel" class='box_container_a white floatright'>取消</a>
+    <a href='javascript:void(0)' id="dirTreeConfirm" class='box_container_a blue floatright'>确认</a>
+
+</script>
 
 </html>
