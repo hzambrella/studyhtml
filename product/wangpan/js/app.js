@@ -50,7 +50,7 @@ $(function () {
         return $modalDirTree
     }
 
-    var $modalDirTree = initModalDirTree().show();
+    var $modalDirTree = initModalDirTree();
 
 
     //初始化化容量条
@@ -340,8 +340,15 @@ $(function () {
         }
     }
     //复制到按钮
-
+    $("#copyFile").click(function (event) {
+        $modalDirTree.changeTitle("复制到")
+        $modalDirTree.show()
+    })
     //移动到按钮
+    $("#moveFile").click(function (event) {
+        $modalDirTree.changeTitle("移动到")
+        $modalDirTree.show()
+    })
 
     //还原按钮
     function doRecycle() {
