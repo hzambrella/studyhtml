@@ -106,10 +106,14 @@ $(function () {
     //back_num=0时，就是往下一层。title是目录名。
     //无论那种情况，都要操作dirStack。别的地方不可操作这个对象
     
-    //ajax在外层写。
+    //ajax在外层写，写在这个函数后面。
+    //返回:对象类型
     function ChangeItemTitle(back_num, title) {
         back_num == null ? back_num = -1 : back_num = back_num;
         title == null ? title = "未命名" : title = title;
+
+        //备份,ajax失败后可用于恢复$(".item-title").html(_backupHTML);
+        var _backupHTML=$(".item-title").html();
 
         if (back_num < 0) {
             //title为null ,back_num<0或为null时，就是直接到初始层。用于左边栏切换。
@@ -172,7 +176,10 @@ $(function () {
                 $("#gobackToLast").remove();
             }
         }
-        return dirStack.toString();
+        return {
+            dirname:dirStack.toString(),
+            _backupHTML:_backupHTML,
+        }
     }
 
     //状态栏 click事件 返回上层目录
@@ -181,9 +188,10 @@ $(function () {
         // console.log($target)
         if($target.is("a.dir_go_back")||$target.is("a#gobackToLast.dir_go_back")){
             var dataDeep=$target.attr("data-deep")
-            var str=ChangeItemTitle(-dataDeep)
-            console.log()
+            var obj=ChangeItemTitle(-dataDeep)
             //TODO:ajax and drawTable
+            // console.log(obj)
+            
         }else {
             return 
         }
@@ -342,7 +350,9 @@ $(function () {
                 //下一页
                 var result_data = getMockData(GetItemId());
                 //ChangeItemTitle(0,"111");
-                ChangeItemTitle(0, $target.parent().find("span").html());
+               var obj=ChangeItemTitle(0, $target.parent().find("span").html());
+                //TODO:ajax drawtable
+                // console.log(obj)
             }
         }, 200)
     })
