@@ -86,16 +86,22 @@
                 </ul>
             </div>
             <p></p>
-            <!--信息栏-->
+            <!--状态栏-->
             <div class="item-title">
-                <span id="itemTitle" class="tab_info" style="float:left">全部文件</span>
-                <span class="tab_info" id="selectFileNum" style="float:left">(已选中0个)</span>
+                <ul>
+                    <!--<li><a id="gobackToLast" data-deep="-1" class="dir_go_back" href="javascript:void(0)">返回上一级</a><span class="EKIHPEb">|</span></li>
+                    <li><a data-deep="-1" class="dir_go_back" href="javascript:void(0)">全部文件</a><span class="KLxwHFb">></span></li>-->
+                </ul>
+                 <span id="itemTitle" class="tab_info" style="float:left">全部文件</span>
                 <span class="tab_info" style="float:right">正在获取中...</span></div>
             <div class="file-list">
                 <!--文件列表-->
-                <table id="file-list-table">
+                <table id="file-list-table" data-deep="0">
                     <tr class="table-title" style="color: grey;">
-                        <th style="width:50%"><input id="selectAllList" type="checkbox" />文件名</th>
+                        <th style="width:50%">
+                            <input id="selectAllList" style="float:left" type="checkbox" />
+                            <span class="tab_info" id="selectFileNum" style="float:left;margin-left:5px">文件名</span>
+                        </th>
                         <th style="width:20%">大小</th>
                         <th style="width:30%">修改时间</th>
                     </tr>
@@ -120,11 +126,9 @@
         </div>
     </div>
 
-    <div id="modal">
-    </div>
-    <div id="modalDirTree">
-
-    </div>
+    <!--modal-->
+    <div id="modal"></div>
+    <div id="modalDirTree"></div>
 
     <script id="table_tpl" type="text/html">
         <%for(var i = 0; i < resultList.length; i++) {%>
@@ -151,6 +155,7 @@
     </script>
 
 </body>
+
 <!--js-->
 <script src="../js/main.js"></script>
 <script src="../js/lib/jquery.hoverdelay.js"></script>
@@ -194,7 +199,7 @@
     })
 </script>
 <script src="../js/app.js"></script>
-<script src="../js/tree.js"></script>
+<script src="../js/dirTree.js"></script>
 <!--mock-->
 <script src="../js/mock.js"></script>
 
@@ -226,13 +231,21 @@
 <script>
 </script>
 
+<!--目录树的操作按钮-->
+<script id="mock_dir_tree_button" type="text/html">
+    <a href='javascript:void(0)' id="dirTreeNewFolder" class='box_container_a white floatleft'>新建文件夹</a>
 
+    <a href='javascript:void(0)' id="dirTreeCancel" class='box_container_a white floatright'>取消</a>
+    <a href='javascript:void(0)' id="dirTreeConfirm" class='box_container_a blue floatright'>确认</a>
+
+</script>
+
+<!--mock dirTree 目录树的原始html  not use-->
 <script id="mock_dir_tree" type="text/html">
     <!--<div class='dirtree_centent'>-->
     <div class='treebox scrollXY' style="height:200px">
         <div class='tree'>
             <ul>
-                <!--一级菜单栏-->
                 <li>
                     <div class='close_menu'><span></span><a title='一级菜单'>一级菜单</a></div>
                     <ul>
@@ -272,9 +285,7 @@
                         </li>
                     </ul>
                 </li>
-                <!--一级菜单栏end-->
 
-                <!--一级菜单栏-->
                 <li>
                     <div class='close_menu'><span></span><a title='一级菜单'>一级菜单</a></div>
                     <ul>
@@ -315,19 +326,11 @@
                     </ul>
                 </li>
                 <li><a title='最后一层'>最后一层的结构有变化最后一层的结构有变化</a></li>
-                <!--一级菜单栏end-->
+
             </ul>
         </div>
     </div>
     <!--</div>-->
-</script>
-
-<script id="mock_dir_tree_button" type="text/html">
-    <a href='javascript:void(0)' id="dirTreeNewFolder" class='box_container_a white floatleft'>新建文件夹</a>
-
-    <a href='javascript:void(0)' id="dirTreeCancel" class='box_container_a white floatright'>取消</a>
-    <a href='javascript:void(0)' id="dirTreeConfirm" class='box_container_a blue floatright'>确认</a>
-
 </script>
 
 </html>

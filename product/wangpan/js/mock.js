@@ -262,12 +262,13 @@ function getRealMockData(type) {
 }
 
 
-function getDirData() {
+function getMockDirData() {
     return dirMockDataObj;
 }
 
 var dirMockDataObj = {
-        'childDirNode': [{
+        'childDirNode': [
+            {
             'childDirNode': [{
                 'childDirNode': [{
                     'childDirNode': [],
@@ -285,7 +286,8 @@ var dirMockDataObj = {
             'modifiedTime': '2018-03-19 11:23:46',
             'name': '新建文件夹',
             'size': '0'
-        }, {
+        },
+         {
             'childDirNode': [{
                 'childDirNode': [{
                     'childDirNode': [],
@@ -315,7 +317,8 @@ var dirMockDataObj = {
             'modifiedTime': '2018-03-19 14:27:11',
             'name': '新建文件夹 (2)',
             'size': '0'
-        }, {
+        },
+         {
             'childDirNode': [{
                 'childDirNode': [],
                 'level': 2,
@@ -327,37 +330,43 @@ var dirMockDataObj = {
             'modifiedTime': '2018-03-19 14:27:22',
             'name': '新建文件夹 (3)',
             'size': '0'
-        }, {
+        }, 
+        {
             'childDirNode': [],
             'level': 1,
             'modifiedTime': '2018-03-19 14:26:26',
             'name': '新建文件夹 (4)',
             'size': '0'
-        }, {
+        },
+         {
             'childDirNode': [],
             'level': 1,
             'modifiedTime': '2018-03-19 14:26:28',
             'name': '新建文件夹 (5)',
             'size': '0'
-        }, {
+        }, 
+        {
             'childDirNode': [],
             'level': 1,
             'modifiedTime': '2018-03-19 14:26:29',
             'name': '新建文件夹 (6)',
             'size': '0'
-        }, {
+        }, 
+        {
             'childDirNode': [],
             'level': 1,
             'modifiedTime': '2018-03-19 14:26:31',
             'name': '新建文件夹 (7)',
             'size': '0'
-        }, {
+        }, 
+        {
             'childDirNode': [],
             'level': 1,
             'modifiedTime': '2018-03-19 14:26:33',
             'name': '新建文件夹 (8)',
             'size': '0'
-        }, {
+        }, 
+        {
             'childDirNode': [{
                 'childDirNode': [],
                 'level': 2,
@@ -369,7 +378,8 @@ var dirMockDataObj = {
             'modifiedTime': '2018-03-19 14:27:26',
             'name': '新建文件夹 (9)',
             'size': '0'
-        }],
+        }
+    ],
         'level': 0,
         'modifiedTime': '2018-03-19 14:26:35',
         'name': 'test',

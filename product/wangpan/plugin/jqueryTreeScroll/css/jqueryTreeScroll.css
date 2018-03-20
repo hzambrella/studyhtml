@@ -31,13 +31,13 @@
 	cursor: pointer;
 }
 .tree ul{
-	padding-left: 12px;
+	padding-left: 14px;
 	margin-top: 4px;
 }
 .close_menu,.open_menu{
 	overflow: hidden;
 }
-.close_menu span,.open_menu span{
+.close_menu span,.open_menu span,.leaf_node span{
 	width: 24px;
 	height: 24px;
 	display: block;
@@ -51,6 +51,13 @@
 .open_menu span{
 	background: url(../img/open.png) no-repeat left top;
 }
+
+.leaf_node span{
+	background: url(../img/close.png) no-repeat left top;
+	/*visibility:hide; */
+}
+
+
 .close_menu span:hover,.open_menu span:hover{
 	opacity: 1;
 }
