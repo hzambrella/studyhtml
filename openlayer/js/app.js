@@ -1,47 +1,62 @@
 //``Feature样式style生成``
-createFeatureStyle = {
+featureStyleMap = {
     //数据层的layer
-    forDataLayer: function () {
-        return new ol.style.Style({
-            //填充样式
+    'data': new ol.style.Style({
+        //填充样式
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.2)'
+        }),
+        //边界样式
+        stroke: new ol.style.Stroke({
+            color: 'red',
+            width: 3
+        }),
+        //点要素样式
+        image: new ol.style.Circle({
+            radius: 7,
             fill: new ol.style.Fill({
-                color: 'rgba(255, 255, 255, 0.2)'
-            }),
-            //边界样式
-            stroke: new ol.style.Stroke({
-                color: 'red',
-                width: 3
-            }),
-            //点要素样式
-            image: new ol.style.Circle({
-                radius: 7,
-                fill: new ol.style.Fill({
-                    color: 'blue'
-                })
+                color: 'blue'
             })
         })
-    },
+    }),
     //可绘制层的drawable
-    forInteraction: function () {
-        return new ol.style.Style({
-            //填充样式
+    'interaction': new ol.style.Style({
+        //填充样式
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.2)'
+        }),
+        //边界样式
+        stroke: new ol.style.Stroke({
+            color: '#ffcc33',
+            width: 2
+        }),
+        //点要素样式
+        image: new ol.style.Circle({
+            radius: 7,
             fill: new ol.style.Fill({
-                color: 'rgba(255, 255, 255, 0.2)'
-            }),
-            //边界样式
-            stroke: new ol.style.Stroke({
-                color: '#ffcc33',
-                width: 2
-            }),
-            //点要素样式
-            image: new ol.style.Circle({
-                radius: 7,
-                fill: new ol.style.Fill({
-                    color: '#ffcc33'
-                })
+                color: '#ffcc33'
             })
         })
-    }
+    }),
+    //选中效果
+    'selected': new ol.style.Style({
+        //填充样式
+        fill: new ol.style.Fill({
+            color: 'orange'
+        }),
+        //边界样式
+        stroke: new ol.style.Stroke({
+            color: 'green',
+            width: 2
+        }),
+        //点要素样式
+        image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+                color: 'yellow'
+            })
+        })
+    })
 }
 
 //``overlay相关``
@@ -57,7 +72,7 @@ var overlayCommon = {
         el.className = 'marker'
         if (id != null) el.id = id;
         type == null ? type = 'default' : type = type;
-        el.title = '标注点'
+        el.title = '标注点：' + name
         labelEl = document.getElementById('label')
         labelEl.appendChild(el)
 
@@ -108,7 +123,9 @@ var x_min = 0,
 
 var p1 = [50, 50],
     p2 = [40, 30],
-    locMockInit = [10, 20];
+    p3 = [70, 50],
+    p4 = [20, 60],
+    locMockInit = [50, 50];
 var extentBaseMap = [x_min, y_min, x_max, y_max];
 
 var projectionBaseMap = new ol.proj.Projection({
@@ -134,6 +151,7 @@ var map = new ol.Map({
                 projection: projectionBaseMap,
                 imageExtent: extentBaseMap,
                 attributions: '© <a href="http://xkcd.com/license.html">xkcd</a>',
+                // crossOrigin: 'anonymous'
             })
         }),
     ],
@@ -160,12 +178,30 @@ var sourceDrawable, //ol.source.Vector()
 
 //```数据层```
 
-var pointFeatureToTest1 = new ol.Feature(new ol.geom.Point(p1));
-var pointFeatureToTest2 = new ol.Feature(new ol.geom.Point(p2));
-var lineFeatureToTest = new ol.Feature(new ol.geom.LineString([
-    p1,
-    p2
-]));
+var pointFeatureToTest1 = new ol.Feature({
+    geometry: new ol.geom.Point(p1),
+    type: 'data',
+});
+var pointFeatureToTest2 = new ol.Feature({
+    geometry: new ol.geom.Point(p2),
+    type: 'data',
+});
+var pointFeatureToTest3 = new ol.Feature({
+    geometry: new ol.geom.Point(p3),
+    type: 'data',
+});
+var pointFeatureToTest4 = new ol.Feature({
+    geometry: new ol.geom.Point(p4),
+    type: 'data',
+});
+var lineFeatureToTest = new ol.Feature({
+    geometry: new ol.geom.LineString([
+        p1,
+        p2,
+        p3,
+        p4,
+    ])
+});
 
 // feature click无效
 // pointFeatureToTest1.on('click', function () {
@@ -173,15 +209,16 @@ var lineFeatureToTest = new ol.Feature(new ol.geom.LineString([
 // })
 
 var sourceDataLayer = new ol.source.Vector({
-    features: [pointFeatureToTest1, lineFeatureToTest],
+    features: [pointFeatureToTest1, pointFeatureToTest2, pointFeatureToTest3, lineFeatureToTest],
 });
 
 var vectorDataLayer = new ol.layer.Vector({
     source: sourceDataLayer,
-    style: createFeatureStyle.forDataLayer(),
+    style: featureStyleMap['data'],
 })
 
-sourceDataLayer.addFeature(pointFeatureToTest2);
+sourceDataLayer.addFeature(pointFeatureToTest4);
+sourceDataLayer
 
 //创建Feature选择器 无效
 // var sf = new ol.Control.SelectFeature(vectorDataLayer);
@@ -242,7 +279,7 @@ $("#interaction").click(function (event) {
         drawable = new ol.interaction.Draw({
             source: sourceDrawable,
             type: 'Polygon',
-            style: createFeatureStyle.forInteraction(),
+            style: featureStyleMap['interaction'],
             maxPoints: 4,
         })
         map.addInteraction(drawable);
@@ -271,16 +308,60 @@ $('#location').click(function (event) {
         map.getOverlays().clear()
         clearInterval(mockLocationTimer);
     } else {
-        var marker = overlayCommon.add(locMockInit, 'haha',null,'head')
-        overlayCommon.rotate(marker,45)
-        mockLocationTimer = setInterval(function () {
-            var po = marker.getPosition();
-            marker.setPosition([po[0] + 10, po[1] + 10]);
-        }, 1000)
+        var marker = overlayCommon.add(locMockInit, 'haha', null, 'head')
+        overlayCommon.rotate(marker, 45)
+        // mockLocationTimer = setInterval(function () {
+        //     var po = marker.getPosition();
+        //     marker.setPosition([po[0] + 10, po[1] + 10]);
+        // }, 5000)
     }
 })
 
 //地图事件监听
-// map.on('click', function (event) {
-//     console.log(event.coordinate)
-// })
+var lastSelectedFeature;
+map.on('click', function (event) {
+    // console.log(event.coordinate)
+    //探测feature
+    var feature = map.forEachFeatureAtPixel(event.pixel, function (feature, layer) {
+        return feature
+    })
+
+    if (feature) {
+        if (feature.get('type') == 'data') {
+            console.log("data要素:", feature, feature.getGeometry().getCoordinates())
+        } else {
+            console.log("非data要素:", feature, feature.getGeometry().getCoordinates())
+        }
+        if (lastSelectedFeature != null) {
+            lastSelectedFeature.setStyle(featureStyleMap[lastSelectedFeature.get('type')])
+        }
+        feature.setStyle(featureStyleMap['selected'])
+        lastSelectedFeature = feature;
+    }
+
+
+    //探测layer 有getImageData的跨域问题
+    // var layer = map.forEachLayerAtPixel(event.pixel, function (layer) {
+    //     return layer
+    // })
+
+    // if (layer) {
+    //     console.log("覆盖物:", layer, layer.getPosition())
+    // }
+})
+
+map.on('pointermove', function (e) {
+    var pixel = map.getEventPixel(e.originalEvent)
+    var isFeature = map.hasFeatureAtPixel(pixel)
+
+    map.getTargetElement().style.cursor = isFeature ? 'pointer' : ''
+})
+
+//``提示工具``
+$('.ol-zoom-in, .ol-zoom-out').tooltip({
+    placement: 'right'
+});
+
+$('.ol-rotate-reset, .ol-attribution button[title]').tooltip({
+    placement: 'left'
+});
