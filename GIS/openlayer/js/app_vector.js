@@ -142,28 +142,45 @@ var projectionBaseMap = new ol.proj.Projection({
 //   undefinedHTML: '&nbsp',
 // })
 
-var map = new ol.Map({
-    target: 'hzMapTest',
-    layers: [
-        new ol.layer.Image({
-            source: new ol.source.ImageStatic({
-                url: 'demo.png', //这里添加静态图片的地址
-                projection: projectionBaseMap,
-                imageExtent: extentBaseMap,
-                attributions: '© <a href="http://xkcd.com/license.html">xkcd</a>',
-                // crossOrigin: 'anonymous'
-            })
-        }),
-    ],
-    view: new ol.View({
-        projection: projectionBaseMap,
-        center: ol.extent.getCenter(extentBaseMap),
-        zoom: 2,
-        maxZoom: 5,
-        minZoom: 1.2,
+
+
+var style = new ol.style.Style({
+    fill: new ol.style.Fill({
+        color: 'rgba(255, 255, 255, 0.6)'
     }),
-    // control: ol.control.defaults().extend([mousePositionControl])
+    stroke: new ol.style.Stroke({
+        color: '#319FD3',
+        width: 1
+    }),
+    text: new ol.style.Text()
 });
+
+var map = new ol.Map({
+    layers: [
+        new ol.layer.Vector({
+            renderMode: 'image',
+            source: new ol.source.Vector({
+                url: 'data/C_chain.json',
+                format: new ol.format.GeoJSON()
+            }),
+            style: function (feature) {
+                style.getText().setText(feature.get('name'));
+                return style;
+            }
+        })
+    ],
+    target: 'hzMapTest',
+    view: new ol.View({
+        center: [0, 0],
+        zoom: 1
+    })
+});
+
+
+// var svg = $("<img/>").addClass("svg-layer").attr("src", "C_chain.svg")
+// var mapDiv = $("#hzMapTest").children()[0];
+// $(mapDiv).append(svg);
+
 
 // 小方格
 // var graticule=new ol.Graticule({

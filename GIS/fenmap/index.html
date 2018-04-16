@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>看蜂鸟地图</title>
+    <!--<link href="/netDisk/view/css/style.css" rel='stylesheet' type='text/css' />-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    #map-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+</head>
+
+<body>
+    <div id="map-container">
+        <button class="btn btn-default">2D</button>
+        <button class="btn btn-default btn-primary">3D</button>
+        <input id="rotateDegree" type="number" />
+        <input type="checkbox" id="toLeft">向左
+        <input type="checkbox" id="toRight">向右
+        <button id="rotateBtn">旋转</button>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="lib/fengmap.min.js"></script>
+<script type="text/javascript">
+    //定义全局map变量
+    var fmapID = '90882'; //mapId
+    var map = new fengmap.FMMap({
+        container: document.getElementById('map-container'), //渲染dom
+        //开发者申请应用名称
+        appName: 'hzambrella_test',
+        //开发者申请应用下web服务的key
+        key: '83b0cf6cc4f4324696aba28edae7224a'
+    });
+
+    //打开Fengmap服务器的地图数据和主题
+    map.openMapById(fmapID);
+
+    var aBtn = document.querySelectorAll('.btn');
+
+    var aBtn = document.querySelectorAll('.btn');
+    //开启2维模式
+    aBtn[0].onclick = function () {
+        //设置地图为2维模式
+        map.viewMode = fengmap.FMViewMode.MODE_2D;
+        this.classList.add('btn-primary');
+        aBtn[1].classList.remove('btn-primary');
+    };
+    //开启3维模式
+    aBtn[1].onclick = function () {
+        //设置地图为3维模式
+        map.viewMode = fengmap.FMViewMode.MODE_3D;
+        this.classList.add('btn-primary');
+        aBtn[0].classList.remove('btn-primary');
+    };
+
+    var rotateDegreeEl = document.getElementById("rotateDegree");
+    var toLeftEl = document.getElementById("toLeft");
+    var toRightEl = document.getElementById("toRight");
+    var rotateBtn = document.getElementById("rotateBtn");
+
+    toLeftEl.onclick = function () {
+        toRightEl.checked = false;
+    }
+
+    toRightEl.onclick = function () {
+        toLeftEl.checked = false;
+    }
+
+    rotateBtn.onclick = function () {
+        var degree = rotateDegreeEl.value;
+        if (toLeftEl.checked == true) {
+            degree = -degree
+        }
+        degree = parseInt(map.rotateAngle) + parseInt(degree)
+        map.rotateTo({
+            to: degree,
+        })
+    }
+</script>
