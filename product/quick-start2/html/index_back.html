@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>室内定位系统</title>
+    <!--<link href="../css/style.css" rel='stylesheet' type='text/css' />-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--jquery-->
+    <script src="../js/vendor/jquery-3.2.1.min.js"></script>
+    <!--jqueryui-->
+    <!--<link rel="stylesheet" href="http://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>-->
+
+    <!--template.js-->
+    <script src="../js/vendor/template.js"></script>
+
+    <!--css-->
+    <link href="../css/back1_main.css" rel="stylesheet" type="text/css" />
+    <!--<link href="../css/app.css" rel="stylesheet" type="text/css" />-->
+
+    <style type="text/css">
+    </style>
+
+    <!--left-nav 左边的导航栏 TODO-->
+    <!--<link rel="stylesheet" type="text/css" href="../css/left_nav.css">-->
+</head>
+
+<body>
+    <div class="mainbox">
+        <!--hearder是顶部-->
+        <header class="top">
+            <!--<img style="float:left;height:60px;margin:10px 10px" src="../images/logo.png" onclick="alert('hz网盘!!')" />-->
+            <p class="logo" onclick="alert('by:hz!!')">楼宇监控后台管理系统<p>
+            <div class="top_navigation" style="display:block;height:60px;margin:10px 10px;float:left;"></div>
+            <div class="user_info">
+                <img id="head_img" class="head_img" src="../images/head_default.png" />
+                <span class="nickname">no_name21312313</span>
+
+                <div id="user_info_detail" class="user_info_detail">
+                    <div class="user_info_detail_head">
+                        <img class="head_img" src="../images/head_default.png" />
+                        <span class="nickname">no_name21312313</span>
+                    </div>
+                    <!--<div class="user_info_detail_middle"></div>-->
+                    <ul>
+                        <li><a id="personal_info" href="javascript:void(0)">个人资料</a></li>
+                        <li><a id="help_center" href="javascript:void(0)">帮助中心</a></li>
+                        <li><a id="logout" href="javascript:void(0)">退出</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </header>
+        <div class="left">
+            <div class="con-left">
+                <div style="height:480px;width:100%">
+                    <ul class="item-list">
+                        <li><a href="javascript:void(0)" id="allFile"><i class="fa fa-building"></i> 楼宇信息</a></li>
+                        <li><a href="javascript:void(0)" id="textFile"><i class="fa fa-map"></i> 地图管理</a></li>
+                        <li><a href="javascript:void(0)" id="imageFile"><i class="fa fa-connectdevelop"></i> 网络管理</a></li>
+                          <li><a href="javascript:void(0)" id="imageFile"><i class="fa fa-user"></i> 人员监控</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="right" id="right">
+        </div>
+    </div>
+    <footer>
+        <p></p>
+    </footer>
+
+    <!--顶部用户栏的延迟-->
+    <script src="../js/lib/jquery.hoverdelay.js"></script>
+
+    <!--fontAwesome-->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+        var viewH = document.documentElement.clientHeight;
+        console.log(viewH)
+        var right = document.getElementById("right");
+        right.style.height = (viewH - 95) + "px";
+
+
+        //控制hover的显示
+        var userDetailIsHover = false;
+
+        $("#user_info_detail").hoverDelay({
+            hoverEvent: function () {
+                userDetailIsHover = true;
+            },
+            outEvent: function () {
+                userDetailIsHover = false;
+                $("#user_info_detail").css("display", "none")
+            }
+        })
+
+        $("#head_img").hoverDelay({
+            hoverEvent: function () {
+                $("#user_info_detail").css("display", "block")
+            },
+            outDuring: 2000,
+            outEvent: function () {
+                if (!userDetailIsHover) {
+                    $("#user_info_detail").css("display", "none")
+                }
+                //$("#user_info_detail").css("display", "none")
+            }
+        });
+    </script>
+</body>

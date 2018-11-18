@@ -1,0 +1,309 @@
+/*后台的main*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    font-family: 微软雅黑;
+}
+
+html,
+body,
+.mainbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #efe9e9;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+}
+
+.mainbox header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 78px;
+    background-color: rgba(62, 139, 229, 1);
+    z-index: 3;
+    line-height: 55px;
+}
+
+.mainbox .left {
+    margin-top: 78px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80%;
+    width: 210px;
+    background: rgba(239, 244, 248, 1);
+    z-index: 2;
+}
+
+.mainbox .right {
+    margin-top: 78px;
+    padding-bottom: 40px;
+    position: absolute;
+    /*top: 55px;*/
+    padding-left: 210px;
+    background: #F5F7F7;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.mainbox .right .rightbox {
+    /*overflow-y:scroll;*/
+}
+
+.mainbox .right .rightbox .rightcon p {
+    text-align: center;
+}
+
+/*底部*/
+
+footer {
+    background: #000;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
+}
+
+footer p,
+header p,
+.left p {
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+}
+
+.left p {
+    margin-top: 300px;
+}
+
+/*用户*/
+
+.top .logo {
+    float: left;
+    height: 60px;
+    margin: 10px 10px;
+    font-size:1.5em;
+    margin-left:50px;
+}
+
+.top .user_info {
+    float: right;
+    height: 60px;
+    width: 500px;
+    margin: 10px 10px;
+}
+
+.top .head_img {
+    height: 40px;
+    margin: 4.5px 9px 9px 9px;
+    float: left;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #cccccc;
+    border-radius: 50%;
+}
+
+.top .user_info_detail {
+    display: none;
+    background-color: white;
+    width: 300px;
+    height: 260px;
+    margin: 25px 0 0 0;
+    border-radius: 10px;
+    box-shadow: 0px 4px 9px #888888;
+    transition: width 2s;
+    -webkit-transition: width 2s;
+    /* Safari */
+}
+
+.top .user_info .nickname {
+    /*line-height: 10px;*/
+    color: #fff;
+}
+
+.top .user_info_detail::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    /* 提示工具底部 */
+    left: auto;
+    right: 460px;
+    margin-top: -7px;
+    border-width: 12px;
+    border-style: solid;
+    border-color: transparent transparent rgba(62, 139, 229, 1) transparent;
+}
+
+.top .user_info_detail_head {
+    border-radius: 10px 10px 0 0;
+    width: 300px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(62, 139, 229, 1);
+}
+
+.top .user_info_detail_head .head_img {
+    height: 50px;
+    margin: 18px 9px 9px 18px;
+}
+
+.top .user_info_detail_head .nickname {
+    margin: 21px 9px 9px 2px;
+    color: white;
+}
+
+.top .user_info_detail_middle {
+    width: 300px;
+    height: 0px;
+    margin: 0;
+    padding: 0;
+}
+
+.top .user_info_detail ul {
+    margin-top: 10px;
+    list-style-type: none;
+    /*padding: 0;*/
+    float: left;
+    border-collapse: collapse;
+}
+
+/*.top  .user_info_detail li{
+   
+}*/
+
+.top .user_info_detail a {
+    display: block;
+    text-decoration: none;
+    width: 285px;
+    height: 35px;
+    padding-top: 10px;
+    padding-left: 15px;
+    color: black;
+}
+
+.top .user_info_detail a:hover {
+    background-color: rgba(240, 258, 253, 1.2);
+}
+
+.top .user_info_detail ul {
+    text-align: left;
+    line-height: 18px;
+}
+
+/* 废弃。鼠标移出去，就没了！！改用js*/
+
+/*#head_img:hover ~ #user_info_detail{
+    display: block;
+}*/
+
+.top .nickname {
+    display: inline-block;
+    /*float:left;*/
+    margin: 4.5px 9px 9px 0;
+    /*width:200px;*/
+    height: 40px;
+    text-align: center;
+    font-size: 1em;
+    /*padding: 10px 0;*/
+}
+
+/*左侧菜单*/
+
+.con-left {
+    position: relative;
+    width: 200px;
+    background: rgba(239, 244, 248, 1);
+    float: left;
+    display: table;
+    text-align: left;
+    color: #fff;
+}
+
+.con-left a {
+    color: #000;
+    padding: 20px 20px 8px 50px;
+    font-size: 1.2em;
+    font-weight: 1.2em;
+    height: 40px;
+}
+
+.con-left a:hover {
+    background-color: #cccccc;
+    color: white;
+}
+
+.con-left a.select {
+    background-color: #555;
+    color: white;
+}
+
+/*内容*/
+.content-main{
+    position: relative;
+    height: 100%;
+    padding:0 32px 64px;
+    overflow: auto;
+}
+
+.content-bar{
+    height: 100px;
+    padding:30px 0 30px 24px;
+    box-sizing: border-box;
+}
+
+.content-bar-left{
+    float: left;
+    height: 40px;
+}
+.content-bar-title{
+    display: inline-block;
+    line-height: 40px;
+    font-size:1.3em;
+}
+
+.content-bar-result-count{
+    display: inline-block;
+    line-height: 40px;
+    color: #999;
+    padding-left:3px; 
+    font-size:1.3em;
+}
+
+/*表格*/
+#list_table {
+    text-align: left;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+#list_table th {
+    padding: 10px 0px;
+}
+
+#list_table tr,
+#list_table td {
+    padding: 18px 0;
+    border-bottom: 1px #cccccc solid;
+}
+
+.table-title{
+    color: grey;
+}
+
+.table-head{
+}
