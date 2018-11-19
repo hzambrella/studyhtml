@@ -1,5 +1,7 @@
 //how to use  
+//页面中导入css和js
 //<div id="selector"></div>  $("#selector").boxAlert();
+// 可以配合modal,见mmodal
 $.fn.boxAlert = function (options) {
     var defaults_con = "确认？</br>真的确认？"
     var defaults = {

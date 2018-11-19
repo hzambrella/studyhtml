@@ -20,13 +20,15 @@
     <script src="../js/vendor/vue.js"></script>
     <!--template.js-->
     <script src="../js/vendor/template.js"></script>
-
+    <!--左侧导航栏-->
+    <script src="../js/back/back_con_left.js"></script>
     <!--css-->
     <link href="../css/back1_main.css" rel="stylesheet" type="text/css" />
     <link href="../css/back/app_back_build.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
-    /*vue加载数据时，不显示难看的花括号*/
+        /*vue加载数据时，不显示难看的花括号*/
+
         [v-cloak] {
             display: none;
         }
@@ -66,54 +68,57 @@
         <div class="left">
             <div class="con-left">
                 <div style="height:480px;width:100%;margin-top:10px">
-                    <ul class="item-list">
-                        <li><a class="select" href="javascript:void(0)" id="allFile"><i class="fa fa-building"></i> 楼宇信息</a></li>
-                        <li><a href="javascript:void(0)" id="textFile"><i class="fa fa-map"></i> 地图管理</a></li>
-                        <li><a href="javascript:void(0)" id="imageFile"><i class="fa fa-connectdevelop"></i> 网络管理</a></li>
-                        <li><a href="javascript:void(0)" id="imageFile"><i class="fa fa-user"></i> 人员监控</a></li>
+                    <ul id="leftNav" class="item-list">
+                        <li><a class="select" href="javascript:void(0)" id="buildInfo"><i class="fa fa-building"></i> 楼宇信息</a></li>
+                        <li><a href="javascript:void(0)" id="mapInfo"><i class="fa fa-map"></i> 地图管理</a></li>
+                        <li><a href="javascript:void(0)" id="netInfo"><i class="fa fa-connectdevelop"></i> 网络管理</a></li>
+                        <li><a href="javascript:void(0)" id="monitorInfo"><i class="fa fa-user"></i> 人员监控</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <div class="right" id="right">
-            <div id="app" class="content-main"  v-cloak>
+            <div id="app" class="content-main" v-cloak>
                 <div class="content-bar">
                     <div class="content-bar-left">
                         <span class="content-bar-title">{{title}}</span>
-                        <span class="content-bar-result-count">共{{resultCount}}个结果</span>
+                        <span v-if="finishLoading" class="content-bar-result-count">共{{pageInfo.resultCount}}个结果</span>
+                        <span v-else class="content-bar-result-count data-loading">加载中</span>
                     </div>
                 </div>
                 <div id="data_table">
                     <table id="list_table" data-deep="0">
                         <tr class="table-head">
+                            <th style=width:5%>序号</th>
                             <th style="width:20%">
                                 <span class="tab_title" id="selectFileNum" style="float:left;margin-left:5px">名称</span>
                             </th>
-                            <th style="width:15%">编号</th>
+                            <th style="width:10%">编号</th>
                             <th style="width:35%">位置</th>
                             <th style="width:30%">操作</th>
                         </tr>
-                        <tr>
+                        <tr v-for="(item,index) in items">
+                            <td class="tab_num">{{index+1}}</td>
                             <td>
                                 <div class="tbcol-1">
-                                    <span>教学楼2号</span>
+                                    <span>{{item.name}}</span>
                                 </div>
                             </td>
-                            <td><span class="data_item_id">1</span></td>
+                            <td><span class="data_item_id">{{item.bid}}</span></td>
                             <td>
                                 <div>
-                                    <input class="data-item-id" value=1 style="display:none" >
-                                    <a href="javascript:void(0)" id="build_loc" v-on:click.prevent="showLoc"><i class="fa fa-map"></i></a>|
-                                    <span>湖北省武汉某某大学某某校区</span>
+                                    <p class="data-item-id" style="display:none">{{item.bid}}</p>
+                                    <a href="javascript:void(0)" title="查看位置" class="tab_small_opt_button" v-on:click.prevent="showLoc"><i class="fa fa-map-marker"></i></a>|
+                                    <span>{{item.address}}</span>
                                 </div>
                             </td>
                             <td id="tab_item_operate">
-                                <input class="data-item-id" value=1 style="display:none" >
-                                <a href="javascript:void(0)" id="detail" v-on:click.prevent="toDetail"><i class="fa fa-map"></i> |</a>
-                                <a href="javascript:void(0)" id="map" v-on:click.prevent="toMap"><i class="fa fa-map"></i> |</a>
-                                <a href="javascript:void(0)" id="network" v-on:click.prevent="toNetwork"><i class="fa fa-map"></i> |</a>
-                                <a href="javascript:void(0)" id="monitor" v-on:click.prevent="toMonitor"><i class="fa fa-map"></i></a>
+                                <p class="data-item-id" style="display:none">{{item.bid}}</p>
+                                <!--<a href="javascript:void(0)" class="tab_small_opt_button" id="detail" v-on:click.prevent="toDetail"><i class="fa fa-map"></i> |</a>-->
+                                <a href="javascript:void(0)" title="地图管理" class="tab_small_opt_button" id="map" v-on:click.prevent="toMap"><i class="fa fa-map"></i> |</a>
+                                <a href="javascript:void(0)" title="网络管理" class="tab_small_opt_button" id="network" v-on:click.prevent="toNetwork"><i class="fa fa-connectdevelop"></i> |</a>
+                                <a href="javascript:void(0)" title="人员监控" class="tab_small_opt_button" id="monitor" v-on:click.prevent="toMonitor"><i class="fa fa-user"></i></a>
                             </td>
                         </tr>
                     </table>
@@ -121,9 +126,11 @@
             </div>
         </div>
     </div>
+
     <footer>
         <p></p>
     </footer>
+
 
     <!--顶部用户栏的延迟-->
     <script src="../js/lib/jquery.hoverdelay.js"></script>
@@ -135,6 +142,29 @@
     <script src="../js/back/mock.js"></script>
     <!--app-->
     <script src="../js/back/app_back_build.js"></script>
+
+    <!--modal-->
+    <link rel="stylesheet" type="text/css" href="../plugin/modal/css/modal.css">
+    <script src="../plugin/modal/js/modal.js"></script>
+    <div id="modal"></div>
+
+    <!--map-container 注意元素和js的顺序-->
+    <div id="map_modal" style="display: none">
+        <div id="mapContainer" class="map_container">
+            <div class="title">
+                <p><span class='title'>地图阿斯蒂芬
+                    
+                    
+                    </span><span class='default_cancel' style='float:right;cursor:pointer;padding-right:15px'>X</span></p>
+            </div>
+            <div class='map_container_con'>
+            </div>
+            <div class='map_container_button'>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="../backComp/map_container/css/mapbox.css">
+    <script src="../backComp/map_container/js/mapbox.js"></script>
 
     <script id="table_tpl" type="text/html">
         <%for(var i = 0; i < resultList.length; i++) {%>
@@ -152,7 +182,13 @@
             <%}%>
     </script>
 
+    <!--box_alert-->
+    <link rel="stylesheet" type="text/css" href="../plugin/box_alert/css/box_alert.css">
+    <script src="../plugin/box_alert/js/box_alert.js"></script>
 
+    <!--box-container-->
+    <link rel="stylesheet" type="text/css" href="../plugin/box_container/css/box_container.css">
+    <script src="../plugin/box_container/js/box_container.js"></script>
 
     <script type="text/javascript">
         var viewH = document.documentElement.clientHeight;
@@ -185,6 +221,27 @@
                 //$("#user_info_detail").css("display", "none")
             }
         });
+
+        /*测试蒙版和boxAlert*/
+        var $modal = $("#modal").modal()
+        //testModalAndBoxAlert()
+
+        function testModalAndBoxAlert() {
+            //确认
+            var modalOpt = {
+                'title': '标题',
+                'content': "内容",
+                'confirmFunc': function () {
+                    $modal.hideModal();
+                    // testMapContainer()
+                },
+                'cancelFunc': function () {
+                    $modal.hideModal();
+                }
+            }
+            $modal.boxAlert(modalOpt);
+            $modal.show();
+        }
     </script>
 
 

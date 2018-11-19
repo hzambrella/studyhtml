@@ -1,387 +1,99 @@
 function getMockData(type) {
     switch (type) {
-        case 'allFile':
-            return getAllFileData();
-        case 'textFile':
-            return getTextFileData();
-        case 'imageFile':
-            return getImgFileData();
-        case 'recycleFile':
-            return getRecycleFileData();
-    }
-
-    function getAllFileData() {
-        var device_data = {
-            resultList: [{
-                    name: 'row 1, cell 1123133333333333333333333333333333333',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                }, {
-                    name: 'row 1, cell 1123133333333333333333333333333333333',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                }, {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                }, {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-                {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                }, {
-                    name: '1232131',
-                    size: '100KB',
-                    modifiedTime: '2018-03-14',
-                },
-
-            ]
-        };
-        return device_data;
-    }
-
-    function getImgFileData() {
-        var device_data = {
-            resultList: [{
-                name: 'img',
-                size: '100M',
-                modifiedTime: '2018-03-14',
-            }]
-        };
-        return device_data;
-    }
-
-    function getTextFileData() {
-        var device_data = {
-            resultList: [{
-                name: 'text1',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }, {
-                name: 'text2',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }]
-        };
-        return device_data;
-    }
-
-    function getRecycleFileData() {
-        var device_data = {
-            resultList: [{
-                name: 'recy1',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }, {
-                name: 'recy1 row 1, cell 1123133333333333333333333333333333333',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }, {
-                name: '1232131',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }, {
-                name: '1232131',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }, {
-                name: 'recy1 row 1, cell 1123133333333333333333333333333333333',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }, {
-                name: 'recy1 row 1, cell 1123133333333333333333333333333333333',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }, {
-                name: '1232131',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }, {
-                name: '1232131',
-                size: '100KB',
-                modifiedTime: '2018-03-14',
-            }]
-        };
-        return device_data;
+        case 'build':
+            return getBuildDataMock();
+        case 'map':
+            return getMapDataMock();
     }
 }
 
-function getRealMockData(type) {
-    switch (type) {
-        case 'allFile':
-            return getRealAllFileData();
-        case 'textFile':
-            return getRealTextFileData();
-        case 'imageFile':
-            return getRealImgFileData();
-        case 'recycleFile':
-            return getRealRecycleFileData();
-    }
+function getBuildDataMock() {
+    return buildDataMock;
+}
 
-    function getRealAllFileData() {
+function getMapDataMock() {
+    return mapDataMock;
+}
 
-    }
-
-    function getRealTextFileData() {
-
-    }
-
-    function getRealImgFileData() {
-
-    }
-
-    function getRealRecycleFileData() {
-
+var buildDataMock = {
+    "code": 0,
+    "message": "操作成功",
+    "success": true,
+    "map": {},
+    "obj": {
+        "pageNum": 1,
+        "pageSize": 1,
+        "size": 1,
+        "orderBy": null,
+        "startRow": 0,
+        "endRow": 0,
+        "total": 1,
+        "pages": 1,
+        "list": [{
+            "bid": 1,
+            "descrip": "测试",
+            "address": "湖北省武汉市某某区",
+            "name": "教学楼2号",
+            "x": 114.271241,
+            "y": 30.447683
+        }],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 0,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": true,
+        "hasPreviousPage": false,
+        "hasNextPage": false,
+        "navigatePages": 8,
+        "navigatepageNums": [1]
     }
 }
 
-
-function getMockDirData() {
-    return dirMockDataObj;
-}
-
-var dirMockDataObj = {
-        'childDirNode': [
-            {
-            'childDirNode': [{
-                'childDirNode': [{
-                    'childDirNode': [],
-                    'level': 3,
-                    'modifiedTime': '2018-03-19 11:23:49',
-                    'name': '新建文件夹',
-                    'size': '0'
-                }],
-                'level': 2,
-                'modifiedTime': '2018-03-19 11:23:49',
-                'name': '新建文件夹',
-                'size': '0'
-            }],
-            'level': 1,
-            'modifiedTime': '2018-03-19 11:23:46',
-            'name': '新建文件夹',
-            'size': '0'
-        },
-         {
-            'childDirNode': [{
-                'childDirNode': [{
-                    'childDirNode': [],
-                    'level': 3,
-                    'modifiedTime': '2018-03-19 14:27:14',
-                    'name': '新建文件夹',
-                    'size': '0'
-                }],
-                'level': 2,
-                'modifiedTime': '2018-03-19 14:27:14',
-                'name': '新建文件夹',
-                'size': '0'
-            }, {
-                'childDirNode': [],
-                'level': 2,
-                'modifiedTime': '2018-03-19 14:27:08',
-                'name': '新建文件夹 (2)',
-                'size': '0'
-            }, {
-                'childDirNode': [],
-                'level': 2,
-                'modifiedTime': '2018-03-19 14:27:11',
-                'name': '新建文件夹 (3)',
-                'size': '0'
-            }],
-            'level': 1,
-            'modifiedTime': '2018-03-19 14:27:11',
-            'name': '新建文件夹 (2)',
-            'size': '0'
-        },
-         {
-            'childDirNode': [{
-                'childDirNode': [],
-                'level': 2,
-                'modifiedTime': '2018-03-19 14:27:22',
-                'name': '新建文件夹',
-                'size': '0'
-            }],
-            'level': 1,
-            'modifiedTime': '2018-03-19 14:27:22',
-            'name': '新建文件夹 (3)',
-            'size': '0'
-        }, 
-        {
-            'childDirNode': [],
-            'level': 1,
-            'modifiedTime': '2018-03-19 14:26:26',
-            'name': '新建文件夹 (4)',
-            'size': '0'
-        },
-         {
-            'childDirNode': [],
-            'level': 1,
-            'modifiedTime': '2018-03-19 14:26:28',
-            'name': '新建文件夹 (5)',
-            'size': '0'
-        }, 
-        {
-            'childDirNode': [],
-            'level': 1,
-            'modifiedTime': '2018-03-19 14:26:29',
-            'name': '新建文件夹 (6)',
-            'size': '0'
-        }, 
-        {
-            'childDirNode': [],
-            'level': 1,
-            'modifiedTime': '2018-03-19 14:26:31',
-            'name': '新建文件夹 (7)',
-            'size': '0'
-        }, 
-        {
-            'childDirNode': [],
-            'level': 1,
-            'modifiedTime': '2018-03-19 14:26:33',
-            'name': '新建文件夹 (8)',
-            'size': '0'
-        }, 
-        {
-            'childDirNode': [{
-                'childDirNode': [],
-                'level': 2,
-                'modifiedTime': '2018-03-19 14:27:26',
-                'name': '新建文件夹',
-                'size': '0'
-            }],
-            'level': 1,
-            'modifiedTime': '2018-03-19 14:27:26',
-            'name': '新建文件夹 (9)',
-            'size': '0'
-        }
-    ],
-        'level': 0,
-        'modifiedTime': '2018-03-19 14:26:35',
-        'name': 'test',
-        'size': '0'
+var mapDataMock = {
+    "code": 0,
+    "message": "操作成功",
+    "success": true,
+    "map": {},
+    "obj": {
+        "pageNum": 1,
+        "pageSize": 2,
+        "size": 2,
+        "orderBy": null,
+        "startRow": 0,
+        "endRow": 1,
+        "total": 2,
+        "pages": 1,
+        "list": [{
+            "mapId": 1,
+            "title": "教学楼2号-4F",
+            "status": 1,
+            "descrip": "",
+            "createTime": "2018年11月14日 05:22",
+            "updateTime": "2018年11月14日 05:22",
+            "floor": 4,
+            "buildName": "教学楼2号",
+            "bid": 1
+        }, {
+            "mapId": 2,
+            "title": "教学楼2号-4F(废弃)",
+            "status": 0,
+            "descrip": "",
+            "createTime": "2018年11月19日 08:05",
+            "updateTime": "2018年11月19日 08:05",
+            "floor": 0,
+            "buildName": null,
+            "bid": 0
+        }],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 0,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": true,
+        "hasPreviousPage": false,
+        "hasNextPage": false,
+        "navigatePages": 8,
+        "navigatepageNums": [1]
     }
+}

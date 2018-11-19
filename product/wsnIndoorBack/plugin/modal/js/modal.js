@@ -7,6 +7,7 @@
     var ModalClass = function (el, opt) {
         this.$element = el
         this.defaults = {
+            clearIfClose: true, // 当隐藏蒙版时是否清除蒙版里面的元素
             backgroundColor: "rgba(0,0,0,0.2)",
             z_index: 300,
         };
@@ -21,7 +22,7 @@
     //         return $(this.$element).css("display", "block");
     //     },
 
-   // }
+    // }
 
     $.fn.modal = function (options) {
         var ModalInstance = new ModalClass(this, options);
@@ -29,9 +30,11 @@
         $(this).css("z-index", ModalInstance.options.z_index);
         return $(this);
     }
-
-    $.fn.hideModal=function(){
-        $(this).children().remove()
+    //注意！modal里面的内容会清空。
+    $.fn.hideModal = function () {
+        if (options.clearIfClose) {
+            $(this).children().remove()
+        }
         $(this).hide()
         return $(this);
     }

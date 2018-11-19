@@ -10,7 +10,6 @@ $.fn.boxContainer = function (options, _con_HTML, _button_HTML) {
     var defaults = {
         'title': 'alert box',
         'closeFunc': function () {
-            $(".box_container").hide()
         }
     };
 
@@ -31,6 +30,7 @@ $.fn.boxContainer = function (options, _con_HTML, _button_HTML) {
         "</div>"
     this.append(_HTML);
     this.find(".default_cancel").bind("click", function () {
+        $(".box_container").hide()
         setting.closeFunc();
     });
 
