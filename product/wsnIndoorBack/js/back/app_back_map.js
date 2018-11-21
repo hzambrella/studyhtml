@@ -1,16 +1,11 @@
 $(function () {
-    var pageInfo = {
-        resultCount: 1,
-        page: 1,
-        totalPage: 1,
-    }
+    //var pageId = $("#pageId").html();
     var app = new Vue({
         el: "#app",
         data: {
             finishLoading: true,
             title: '地图管理',
-            pageInfo: pageInfo,
-            items: {},
+            data: commonData,
         },
         methods: {
             showLoc: function showLoc() {
@@ -20,7 +15,8 @@ $(function () {
 
             toDetail: function toDetail() {
                 var id = $(event.target).parent().siblings(".data-item-id").html();
-                alert(id);
+                //alert(id);
+                location.href = getRouter("mapdetail");
             },
             deleteMap: function toMonitor() {
                 var id = $(event.target).parent().siblings(".data-item-id").html();
@@ -36,7 +32,7 @@ $(function () {
         app.finishLoading = false;
         //TODO:ajax
         setTimeout(function () {
-            app.items = getMockData('map').obj.list;
+            app.data = getMockData('map');
             app.finishLoading = true;
         }, 200)
     }

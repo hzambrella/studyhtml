@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>室内定位系统</title>
+    <!--<link href="../css/style.css" rel='stylesheet' type='text/css' />-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--openlayer-->
+    <script src="../openlayers/ol.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../openlayers/ol.css" type="text/css">
+
+    <!--jquery-->
+    <script src="../js/vendor/jquery-3.2.1.min.js"></script>
+
+
+    <!--jqueryui-->
+    <!--<link rel="stylesheet" href="http://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>-->
+
+    <!--Bootstrap4  -->
+    <link rel="stylesheet" href="../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <script src="../js/vendor/popper.min.js"></script>
+    <script src="../bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+
+
+    <!--vue.js-->
+    <script src="../js/vendor/vue.js"></script>
+    <!--template.js-->
+    <script src="../js/vendor/template.js"></script>
+    <!--路由-->
+    <script src="../js/back/back_route.js"></script>
+    <!--css-->
+    <link href="../css/back1_main.css" rel="stylesheet" type="text/css" />
+    <link href="../css/back/app_back_map_detail.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        /*vue加载数据时，不显示难看的花括号*/
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+
+    <!--left-nav 左边的导航栏 TODO-->
+    <!--<link rel="stylesheet" type="text/css" href="../css/left_nav.css">-->
+</head>
+
+<body>
+    <p id="pageId" style="display:none">mapdetail</p>
+    <div class="mainbox">
+        <!--hearder是顶部-->
+        <header class="top">
+            <!--<img style="float:left;height:60px;margin:10px 10px" src="../images/logo.png" onclick="alert('hz网盘!!')" />-->
+            <p class="logo" onclick="alert('by:hz!!')">楼宇监控后台管理系统 </p>
+            <div class="top_navigation" style="display:block;height:60px;margin:10px 10px;float:left;"></div>
+            <div class="user_info">
+                <img id="head_img" class="head_img" src="../images/head_default.png" />
+                <span class="nickname">no_name21312313</span>
+
+                <div id="user_info_detail" class="user_info_detail">
+                    <div class="user_info_detail_head">
+                        <img class="head_img" src="../images/head_default.png" />
+                        <span class="nickname">no_name21312313</span>
+                    </div>
+                    <!--<div class="user_info_detail_middle"></div>-->
+                    <ul>
+                        <li><a id="personal_info" href="javascript:void(0)">个人资料</a></li>
+                        <li><a id="help_center" href="javascript:void(0)">帮助中心</a></li>
+                        <li><a id="logout" href="javascript:void(0)">退出</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </header>
+        <div class="left">
+            <div class="con-left">
+                <div style="height:480px;width:100%;margin-top:10px">
+                    <ul id="leftNav" class="item-list">
+                        <li><a href="javascript:void(0)" id="buildInfo"><i class="fa fa-building"></i> 楼宇信息</a></li>
+                        <li><a class="select" href="javascript:void(0)" id="mapInfo"><i class="fa fa-map"></i> 地图管理</a></li>
+                        <li><a href="javascript:void(0)" id="netInfo"><i class="fa fa-connectdevelop"></i> 网络管理</a></li>
+                        <li><a href="javascript:void(0)" id="monitorInfo"><i class="fa fa-user"></i> 人员监控</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="right" id="right">
+            <div id="app" class="content-main" v-cloak>
+                <p id="mapId" style="display:none">1</p>
+                <div class="content-bar">
+                    <div class="content-bar-left">
+                        <span class="content-bar-breadcrumb"><span class="breadcrumbback" v-on:click="back('mapInfo')">地图列表</span>/</span>
+                        <span class="content-bar-breadcrumb">{{title}}</span>
+                    </div>
+                    <div class="content-bar-right">
+                        <button id="mapDetailInfo" type="button" class="btn btn-primary" data-toggle="modal" data-target="#hintModal">修改地图信息</button>
+                        <button id="publishMap" type="button" class="btn btn-primary" data-toggle="modal" data-target="#hintModal">发布地图</button>
+                    </div>
+                </div>
+                <div class="content-mapapp">
+                    <div class="content-mapComponent">
+                        <div class="map-all">
+                            <!--<div class="map-tool">
+
+                            </div>-->
+                            <div class="map-entity" style="width: 90%;">
+                                <div id="indoorMap" class="indoormap"></div>
+                            </div>
+                            <div class="map-floor">
+                                <div class="btn-group btn-group-vertical map-floor-btnroup ">
+                                    <button class="btn btn-default" type="button">4F</button>
+                                    <button class="btn btn-default" type="button">3F</button>
+                                    <button class="btn btn-default" type="button">2F</button>
+                                    <button class="btn btn-default" type="button">1F</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-footer">
+                            <span v-if="!finishLoading" class="map-status data-loading">加载中</span>
+                            <span v-else class="map-status">加载完毕--地图名称：{{mapDetail.title}}</span>
+                        </div>
+                    </div>
+
+                    <div class="content-mapinfo">
+                        <ul id="mapDataTab" class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#mapData" data-toggle="tab">地图数据</a>
+                            </li>
+                            <li><a href="#baseMapData" data-toggle="tab">底图数据</a></li>
+                            <li class="dropdown">
+                                <a href="#" id="tabDropPOI" class="dropdown-toggle" data-toggle="dropdown">POI数据<b class="caret"></b></a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="tabDropPOI">
+                                    <li><a href="#poiData1" tabindex="-1" data-toggle="tab">TODO1</a></li>
+                                    <li><a href="#poiData2" tabindex="-1" data-toggle="tab">TODO2</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div id="mapDataTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="mapData">
+                                <table class="table table-bordered table-sm" style="margin-top:10px;" v-cloak>
+                                    <thead>
+                                        <tr>
+                                            <th width="25%">键</th>
+                                            <th width="75%">值</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>mapId</td>
+                                            <td>{{mapDetail.mapId}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>标题</td>
+                                            <td>{{mapDetail.title}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>status</td>
+                                            <td>{{mapDetail.status}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>创建时间</td>
+                                            <td>{{mapDetail.createTime}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>修改时间</td>
+                                            <td>{{mapDetail.updateTime}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>楼层</td>
+                                            <td>{{mapDetail.floor}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>建筑物名</td>
+                                            <td>{{mapDetail.buildName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>建筑物id</td>
+                                            <td>{{mapDetail.建筑物id}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="baseMapData">
+                                <table class="table table-bordered table-sm" style="margin-top:10px;" v-cloak>
+                                    <thead>
+                                        <tr>
+                                            <th width="25%">键</th>
+                                            <th width="75%">值</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>code</td>
+                                            <td>{{baseMapData.code}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>host</td>
+                                            <td>{{baseMapData.host}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>serverType</td>
+                                            <td>{{baseMapData.serverType}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>workspace</td>
+                                            <td>{{baseMapData.workspace}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>requestType</td>
+                                            <td>{{baseMapData.requestType}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>layers</td>
+                                            <td>{{baseMapData.layers}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>x_min</td>
+                                            <td>{{baseMapData.x_min}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>y_min</td>
+                                            <td>{{baseMapData.y_min}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>x_max</td>
+                                            <td>{{baseMapData.x_max}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>y_max</td>
+                                            <td>{{baseMapData.y_max}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>zoom_default</td>
+                                            <td>{{baseMapData.zoom_default}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>zoom_min</td>
+                                            <td>{{baseMapData.zoom_min}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>zoom_max</td>
+                                            <td>{{baseMapData.zoom_max}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="poiData1">
+                                <p>敬请期待</p>
+                            </div>
+                            <div class="tab-pane fade" id="poiData2">
+                                <p>敬请期待</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <p id="footer">推荐使用360浏览器或谷歌浏览器</p>
+    </footer>
+
+    <!-- 模态框,用data-toggle="modal" data-target="#hintModal来进行交互 -->
+    <div class="modal fade" id="hintModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">敬请期待</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    敬请期待....
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--顶部用户栏的延迟-->
+    <script src="../js/lib/jquery.hoverdelay.js"></script>
+
+    <!--fontAwesome-->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+    <!--mock-->
+    <script src="../js/back/mock.js"></script>
+
+    <!--app-->
+    <script src="../js/back/app_back_map_detail.js"></script>
+
+    <!--modal-->
+    <link rel="stylesheet" type="text/css" href="../plugin/modal/css/modal.css">
+    <script src="../plugin/modal/js/modal.js"></script>
+    <div id="modal"></div>
+
+    <!--box_alert-->
+    <link rel="stylesheet" type="text/css" href="../plugin/box_alert/css/box_alert.css">
+    <script src="../plugin/box_alert/js/box_alert.js"></script>
+
+    <!--box-container-->
+    <link rel="stylesheet" type="text/css" href="../plugin/box_container/css/box_container.css">
+    <script src="../plugin/box_container/js/box_container.js"></script>
+
+    <script type="text/javascript">
+    </script>
+</body>

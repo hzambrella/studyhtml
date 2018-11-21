@@ -1,16 +1,10 @@
 $(function () {
-    var pageInfo = {
-        resultCount: 1,
-        page: 1,
-        totalPage: 1,
-    }
     var app = new Vue({
         el: "#app",
         data: {
             finishLoading:true,
             title: "楼宇管理",
-            pageInfo: pageInfo,
-            items: {},
+            data: commonData,
         },
         methods: {
             showLoc: function showLoc() {
@@ -42,7 +36,7 @@ $(function () {
         app.finishLoading=false;
         //TODO:ajax
         setTimeout(function () {
-            app.items = getMockData('build').obj.list;
+            app.data = getMockData('build');
             app.finishLoading=true;
         }, 200)
     }
