@@ -1,7 +1,7 @@
 $(function () {
     //var pageId = $("#pageId").html();
     var app = new Vue({
-        el: "#app",
+        el: "#mainbox",
         data: {
             finishLoading: true,
             title: '地图管理',

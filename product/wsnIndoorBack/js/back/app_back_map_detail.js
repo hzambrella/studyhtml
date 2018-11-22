@@ -16,20 +16,20 @@ $(function () {
     }
 
     var defaultMapDetail = {
-        "mapId": 1,
-        "title": "教学楼2号-4F",
+        "mapId": 0,
+        "title": "",
         "status": 1,
         "descrip": "",
-        "createTime": "2018年11月14日\n\t\t05:22",
-        "updateTime": "2018年11月14日 05:22",
-        "floor": 4,
-        "height": 6,
-        "buildName": "教学楼2号",
-        "bid": 1
+        "createTime": "",
+        "updateTime": "",
+        "floor": 1,
+        "height": 1,
+        "buildName": "",
+        "bid": 0
     }
 
     var app = new Vue({
-        el: "#app",
+        el: "#mainbox",
         data: {
             mapId: $("mapId").html(),
             finishLoading: true,
@@ -37,6 +37,7 @@ $(function () {
             items: {},
             baseMapData: defaultGisData,
             mapDetail: defaultMapDetail,
+            floor: [],
         },
         methods: {
             back: routerBack
@@ -50,7 +51,9 @@ $(function () {
         //TODO:ajax
         setTimeout(function () {
             app.mapDetail = getMapDetailMock().obj
+            //右边信息栏，显示第一个标签页
             $('#mapDataTab li:eq(0) a').tab('show');
+            floorButton();
             getBaseMapData(mapId)
         }, 20)
     }
@@ -60,6 +63,14 @@ $(function () {
             app.baseMapData = loadMap()
             app.finishLoading = true
         }, 20)
+    }
+
+    function floorButton() {
+        floor = new Array();
+        for (i = app.mapDetail.height; i > 0; i--) {
+            floor.push(i + "F");
+        }
+        app.floor = floor
     }
 
     function loadMap() {

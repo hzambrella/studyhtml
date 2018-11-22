@@ -45,8 +45,8 @@
 </head>
 
 <body>
-    <p id="pageId" style="display:none">map</p>
-    <div class="mainbox">
+    <p id="pageId" style="display:none">mapInfo</p>
+    <div id="mainbox" class="mainbox">
         <!--hearder是顶部-->
         <header class="top">
             <!--<img style="float:left;height:60px;margin:10px 10px" src="../images/logo.png" onclick="alert('hz网盘!!')" />-->
@@ -74,12 +74,7 @@
         <div class="left">
             <div class="con-left">
                 <div style="height:480px;width:100%;margin-top:10px">
-                    <ul id="leftNav" class="item-list">
-                        <li><a href="javascript:void(0)" id="buildInfo"><i class="fa fa-building"></i> 楼宇信息</a></li>
-                        <li><a class="select" href="javascript:void(0)" id="mapInfo"><i class="fa fa-map"></i> 地图管理</a></li>
-                        <li><a href="javascript:void(0)" id="netInfo"><i class="fa fa-connectdevelop"></i> 网络管理</a></li>
-                        <li><a href="javascript:void(0)" id="monitorInfo"><i class="fa fa-user"></i> 人员监控</a></li>
-                    </ul>
+                    <leftnav></leftnav>
                 </div>
             </div>
         </div>
@@ -126,7 +121,11 @@
                                 </div>
                             </td>
                             <td><span class="data_item_id">{{item.floor}}</span></td>
-                            <td><span class="data_item_id">{{item.status}}</span></td>
+                            <td>
+                                <span class="data_item_id" v-if="item.status==0">未发布</span>
+                                <span class="data_item_id" v-if="item.status==1">已发布</span>
+                                <span class="data_item_id" v-if="item.status==2">已锁定</span>
+                            </td>
                             <td>
                                 <span>{{item.updateTime}}</span>
                             </td>
