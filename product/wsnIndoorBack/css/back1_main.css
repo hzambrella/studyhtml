@@ -88,8 +88,9 @@ header p,
     float: left;
     height: 60px;
     margin: 10px 10px;
-    font-size: 1.5em;
+    font-size: 1.7em;
     margin-left: 50px;
+    font-weight: bold;
 }
 
 .top .user_info {
@@ -228,8 +229,8 @@ header p,
 
 .con-left a {
     color: #000;
-    padding: 10px 10px 10px 40px;
-    font-size: 1.2em;
+    padding: 10px 10px 10px 20px;
+    font-size: 1.1em;
     height: 55px;
     display: block;
     text-decoration: none;
@@ -261,9 +262,15 @@ header p,
 }
 
 .con-left .item-list-level2 a {
-    padding-left: 70px;
-    font-size: 1.05em;
+    padding-left: 40px;
+    font-size: 1.0em;
     /*color: white;*/
+}
+
+.con-left-title{
+    color: black;
+    padding:0 0 10px 20px;
+    font-weight: bold;
 }
 
 /*内容*/
@@ -479,7 +486,7 @@ header p,
     width: 65%;
     margin-right: 10px;
     height: 600px;
-    border:5px solid black;
+    border: 5px solid black;
     border-left: 5px solid grey;
     border-bottom: 5px solid grey;
 }
@@ -489,6 +496,14 @@ header p,
     position: relative;
     width: 30%;
     height: 600px;
+    background-color: #fff;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .2);
+    padding: 10px 25px;
+}
+
+/*通用*/
+
+.white-panel {
     background-color: #fff;
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .2);
     padding: 10px 25px;

@@ -91,6 +91,9 @@
                         <span v-if="finishLoading" class="content-bar-result-count">共{{data.obj.total||0}}个结果</span>
                         <span v-else class="content-bar-result-count data-loading">加载中</span>
                     </div>
+                    <div class="content-bar-right">
+                        <button id="refresh" type="button" class="btn btn-primary" @click="refresh">刷新</button>
+                    </div>
                 </div>
                 <ul id="showTabNav" class="nav nav-tabs">
                     <li class="active"><a href="#showByTab" data-toggle="tab">表格展示</a></li>

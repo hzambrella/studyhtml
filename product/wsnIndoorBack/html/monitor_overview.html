@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>室内定位系统</title>
+    <!--<link href="../css/style.css" rel='stylesheet' type='text/css' />-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--jquery-->
+    <script src="../js/vendor/jquery-3.2.1.min.js"></script>
+    <!--jqueryui-->
+    <!--<link rel="stylesheet" href="http://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>-->
+
+    <!--Bootstrap3 -->
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/vendor/popper.min.js"></script>
+
+
+    <!--vue.js-->
+    <script src="../js/vendor/vue.js"></script>
+    <!--template.js-->
+    <script src="../js/vendor/template.js"></script>
+
+    <!--baidu map-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Nj2QIPFYyVb49p93WnQhxbvjPt4lsmco"></script>
+    <!--路由-->
+    <script src="../js/back/back_route.js"></script>
+    <!--css-->
+    <link href="../css/back1_main.css" rel="stylesheet" type="text/css" />
+    <link href="../css/back/monitor_overview.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        /*vue加载数据时，不显示难看的花括号*/
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+
+    <!--left-nav 左边的导航栏 TODO-->
+    <!--<link rel="stylesheet" type="text/css" href="../css/left_nav.css">-->
+</head>
+
+<body>
+    <p id="pageGroupId" style="display:none">monitor</p>
+    <p id="pageId" style="display:none">mOverview</p>
+    <div id="mainbox" class="mainbox">
+        <!--hearder是顶部-->
+        <header class="top">
+            <!--<img style="float:left;height:60px;margin:10px 10px" src="../images/logo.png" onclick="alert('hz网盘!!')" />-->
+            <p class="logo" onclick="alert('by:hz!!')">楼宇监控后台管理系统</p>
+            <div class="top_navigation" style="display:block;height:60px;margin:10px 10px;float:left;"></div>
+            <div class="user_info">
+                <img id="head_img" class="head_img" src="../images/head_default.png" />
+                <span class="nickname">no_name21312313</span>
+
+                <div id="user_info_detail" class="user_info_detail">
+                    <div class="user_info_detail_head">
+                        <img class="head_img" src="../images/head_default.png" />
+                        <span class="nickname">no_name21312313</span>
+                    </div>
+                    <!--<div class="user_info_detail_middle"></div>-->
+                    <ul>
+                        <li><a id="personal_info" href="javascript:void(0)">个人资料</a></li>
+                        <li><a id="help_center" href="javascript:void(0)">帮助中心</a></li>
+                        <li><a id="logout" href="javascript:void(0)">退出</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </header>
+        <div class="left">
+            <div class="con-left">
+                <div style="height:480px;width:100%;margin-top:10px">
+                    <leftnav group='monitor'></leftnav>
+                </div>
+            </div>
+        </div>
+
+        <div class="right" id="right">
+            <div id="app" class="content-main" v-cloak>
+                <div class="content-bar">
+                    <div class="content-bar-left">
+                        <span class="content-bar-breadcrumb">{{title}}</span>
+                        <span v-if="!finishLoading" class="content-bar-result-count data-loading">加载中</span>
+                    </div>
+                    <div class="content-bar-right">
+                        <button id="refresh" type="button" class="btn btn-primary" @click="refresh">刷新</button>
+                    </div>
+                </div>
+                <div class="content-overview">
+                    <div class="content-overview-left">
+                        <div id="sourceOverview" class="white-panel">
+                            <h3>网络拓扑</h3>
+                            <div class="network-topology">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                    <image x=0 y=0 class="network-topology-node" href="../fonts/iconfont/gateway.png" />
+                                    <image x=100 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
+                                    <image x=200 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
+                                    <image x=300 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
+                                    <image x=400 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
+                                    <image x=500 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
+                                    <image x=600 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
+                                    <path d="M70 30 L70 30 L640 30" fill="transparent" stroke="black" />
+                                    <path d="M140 30 L140 100" fill="transparent" stroke="black" />
+                                    <path d="M240 30 L240 100" fill="transparent" stroke="black" />
+                                    <path d="M340 30 L340 100" fill="transparent" stroke="black" />
+                                    <path d="M440 30 L440 100" fill="transparent" stroke="black" />
+                                    <path d="M540 30 L540 100" fill="transparent" stroke="black" />
+                                    <path d="M640 30 L640 100" fill="transparent" stroke="black" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-overview-right">
+                        <div id="question" class="white-panel">
+                            <h3>公告</h3>
+                            <div style="height:300px;width:100%">暂无</div>
+                        </div>
+                        <div id="bbs" class="white-panel">
+                            <h3>留言板</h3>
+                            <div style="height:300px;width:100%">暂无</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p id="footer">推荐使用360浏览器或谷歌浏览器</p>
+    </footer>
+
+    <!--顶部用户栏的延迟-->
+    <script src="../js/lib/jquery.hoverdelay.js"></script>
+
+    <!--fontAwesome-->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+    <!--mock-->
+    <script src="../js/back/mock.js"></script>
+    <!--app-->
+    <script src="../js/back/app_back_overview.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../backComp/map_container/css/mapbox.css">
+    <script src="../backComp/map_container/js/mapbox.js"></script>
+
+    <script type="text/javascript">
+    </script>
+
+    <!--box_alert-->
+    <link rel="stylesheet" type="text/css" href="../plugin/box_alert/css/box_alert.css">
+    <script src="../plugin/box_alert/js/box_alert.js"></script>
+
+    <!--box-container-->
+    <link rel="stylesheet" type="text/css" href="../plugin/box_container/css/box_container.css">
+    <script src="../plugin/box_container/js/box_container.js"></script>
+
+    <script type="text/javascript">
+    </script>
+</body>

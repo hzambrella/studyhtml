@@ -55,6 +55,7 @@
 </head>
 
 <body>
+    <p id="pageGroupId" style="display:none">Index</p>
     <p id="pageId" style="display:none">mapdetail</p>
     <div id="mainbox" class="mainbox" v-cloak>
         <!--hearder是顶部-->
@@ -84,9 +85,9 @@
         <div class="left">
             <div class="con-left">
                 <div style="height:480px;width:100%;margin-top:10px">
-                    <leftnav></leftnav>
+                    <leftnav group='index'></leftnav>
                 </div>
-                   <!--<ul id='leftNav' class='item-list' v-cloak>
+                <!--<ul id='leftNav' class='item-list' v-cloak>
                         <li v-for='(val,key) in leftNavRouter'>
                             <a v-if='!val.level2' href='javascript:void(0)' :id='key'><i :class='val.icon'></i> {{val.name}}</a>
                             <a v-else href="javascript:void(0)" :id='key' class='left-nav-level2' :for='val.level2Id'><i :class='val.icon'></i>{{val.name}}

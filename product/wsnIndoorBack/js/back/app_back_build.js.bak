@@ -1,0 +1,83 @@
+$(function () {
+    var vdata = {
+        tabsId: '#showByTab',
+        finishLoading: true, //异步请求的数据是否加载完毕
+        hasLoadMarkerOnBmap: false, //是否已经把新数据显示在地图中
+        title: "楼宇管理",
+        data: commonData,
+    }
+
+    var getData = function () {
+        vdata.finishLoading = false;
+        //初始化地图
+        initBMap()
+        //把地图上的覆盖物清除掉
+        if (BMapObj) {
+            BMapObj.clearOverlays();
+        }
+        vdata.hasLoadMarkerOnBmap = false;
+        //TODO:ajax
+        setTimeout(function () {
+            vdata.data = getMockData('build');
+            vdata.finishLoading = true;
+            if (vdata.tabsId == "#showBMap") {
+                showBuildDataAsMarker()
+            }
+        }, 200)
+    }
+
+    //TODO:fix bug:表格页按刷新，切换到地图页，地图上的marker会偏移
+    var showBuildDataAsMarker= function () {
+        //当标签页是地图展示，且地图已经初始化，且新数据未显示在地图中时
+        if (vdata.tabsId == '#showBMap' && BMapObj && !app.hasLoadMarkerOnBmap) {
+            list = app.data.obj.list;
+            for (var item in list) {
+                addMarkerOnBMap(list[item].x, list[item].y, list[item].name, list[item].address)
+            }
+            app.hasLoadMarkerOnBmap = true;
+        }
+    }
+
+
+    var app = new Vue({
+        el: "#mainbox",
+        data: vdata,
+        mounted: function () {},
+        methods: {
+            refresh: getData,
+            showLoc: function showLoc() {
+                var id = $(event.target).parent().siblings(".data-item-id").html();
+                if (id);
+                alert(id);
+            },
+            toDetail: function toDetail() {
+                var id = $(event.target).parent().siblings(".data-item-id").html();
+                if (id);
+                alert(id);
+            },
+            toMap: function toMap() {
+                var id = $(event.target).parent().siblings(".data-item-id").html();
+                if (id);
+                alert(id);
+            },
+            toNetwork: function toNetWork() {
+                var id = $(event.target).parent().siblings(".data-item-id").html();
+                if (id);
+                alert(id);
+            },
+            toMonitor: function toMonitor() {
+                var id = $(event.target).parent().siblings(".data-item-id").html();
+                if (id);
+                alert(id);
+            },
+        }
+    })
+
+    app.refresh(app, 1);
+    //绑定事件：标签页切换时，如果地图已经初始化，且新数据未显示在地图中时，添加覆盖物
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        vdata.tabsId = $(e.target).attr('href');
+        showBuildDataAsMarker();
+    })
+
+})

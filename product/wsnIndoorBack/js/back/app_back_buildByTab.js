@@ -1,27 +1,26 @@
 $(function () {
+    var vdata = {
+        finishLoading: true, //异步请求的数据是否加载完毕
+        title: getTitle("buildInfo")+"/"+getTitle(),
+        data: commonData,
+    }
+
+    var getData = function () {
+        vdata.finishLoading = false;
+        //TODO:ajax
+        setTimeout(function () {
+            vdata.data = getMockData('build');
+            vdata.finishLoading = true;
+        }, 200)
+    }
+
     var app = new Vue({
         el: "#mainbox",
-        data: {
-            finishLoading: true,
-            hasLoadMarkerOnBmap: false,
-            title: "楼宇管理",
-            data: commonData,
-        },
+        data: vdata,
         mounted: function () {
-            initBMap()
-            getData(1) //首次加载页面时
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                if (BMapObj && !hasLoadMarkerOnBmap) {
-                    list = data.obj.list;
-                    console.log(list);
-                    for (var item in list) {
-                        addMarkerOnBMap(list[item].x, list[item].y, list[item].name, list[item].address)
-                    }
-                    hasLoadMarkerOnBmap = true;
-                }
-            })
         },
         methods: {
+            refresh: getData,
             showLoc: function showLoc() {
                 var id = $(event.target).parent().siblings(".data-item-id").html();
                 if (id);
@@ -50,16 +49,5 @@ $(function () {
         }
     })
 
-
-
-    function getData(page) {
-        this.finishLoading = false;
-        //TODO:ajax
-        setTimeout(function () {
-            this.data = getMockData('build');
-            this.finishLoading = true;
-            this.hasLoadMarkerOnBmap=false;
-        }, 200)
-    }
-
+    app.refresh(app, 1);
 })

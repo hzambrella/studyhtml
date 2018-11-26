@@ -1,0 +1,35 @@
+.content-overview {
+    position: relative;
+    /*height: 600px;*/
+    width: 100%;
+    /*box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .2);
+    padding: 10px 25px;*/
+}
+
+.content-overview-left {
+    position: relative;
+    /*height: 100%;*/
+    width: 70%;
+    float: left;
+    /*box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .2);
+    padding: 10px 25px;*/
+}
+.content-overview-right {
+    position: relative;
+    /*height: 100%;*/
+    width: 30%;
+    float: right;
+    /*box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .2);
+    padding: 10px 25px;*/
+}
+
+.content-overview-left .white-panel {
+    margin: 20px;
+    padding: 20px;
+}
+
+.content-overview-right .white-panel {
+    margin: 20px;
+    padding: 20px;
+}
+
