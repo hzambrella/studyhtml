@@ -1,3 +1,5 @@
+//路由和通用
+//路由，百度地图，通用数据格式，通用的方法
 var buildInfoRouter = {
     "buildInfoByTab": {
         url: "back_buildingByTab.html",
@@ -126,9 +128,9 @@ var monitorNavRouter = {
         icon: "fa fa-users",
         name: "访客管理",
     },
-    "backToIndex":{
-        url:"back_buildingByBmap.html",
-        name:"返回主页",
+    "backToIndex": {
+        url: "back_buildingByBmap.html",
+        name: "返回主页",
     }
 }
 
@@ -394,7 +396,17 @@ function addWindowsInfoForBMapMarker(marker, title, desc) {
 }
 
 
+//用数据
 var commonData = {
+    "code": 0,
+    "message": "操作成功",
+    "success": true,
+    "map": {},
+    "obj": {}
+}
+
+
+var commonPageData = {
     "code": 0,
     "message": "操作成功",
     "success": true,
@@ -420,4 +432,16 @@ var commonData = {
         "navigatePages": 0,
         "navigatepageNums": [1]
     }
+}
+
+String.format = function () {
+    if (arguments.length == 0)
+        return null;
+
+    var str = arguments[0];
+    for (var i = 1; i < arguments.length; i++) {
+        var re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+        str = str.replace(re, arguments[i]);
+    }
+    return str;
 }

@@ -5,7 +5,7 @@ $(function () {
         data: {
             finishLoading: true,
             title: '地图管理',
-            data: commonData,
+            data: commonPageData,
         },
         methods: {
             showLoc: function showLoc() {

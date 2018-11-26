@@ -50,7 +50,7 @@
 
 <body>
     <p id="pageGroupId" style="display:none">monitor</p>
-    <p id="pageId" style="display:none">mOverview</p>
+    <p id="pageId" style="display:none">mAnchor</p>
     <div id="mainbox" class="mainbox">
         <!--hearder是顶部-->
         <header class="top">
@@ -95,51 +95,7 @@
                         <button id="refresh" type="button" class="btn btn-primary" @click="refresh">刷新</button>
                     </div>
                 </div>
-                <div class="content-overview">
-                    <div class="content-overview-left">
-                        <div id="sourceOverview" class="white-panel">
-                            <h3>网络拓扑</h3>
-                            <div class="network-topology">
-                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                    <!--<image x=0 y=0 class="network-topology-node" href="../fonts/iconfont/gateway.png" />
-                                    <image x=100 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
-                                    <image x=200 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
-                                    <image x=300 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
-                                    <image x=400 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
-                                    <image x=500 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
-                                    <image x=600 y=110 class="network-topology-node" href="../fonts/iconfont/coordinator.png" />
-                                   
-                                    <path d="M140 30 L140 100" fill="transparent" stroke="black" />
-                                    <path d="M240 30 L240 100" fill="transparent" stroke="black" />
-                                    <path d="M340 30 L340 100" fill="transparent" stroke="black" />
-                                    <path d="M440 30 L440 100" fill="transparent" stroke="black" />
-                                    <path d="M540 30 L540 100" fill="transparent" stroke="black" />
-                                    <path d="M640 30 L640 100" fill="transparent" stroke="black" />-->
 
-                                    <image v-for="(val,key) in sinkLocInSVG" :x='val.x' :y='val.y' class="network-topology-node" :href='svgDrawParam.sinkImageUrl'
-                                    />
-                                    <image v-for="(val,key) in coorLocInSVG" :x='val.x' :y='val.y' class="network-topology-node" :href='svgDrawParam.coorImageUrl'
-                                    />
-                                    <!--<path d="M70 30 V400 M70 30 L640 30 M70 230 L640 230" fill="transparent" stroke="black" />-->
-                                    <path v-for="(val,key) in lineOfSink" :d='val' fill="transparent" stroke="black" />
-                                    <path v-for="(val,key) in lineOfCoor" :d='val' fill="transparent" stroke="black" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-overview-right">
-                        <div id="question" class="white-panel">
-                            <h3>公告</h3>
-                            <div style="height:300px;width:100%">
-                                暂无
-                            </div>
-                        </div>
-                        <div id="bbs" class="white-panel">
-                            <h3>留言板</h3>
-                            <div style="height:300px;width:100%">暂无</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -157,7 +113,7 @@
     <!--mock-->
     <script src="../js/back/mock.js"></script>
     <!--app-->
-    <script src="../js/back/back_monitor_overview.js"></script>
+    <script src="../js/back/back_monitor_anchor.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../backComp/map_container/css/mapbox.css">
     <script src="../backComp/map_container/js/mapbox.js"></script>

@@ -3,7 +3,7 @@ $(function () {
         finishLoading: true, //异步请求的数据是否加载完毕
         hasLoadMarkerOnBmap: false, //是否已经把新数据显示在地图中
         title: "网络管理/" + getTitle(),
-        data: commonData,
+        data: commonPageData,
         currentData: {}, //选中marker的data
         currentMarker: null, //被选中该的marker
     }

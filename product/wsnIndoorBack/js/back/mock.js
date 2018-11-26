@@ -28,6 +28,10 @@ function getMapDetailMock() {
     return mapDetailMock;
 }
 
+function getNetDevComMock() {
+    return netComDevMock;
+}
+
 //url: 'http://127.0.0.1:8083/geoserver/hzmap/wms',
 var mapMessMock = {
     code: 'EPSG:404000',
@@ -61,14 +65,14 @@ var buildDataMock = {
         "total": 1,
         "pages": 1,
         "list": [{
-                "bid": 1,
-                "descrip": "测试",
-                "address": "湖北省武汉市某某区",
-                "name": "教学楼2号",
-                "x": 114.271241,
-                "y": 30.447683,
-                "height": 6,
-            }],
+            "bid": 1,
+            "descrip": "测试",
+            "address": "湖北省武汉市某某区",
+            "name": "教学楼2号",
+            "x": 114.271241,
+            "y": 30.447683,
+            "height": 6,
+        }],
         "firstPage": 1,
         "prePage": 0,
         "nextPage": 0,
@@ -169,5 +173,56 @@ var mapDetailMock = {
         "height": 6,
         "buildName": "教学楼2号",
         "bid": 1
+    }
+}
+
+var netComDevMock = {
+    "code": 0,
+    "message": "操作成功",
+    "success": true,
+    "map": {},
+    "obj": {
+        "coordinators": [{
+            "coorId": 1,
+            "status": 1,
+            "sn": "CAE8601001",
+            "bid": 1,
+            "nid": 1,
+            "floor": 4
+        }, {
+            "coorId": 1,
+            "status": 1,
+            "sn": "CAE8601001",
+            "bid": 1,
+            "nid": 1,
+            "floor": 4
+        }, {
+            "coorId": 1,
+            "status": 1,
+            "sn": "CAE8601001",
+            "bid": 1,
+            "nid": 1,
+            "floor": 4
+        },{
+            "coorId": 1,
+            "status": 1,
+            "sn": "CAE8601001",
+            "bid": 1,
+            "nid": 1,
+            "floor": 4
+        },{
+            "coorId": 1,
+            "status": 1,
+            "sn": "CAE8601001",
+            "bid": 1,
+            "nid": 1,
+            "floor": 4
+        }],
+        "sinks": [{
+            "sinkId": 1,
+            "status": 1,
+            "sn": "SAE8601001",
+            "bid": 1
+        }]
     }
 }

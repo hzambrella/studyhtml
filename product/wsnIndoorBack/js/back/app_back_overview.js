@@ -2,7 +2,7 @@ $(function () {
     var vdata = {
         finishLoading: true, //异步请求的数据是否加载完毕
         title: getTitle(),
-        data: commonData,
+        data: commonPageData,
     }
 
     var getData = function () {
