@@ -45,7 +45,7 @@ $(function () {
         setTimeout(function () {
             vdata.data = getNetDevComMock()
             cacuSVGPostionForDev(vdata.data.obj)
-            console.log(JSON.stringify(sinkLocInSVG), JSON.stringify(coorLocInSVG));
+            //console.log(JSON.stringify(sinkLocInSVG), JSON.stringify(coorLocInSVG));
             vdata.finishLoading = true;
         }, 200)
     }
