@@ -61,7 +61,8 @@ $(function () {
     function getBaseMapData(mapId) {
         //TODO:ajax
         setTimeout(function () {
-            app.baseMapData = loadMap(mapId)
+            app.baseMapData = getBaseMapDataMock(mapId).obj;
+            loadMap(mapId, app.baseMapData )
             app.finishLoading = true
         }, 20)
     }

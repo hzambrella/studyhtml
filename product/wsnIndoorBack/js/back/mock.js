@@ -20,7 +20,7 @@ function getMapDataMock() {
     return mapDataMock;
 }
 
-function getBaseMapMock() {
+function getBaseMapDataMock() {
     return baseMapMock;
 }
 
@@ -39,6 +39,11 @@ function getBuildMapRelMock() {
 function getNetworkMock() {
     return networkMock;
 }
+
+function getNetworksMock() {
+    return networksMock;
+}
+
 
 function getAnchorMock() {
     return anchorMock;
@@ -251,8 +256,6 @@ var buildMapRelMock = {
     }]
 }
 
-
-
 var networkMock = {
     "code": 0,
     "message": "操作成功",
@@ -262,9 +265,56 @@ var networkMock = {
         "nid": 1,
         "bid": 1,
         "floor": 4,
+        "coorId": 1,
         "comStatus": 1,
-        "anchorStatus": 2,
-        "coorId": 1
+        "anchorStatus": 0,
+        "anchorTaskStatus": 0,
+        "coordinator": null
+    }
+}
+
+var networksMock = {
+    "code": 0,
+    "message": "操作成功",
+    "success": true,
+    "map": {},
+    "obj": {
+        "pageNum": 1,
+        "pageSize": 1,
+        "size": 1,
+        "orderBy": null,
+        "startRow": 0,
+        "endRow": 0,
+        "total": 1,
+        "pages": 1,
+        "list": [{
+            "nid": 1,
+            "bid": 1,
+            "floor": 4,
+            "coorId": 1,
+            "comStatus": 1,
+            "anchorStatus": 4,
+            "anchorTaskStatus": 0,
+            "coordinator": {
+                "coorId": 1,
+                "status": 1,
+                "sn": "CAE8601001",
+                "bid": 1,
+                "nid": 1,
+                "floor": 4,
+                "panId": null
+            }
+        }],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 0,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": true,
+        "hasPreviousPage": false,
+        "hasNextPage": false,
+        "navigatePages": 8,
+        "navigatepageNums": [1]
     }
 }
 

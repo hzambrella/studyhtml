@@ -1,0 +1,122 @@
+.content-info {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 40%;
+}
+
+.anchor-info {
+    height: 50%;
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.workflow-info {
+    height: 40%;
+    position: relative;
+    width: 100%;
+}
+
+.progress-inner {
+    height: 30%;
+    width: 100%;
+    /*background-color: antiquewhite;*/
+}
+
+.anchor_operate {
+    width: 100%;
+}
+
+.anchor_operate button {
+    float: right;
+    margin: 20px;
+}
+
+.anchor-info-top {
+    position: relative;
+    height: 20%;
+    width: 100%;
+}
+
+.anchor-info-container {
+    position: relative;
+    height: 75%;
+    width: 100%;
+}
+
+#anchorOperate {
+    position: relative;
+    height: 100%;
+    width: 20%;
+    float: left;
+}
+
+#anchorOperate .checkbox {
+    position: relative;
+    margin-left: 10px;
+}
+
+.anchor-info-table {
+    position: relative;
+    height: 100%;
+    width: 75%;
+    float: left;
+}
+
+/*
+.progress_inner_step_border {
+    font-size: 14px;
+    padding: 0 10px;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    float: left;
+    text-align: center;
+    position: relative; 
+}*/
+
+/*.progress_inner_step {
+    width: 30px;
+    height: 30px;
+    color: #70afd0;
+    background: white;
+    line-height: 25px;
+    border: 3px solid #a6cde2;
+    font-size: 12px;
+    top: 3px;
+    border-radius: 100%;
+    /*-webkit-transition: all .4s;
+    transition: all .4s;
+    cursor: pointer;
+    pointer-events: none;
+}
+*/
+
+/*
+.progress_inner_step label {
+    padding-top: 50px;
+    top: -20px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+.step_circle {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    background: white;
+    border: 3px solid blue;
+    vertical-align: top;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.step_circle span {
+    display: block;
+    color: blue;
+    height: 30px;
+    line-height: 30px;
+    text-align: center
+}*/

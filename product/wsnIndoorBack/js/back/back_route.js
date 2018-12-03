@@ -13,26 +13,36 @@ var buildInfoRouter = {
     },
 }
 
-var netInfoRouter = {
+var hardwareRouter = {
     // "anchorInfo": {
     //     url: "back_anchor.html",
     //     name: "锚节点",
-    //     parentLevel: "netInfo",
+    //     parentLevel: "hardware",
     // },
     "sinkInfo": {
         url: "",
         name: "汇聚节点",
-        parentLevel: "netInfo",
+        parentLevel: "hardware",
     },
     "coordinatorInfo": {
         url: "",
         name: "协调器",
-        parentLevel: "netInfo",
+        parentLevel: "hardware",
+    },
+    "anchorInfo": {
+        url: "",
+        name: "定位设备",
+        parentLevel: "hardware",
+    },
+    "sensorInfo": {
+        url: "",
+        name: "环境监控设备",
+        parentLevel: "hardware",
     },
     // "performOfNet": {
     //     url: "",
     //     name: "整体性能",
-    //     parentLevel: "netInfo",
+    //     parentLevel: "hardware",
     // },
 }
 
@@ -52,14 +62,14 @@ var leftNavRouter = {
     "mapInfo": {
         url: "back_map.html",
         icon: "fa fa-map",
-        name: "地图信息总览",
+        name: "地图管理",
     },
-    "netInfo": {
+    "hardware": {
         url: "",
         icon: "fa fa-podcast",
-        name: "网络设备信息",
+        name: "无线传感器管理",
         level2Id: "leftNavNetWorkLevel2",
-        level2: netInfoRouter,
+        level2: hardwareRouter,
     },
     // "monitorInfo": {
     //     url: "",
@@ -73,7 +83,7 @@ var leftNavRouter = {
     },
 
     // "mapInfo": "back_map.html",
-    // "netInfo": "",
+    // "hardware": "",
     // "monitorInfo": "",
     // "mapdetail": "back_mapdetail.html",
 }
@@ -109,8 +119,15 @@ var monitorNavRouter = {
         icon: "fa fa-connectdevelop",
         name: "楼内概览",
     },
-    "mDevice": {
+    "mNetwork": {
+        url: "monitor_network.html",
         icon: "fa fa-rss",
+        name: "无线网络管理",
+        // level2Id: "mDeviceLevel2",
+        // level2: monitorDeviceRouter,
+    },
+    "mDevice": {
+        icon: "fa fa-podcast",
         name: "无线设备管理",
         level2Id: "mDeviceLevel2",
         level2: monitorDeviceRouter,
@@ -139,7 +156,7 @@ monitorNavRouter.name = "楼宇管理"
 var routerSummary = [
     leftNavRouter,
     buildInfoRouter,
-    netInfoRouter,
+    hardwareRouter,
     commonRouter,
     monitorDeviceRouter,
     monitorNavRouter,
@@ -185,7 +202,7 @@ var leftNavTpl =
 //     "</div>"
 
 
-//左侧导航栏
+//左侧导航栏和用户信息
 //直接在页面加入：<leftnav></leftnav>
 Vue.component('leftnav', {
     props: ['group'],
@@ -200,6 +217,33 @@ Vue.component('leftnav', {
         var pageId = $("#pageId").html();
         $("#" + pageId).addClass("select")
         $("#" + pageId).parents('ul').show()
+
+        //上面的用户
+        //控制hover的显示
+        var userDetailIsHover = false;
+
+        $("#user_info_detail").hoverDelay({
+            hoverEvent: function () {
+                userDetailIsHover = true;
+            },
+            outEvent: function () {
+                userDetailIsHover = false;
+                $("#user_info_detail").css("display", "none")
+            }
+        })
+
+        $("#head_img").hoverDelay({
+            hoverEvent: function () {
+                $("#user_info_detail").css("display", "block")
+            },
+            outDuring: 2000,
+            outEvent: function () {
+                if (!userDetailIsHover) {
+                    $("#user_info_detail").css("display", "none")
+                }
+                //$("#user_info_detail").css("display", "none")
+            }
+        });
     },
     methods: {
         navigate: function (event) {
@@ -274,32 +318,6 @@ $(function () {
     var right = document.getElementById("right");
     right.style.height = (viewH - 95) + "px";
 
-    //控制hover的显示
-    var userDetailIsHover = false;
-
-    $("#user_info_detail").hoverDelay({
-        hoverEvent: function () {
-            userDetailIsHover = true;
-        },
-        outEvent: function () {
-            userDetailIsHover = false;
-            $("#user_info_detail").css("display", "none")
-        }
-    })
-
-    $("#head_img").hoverDelay({
-        hoverEvent: function () {
-            $("#user_info_detail").css("display", "block")
-        },
-        outDuring: 2000,
-        outEvent: function () {
-            if (!userDetailIsHover) {
-                $("#user_info_detail").css("display", "none")
-            }
-            //$("#user_info_detail").css("display", "none")
-        }
-    });
-
     $("#footer").html("推荐使用360浏览器或谷歌浏览器&nbsp&nbsp&nbsp&nbspby:hzambrella");
 
     /*测试蒙版和boxAlert*/
@@ -346,7 +364,7 @@ var commonPageData = {
         "orderBy": null,
         "startRow": 0,
         "endRow": 0,
-        "total": 2,
+        "total": 0,
         "pages": 0,
         "list": [],
         "firstPage": 1,

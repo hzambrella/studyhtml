@@ -110,6 +110,8 @@ header p,
     border-radius: 50%;
 }
 
+/*这里改隐藏显示*/
+
 .top .user_info_detail {
     display: none;
     background-color: white;
@@ -267,26 +269,29 @@ header p,
     /*color: white;*/
 }
 
-.con-left-title{
+.con-left-title {
     color: black;
-    padding:0 0 10px 20px;
+    padding: 0 0 10px 20px;
     font-weight: bold;
 }
 
 /*内容*/
-
 .content-main {
     position: relative;
     height: 100%;
-    padding: 0 32px 64px;
+    padding-bottom: 64px;
     overflow: auto;
 }
 
 .content-bar {
     position: relative;
-    height: 80px;
+    height: 70px;
     padding: 15px 0 15px 24px;
     box-sizing: border-box;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 25px;
+    margin-bottom: 10px;
 }
 
 .content-bar-left {
@@ -298,6 +303,7 @@ header p,
 
 .content-bar-right {
     float: right;
+    padding-right: 100px;
     height: 50px;
     line-height: 50px;
     font-size: 1.3em;
@@ -320,21 +326,48 @@ header p,
 
 /*表格*/
 
-#list_table {
-    text-align: left;
-    padding-left: 20px;
-    padding-bottom: 20px;
+.list_top {
     width: 100%;
+    padding: 20px 50px;
+    margin-bottom: 10px;
+}
+
+.list_top_operate {
+    float: right;
+    padding-right: 200px;
+}
+
+#data_table {
+    width: 98%;
+    min-height: 500px;
+    height: auto;
+    border-bottom: 1px #cccccc solid;
+    margin: 30px auto;
+}
+
+.list_table_container {
+    width: 100%;
+    min-height: 500px;
+    height: auto;
+    background-color: white;
+    padding: 10px 30px;
+}
+
+#list_table {
+    width: 100%;
+    text-align: left;
+    margin: 0 auto;
+    padding: 10px 20px;
     border-collapse: collapse;
 }
 
 #list_table th {
-    padding: 10px 0px;
+    padding: 10px 10px;
 }
 
 #list_table tr,
 #list_table td {
-    padding: 18px 0;
+    padding: 8px 10px;
     border-bottom: 1px #cccccc solid;
 }
 
@@ -357,6 +390,39 @@ header p,
 
 .tab_num {
     color: #888888;
+}
+
+/*底部*/
+
+.list_bottom {
+    width: 98%;
+    position: relative;
+    bottom: 0px;
+    margin: 0px auto;
+    padding: 5px;
+    border-top: 1px solid #ddd;
+    background-color: white;
+}
+
+.list_bottom_tabinfo {
+    display: inline-block;
+    height: 50px;
+    padding-left:20px;
+    font-size:16px;
+    position: relative;
+    line-height: 50px;
+}
+
+/*底部的分页*/
+
+.list_pagination {
+    position: relative;
+    float: right;
+    margin-right: 100px;
+}
+
+.list_pagination .pagination {
+    margin: 5px;
 }
 
 /*表格数据加载*/
@@ -393,8 +459,9 @@ header p,
 .content-mapComponent {
     position: relative;
     float: left;
-    width: 60%;
+    width: 55%;
     height: 100%;
+    margin-left:10px;
     /*background-color: palegreen;*/
 }
 
@@ -443,7 +510,7 @@ header p,
 .map-entity {
     position: relative;
     float: left;
-    width: 80%;
+    width: 92%;
     height: 100%;
     /*background-color: orchid;*/
 }
@@ -502,6 +569,8 @@ header p,
 }
 
 /*通用*/
+
+/*腾讯云的白色div*/
 
 .white-panel {
     background-color: #fff;

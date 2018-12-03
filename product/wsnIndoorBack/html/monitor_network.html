@@ -30,7 +30,7 @@
     <script src="../js/back/back_route.js"></script>
     <!--css-->
     <link href="../css/back1_main.css" rel="stylesheet" type="text/css" />
-    <link href="../css/back/app_back_map.css" rel="stylesheet" type="text/css" />
+    <link href="../css/back/monitor_network.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
         /*vue加载数据时，不显示难看的花括号*/
@@ -45,8 +45,10 @@
 </head>
 
 <body>
-    <p id="pageGroupId" style="display:none">Index</p>
-    <p id="pageId" style="display:none">mapInfo</p>
+    <p id="pageGroupId" style="display:none">monitor</p>
+    <p id="pageId" style="display:none">mNetwork</p>
+    <p id="bid" style="display:none">1</p>
+    <p id="bname" style="display:none">教学楼2号</p>
     <div id="mainbox" class="mainbox">
         <!--hearder是顶部-->
         <header class="top">
@@ -75,7 +77,7 @@
         <div class="left">
             <div class="con-left">
                 <div style="height:480px;width:100%;margin-top:10px">
-                    <leftnav group='index'></leftnav>
+                    <leftnav group='monitor'></leftnav>
                 </div>
             </div>
         </div>
@@ -84,60 +86,76 @@
             <div id="app" class="content-main" v-cloak>
                 <div class="content-bar">
                     <div class="content-bar-left">
-                        <span class="content-bar-breadcrumb">{{title}}</span>
-                        <span v-if="finishLoading" class="content-bar-result-count">共{{data.obj.total}}个结果</span>
-                        <span v-else class="content-bar-result-count data-loading">加载中</span>
+                        <h3 class="content-bar-breadcrumb">{{title}}</h3>
+                    </div>
+                    <div class="content-bar-right">
+                        <button id="refresh" type="button" class="btn btn-primary" @click="refresh"><i class="fa fa-plus"></i> 新建网络</button>
+                        <button id="refresh" type="button" class="btn btn-primary" @click="refresh"><i class="fa fa-refresh"></i> 刷新</button>
                     </div>
                 </div>
                 <!--"mapId":0,"title":"教学楼2号-4F","status":1,"descrip":"",
                 "createTime":"2018年11月14日 05:22","updateTime":"2018年11月14日 05:22","floor":4,"buildName":"教学楼2号"-->
                 <div id="data_table">
-                    <table id="list_table" data-deep="0">
-                        <tr class="table-head">
-                            <th style=width:5%>序号</th>
-                            <th style="width:20%">
-                                <span class="tab_title" id="selectFileNum" style="float:left;margin-left:5px">标题</span>
-                            </th>
-                            <th style="width:25%">楼名</th>
-                            <th style="width:5%">楼层</th>
-                            <th style="width:10%">状态</th>
-                            <th style="width:15%">修改时间</th>
-                            <th style="width:20%">操作</th>
-                        </tr>
-                        <tr v-for="(item,index) in data.obj.list">
-                            <td class="tab_num">{{index+1}}</td>
-                            <td>
-                                <div class="tbcol-1">
-                                    <span>{{item.title}}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div v-if="item.buildName!=null">
-                                    <p class="data-item-id" style="display:none">{{item.bid}}</p>
-                                    <a href="javascript:void(0)" title="查看位置" class="tab_small_opt_button" v-on:click.prevent="showLoc"><i class="fa fa-map-marker"></i></a>|
-                                    <span>{{item.buildName}}</span>
-                                </div>
-                                <div v-else>
-                                    暂无
-                                </div>
-                            </td>
-                            <td><span class="data_item_id">{{item.floor}}</span></td>
-                            <td>
-                                <span class="data_item_id" v-if="item.status==0">未发布</span>
-                                <span class="data_item_id" v-if="item.status==1">已发布</span>
-                                <span class="data_item_id" v-if="item.status==2">已锁定</span>
-                            </td>
-                            <td>
-                                <span>{{item.updateTime}}</span>
-                            </td>
-
-                            <td id="tab_item_operate">
-                                <p class="data-item-id" style="display:none">{{item.mapId}}</p>
-                                <a href="javascript:void(0)" title="详情和编辑" class="tab_small_opt_button" id="toDetail" v-on:click.prevent="toDetail"><i class="fa fa-pencil"></i> |</a>
-                                <a href="javascript:void(0)" title="删除地图" class="tab_small_opt_button" id="deleteMap" v-on:click.prevent="deleteMap"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="list_table_container">
+                        <table id="list_table" data-deep="0">
+                            <tr class="table-head">
+                                <th style=width:5%>序号</th>
+                                <th style="width:5%">楼层</th>
+                                <th style="width:15%">网络状态</th>
+                                <th style="width:10%">协调器序列号</th>
+                                <th style="width:10%">定位设备状态</th>
+                                <th style="width:20%">操作</th>
+                            </tr>
+                            <tr v-for="(item,index) in data.obj.list">
+                                <td class="tab_num">{{index+1}}</td>
+                                <td>
+                                    <div class="tbcol-1">
+                                        <span>{{item.floor}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="data_item_id" v-if="item.comStatus==0">维护中</span>
+                                    <span class="data_item_id" v-if="item.comStatus==1">打开</span>
+                                    <span class="data_item_id" v-if="item.comStatus==2">异常</span>
+                                </td>
+                                <td>
+                                    <div>
+                                        <span v-if='item.coordinator'>{{item.coordinator.sn}}</span>
+                                        <span v-else>未配置协调器</span>
+                                        <a href="javascript:void(0)" :nid='item.nid' title="更改协调器信息" class="tab_small_opt_button" v-on:click="changeCoor"><i class="fa fa-pencil"></i></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="data_item_id" v-if="item.anchorStatus==0">新建网络</span>
+                                    <span class="data_item_id" v-if="item.anchorStatus==1">布设硬件</span>
+                                    <span class="data_item_id" v-if="item.anchorStatus==2">组网</span>
+                                    <span class="data_item_id" v-if="item.anchorStatus==3">标定关键锚节点</span>
+                                    <span class="data_item_id" v-if="item.anchorStatus==4">洪范</span>
+                                    <span class="data_item_id" v-if="item.anchorStatus==5">训练</span>
+                                    <span class="data_item_id" v-if="item.anchorStatus==6">完成构建</span>
+                                </td>
+                                <td id="tab_item_operate">
+                                    <button type="button" class="btn btn-primary" @click="">详情</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="list_bottom">
+                    <div class="list_bottom_tabinfo">
+                        <span>当前位置：{{bname}}</span>
+                        <span v-if="finishLoading" class="">共{{data.obj.total}}个结果</span>
+                        <span v-else class="data-loading">加载中</span>
+                    </div>
+                    <div class="list_pagination">
+                        <ul class="pagination">
+                            <li><a href="#">首页</a></li>
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                            <li><a href="#">尾页</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -157,26 +175,8 @@
     <!--mock-->
     <script src="../js/back/mock.js"></script>
     <!--app-->
-    <script src="../js/back/app_back_map.js"></script>
+    <script src="../js/back/back_monitor_network.js"></script>
 
-    <!--modal-->
-    <link rel="stylesheet" type="text/css" href="../plugin/modal/css/modal.css">
-    <script src="../plugin/modal/js/modal.js"></script>
-    <div id="modal"></div>
-
-    <!--map-container 注意元素和js的顺序 .用于显示建筑物的位置-->
-    <div id="map_modal" style="display: none">
-        <div id="mapContainer" class="map_container">
-            <div class="title">
-                <p><span class='title'>地图阿斯蒂芬
-                    </span><span class='default_cancel' style='float:right;cursor:pointer;padding-right:15px'>X</span></p>
-            </div>
-            <div class='map_container_con'>
-            </div>
-            <div class='map_container_button'>
-            </div>
-        </div>
-    </div>
     <link rel="stylesheet" type="text/css" href="../backComp/map_container/css/mapbox.css">
     <script src="../backComp/map_container/js/mapbox.js"></script>
     <!--box_alert-->

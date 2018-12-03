@@ -35,11 +35,13 @@
 }
 
 .network-topology {
-    height: 900px;
+    min-height: 600px;
+    height: auto;
     width: 100%;
 }
 
 .network-topology svg{
+    min-height: 600px;
     overflow: auto;
     height:100%;
     width:100%;

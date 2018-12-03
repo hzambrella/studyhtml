@@ -61,10 +61,20 @@ $(function () {
         }
     })
 
+    function resetTopologyData() {
+       // $("#topoImage").empty();
+        sinkLocInSVG.splice(0, sinkLocInSVG.length)
+        coorLocInSVG.splice(0, coorLocInSVG.length)
+        lineOfSink.splice(0, lineOfSink.length)
+        lineOfCoor.splice(0, lineOfCoor.length)
+    }
+
+
     //将mock的数据JSON.stringfy
     //TODO::验证正确性,很多节点时。汇聚节点暂时只有一个。
     // 横着是X
     function cacuSVGPostionForDev(netComDev) {
+        resetTopologyData()
         var startX = svgDrawParam.startX,
             startY = svgDrawParam.startY,
             spaceCSX = svgDrawParam.spaceCSX,
@@ -93,8 +103,8 @@ $(function () {
         for (var index in coorList) {
             coor = coorList[index]
             coorLocInSVG.push({
-                x: startX+(parseInt(sinkList.length / sinkConNum) + 1) * spaceCSX + parseInt(index % coorXNum) * spaceX,
-                y: startY+spaceCSY + parseInt(index / coorXNum) * spaceY,
+                x: startX + (parseInt(sinkList.length / sinkConNum) + 1) * spaceCSX + parseInt(index % coorXNum) * spaceX,
+                y: startY + spaceCSY + parseInt(index / coorXNum) * spaceY,
             })
         }
 
@@ -108,12 +118,12 @@ $(function () {
         //var XStart = spaceCSY + imgWidth * 1.5;
         var pathD = pathD + String.format('M{0} {1} V{2}', startPX, startPY, startPY + YSpace * (coorYNum - 1));
         for (var i = 0; i < coorYNum; i++) {
-            coorXNumNow=coorXNum;//当前第i行拥有多少个coor
-            if (i==coorYNum-1){
-               coorXNumNow=coorLocInSVG.length%coorXNum;
+            coorXNumNow = coorXNum; //当前第i行拥有多少个coor
+            if (i == coorYNum - 1) {
+                coorXNumNow = coorLocInSVG.length % coorXNum;
             }
             pathD = pathD + String.format(' M{0} {1} L{2} {3} ', startPX, startPY + i * YSpace, startPX + coorXNumNow * spaceX, startPY + i * YSpace);
-            
+
         }
         //  }
         lineOfSink.push(pathD)
@@ -125,5 +135,6 @@ $(function () {
                 coorLocInSVG[i].x + imgWidth / 2, coorLocInSVG[i].y - imgHeight / 2)
             lineOfCoor.push(cpathD);
         }
+        console.log(sinkLocInSVG)
     }
 })
