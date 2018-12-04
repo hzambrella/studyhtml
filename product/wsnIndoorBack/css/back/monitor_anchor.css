@@ -6,7 +6,7 @@
 }
 
 .anchor-info {
-    height: 50%;
+    height: 60%;
     position: relative;
     margin-bottom: 30px;
     width: 100%;
@@ -35,13 +35,13 @@
 
 .anchor-info-top {
     position: relative;
-    height: 20%;
+    height: 15%;
     width: 100%;
 }
 
 .anchor-info-container {
     position: relative;
-    height: 75%;
+    height: 85%;
     width: 100%;
 }
 

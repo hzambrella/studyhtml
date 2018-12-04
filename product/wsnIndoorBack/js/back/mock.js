@@ -267,7 +267,7 @@ var networkMock = {
         "floor": 4,
         "coorId": 1,
         "comStatus": 1,
-        "anchorStatus": 0,
+        "anchorStatus": 4,
         "anchorTaskStatus": 0,
         "coordinator": null
     }
@@ -332,7 +332,10 @@ var anchorMock = {
         "status": 1,
         "x": 2,
         "y": 6,
-        "sn": "AAE861009"
+        "sn": "AAE861009",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1010,
         "nid": 1,
@@ -342,7 +345,10 @@ var anchorMock = {
         "status": 1,
         "x": 2,
         "y": 60,
-        "sn": "AAE861010"
+        "sn": "AAE861010",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1011,
         "nid": 1,
@@ -352,7 +358,10 @@ var anchorMock = {
         "status": 1,
         "x": 0,
         "y": 63,
-        "sn": "AAE861011"
+        "sn": "AAE861011",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1021,
         "nid": 1,
@@ -362,7 +371,10 @@ var anchorMock = {
         "status": 1,
         "x": 0,
         "y": 3,
-        "sn": "AAE861021"
+        "sn": "AAE861021",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1033,
         "nid": 1,
@@ -372,7 +384,10 @@ var anchorMock = {
         "status": 1,
         "x": 74,
         "y": 60,
-        "sn": "AAE861033"
+        "sn": "AAE861033",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1034,
         "nid": 1,
@@ -382,7 +397,10 @@ var anchorMock = {
         "status": 1,
         "x": 77,
         "y": 63,
-        "sn": "AAE861034"
+        "sn": "AAE861034",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1058,
         "nid": 1,
@@ -392,7 +410,10 @@ var anchorMock = {
         "status": 1,
         "x": 74,
         "y": 6,
-        "sn": "AAE861058"
+        "sn": "AAE861058",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1071,
         "nid": 1,
@@ -402,7 +423,10 @@ var anchorMock = {
         "status": 1,
         "x": 77,
         "y": 3,
-        "sn": "AAE861071"
+        "sn": "AAE861071",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1001,
         "nid": 1,
@@ -412,7 +436,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861001"
+        "sn": "AAE861001",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1002,
         "nid": 1,
@@ -422,7 +449,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861002"
+        "sn": "AAE861002",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1003,
         "nid": 1,
@@ -432,7 +462,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861003"
+        "sn": "AAE861003",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1004,
         "nid": 1,
@@ -442,7 +475,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861004"
+        "sn": "AAE861004",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1005,
         "nid": 1,
@@ -452,7 +488,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861005"
+        "sn": "AAE861005",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1006,
         "nid": 1,
@@ -462,7 +501,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861006"
+        "sn": "AAE861006",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1007,
         "nid": 1,
@@ -472,7 +514,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861007"
+        "sn": "AAE861007",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1008,
         "nid": 1,
@@ -482,7 +527,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861008"
+        "sn": "AAE861008",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1012,
         "nid": 1,
@@ -492,7 +540,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861012"
+        "sn": "AAE861012",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1013,
         "nid": 1,
@@ -502,7 +553,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861013"
+        "sn": "AAE861013",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1014,
         "nid": 1,
@@ -512,7 +566,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861014"
+        "sn": "AAE861014",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1015,
         "nid": 1,
@@ -522,7 +579,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861015"
+        "sn": "AAE861015",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1016,
         "nid": 1,
@@ -532,7 +592,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861016"
+        "sn": "AAE861016",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1017,
         "nid": 1,
@@ -542,7 +605,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861017"
+        "sn": "AAE861017",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1018,
         "nid": 1,
@@ -552,7 +618,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861018"
+        "sn": "AAE861018",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1019,
         "nid": 1,
@@ -562,7 +631,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861019"
+        "sn": "AAE861019",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1020,
         "nid": 1,
@@ -572,7 +644,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861020"
+        "sn": "AAE861020",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1022,
         "nid": 1,
@@ -582,7 +657,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861022"
+        "sn": "AAE861022",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1023,
         "nid": 1,
@@ -592,7 +670,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861023"
+        "sn": "AAE861023",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1024,
         "nid": 1,
@@ -602,7 +683,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861024"
+        "sn": "AAE861024",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1025,
         "nid": 1,
@@ -612,7 +696,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861025"
+        "sn": "AAE861025",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1026,
         "nid": 1,
@@ -622,7 +709,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861026"
+        "sn": "AAE861026",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1027,
         "nid": 1,
@@ -632,7 +722,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861027"
+        "sn": "AAE861027",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1028,
         "nid": 1,
@@ -642,7 +735,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861028"
+        "sn": "AAE861028",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1029,
         "nid": 1,
@@ -652,7 +748,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861029"
+        "sn": "AAE861029",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1030,
         "nid": 1,
@@ -662,7 +761,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861030"
+        "sn": "AAE861030",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1031,
         "nid": 1,
@@ -672,7 +774,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861031"
+        "sn": "AAE861031",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1032,
         "nid": 1,
@@ -682,7 +787,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861032"
+        "sn": "AAE861032",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1035,
         "nid": 1,
@@ -692,7 +800,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861035"
+        "sn": "AAE861035",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1036,
         "nid": 1,
@@ -702,7 +813,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861036"
+        "sn": "AAE861036",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1037,
         "nid": 1,
@@ -712,7 +826,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861037"
+        "sn": "AAE861037",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1038,
         "nid": 1,
@@ -722,7 +839,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861038"
+        "sn": "AAE861038",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1039,
         "nid": 1,
@@ -732,7 +852,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861039"
+        "sn": "AAE861039",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1040,
         "nid": 1,
@@ -742,7 +865,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861040"
+        "sn": "AAE861040",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1041,
         "nid": 1,
@@ -752,7 +878,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861041"
+        "sn": "AAE861041",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1042,
         "nid": 1,
@@ -762,7 +891,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861042"
+        "sn": "AAE861042",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1043,
         "nid": 1,
@@ -772,7 +904,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861043"
+        "sn": "AAE861043",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1044,
         "nid": 1,
@@ -782,7 +917,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861044"
+        "sn": "AAE861044",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1045,
         "nid": 1,
@@ -792,7 +930,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861045"
+        "sn": "AAE861045",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1046,
         "nid": 1,
@@ -802,7 +943,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861046"
+        "sn": "AAE861046",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1047,
         "nid": 1,
@@ -812,7 +956,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861047"
+        "sn": "AAE861047",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1048,
         "nid": 1,
@@ -822,7 +969,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861048"
+        "sn": "AAE861048",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1049,
         "nid": 1,
@@ -832,7 +982,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861049"
+        "sn": "AAE861049",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1050,
         "nid": 1,
@@ -842,7 +995,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861050"
+        "sn": "AAE861050",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1051,
         "nid": 1,
@@ -852,7 +1008,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861051"
+        "sn": "AAE861051",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1052,
         "nid": 1,
@@ -862,7 +1021,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861052"
+        "sn": "AAE861052",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1053,
         "nid": 1,
@@ -872,7 +1034,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861053"
+        "sn": "AAE861053",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1054,
         "nid": 1,
@@ -882,7 +1047,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861054"
+        "sn": "AAE861054",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1055,
         "nid": 1,
@@ -892,7 +1060,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861055"
+        "sn": "AAE861055",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1056,
         "nid": 1,
@@ -902,7 +1073,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861056"
+        "sn": "AAE861056",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1057,
         "nid": 1,
@@ -912,7 +1086,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861057"
+        "sn": "AAE861057",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1059,
         "nid": 1,
@@ -922,7 +1099,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861059"
+        "sn": "AAE861059",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1060,
         "nid": 1,
@@ -932,7 +1112,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861060"
+        "sn": "AAE861060",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1061,
         "nid": 1,
@@ -942,7 +1125,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861061"
+        "sn": "AAE861061",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1062,
         "nid": 1,
@@ -952,7 +1138,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861062"
+        "sn": "AAE861062",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1063,
         "nid": 1,
@@ -962,7 +1151,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861063"
+        "sn": "AAE861063",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1064,
         "nid": 1,
@@ -972,7 +1164,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861064"
+        "sn": "AAE861064",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1065,
         "nid": 1,
@@ -982,7 +1177,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861065"
+        "sn": "AAE861065",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1066,
         "nid": 1,
@@ -992,7 +1190,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861066"
+        "sn": "AAE861066",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1067,
         "nid": 1,
@@ -1002,7 +1203,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861067"
+        "sn": "AAE861067",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1068,
         "nid": 1,
@@ -1012,7 +1216,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861068"
+        "sn": "AAE861068",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1069,
         "nid": 1,
@@ -1022,7 +1229,10 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861069"
+        "sn": "AAE861069",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }, {
         "anchorId": 1070,
         "nid": 1,
@@ -1032,6 +1242,9 @@ var anchorMock = {
         "status": 1,
         "x": null,
         "y": null,
-        "sn": "AAE861070"
+        "sn": "AAE861070",
+        "energy": 90,
+        "createTime": "2018年12月04日 12:21",
+        "updateTime": "2018年12月04日 12:21"
     }]
 }

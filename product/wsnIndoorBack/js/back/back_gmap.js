@@ -8,6 +8,11 @@ var GMap = null;
 
 function loadMap(mapId, mapMess) {
     //先清空GMap
+    if (GMap != null) {
+        //移除掉覆盖物和图层
+        GMap.removeLayer();
+        GMap.removeOverlay();
+    }
     document.getElementById('indoorMap').innerHTML = '';
     GMap = null;
     //TODO:ajax
@@ -56,8 +61,6 @@ function loadMap(mapId, mapMess) {
         //  }).extend([attribution])
         // control: ol.control.defaults().extend([mousePositionControl])
     });
-
-    anchorLayer()
 }
 
 //``Feature样式style生成``
@@ -122,32 +125,138 @@ var featureStyleMap = {
 }
 
 
-
-function anchorLayer() {
-    var anchors = getAnchorMock();
-    var anHigherFeatures = [];
-    for (var index in anchors.obj) {
-        anchor=anchors.obj[index]
-        if (anchor.anchorType == 1) {
-            console.log(1)
-            anHigherFeatures.push(new ol.Feature({
-                geometry: new ol.geom.Point([anchor.x, anchor.y]),
-                type: 'data',
-            }));
-        }
-    }
-
-    console.log(anHigherFeatures)
-
-    var sourceDataLayer = new ol.source.Vector({
-        features: anHigherFeatures,
-    });
-
-    var vectorDataLayer = new ol.layer.Vector({
-        source: sourceDataLayer,
-        style: featureStyleMap['data'],
+// 锚节点的样式
+var anchorFeatureStyleMap = {
+    //higher anchor的layer
+    'higherAnchor': new ol.style.Style({
+        image: new ol.style.RegularShape({
+            fill: new ol.style.Fill({
+                color: 'blue'
+            }),
+            points: 5,
+            radius: 10,
+            radius2: 4,
+            angle: 0
+        })
+    }),
+    'higherAnchorClose': new ol.style.Style({
+        image: new ol.style.RegularShape({
+            fill: new ol.style.Fill({
+                color: 'grey'
+            }),
+            points: 5,
+            radius: 10,
+            radius2: 4,
+            angle: 0
+        })
+    }),
+    'higherAnchorBreak': new ol.style.Style({
+        image: new ol.style.RegularShape({
+            fill: new ol.style.Fill({
+                color: 'red'
+            }),
+            points: 5,
+            radius: 10,
+            radius2: 4,
+            angle: 0
+        })
+    }),
+    'higherAnchorSelect': new ol.style.Style({
+        image: new ol.style.RegularShape({
+            fill: new ol.style.Fill({
+                color: 'yellow'
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'green',
+                width: 2
+            }),
+            points: 5,
+            radius: 15,
+            radius2: 6,
+            angle: 0
+        })
+    }),
+    //higher anchor的layer
+    'anchor': new ol.style.Style({
+        //点要素样式
+        image: new ol.style.Circle({
+            radius: 4,
+            fill: new ol.style.Fill({
+                color: 'blue'
+            })
+        })
+    }),
+    'anchorSelect': new ol.style.Style({
+        //点要素样式
+        image: new ol.style.Circle({
+            radius: 6,
+            fill: new ol.style.Fill({
+                color: 'yellow'
+            })
+        })
     })
-
-    GMap.addLayer(vectorDataLayer)
-
 }
+
+function anchorStyleFunction(feature) {
+    // var anchorType = feature.get('anchorType')
+
+    // if (anchorType){
+
+    // }
+    var style = anchorFeatureStyleMap['higherAnchor']
+    switch (feature.get('status')) {
+        case Status.anchorStatus.Close:
+            style = anchorFeatureStyleMap['higherAnchorClose']
+            break;
+        case Status.anchorStatus.Open:
+            style = anchorFeatureStyleMap['higherAnchor']
+            break;
+        case Status.anchorStatus.Break:
+            style = anchorFeatureStyleMap['higherAnchorBreak']
+            break
+        default:
+            style = anchorFeatureStyleMap['higherAnchor']
+            break;
+    }
+    return style;
+}
+
+function anchorStyleClickFunction(feature) {
+    var style;
+    switch (feature.get('anchorType')) {
+        case Status.anchorType.higher:
+            style = anchorFeatureStyleMap['higherAnchorSelect']
+            break;
+        case Status.anchorType.normal:
+            style = style = anchorFeatureStyleMap['anchorSelect']
+            break;
+    }
+    return style
+}
+
+// function anchorLayer() {
+//     var anchors = getAnchorMock();
+//     var anHigherFeatures = [];
+//     for (var index in anchors.obj) {
+//         anchor = anchors.obj[index]
+//         if (anchor.anchorType == 1) {
+//             var feature = new ol.Feature({
+//                 geometry: new ol.geom.Point([anchor.x, anchor.y]),
+//                 type: 'data',
+//             })
+//             feature.setProperties(anchor);
+//             anHigherFeatures.push(feature);
+//         }
+//     }
+
+//     var sourceDataLayer = new ol.source.Vector({
+//         features: anHigherFeatures,
+//     });
+
+//     var vectorDataLayer = new ol.layer.Vector({
+//         source: sourceDataLayer,
+//         style: anchorStyleFunction,
+//     })
+
+//     GMap.addLayer(vectorDataLayer)
+// }

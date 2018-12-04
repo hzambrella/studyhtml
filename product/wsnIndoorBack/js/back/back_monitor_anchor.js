@@ -28,7 +28,8 @@
 // =》6.完成构建
 // 描述：定位网络构建完成，可进行任务。
 
-
+// import networkAnchorStatus from 'back_ajax.js';
+// import anchorDeploySteps from 'back_ajax.js';
 
 $(function () {
     var noFloor = -10000; //未选择楼层
@@ -71,22 +72,20 @@ $(function () {
         "coorId": 0,
     }
 
-    var anchorDeploySteps = {
-        0: '新键网络',
-        1: '布设硬件',
-        2: '组网',
-        3: '标定关键锚节点',
-        4: '洪范',
-        5: '训练',
-        6: '完成构建',
+    var defaultSelectAnchor = {
+        "anchorId": 0,
+        // "nid": 0,
+        // "bid": 0,
+        // "floor": 0,
+        "anchorType": 0,
+        "status": 0,
+        "x": 0,
+        "y": 0,
+        "sn": "",
+        "createTime": "",
+        "updateTime": "",
+        "energy": 0,
     }
-
-    var taskStatus = {
-        0: '--待进行',
-        1: '中',
-        2: '失败',
-    }
-
     // var task={
     //     0:
     // }
@@ -95,22 +94,59 @@ $(function () {
         noFloor: noFloor,
         bid: document.getElementById("bid").innerHTML,
         title: getTitle(),
-        mapFinishLoading: true,
-        netFinishLoading: true,
-        hasStartProcess: false, //是否开始任务了
-        buildMapRel: [], //后端传过来的是倒序
-        baseMapData: defaultGisData,
-        mapDetail: defaultMapDetail,
-        mapLoadingMessage: '', //加载地图数据时的信息
+        //提示信息
+        mapFinishLoading: true, //地图数据是否加载完毕
+        netFinishLoading: true, //网络数据是否加载完毕
+        anchorFinishLoading: true, //锚节点数据是否加载完毕
         mapMessage: '', //加载地图数据完毕后的提示
-        netLoadingMessage: '',
-        netMessage: '',
+        mapLoadingMessage: '', //加载地图数据时的信息
+        netMessage: '', //加载网络数据完毕后的提示
+        netLoadingMessage: '', //加载网络数据时的信息
+        anchorMessage: '', //加载锚节点数据时的提示
+        anchorLoadingMessage: '', //加载锚节点数据完毕后的提示
+        //数据
+        buildMapRel: [], //网络楼宇关系对象，后端传过来的是根据楼层的倒序
+        baseMapData: defaultGisData, //底图数据
+        mapDetail: defaultMapDetail, //地图详情
         currentFloor: noFloor, //当前楼层，-100000代表没选择当前楼层
         currentMapId: 0, //当前地图id
         activeFloorButton: null, //按钮组中active的按钮的element
-        network: defaultNetwork,
-        anchorDeploySteps: anchorDeploySteps,
+        network: defaultNetwork, //网络对象
+        showHigherAnchor: false, //checkbox,关键锚节点
+        anchor: null,
+        selectAnchor: defaultSelectAnchor, //选中的anchor
+        //任务
+        hasStartProcess: false, //是否开始任务了
+        networkAnchorStatus: Status.networkAnchorStatus, //网络中锚节点构建的步骤枚举,在back_ajax.js
+        anchorDeploySteps: Status.anchorDeploySteps, //对应的步骤名称，在back_ajax.js
+        taskStatus: Status.taskStatus, //构建任务的状态
     }
+
+    //图层
+    var anchorSource = new ol.source.Vector({});
+    var anchorLayer = new ol.layer.Vector({
+        //source: anchorSource,
+        style: anchorStyleFunction,
+    })
+
+    var highAnchorSource = new ol.source.Vector({});
+    var highAnchorLayer = new ol.layer.Vector({
+        //source: highAnchorSource,
+        style: anchorStyleFunction,
+    })
+
+    var lastSelectFeature = null;
+    //select
+    /*
+    var selectClick = new ol.interaction.Select({
+        condition: ol.events.condition.click,
+        sytle: anchorFeatureStyleMap['higherAnchorSelect']
+    });
+
+    selectClick.on('select', function (e) {
+        //console.log(e.target.getFeatures());
+    });
+    */
 
 
     //TODO:理清逻辑。应当是有无地图都能进行操作，无地图时采用列表形式。但是时间关系，有地图才能管理。
@@ -150,10 +186,26 @@ $(function () {
         vdata.currentMapId = $target.attr('mapId')
     }
 
+    function resetMessage() {
+        vdata.mapFinishLoading = true //地图数据是否加载完毕
+        vdata.netFinishLoading = true //网络数据是否加载完毕
+        vdata.anchorFinishLoading = true //锚节点数据是否加载完毕
+        vdata.mapMessage = '' //加载地图数据完毕后的提示
+        vdata.mapLoadingMessage = '' //加载地图数据时的信息
+        vdata.netMessage = '' //加载网络数据完毕后的提示
+        vdata.netLoadingMessage = '' //加载网络数据时的信息
+        vdata.anchorMessage = '' //加载锚节点数据时的提示
+        vdata.anchorLoadingMessage = '' //加载锚节点数据完毕后的提示
+    }
+
     function loadData(event) {
+        //重置数据
+        resetMessage();
         resetGMapData()
         resetNetworkData();
+        //加载新数据
         exchangeFloor(event)
+        resetAnchorLayer()
         loadGMap()
         getNetwork()
     }
@@ -169,6 +221,40 @@ $(function () {
                 vdata.baseMapData = getBaseMapDataMock(mapId).obj;
                 mapStatusAndMessage(false, '加载地图中.')
                 loadMap(mapId, vdata.baseMapData)
+                GMap.addLayer(anchorLayer)
+                GMap.addLayer(highAnchorLayer)
+                //  GMap.addInteraction(selectClick);
+                GMap.on('click', function (e) {
+                    //在点击时获取像素区域
+                    var pixel = GMap.getEventPixel(e.originalEvent);
+                    //用featureType来区分feature的类型。
+                    GMap.forEachFeatureAtPixel(pixel, function (feature) {
+                        //coodinate存放了点击时的坐标信息
+                        if (feature.get('featureType') == 'anchor' + Status.anchorType.higher ||
+                            feature.get('featureType') == 'anchor' + Status.anchorType.normal) {
+                            vdata.selectAnchor = {};
+                            vdata.selectAnchor.anchorId = feature.get("anchorId")
+                            // selectAnchor.nid = feature.get("nid")
+                            // selectAnchor.bid = feature.get("bid")
+                            // selectAnchor.floor = feature.get("floor")
+                            vdata.selectAnchor.anchorType = feature.get("anchorType")
+                            vdata.selectAnchor.status = feature.get("status")
+                            vdata.selectAnchor.x = feature.get("x")
+                            vdata.selectAnchor.y = feature.get("y")
+                            vdata.selectAnchor.sn = feature.get("sn")
+                            vdata.selectAnchor.createTime = feature.get("createTime")
+                            vdata.selectAnchor.updateTime = feature.get("updateTime")
+                            vdata.selectAnchor.energy = feature.get("energy")
+                            if (lastSelectFeature) {
+                                lastSelectFeature.setStyle(anchorStyleFunction(lastSelectFeature));
+                            }
+
+                            feature.setStyle(anchorStyleClickFunction(feature))
+                            lastSelectFeature = feature
+                        }
+                    });
+                });
+
                 mapStatusAndMessage(true, '', '地图加载完毕')
                 getMapDetail(mapId)
             }, 20)
@@ -195,14 +281,14 @@ $(function () {
     }
 
     function getTaskMessage() {
-        var taskMessage='当前进度:' + vdata.anchorDeploySteps[vdata.network.anchorStatus] 
-        if (vdata.network.anchorStatus!=6){
-            taskMessage=taskMessage+  taskStatus[vdata.network.anchorTaskStatus]
+        var taskMessage = '当前进度:' + vdata.anchorDeploySteps[vdata.network.anchorStatus]
+        if (vdata.network.anchorStatus != vdata.networkAnchorStatus.complete) {
+            taskMessage = taskMessage + Status.taskStatusMap[vdata.network.anchorTaskStatus]
         }
-        return taskMessage;  
+        return taskMessage;
     }
 
-    //选择楼层后，加载网络数据
+    //选择楼层后，加载网络数据，然后根据步骤加载锚节点数据
     function getNetwork() {
         //TODO:ajax
         var floor = vdata.currentFloor;
@@ -211,6 +297,9 @@ $(function () {
         setTimeout(function () {
             vdata.network = getNetworkMock().obj;
             netStatusAndMessage(true, '', getTaskMessage())
+
+            //加载锚节点数据
+            getAnchorData()
         }, 20)
     }
 
@@ -219,44 +308,44 @@ $(function () {
     function newNetMock() {
         alert('请点击无线网络管理--新建网络');
         vdata.network.anchorStatus++;
-        vdata.network.anchorTaskStatus = 0;
+        vdata.network.anchorTaskStatus = taskStatus.todo;
     }
 
     function deployHardWareMock() {
         vdata.network.anchorStatus++;
-        vdata.network.anchorTaskStatus = 0;
-    }
-
-    function locCrucialAnchorMock() {
-        vdata.network.anchorStatus++;
-        vdata.network.anchorTaskStatus = 0;
+        vdata.network.anchorTaskStatus = taskStatus.todo;
     }
 
     function buildNetworkMock() {
         vdata.network.anchorStatus++;
-        vdata.network.anchorTaskStatus = 0;
+        vdata.network.anchorTaskStatus = taskStatus.todo;
+    }
+
+    function locCrucialAnchorMock() {
+        vdata.network.anchorStatus++;
+        vdata.network.anchorTaskStatus = taskStatus.todo;
+        getAnchorData()
     }
 
     function floodingMock() {
-
-        vdata.network.anchorTaskStatus = 1;
+        vdata.network.anchorTaskStatus = taskStatus.doing;
         setTimeout(function () {
             vdata.network.anchorStatus++;
-            vdata.network.anchorTaskStatus = 0;
+            vdata.network.anchorTaskStatus = taskStatus.todo;
         }, 1000)
     }
 
     function trainingMock() {
-        vdata.network.anchorTaskStatus = 1;
+        vdata.network.anchorTaskStatus = taskStatus.doing;
         setTimeout(function () {
             vdata.network.anchorStatus++;
-            vdata.network.anchorTaskStatus = 0;
+            vdata.network.anchorTaskStatus = taskStatus.todo;
         }, 1000)
     }
 
     function restartMock() {
-        vdata.network.anchorStatus = 1;
-        vdata.network.anchorTaskStatus = 0;
+        vdata.network.anchorStatus = vdata.networkAnchorStatus.newNet;
+        vdata.network.anchorTaskStatus = taskStatus.todo;
     }
 
     //模拟进行任务
@@ -265,35 +354,110 @@ $(function () {
         // vdata.network.anchorStatus++;
         taskArrayMock(index);
     }
-    
+
     //模拟进行任务
     function taskArrayMock(index) {
         index = parseInt(index)
         switch (index) {
-            case 0:
+            case vdata.networkAnchorStatus.newNet:
                 newNetMock();
                 break;
-            case 1:
+            case vdata.networkAnchorStatus.hardware:
                 deployHardWareMock();
                 break;
-            case 2:
+            case vdata.networkAnchorStatus.networking:
                 buildNetworkMock();
                 break;
-            case 3:
+            case vdata.networkAnchorStatus.noteHigherAnchor:
                 locCrucialAnchorMock();
                 break;
-            case 4:
+            case vdata.networkAnchorStatus.broadcast:
                 floodingMock();
                 break;
-            case 5:
+            case vdata.networkAnchorStatus.training:
                 trainingMock();
                 break;
-            case 6:
+            case vdata.networkAnchorStatus.complete:
                 restartMock();
                 break;
         }
     }
     // newNet, deployHardWare, buildNetwork, locCrucialAnchor, flooding, training
+
+    //锚节点数据
+    function anchorStatusAndMessage(anchorFinishLoading, anchorLoadingMessage, anchorMessage) {
+        vdata.anchorFinishLoading = anchorFinishLoading;
+        anchorLoadingMessage ? vdata.anchorLoadingMessage = anchorLoadingMessage : vdata.anchorFinishLoading = vdata.anchorFinishLoading;
+        anchorMessage ? vdata.anchorMessage = anchorMessage : vdata.anchorMessage = vdata.anchorMessage;
+    }
+
+    //重置图层
+    function resetAnchorLayer() {
+        anchorSource.clear()
+        highAnchorSource.clear()
+        vdata.selectAnchor = defaultSelectAnchor
+    }
+
+    //加载数据
+    function getAnchorData() {
+        if (vdata.network.anchorStatus >= vdata.networkAnchorStatus.broadcast) {
+            anchorStatusAndMessage(false, '加载锚节点数据中')
+            setTimeout(function () {
+                //TODO:ajax
+                vdata.anchors = getAnchorMock();
+                renderAnchorDataAsGFeature();
+                anchorStatusAndMessage(true, '', '加载完毕，点击地图中的要素即可查看信息')
+            }, 1000)
+        }
+    }
+
+    function renderAnchorDataAsGFeature() {
+        resetAnchorLayer()
+
+        var anchors = vdata.anchors
+        var anHigherFeatures = [];
+        var anFeatures = [];
+        for (var index in anchors.obj) {
+            anchor = anchors.obj[index]
+            var feature = new ol.Feature({
+                geometry: new ol.geom.Point([anchor.x, anchor.y]),
+                type: 'data',
+            })
+
+            feature.setProperties(anchor);
+            //用featureType来区分feature的类型。
+            feature.set('featureType', 'anchor' + anchor.anchorType)
+            if (anchor.anchorType == Status.anchorType.higher) {
+                anHigherFeatures.push(feature);
+            }
+
+            if (anchor.anchorType == Status.anchorType.normal) {
+                anFeatures.push(feature);
+            }
+        }
+        anchorSource.addFeatures(anFeatures)
+        highAnchorSource.addFeatures(anHigherFeatures)
+    }
+
+    function showHigherAnchor(val, oldval) {
+        if (val) {
+            if (vdata.network.anchorStatus < vdata.networkAnchorStatus.broadcast) {
+                return
+            } else {
+                highAnchorLayer.setSource(highAnchorSource);
+            }
+        } else {
+            if (vdata.selectAnchor.anchorType == Status.anchorType.higher) {
+                vdata.selectAnchor = defaultSelectAnchor;
+            }
+            highAnchorLayer.setSource(null);
+        }
+    }
+
+
+    function moreAnchorInfo() {
+        console.log(vdata.selectAnchor)
+    }
 
     var app = new Vue({
         el: "#mainbox",
@@ -303,15 +467,17 @@ $(function () {
             loadData: loadData,
             startTask: startTaskMock,
             refresh: function () {},
+            moreAnchorInfo: moreAnchorInfo,
         },
         mounted: function () {},
         watch: {
             network: {
                 handler: function (val, oldval) {
-                    vdata.netMessage =getTaskMessage()
+                    vdata.netMessage = getTaskMessage()
                 },
                 deep: true //对象内部的属性监听，也叫深度监听
-            }
+            },
+            showHigherAnchor: showHigherAnchor
         }
     })
 

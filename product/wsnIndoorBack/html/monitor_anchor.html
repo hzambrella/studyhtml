@@ -139,13 +139,16 @@
                             <div class="anchor-info-top">
                                 <h4>锚节点信息</h4>
                                 <span v-if='network.nid<=0'>请于地图右上角选择一个楼层</span>
-                                <span v-if='network.anchorStatus<3'>完成"标定关键锚节点"后才能查看</span>
-                                <span v-else>加载完毕</span>
+                                <span v-if='network.anchorStatus<networkAnchorStatus.broadcast'>完成"标定关键锚节点"后才能查看</span>
+                                <span v-else-if='!anchorFinishLoading'>{{anchorLoadingMessage}}</span>
+                                <span v-else-if='anchorFinishLoading'>{{anchorMessage}}</span>
                             </div>
-                            <div class="anchor-info-container" v-if='network.anchorStatus>=3'>
+                            <div class="anchor-info-container" v-if='network.anchorStatus>=networkAnchorStatus.broadcast'>
                                 <div id="anchorOperate">
                                     <div class="checkbox checkbox-success">
-                                        <input id="checkbox3" class="styled" type="checkbox">
+                                        <input v-if="anchorFinishLoading" v-model='showHigherAnchor' id="checkbox3" class="styled" type="checkbox">
+                                        <input v-if="!anchorFinishLoading" v-model='showHigherAnchor' checked="true" id="checkbox3" class="styled" type="checkbox"
+                                            disabled>
                                         <label for="checkbox3">关键锚节点</label>
                                     </div>
                                     <div class="checkbox checkbox-success">
@@ -153,6 +156,7 @@
                                         <input id="checkbox3" class="styled" type="checkbox" v-else>
                                         <label for="checkbox3">普通锚节点</label>
                                     </div>
+                                    <button type="button" :class='{disabled:selectAnchor.anchorId<=0}' class="btn btn-primary" @click='moreAnchorInfo'>查看更多</button>
                                 </div>
                                 <div class="anchor-info-table">
                                     <table class="table table-bordered table-sm" style="margin-top:10px;">
@@ -162,10 +166,38 @@
                                                 <th width="65%">值</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody v-show='selectAnchor.anchorId>0'>
                                             <tr>
-                                                <td>建筑物id</td>
-                                                <td>123</td>
+                                                <td>锚节点id</td>
+                                                <td>{{selectAnchor.anchorId}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>锚节点类型</td>
+                                                <td v-if='selectAnchor.anchorType==0'>普通锚节点</td>
+                                                <td v-if='selectAnchor.anchorType==1'>关键锚节点</td>
+                                            </tr>
+                                            <tr>
+                                                <td>状态</td>
+                                                <td v-if='selectAnchor.status==0'>关闭</td>
+                                                <td v-if='selectAnchor.status==1'>正常</td>
+                                                <td v-if='selectAnchor.status==2'>故障</td>
+                                                <td v-if='selectAnchor.status==3'>停用</td>
+                                            </tr>
+                                            <tr>
+                                                <td>坐标</td>
+                                                <td>({{selectAnchor.x}},{{ selectAnchor.y}})</td>
+                                            </tr>
+                                            <tr>
+                                                <td>序列号</td>
+                                                <td>{{selectAnchor.sn}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>电量</td>
+                                                <td>{{selectAnchor.energy}}%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>更新时间</td>
+                                                <td>{{selectAnchor.updateTime}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -191,13 +223,13 @@
                                 </ul>
                             </div>
                             <div class="anchor_operate" v-if='network.nid>0'>
-                                <button v-if="network.anchorTaskStatus==1&&network.anchorStatus!=6" id="startProcess" type="button" class="btn btn-primary"
-                                    disabled>任务进行中</button>
-                                <button @click='startTask' v-if="network.anchorStatus!=6&&network.anchorTaskStatus==0||network.anchorTaskStatus==2" id="startProcess"
-                                    type="button" class="btn btn-primary">开始任务</button>
+                                <button v-if="network.anchorTaskStatus==taskStatus.doing&&network.anchorStatus!=networkAnchorStatus.complete" id="startProcess"
+                                    type="button" class="btn btn-primary" disabled>任务进行中</button>
+                                <button @click='startTask' v-if="network.anchorStatus!=networkAnchorStatus.complete&&network.anchorTaskStatus==taskStatus.todo||network.anchorTaskStatus==taskStatus.fail"
+                                    id="startProcess" type="button" class="btn btn-primary">开始任务</button>
                                 <!--<button @click='startProcess' v-if="network.anchorStatus==anchorDeploySteps.length" id="startProcess" type="button" class="btn btn-primary">开始任务</button>-->
-                                <button @click='startTask' v-if="network.anchorStatus==6&&network.anchorTaskStatus==0||network.anchorTaskStatus==2" id="startProcess"
-                                    type="button" class="btn btn-primary">重新开始任务</button>
+                                <button @click='startTask' v-if="network.anchorStatus==networkAnchorStatus.complete&&network.anchorTaskStatus==taskStatus.todo||network.anchorTaskStatus==taskStatus.fail"
+                                    id="startProcess" type="button" class="btn btn-primary">重新开始任务</button>
                             </div>
                         </div>
                     </div>
@@ -237,10 +269,10 @@
 
     <!--mock-->
     <script src="../js/back/mock.js"></script>
-    <!--app-->
-    <script src="../js/back/back_monitor_anchor.js"></script>
     <!--ajax-->
     <script src="../js/back/back_ajax.js"></script>
+    <!--app-->
+    <script src="../js/back/back_monitor_anchor.js"></script>
     <!--gmap-->
     <script src="../js/back/back_gmap.js"></script>
 
