@@ -113,6 +113,7 @@ $(function () {
         activeFloorButton: null, //按钮组中active的按钮的element
         network: defaultNetwork, //网络对象
         showHigherAnchor: false, //checkbox,关键锚节点
+        showNormalAnchor: false,
         anchor: null,
         selectAnchor: defaultSelectAnchor, //选中的anchor
         //任务
@@ -308,44 +309,44 @@ $(function () {
     function newNetMock() {
         alert('请点击无线网络管理--新建网络');
         vdata.network.anchorStatus++;
-        vdata.network.anchorTaskStatus = taskStatus.todo;
+        vdata.network.anchorTaskStatus = Status.taskStatus.todo;
     }
 
     function deployHardWareMock() {
         vdata.network.anchorStatus++;
-        vdata.network.anchorTaskStatus = taskStatus.todo;
+        vdata.network.anchorTaskStatus = Status.taskStatus.todo;
     }
 
     function buildNetworkMock() {
         vdata.network.anchorStatus++;
-        vdata.network.anchorTaskStatus = taskStatus.todo;
+        vdata.network.anchorTaskStatus = Status.taskStatus.todo;
     }
 
     function locCrucialAnchorMock() {
         vdata.network.anchorStatus++;
-        vdata.network.anchorTaskStatus = taskStatus.todo;
+        vdata.network.anchorTaskStatus = Status.taskStatus.todo;
         getAnchorData()
     }
 
     function floodingMock() {
-        vdata.network.anchorTaskStatus = taskStatus.doing;
+        vdata.network.anchorTaskStatus = Status.taskStatus.doing;
         setTimeout(function () {
             vdata.network.anchorStatus++;
-            vdata.network.anchorTaskStatus = taskStatus.todo;
+            vdata.network.anchorTaskStatus = Status.taskStatus.todo;
         }, 1000)
     }
 
     function trainingMock() {
-        vdata.network.anchorTaskStatus = taskStatus.doing;
+        vdata.network.anchorTaskStatus = Status.taskStatus.doing;
         setTimeout(function () {
             vdata.network.anchorStatus++;
-            vdata.network.anchorTaskStatus = taskStatus.todo;
+            vdata.network.anchorTaskStatus = Status.taskStatus.todo;
         }, 1000)
     }
 
     function restartMock() {
         vdata.network.anchorStatus = vdata.networkAnchorStatus.newNet;
-        vdata.network.anchorTaskStatus = taskStatus.todo;
+        vdata.network.anchorTaskStatus = Status.taskStatus.todo;
     }
 
     //模拟进行任务
@@ -395,6 +396,8 @@ $(function () {
     function resetAnchorLayer() {
         anchorSource.clear()
         highAnchorSource.clear()
+        vdata.showHigherAnchor=false;
+        vdata.showNormalAnchor=false;
         vdata.selectAnchor = defaultSelectAnchor
     }
 
@@ -407,7 +410,7 @@ $(function () {
                 vdata.anchors = getAnchorMock();
                 renderAnchorDataAsGFeature();
                 anchorStatusAndMessage(true, '', '加载完毕，点击地图中的要素即可查看信息')
-            }, 1000)
+            }, 100)
         }
     }
 
@@ -454,6 +457,21 @@ $(function () {
         }
     }
 
+    function showNormalAnchor(val, oldval) {
+        if (val) {
+            if (vdata.network.anchorStatus < vdata.networkAnchorStatus.broadcast) {
+                return
+            } else {
+                anchorLayer.setSource(anchorSource);
+            }
+        } else {
+            if (vdata.selectAnchor.anchorType == Status.anchorType.normal) {
+                vdata.selectAnchor = defaultSelectAnchor;
+            }
+            anchorLayer.setSource(null);
+        }
+    }
+
 
     function moreAnchorInfo() {
         console.log(vdata.selectAnchor)
@@ -477,7 +495,8 @@ $(function () {
                 },
                 deep: true //对象内部的属性监听，也叫深度监听
             },
-            showHigherAnchor: showHigherAnchor
+            showHigherAnchor: showHigherAnchor,
+            showNormalAnchor: showNormalAnchor
         }
     })
 

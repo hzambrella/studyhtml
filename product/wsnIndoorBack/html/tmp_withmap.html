@@ -37,10 +37,7 @@
     <script src="../js/back/back_route.js"></script>
     <!--css-->
     <link href="../css/back1_main.css" rel="stylesheet" type="text/css" />
-    <link href="../css/back/monitor_anchor.css" rel="stylesheet" type="text/css" />
-    <!--进度条-->
-    <link href="../css/back/progress_step.css" rel="stylesheet" type="text/css" />
-
+    <link href="../css/back/tmp_withmap.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
         /*vue加载数据时，不显示难看的花括号*/
@@ -57,7 +54,7 @@
 <body>
     <!--隐藏域，由后端填写-->
     <p id="pageGroupId" style="display:none">monitor</p>
-    <p id="pageId" style="display:none">mAnchor</p>
+    <p id="pageId" style="display:none">mSensor</p>
     <p id="bid" style="display:none">1</p>
     <p id="bname" style="display:none">教学楼2号</p>
     <div id="mainbox" class="mainbox">
@@ -132,106 +129,11 @@
                         <div class="map-footer">
                             <span v-if="!mapFinishLoading" class="map-status data-loading">{{mapLoadingMessage}}</span>
                             <span v-else class="map-status">{{mapMessage}}</span>
-                            <!--坐标-->
-                            <span id='mouse-position'></span> 
                         </div>
                     </div>
-                    <div class='content-info'>
-                        <div class="anchor-info white-panel">
-                            <div class="anchor-info-top">
-                                <h4>锚节点信息</h4>
-                                <span v-if='network.nid<=0'>请于地图右上角选择一个楼层</span>
-                                <span v-if='network.anchorStatus<networkAnchorStatus.broadcast'>完成"标定关键锚节点"后才能查看</span>
-                                <span v-else-if='!anchorFinishLoading' class='data-loading'>{{anchorLoadingMessage}}</span>
-                                <span v-else-if='anchorFinishLoading'>{{anchorMessage}}</span>
-                            </div>
-                            <div class="anchor-info-container" v-if='network.anchorStatus>=networkAnchorStatus.broadcast'>
-                                <div id="anchorOperate">
-                                    <div class="checkbox checkbox-success">
-                                        <input :disabled="!anchorFinishLoading" v-model='showHigherAnchor' id="checkbox3" class="styled" type="checkbox">
-                                        <label for="checkbox3">关键锚节点</label>
-                                    </div>
-                                    <div class="checkbox checkbox-success">
-                                        <input id="checkbox3" :disabled="network.anchorStatus<6||!anchorFinishLoading" v-model='showNormalAnchor' class="styled"
-                                            type="checkbox">
-                                        <label for="checkbox3">普通锚节点</label>
-                                    </div>
-                                    <button type="button" :disabled='selectAnchor.anchorId<=0' class="btn btn-primary" @click='moreAnchorInfo'>查看更多</button>
-                                </div>
-                                <div class="anchor-info-table">
-                                    <table class="table table-bordered table-sm" style="margin-top:10px;">
-                                        <thead>
-                                            <tr>
-                                                <th width="35%">键</th>
-                                                <th width="65%">值</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody v-show='selectAnchor.anchorId>0'>
-                                            <tr>
-                                                <td>锚节点id</td>
-                                                <td>{{selectAnchor.anchorId}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>锚节点类型</td>
-                                                <td v-if='selectAnchor.anchorType==0'>普通锚节点</td>
-                                                <td v-if='selectAnchor.anchorType==1'>关键锚节点</td>
-                                            </tr>
-                                            <tr>
-                                                <td>状态</td>
-                                                <td v-if='selectAnchor.status==0'>关闭</td>
-                                                <td v-if='selectAnchor.status==1'>正常</td>
-                                                <td v-if='selectAnchor.status==2'>故障</td>
-                                                <td v-if='selectAnchor.status==3'>停用</td>
-                                            </tr>
-                                            <tr>
-                                                <td>坐标</td>
-                                                <td>({{selectAnchor.x}},{{ selectAnchor.y}})</td>
-                                            </tr>
-                                            <tr>
-                                                <td>序列号</td>
-                                                <td>{{selectAnchor.sn}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>电量</td>
-                                                <td>{{selectAnchor.energy}}%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>更新时间</td>
-                                                <td>{{selectAnchor.updateTime}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="workflow-info white-panel">
-                            <h4>锚节点布设状态</h4>
-                            <span v-if='network.nid<=0'>请于地图右上角选择一个楼层</span>
-                            <span v-else-if='!netFinishLoading' class='data-loading'>{{netLoadingMessage}}</span>
-                            <span v-else-if='netFinishLoading'>{{netMessage}}</span>
-                            <div class="progress-inner">
-                                <ul id="anchorDeploySteps" v-if='network.nid>0' class="steps">
-                                    <!--<li>新网络</li>
-                                    <li>布设硬件</li>
-                                    <li>标定关键锚节点</li>
-                                    <li>开启网络</li>
-                                    <li class="todo">洪范</li>
-                                    <li class="waiting">训练</li>
-                                    <li class="waiting">完成构建</li>-->
-                                    <li v-for='(val,key,index) in anchorDeploySteps' :index=index :name='val' :class='{waiting:network.anchorStatus<index,todo:network.anchorStatus==index&&network.anchorStatus!=6&&network.anchorTaskStatus==0,fail:network.anchorStatus==index&&network.anchorTaskStatus==2}'>{{val}}</li>
-                                </ul>
-                            </div>
-                            <div class="anchor_operate" v-if='network.nid>0'>
-                                <button v-if="network.anchorTaskStatus==taskStatus.doing&&network.anchorStatus!=networkAnchorStatus.complete" id="startProcess"
-                                    type="button" class="btn btn-primary" disabled>任务进行中</button>
-                                <button @click='startTask' v-if="network.anchorStatus!=networkAnchorStatus.complete&&network.anchorTaskStatus==taskStatus.todo||network.anchorTaskStatus==taskStatus.fail"
-                                    id="startProcess" type="button" class="btn btn-primary">开始任务</button>
-                                <!--<button @click='startProcess' v-if="network.anchorStatus==anchorDeploySteps.length" id="startProcess" type="button" class="btn btn-primary">开始任务</button>-->
-                                <button @click='startTask' v-if="network.anchorStatus==networkAnchorStatus.complete&&network.anchorTaskStatus==taskStatus.todo||network.anchorTaskStatus==taskStatus.fail"
-                                    id="startProcess" type="button" class="btn btn-primary" disabled>重新开始任务</button>
-                            </div>
-                        </div>
+                    <div class='content-info'>
+
                     </div>
                 </div>
                 <!--内容end-->
@@ -272,7 +174,7 @@
     <!--ajax-->
     <script src="../js/back/back_ajax.js"></script>
     <!--app-->
-    <script src="../js/back/back_monitor_anchor.js"></script>
+    <script src="../js/back/tmp_withmap.js"></script>
     <!--gmap-->
     <script src="../js/back/back_gmap.js"></script>
 

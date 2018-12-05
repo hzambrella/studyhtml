@@ -32,6 +32,24 @@ function loadMap(mapId, mapMess) {
         collapsible: false
     });
 
+    var view = new ol.View({
+        projection: projectionBaseMap,
+        center: ol.extent.getCenter(extentBaseMap),
+        zoom: mapMess.zoom_default,
+        maxZoom: mapMess.zoom_max,
+        minZoom: mapMess.zoom_min,
+    })
+
+    var mousePositionControl = new ol.control.MousePosition({
+        coordinateFormat: ol.coordinate.createStringXY(4),
+        projection: mapMess.code,
+        // comment the following two lines to have the mouse position
+        // be placed within the map.
+        className: 'custom-mouse-position',
+        target: document.getElementById('mouse-position'),
+        undefinedHTML: '&nbsp;'
+    });
+
     GMap = new ol.Map({
         target: 'indoorMap',
         layers: [
@@ -49,18 +67,36 @@ function loadMap(mapId, mapMess) {
                 })
             }),
         ],
-        view: new ol.View({
-            projection: projectionBaseMap,
-            center: ol.extent.getCenter(extentBaseMap),
-            zoom: mapMess.zoom_default,
-            maxZoom: mapMess.zoom_max,
-            minZoom: mapMess.zoom_min,
-        }),
+        view: view,
+        controls: ol.control.defaults().extend([mousePositionControl]),
         // control: ol.control.defaults({
         //      attribution: false
         //  }).extend([attribution])
         // control: ol.control.defaults().extend([mousePositionControl])
     });
+
+    rotataButton()
+
+    function rotataButton() {
+        var rotataButtonTmp = "<div id='viewOperate'>" +
+            "<button class='center' id='rotateLeft'>↻</button>" +
+            "<button class='center' id='rotateRight'>↺</button>" +
+            "</div>"
+        $('#indoorMap').append(rotataButtonTmp);
+
+        $("#rotateLeft").on('click', function () {
+            view.animate({
+                rotation: view.getRotation() + Math.PI / 6
+            });
+        })
+
+
+        $("#rotateRight").on('click', function () {
+            view.animate({
+                rotation: view.getRotation() - Math.PI / 6
+            });
+        })
+    }
 }
 
 //``Feature样式style生成``
@@ -176,9 +212,7 @@ var anchorFeatureStyleMap = {
             angle: 0
         })
     }),
-    //higher anchor的layer
-    'anchor': new ol.style.Style({
-        //点要素样式
+    'normalAnchor': new ol.style.Style({
         image: new ol.style.Circle({
             radius: 4,
             fill: new ol.style.Fill({
@@ -186,10 +220,29 @@ var anchorFeatureStyleMap = {
             })
         })
     }),
-    'anchorSelect': new ol.style.Style({
-        //点要素样式
+    'normalAnchorClose': new ol.style.Style({
         image: new ol.style.Circle({
-            radius: 6,
+            radius: 4,
+            fill: new ol.style.Fill({
+                color: 'grey'
+            })
+        })
+    }),
+    'normalAnchorBreak': new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 4,
+            fill: new ol.style.Fill({
+                color: 'red'
+            })
+        })
+    }),
+    'normalAnchorSelect': new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 8,
+            stroke: new ol.style.Stroke({
+                color: 'green',
+                width: 2
+            }),
             fill: new ol.style.Fill({
                 color: 'yellow'
             })
@@ -197,28 +250,47 @@ var anchorFeatureStyleMap = {
     })
 }
 
+
 function anchorStyleFunction(feature) {
-    // var anchorType = feature.get('anchorType')
+    var anchorType = feature.get('anchorType')
 
-    // if (anchorType){
-
-    // }
-    var style = anchorFeatureStyleMap['higherAnchor']
-    switch (feature.get('status')) {
-        case Status.anchorStatus.Close:
-            style = anchorFeatureStyleMap['higherAnchorClose']
-            break;
-        case Status.anchorStatus.Open:
-            style = anchorFeatureStyleMap['higherAnchor']
-            break;
-        case Status.anchorStatus.Break:
-            style = anchorFeatureStyleMap['higherAnchorBreak']
-            break
-        default:
-            style = anchorFeatureStyleMap['higherAnchor']
-            break;
+    if (anchorType == Status.anchorType.normal) {
+        var style = anchorFeatureStyleMap['normalAnchor']
+        switch (feature.get('status')) {
+            case Status.anchorStatus.Close:
+                style = anchorFeatureStyleMap['normalAnchorClose']
+                break;
+            case Status.anchorStatus.Open:
+                style = anchorFeatureStyleMap['normalAnchor']
+                break;
+            case Status.anchorStatus.Break:
+                style = anchorFeatureStyleMap['normalAnchorBreak']
+                break
+            default:
+                style = anchorFeatureStyleMap['normalAnchor']
+                break;
+        }
+        return style;
     }
-    return style;
+
+    if (anchorType == Status.anchorType.higher) {
+        var style = anchorFeatureStyleMap['higherAnchor']
+        switch (feature.get('status')) {
+            case Status.anchorStatus.Close:
+                style = anchorFeatureStyleMap['higherAnchorClose']
+                break;
+            case Status.anchorStatus.Open:
+                style = anchorFeatureStyleMap['higherAnchor']
+                break;
+            case Status.anchorStatus.Break:
+                style = anchorFeatureStyleMap['higherAnchorBreak']
+                break
+            default:
+                style = anchorFeatureStyleMap['higherAnchor']
+                break;
+        }
+        return style;
+    }
 }
 
 function anchorStyleClickFunction(feature) {
@@ -228,10 +300,67 @@ function anchorStyleClickFunction(feature) {
             style = anchorFeatureStyleMap['higherAnchorSelect']
             break;
         case Status.anchorType.normal:
-            style = style = anchorFeatureStyleMap['anchorSelect']
+            style = style = anchorFeatureStyleMap['normalAnchorSelect']
             break;
     }
     return style
+}
+
+//传感器样式
+var sensorFeatureStyleMap = {
+    //higher anchor的layer
+    'sensor': new ol.style.Style({
+        image: new ol.style.Icon(({
+            anchor: [0.5, 0.96],
+            //crossOrigin: 'anonymous',
+            src: '../fonts/iconfont/sensor32.png',
+        }))
+    }),
+    'sensorClose': new ol.style.Style({
+        image: new ol.style.Icon(({
+            anchor: [0.5, 0.96],
+            //crossOrigin: 'anonymous',
+            src: '../fonts/iconfont/sensor32_close.png',
+        }))
+    }),
+    'sensorBreak': new ol.style.Style({
+        image: new ol.style.Icon(({
+            anchor: [0.5, 0.96],
+            //crossOrigin: 'anonymous',
+            src: '../fonts/iconfont/sensor32_break.png',
+        }))
+    }),
+    'sensorSelect': new ol.style.Style({
+        image: new ol.style.Icon(({
+            anchor: [0.5, 0.96],
+            //crossOrigin: 'anonymous',
+            src: '../fonts/iconfont/sensor36_select.png',
+        }))
+    }),
+}
+
+//TODO:
+function sensorStyleFunction(feature) {
+    var style = sensorFeatureStyleMap['sensor']
+    switch (feature.get('status')) {
+        case Status.anchorStatus.Close:
+            style = sensorFeatureStyleMap['sensorClose']
+            break;
+        case Status.anchorStatus.Open:
+            style = sensorFeatureStyleMap['sensor']
+            break;
+        case Status.anchorStatus.Break:
+            style = sensorFeatureStyleMap['sensorBreak']
+            break
+        default:
+            style = sensorFeatureStyleMap['sensor']
+            break;
+    }
+    return style;
+}
+
+function sensorStyleClickFunction(feature) {
+    return sensorFeatureStyleMap['sensorSelect']
 }
 
 // function anchorLayer() {

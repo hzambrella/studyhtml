@@ -1,5 +1,6 @@
 var Status = {}
 $(function () {
+    //锚节点的状态
     var anchorStatus = {};
     anchorStatus.Close = 0;
     anchorStatus.Open = 1;
@@ -14,6 +15,22 @@ $(function () {
         3: '停用',
     }
     Status.anchorStatusMap = anchorStatusMap
+
+    //传感器的状态
+    var sensorStatus = {};
+    sensorStatus.Close = 0;
+    sensorStatus.Open = 1;
+    sensorStatus.Break = 2;
+    sensorStatus.Stop = 3;
+    Status.sensorStatus = sensorStatus
+
+    var sensorStatusMap = {
+        0: '关闭',
+        1: '打开',
+        2: '故障',
+        3: '停用',
+    }
+    Status.sensorStatusMap = sensorStatusMap
 
     // 0.新建网络（已存在时不可新建。添加楼层的同时，在数据库的buid_network表中添加一行数据）=>
     // 1.布设硬件（填写协调器的coor_id）=》
@@ -67,6 +84,16 @@ $(function () {
         1: '关键锚节点',
     }
     Status.anchorTypeName = anchorTypeName
+
+
+    var sensorType = {};
+    sensorType.normal = 0;
+    Status.sensorType = sensorType
+
+    var sensorTypeName = {
+        0: '多功能传感器',
+    }
+    Status.sensorTypeName = sensorTypeName
 })
 
 console.log(Status)

@@ -1,0 +1,181 @@
+.content-info {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 40%;
+}
+
+.sensor-info {
+    height: 100%;
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.sensor-info-top {
+    position: relative;
+    height: 10%;
+    width: 100%;
+}
+
+.sensor-info-left {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    margin: 0;
+    float: left;
+}
+
+.sensor-info-right {
+    position: relative;
+    width: 10%;
+    height: 100%;
+    margin: 0;
+    float: left;
+}
+
+.sensor-info-operate {
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    color: black;
+}
+
+.sensor-info-container {
+    position: relative;
+    height: 85%;
+    width: 100%;
+}
+
+.sensor-table-key {
+    font-weight: bold;
+}
+
+.sensor-table-operate {
+    color: black;
+}
+
+.sensor-info-table-operate {
+    position: relative;
+    height: 7%;
+    width: 100%;
+    /*background-color: pink;*/
+}
+
+.sensor-info-table {
+    position: relative;
+    /*padding: 0px 0 0px 0;*/
+    height: 90%;
+    width: 100%;
+    overflow: auto;
+    /*background-color: orange;*/
+}
+
+/*.sensor-info-table-page {
+    position: relative;
+    padding: 10px 10px 10px 10px;
+    height: 10%;
+    width: 100%;
+ 
+}*/
+
+.sensor-info-list-bottom {
+    width: 98%;
+    position: relative;
+    bottom: 0px;
+    margin: 0px auto;
+    padding: 5px;
+    border-top: 1px solid #ddd;
+    background-color: white;
+}
+
+.sensor-info-pagination {
+    position: relative;
+    float: right;
+}
+
+.sensor-loc-button {
+    padding: 0 22px;
+    margin: auto 0;
+}
+
+.danger_alert {
+    width: 22px;
+    height: 22px;
+    margin: 0 5px;
+    float: left;
+}
+
+.poison {
+    background-image: url('../../fonts/iconfont/poison22.png');
+}
+
+.fire {
+    background-image: url('../../fonts/iconfont/fire22.png');
+}
+
+.smog {
+    background-image: url('../../fonts/iconfont/smog22.png');
+}
+
+.poison_alert {
+    background-image: url('../../fonts/iconfont/poison22_alert.png');
+}
+
+.fire_alert {
+    background-image: url('../../fonts/iconfont/fire22_alert.png');
+}
+
+.smog_alert {
+    background-image: url('../../fonts/iconfont/smog22_alert.png');
+}
+
+.ol-popup {
+    position: absolute;
+    background-color: white;
+    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    bottom: 12px;
+    left: -50px;
+    min-width: 380px;
+}
+
+.ol-popup:after,
+.ol-popup:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.ol-popup:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 48px;
+    margin-left: -10px;
+}
+
+.ol-popup:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 48px;
+    margin-left: -11px;
+}
+
+.ol-popup-closer {
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+}
+
+.ol-popup-closer:after {
+    content: "✖";
+}
