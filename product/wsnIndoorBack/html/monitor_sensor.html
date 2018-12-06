@@ -107,7 +107,7 @@
 
                 <!--内容-->
                 <div class="content-mapapp">
-                    <div class="content-mapComponent">
+                    <div class="content-mapComponent" style="width:45%">
                         <div class="map-all">
                             <!--工具-->
                             <!--<div class="map-tool">
@@ -134,7 +134,7 @@
                         </div>
                     </div>
 
-                    <div class='content-info'>
+                    <div class='content-info' style="width:53%">
                         <div class="sensor-info white-panel">
                             <div class="sensor-info-top">
                                 <div class="sensor-info-left">
@@ -165,36 +165,40 @@
                                             <tr>
                                                 <th width="10%">编号</th>
                                                 <th width="15%">序列号</th>
-                                                <th width="15%">查看位置</th>
-                                                <th width="10%">电量</th>
-                                                <th width="10%">温度</th>
-                                                <th width="10%">湿度</th>
-                                                <th width="30%">险情</th>
+                                                <th width="12%">险情</th>
+                                                <th width="12%">是否已定位</th>
+                                                <th width="7%">电量</th>
+                                                <th width="7%">亮度%</th>
+                                                <th width="7%">温度℃</th>
+                                                <th width="7%">湿度%</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr v-for="val in sensors">
                                                 <td>{{val.sid}}</td>
                                                 <td>{{val.sn}}</td>
-                                                <td v-if='!val.hasLocation'>
-                                                    <button type="button" style="float:right" class="sensor-loc-button btn btn-default" data-toggle="tooltip" title="去定位">
+                                                <td>
+                                                    <div v-if="val.latestData.smog" class="danger_alert smog_alert"></div>
+                                                    <div v-if="!val.latestData.smog" class="danger_alert smog"></div>
+                                                    <div v-if="val.latestData.flame" class="danger_alert fire_alert"></div>
+                                                    <div v-if="!val.latestData.flame" class="danger_alert fire"></div>
+                                                    <div v-if="val.latestData.poison" class="danger_alert poison_alert"></div>
+                                                    <div v-if="!val.latestData.poison" class="danger_alert poison"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="sensor-is-position" :class="[val.hasLocation?'sensor-is-position-true':'sensor-is-position-false']"></div>
+                                                    <button :sid="val.sid" type="button" class="sensor-loc-button btn btn-default" :class="{disabled:!val.hasLocation}" data-toggle="tooltip"
+                                                        title="选择">
+                                                        <i class="fa fa-hand-pointer-o"></i>
+                                                    </button>
+                                                    <button :sid="val.sid" type="button" class="sensor-loc-button btn btn-default" data-toggle="tooltip" :title="[val.hasLocation?'重新定位':'去定位']">
                                                         <i class="fa fa-map-marker"></i>
                                                     </button>
                                                 </td>
-                                                <td v-if='val.hasLocation'>
-                                                    <button type="button" style="float:right" class="sensor-loc-button btn btn-default" data-toggle="tooltip" title="选择">
-                                                        <i class="fa fa-hand-pointer-o"></i>
-                                                    </button>
-                                                </td>
-
                                                 <td>{{val.energy}}%</td>
-                                                <td>33</td>
-                                                <td>123</td>
-                                                <td>
-                                                    <div class="danger_alert smog"></div>
-                                                    <div class="danger_alert fire"></div>
-                                                    <div class="danger_alert poison"></div>
-                                                </td>
+                                                <td>{{val.latestData.lux}}</td>
+                                                <td>{{val.latestData.temperature}}</td>
+                                                <td>{{val.latestData.humidity}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -223,54 +227,56 @@
         </div>
 
         <p>{{selectSensor.sid}}</p>
-        <!--popup-->
+        <!--popup 这里不知道为啥vue加载不上数据-->
         <popup id="popup" class="ol-popup">
             <a href="#" id="popup-closer" class="ol-popup-closer"></a>
             <div id="popup-content">
-                <h5 id="sensor-title">传感器1111</h5>
+                <h5 id="sensor-title">传感器</h5>
                 <table class="table table-bordered table-sm sensor-table" style="margin-top:10px;">
                     <!--<thead>
                         <tr>
-                            <th width="35%">键</th>
-                            <th width="65%">值</th>
+                            <th>键</th>
+                            <th width="25%">值</th>
+                            <th width="25%">键</th>
+                            <th width="25%">值</th>
                         </tr>
                     </thead>-->
                     <tbody>
                         <tr>
-                            <td class="sensor-table-key">序列号</td>
-                            <td>12312313</td>
-                            <td class="sensor-table-key">电量</td>
-                            <td>10%</td>
+                            <td width="25%" class="sensor-table-key">编号</td>
+                            <td width="25%" id="sensorSid">无</td>
+                            <td width="25%" class="sensor-table-key">电量</td>
+                            <td width="25%" id="sensorEnergy">无</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr>
-                            <td class="sensor-table-key">温度</td>
-                            <td>36℃</td>
-                            <td class="sensor-table-key">湿度</td>
-                            <td>45%</td>
+                            <td  width="25%" class="sensor-table-key">温度(℃)</td>
+                            <td  width="25%" id="sensorTemp">无</td>
+                            <td  width="25%" class="sensor-table-key">湿度(%)</td>
+                            <td  width="25%" id="humidity">无</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr>
-                            <td class="sensor-table-key">光照</td>
-                            <td>10 lx(阴暗)</td>
-                            <td class="sensor-table-key">明火</td>
-                            <td>无</td>
+                            <td  width="25%" class="sensor-table-key">光照(lx)</td>
+                            <td  width="25%" id="lux">无</td>
+                            <td  width="25%" class="sensor-table-key">明火</td>
+                            <td  width="25%" id="flame">无</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr>
-                            <td class="sensor-table-key">烟雾</td>
-                            <td>无</td>
-                            <td class="sensor-table-key">毒气</td>
-                            <td>无</td>
+                            <td  width="25%" class="sensor-table-key">烟雾</td>
+                            <td  width="25%" id="smog">无</td>
+                            <td  width="25%" class="sensor-table-key">毒气</td>
+                            <td  width="25%" id="poison">无</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr>
                             <td class="sensor-table-key" colspan="2">更新时间 <a class="sensor-table-operate" a href="javascript:void(0)" title="刷新"><i class="fa fa-refresh"></i></a></td>
-                            <td colspan="2">2018年12月12日 16:00</td>
+                            <td id="latestDataUpdateTime" colspan="2">无</td>
                         </tr>
                     </tbody>
                 </table>

@@ -1268,8 +1268,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 2.611216,
         "y": 59.61605,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 77,
+            "sid": 1001,
+            "temperature": 6.0,
+            "humidity": 49,
+            "lux": 5,
+            "flame": true,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1002,
         "sn": "SNAE861002",
@@ -1280,8 +1291,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 18.396372,
         "y": 62.28504,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 80,
+            "sid": 1002,
+            "temperature": 6.0,
+            "humidity": 47,
+            "lux": 9,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1003,
         "sn": "SNAE861003",
@@ -1292,8 +1314,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 40.52669,
         "y": 62.17276,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 83,
+            "sid": 1003,
+            "temperature": 9.0,
+            "humidity": 46,
+            "lux": 13,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1004,
         "sn": "SNAE861004",
@@ -1304,8 +1337,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 59.1094,
         "y": 62.17276,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 86,
+            "sid": 1004,
+            "temperature": 9.0,
+            "humidity": 46,
+            "lux": 10,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1005,
         "sn": "SNAE861005",
@@ -1316,8 +1360,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 74.69863,
         "y": 62.04899,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 89,
+            "sid": 1005,
+            "temperature": 6.0,
+            "humidity": 46,
+            "lux": 5,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1006,
         "sn": "SNAE861006",
@@ -1328,8 +1383,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 1.5299971,
         "y": 43.298817,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 92,
+            "sid": 1006,
+            "temperature": 6.0,
+            "humidity": 48,
+            "lux": 8,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1007,
         "sn": "SNAE861007",
@@ -1340,8 +1406,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 1.2418463,
         "y": 24.52682,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 95,
+            "sid": 1007,
+            "temperature": 8.0,
+            "humidity": 46,
+            "lux": 12,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1008,
         "sn": "SNAE861008",
@@ -1352,8 +1429,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 1.771363,
         "y": 5.918016,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 98,
+            "sid": 1008,
+            "temperature": 5.0,
+            "humidity": 46,
+            "lux": 12,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1009,
         "sn": "SNAE861009",
@@ -1364,8 +1452,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 15.168113,
         "y": 5.115444,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 101,
+            "sid": 1009,
+            "temperature": 6.0,
+            "humidity": 46,
+            "lux": 9,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1010,
         "sn": "SNAE861010",
@@ -1376,8 +1475,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 33.10019,
         "y": 5.255845,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 104,
+            "sid": 1010,
+            "temperature": 5.0,
+            "humidity": 48,
+            "lux": 7,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1011,
         "sn": "SNAE861011",
@@ -1388,8 +1498,19 @@ var sensorMock = {
         "hasLocation": true,
         "x": 51.642525,
         "y": 5.3026457,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 107,
+            "sid": 1011,
+            "temperature": 6.0,
+            "humidity": 45,
+            "lux": 6,
+            "flame": false,
+            "smog": true,
+            "poison": true,
+            "createTime": "2018年12月05日 18:04"
+        }
     }, {
         "sid": 1012,
         "sn": "SNAE861012",
@@ -1400,7 +1521,18 @@ var sensorMock = {
         "hasLocation": true,
         "x": 72.67281,
         "y": 5.1622443,
-        "createTime": "2018年12月05日 06:04",
-        "updateTime": "2018年12月05日 06:04"
+        "createTime": "2018年12月05日 18:04",
+        "updateTime": "2018年12月05日 18:04",
+        "latestData": {
+            "id": 110,
+            "sid": 1012,
+            "temperature": 6.0,
+            "humidity": 48,
+            "lux": 9,
+            "flame": false,
+            "smog": false,
+            "poison": false,
+            "createTime": "2018年12月05日 18:04"
+        }
     }]
 }

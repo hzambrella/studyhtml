@@ -337,6 +337,28 @@ var sensorFeatureStyleMap = {
             src: '../fonts/iconfont/sensor36_select.png',
         }))
     }),
+    'flame': new ol.style.Style({
+        image: new ol.style.Icon(({
+            anchor: [0.5, 0.96],
+            //crossOrigin: 'anonymous',
+            src: '../fonts/iconfont/flame32.png',
+        }))
+    }),
+    'poison': new ol.style.Style({
+        image: new ol.style.Icon(({
+            anchor: [0.5, 0.96],
+            //crossOrigin: 'anonymous',
+            src: '../fonts/iconfont/poison32.png',
+        }))
+    }),
+    'smog': new ol.style.Style({
+        image: new ol.style.Icon(({
+            anchor: [0.5, 0.96],
+            //crossOrigin: 'anonymous',
+            src: '../fonts/iconfont/smog32.png',
+        }))
+    }),
+
 }
 
 //TODO:
@@ -356,11 +378,43 @@ function sensorStyleFunction(feature) {
             style = sensorFeatureStyleMap['sensor']
             break;
     }
+
+    //险情：烟雾《毒气《火灾 (烟雾《火灾《毒气)
+    var lastestData = feature.get('latestData');
+    if (lastestData.id > 0) {
+        if (lastestData.smog == true) {
+            style = sensorFeatureStyleMap['smog']
+        }
+        if (lastestData.poison == true) {
+            style = sensorFeatureStyleMap['poison']
+        }
+
+        if (lastestData.flame == true) {
+            style = sensorFeatureStyleMap['flame']
+        }
+
+
+    }
+
     return style;
 }
 
 function sensorStyleClickFunction(feature) {
-    return sensorFeatureStyleMap['sensorSelect']
+    var style=sensorFeatureStyleMap['sensorSelect'];
+    var lastestData = feature.get('latestData');
+    if (lastestData.id > 0) {
+        if (lastestData.smog == true) {
+            style = sensorFeatureStyleMap['smog']
+        }
+        if (lastestData.flame == true) {
+            style = sensorFeatureStyleMap['flame']
+        }
+
+        if (lastestData.poison == true) {
+            style = sensorFeatureStyleMap['poison']
+        }
+    }
+    return style
 }
 
 // function anchorLayer() {

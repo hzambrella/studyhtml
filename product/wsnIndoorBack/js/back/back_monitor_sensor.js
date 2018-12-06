@@ -202,6 +202,22 @@ $(function () {
                             vdata.selectSensor.createTime = feature.get("createTime")
                             vdata.selectSensor.updateTime = feature.get("updateTime")
                             vdata.selectSensor.energy = feature.get("energy")
+                            vdata.selectSensor.latestData = feature.get("latestData")
+                            $("#sensorSid").html(vdata.selectSensor.sid);
+                            $("#sensorEnergy").html(vdata.selectSensor.energy);
+                            $("#sensor-title").html("传感器  序列号："+ vdata.selectSensor.sn)
+                            var latestData = vdata.selectSensor.latestData;
+                            if (latestData) {
+                                latestData.temperature ? $("#sensorTemp").html(latestData.temperature) : $("#sensorTemp").html("无")
+                                latestData.humidity ? $("#humidity").html(latestData.humidity) : $("#humidity").html("无")
+                                latestData.lux ? $("#lux").html(latestData.humidity) : $("#lux").html("无")
+                                latestData.flame ? $("#flame").html("有") : $("#flame").html("无")
+                                latestData.smog ? $("#smog").html("有") : $("#smog").html("无")
+                                latestData.poison ? $("#poison").html("有") : $("#poison").html("无")
+                                latestData.createTime ? $("#latestDataUpdateTime").html(latestData.createTime) : $("#latestDataUpdateTime").html("暂无数据")
+                            }else{
+                                $("#latestDataUpdateTime").html("暂无数据")
+                            }
                             console.log(vdata.selectSensor)
                         }
                     });
@@ -281,7 +297,6 @@ $(function () {
                 geometry: new ol.geom.Point([sensor.x, sensor.y]),
                 type: 'data',
             })
-
             feature.setProperties(sensor);
             //用featureType来区分feature的类型。
             feature.set('featureType', 'sensor' + sensor.sensorType)
