@@ -78,6 +78,8 @@ $(function () {
         network: defaultNetwork, //网络对象
         sensors: [],
         selectSensor: defaultSelectSensor,
+        //状态
+        sensorStatus:Status.sensorStatus,
     }
 
     //图层
@@ -189,36 +191,7 @@ $(function () {
 
                             feature.setStyle(sensorStyleClickFunction(feature))
                             lastSelectFeature = feature
-                            var coordinate = e.coordinate;
-                            //coordinate[1] = coordinate[1]+1 //往上挪点
-                            popup.setPosition(coordinate);
-                            vdata.selectSensor = {};
-                            vdata.selectSensor.sid = feature.get("sid")
-                            vdata.selectSensor.sensorType = feature.get("sensorType")
-                            vdata.selectSensor.status = feature.get("status")
-                            vdata.selectSensor.x = feature.get("x")
-                            vdata.selectSensor.y = feature.get("y")
-                            vdata.selectSensor.sn = feature.get("sn")
-                            vdata.selectSensor.createTime = feature.get("createTime")
-                            vdata.selectSensor.updateTime = feature.get("updateTime")
-                            vdata.selectSensor.energy = feature.get("energy")
-                            vdata.selectSensor.latestData = feature.get("latestData")
-                            $("#sensorSid").html(vdata.selectSensor.sid);
-                            $("#sensorEnergy").html(vdata.selectSensor.energy);
-                            $("#sensor-title").html("传感器  序列号："+ vdata.selectSensor.sn)
-                            var latestData = vdata.selectSensor.latestData;
-                            if (latestData) {
-                                latestData.temperature ? $("#sensorTemp").html(latestData.temperature) : $("#sensorTemp").html("无")
-                                latestData.humidity ? $("#humidity").html(latestData.humidity) : $("#humidity").html("无")
-                                latestData.lux ? $("#lux").html(latestData.humidity) : $("#lux").html("无")
-                                latestData.flame ? $("#flame").html("有") : $("#flame").html("无")
-                                latestData.smog ? $("#smog").html("有") : $("#smog").html("无")
-                                latestData.poison ? $("#poison").html("有") : $("#poison").html("无")
-                                latestData.createTime ? $("#latestDataUpdateTime").html(latestData.createTime) : $("#latestDataUpdateTime").html("暂无数据")
-                            }else{
-                                $("#latestDataUpdateTime").html("暂无数据")
-                            }
-                            console.log(vdata.selectSensor)
+                            doPopup(e.coordinate, feature)
                         }
                     });
                 });
@@ -235,6 +208,41 @@ $(function () {
                 mapStatusAndMessage(true, '', '地图加载完毕：' + vdata.mapDetail.title)
             }, 20)
         }
+    }
+
+    function doPopup(coordinate, feature) {
+        //coordinate[1] = coordinate[1]+1 //往上挪点
+        popup.setPosition(coordinate);
+        vdata.selectSensor = {};
+        vdata.selectSensor.sid = feature.get("sid")
+        vdata.selectSensor.sensorType = feature.get("sensorType")
+        vdata.selectSensor.status = feature.get("status")
+        vdata.selectSensor.x = feature.get("x")
+        vdata.selectSensor.y = feature.get("y")
+        vdata.selectSensor.sn = feature.get("sn")
+        vdata.selectSensor.createTime = feature.get("createTime")
+        vdata.selectSensor.updateTime = feature.get("updateTime")
+        vdata.selectSensor.energy = feature.get("energy")
+        vdata.selectSensor.latestData = feature.get("latestData")
+
+        $("#sensorSid").html(vdata.selectSensor.sid);
+        $("#senserType").html(Status.sensorTypeName[vdata.selectSensor.sensorType]);
+        $("#sensorStatus").html(Status.sensorStatusMap[vdata.selectSensor.status]);
+        $("#sensorEnergy").html(vdata.selectSensor.energy);
+        $("#sensor-title").html("传感器  序列号：" + vdata.selectSensor.sn)
+        var latestData = vdata.selectSensor.latestData;
+        if (latestData) {
+            latestData.temperature ? $("#sensorTemp").html(latestData.temperature) : $("#sensorTemp").html("无")
+            latestData.humidity ? $("#humidity").html(latestData.humidity) : $("#humidity").html("无")
+            latestData.lux ? $("#lux").html(latestData.humidity) : $("#lux").html("无")
+            latestData.flame ? $("#flame").html("有") : $("#flame").html("无")
+            latestData.smog ? $("#smog").html("有") : $("#smog").html("无")
+            latestData.poison ? $("#poison").html("有") : $("#poison").html("无")
+            latestData.createTime ? $("#latestDataUpdateTime").html(latestData.createTime) : $("#latestDataUpdateTime").html("暂无数据")
+        } else {
+            $("#latestDataUpdateTime").html("暂无数据")
+        }
+        console.log(vdata.selectSensor)
     }
 
     function resetNetworkData() {
@@ -310,6 +318,17 @@ $(function () {
     //     console.log(vdata.selectSensor)
     // }
 
+
+    //事件
+    function chooseSensor(evt) {
+        var sid = $(evt.target).attr("sid")
+        sensorSource.forEachFeature(function (feature) {
+            if (feature.get("sid") == sid) {
+                doPopup([feature.get("x"), feature.get("y")], feature)
+            }
+        })
+    }
+
     var app = new Vue({
         el: "#mainbox",
         data: vdata,
@@ -317,6 +336,7 @@ $(function () {
             getBuildMapRel: getBuildMapRel,
             loadData: loadData,
             refresh: function () {},
+            chooseSensor: chooseSensor,
         },
         mounted: function () {
             //按钮的提示

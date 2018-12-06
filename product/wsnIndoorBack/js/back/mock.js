@@ -1277,7 +1277,7 @@ var sensorMock = {
             "humidity": 49,
             "lux": 5,
             "flame": true,
-            "smog": false,
+            "smog": true,
             "poison": false,
             "createTime": "2018年12月05日 18:04"
         }
@@ -1300,7 +1300,7 @@ var sensorMock = {
             "humidity": 47,
             "lux": 9,
             "flame": false,
-            "smog": false,
+            "smog": true,
             "poison": false,
             "createTime": "2018年12月05日 18:04"
         }
@@ -1392,7 +1392,7 @@ var sensorMock = {
             "humidity": 48,
             "lux": 8,
             "flame": false,
-            "smog": false,
+            "smog": true,
             "poison": false,
             "createTime": "2018年12月05日 18:04"
         }

@@ -134,19 +134,20 @@ var monitorNavRouter = {
     },
     //访客和移动设备，这里运行算法2,进行移动目标的定位。开始是个表格，分时间段
     //然后点目标可以看到轨迹
-    "mRobot": {
-        url: "monitor_visitor.html",
-        icon: "fa fa-android",
-        name: "移动物管理",
-    },
+    // "mRobot": {
+    //     url: "monitor_visitor.html",
+    //     icon: "fa fa-android",
+    //     name: "移动物管理",
+    // },
 
-    "mVistor": {
-        url: "monitor_visitor.html",
-        icon: "fa fa-users",
-        name: "访客管理",
+    "mMove": {
+        url: "monitor_move.html",
+        icon: "fa fa-random",
+        name: "移动目标管理",
     },
     "backToIndex": {
         url: "back_buildingByBmap.html",
+        icon: "fa fa-reply",
         name: "返回主页",
     }
 }
