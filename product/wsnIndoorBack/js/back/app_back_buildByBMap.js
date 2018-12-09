@@ -2,7 +2,7 @@ $(function () {
     var vdata = {
         finishLoading: true, //异步请求的数据是否加载完毕
         hasLoadMarkerOnBmap: false, //是否已经把新数据显示在地图中
-        title:getTitle("buildInfo")+"/"+getTitle(),
+        title: getTitle("buildInfo") + "/" + getTitle(),
         data: commonPageData,
         currentData: {}, //选中marker的data
         currentMarker: null, //被选中该的marker
@@ -36,8 +36,8 @@ $(function () {
                 marker.addEventListener("click", function () {
                     var p = this.getPosition(); //获取marker的位置
                     vdata.currentData = this.data;
-                    if (vdata.currentMarker!==null) {
-                        vdata.currentMarker.setAnimation(null)//上个被选中的marker停止弹跳
+                    if (vdata.currentMarker !== null) {
+                        vdata.currentMarker.setAnimation(null) //上个被选中的marker停止弹跳
                     }
                     this.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
                     vdata.currentMarker = this;
@@ -57,12 +57,13 @@ $(function () {
             refresh: getData,
             showLoc: function showLoc() {
                 var id = $(event.target).parent().siblings(".data-item-id").html();
-                if (id);
-                alert(id);
+                // if (id);
+                // alert(id);
             },
-            toMonitor:function toMonitor(e){
-                alert($(e.target).attr('bid'))
-                console.log($(e.target))
+            toMonitor: function toMonitor(e) {
+                // alert($(e.target).attr('bid'))
+                // console.log($(e.target))
+                location.href = getRouter("mOverview");
             }
         }
     })

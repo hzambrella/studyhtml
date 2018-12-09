@@ -37,7 +37,7 @@
     <script src="../js/back/back_route.js"></script>
     <!--css-->
     <link href="../css/back1_main.css" rel="stylesheet" type="text/css" />
-    <link href="../css/back/tmp_withmap.css" rel="stylesheet" type="text/css" />
+    <link href="../css/back/monitor_move.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
         /*vue加载数据时，不显示难看的花括号*/
@@ -107,7 +107,7 @@
 
                 <!--内容-->
                 <div class="content-mapapp">
-                    <div class="content-mapComponent">
+                    <div class="content-mapComponent" style="width:45%">
                         <div class="map-all">
                             <!--工具-->
                             <!--<div class="map-tool">
@@ -132,13 +132,100 @@
                         </div>
                     </div>
 
-                    <div class='content-info'>
+                    <div class='content-info' style="width:53%">
+                        <div class="target-info white-panel">
+                            <div class="target-info-top">
+                                <div class="target-info-left">
+                                    <h4>移动目标信息</h4>
+                                    <span v-if='network.nid<=0'>请于地图右上角选择一个楼层</span>
+                                    <span v-else-if='!targetFinishLoading' class='data-loading'>{{targetLoadingMessage}}</span>
+                                    <span v-else-if='targetFinishLoading'>{{targetMessage}}</span>
+                                </div>
+                                <div class="target-info-right">
+                                </div>
+                            </div>
+                            <div class="target-info-container">
+                                <div class="target-info-table-operate">
+                                    <button type="button" style="float:right" class="btn btn-default" data-toggle="tooltip" title="刷新"><i class="fa fa-refresh"></i></button>
+                                    <div class="col-lg-6" style="float:right">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="target-info-table">
+                                    <table class="table table-bordered table-sm target-table" style="margin-top:10px;">
+                                        <thead>
+                                            <tr>
+                                                <th width="10%">编号</th>
+                                                <th width="15%">名字</th>
+                                                <th width="10%">类型</th>
+                                                <!--<th width="7%">电话</th>
+                                                <th width="15%">证件号码</th>-->
+                                                <!--<th width="10%">备注</th>-->
+                                                <th width="25%">进楼时间</th>
+                                                <th width="25%">离开时间</th>
+                                                <th width="15%">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="target-info-table-row" v-for="(val,index) in targets" :class="{select:val.targetId==selectTargetId}">
+                                                <td>{{val.targetId}}</td>
+                                                <td>{{val.name}}</td>
+                                                <td v-if='val.type==0'>内部人员</td>
+                                                <td v-if='val.type==1'>访客</td>
+                                                <td v-if='val.type==2'>机器人</td>
+                                                <!--<td>{{val.mobile}}</td>
+                                                <td>{{val.idCard}}</td>-->
+                                                <!--<td>{{val.remark}}</td>-->
+                                                <td>{{val.createTime}}</td>
+                                                <td>{{val.leaveTime}}</td>
+                                                <td>
+                                                    <button :index="index" :targetId="val.targetId" type="button" class="target-button btn btn-default" data-toggle="tooltip"
+                                                        title="查看轨迹" @click="getTrail">
+                                                        <!--<i :sid="val.sid" class="fa fa-hand-pointer-o"></i>-->
+                                                    </button>
+                                                    <button :index="index" :targetId="val.targetId" type="button" class="detail-button btn btn-default" data-toggle="tooltip"
+                                                        title="查看详情" @click="getDetail">
+                                                        <!--<i :sid="val.sid" class="fa fa-hand-pointer-o"></i>-->
+                                                    </button>
+                                                    <button :index="index" :targetId="val.targetId" type="button" class="delete-button btn btn-default" data-toggle="tooltip"
+                                                        title="删除" @click="deleteTarget">
+                                                        <!--<i :sid="val.sid" class="fa fa-hand-pointer-o"></i>-->
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="target-info-table-page">
+                                    <div class="target-info-list-bottom">
+                                        <div class="list_bottom_tabinfo">
+                                        </div>
+                                        <div class="target-info-pagination">
+                                            <ul class="pagination">
+                                                <li><a href="#">首页</a></li>
+                                                <li><a href="#">&laquo;</a></li>
+                                                <li><a href="#">1</a></li>
+                                                <li><a href="#">&raquo;</a></li>
+                                                <li><a href="#">尾页</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--内容end-->
             </div>
         </div>
+
+
 
         <!--模态框-流程-->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -159,6 +246,21 @@
         </div>
     </div>
 
+    <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content">
+            <h5 id="trail-title">轨迹</h5>
+            <table class="table table-bordered table-sm sensor-table" style="margin-top:10px;">
+                <tbody>
+                    <tr>
+                        <td width="25%" id="time-title" class="sensor-table-key">时间</td>
+                        <td width="75%" id="time-val">无</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <footer>
         <p id="footer">推荐使用360浏览器或谷歌浏览器</p>
     </footer>
@@ -174,7 +276,7 @@
     <!--ajax-->
     <script src="../js/back/back_ajax.js"></script>
     <!--app-->
-    <script src="../js/back/tmp_withmap.js"></script>
+    <script src="../js/back/back_monitor_move.js"></script>
     <!--gmap-->
     <script src="../js/back/back_gmap.js"></script>
 

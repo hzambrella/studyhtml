@@ -1,0 +1,175 @@
+.content-info {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 40%;
+}
+
+.target-info {
+    height: 100%;
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.target-info-top {
+    position: relative;
+    height: 10%;
+    width: 100%;
+}
+
+.target-info-left {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    margin: 0;
+    float: left;
+}
+
+.target-info-right {
+    position: relative;
+    width: 10%;
+    height: 100%;
+    margin: 0;
+    float: left;
+}
+
+.target-info-operate {
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    color: black;
+}
+
+.target-info-container {
+    position: relative;
+    height: 80%;
+    width: 100%;
+}
+
+.target-table-key {
+    font-weight: bold;
+}
+
+.target-table-operate {
+    color: black;
+}
+
+.target-info-table-operate {
+    position: relative;
+    height: 7%;
+    width: 100%;
+    /*background-color: pink;*/
+}
+
+.target-info-table {
+    position: relative;
+    /*padding: 0px 0 0px 0;*/
+    height: 90%;
+    width: 100%;
+    overflow: auto;
+    /*background-color: orange;*/
+}
+
+.target-info-table-row {}
+
+.target-info-table-row.select {
+    background-color: #F5F7F7;
+}
+
+/*.target-info-table-page {
+    position: relative;
+    padding: 10px 10px 10px 10px;
+    height: 10%;
+    width: 100%;
+ 
+}*/
+
+.target-info-list-bottom {
+    width: 98%;
+    position: relative;
+    bottom: 0px;
+    margin: 0px auto;
+    padding: 5px;
+    border-top: 1px solid #ddd;
+    background-color: white;
+}
+
+.target-info-pagination {
+    position: relative;
+    float: right;
+}
+
+.target-status {
+    width: 22px;
+    height: 22px;
+}
+
+.target-button {
+    width: 22px;
+    height: 22px;
+    background-image: url('../../fonts/iconfont/trail22.png');
+}
+
+.detail-button {
+    width: 22px;
+    height: 22px;
+    background-image: url('../../fonts/iconfont/detail22.png');
+}
+
+.delete-button {
+    width: 22px;
+    height: 22px;
+    background-image: url('../../fonts/iconfont/delete22.png');
+}
+
+
+.ol-popup {
+    position: absolute;
+    background-color: white;
+    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    bottom: 12px;
+    left: -50px;
+    min-width: 250px;
+}
+
+.ol-popup:after,
+.ol-popup:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.ol-popup:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 48px;
+    margin-left: -10px;
+}
+
+.ol-popup:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 48px;
+    margin-left: -11px;
+}
+
+.ol-popup-closer {
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+}
+
+.ol-popup-closer:after {
+    content: "✖";
+}

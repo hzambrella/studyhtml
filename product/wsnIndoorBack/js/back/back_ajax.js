@@ -94,6 +94,20 @@ $(function () {
         0: '多功能传感器',
     }
     Status.sensorTypeName = sensorTypeName
+
+
+    var targetType = {}
+    targetType.insider = 0
+    targetType.visitor = 1
+    targetType.robot = 2
+    Status.targetType = targetType
+
+    var targetName = {
+        0: '内部人员',
+        1: '访客',
+        2: '机器人',
+    }
+    Status.targetName = targetName
 })
 
 console.log(Status)

@@ -53,6 +53,14 @@ function getSensorMock() {
     return sensorMock;
 }
 
+function getTargetMock() {
+    return targetMock
+}
+
+function getTrailMock() {
+    return trailMock;
+}
+
 //url: 'http://127.0.0.1:8083/geoserver/hzmap/wms',
 var mapMessMock = {
     code: 'EPSG:404000',
@@ -271,7 +279,7 @@ var networkMock = {
         "floor": 4,
         "coorId": 1,
         "comStatus": 1,
-        "anchorStatus": 6,
+        "anchorStatus": 0, //改这里
         "anchorTaskStatus": 0,
         "coordinator": null
     }
@@ -1535,4 +1543,74 @@ var sensorMock = {
             "createTime": "2018年12月05日 18:04"
         }
     }]
+}
+
+var targetMock = [{
+    "leaveTime": "2018年12月01日 12:04",
+    "unit": "美团外卖",
+    "targetId": 2018120111,
+    "createTime": "2018年12月01日 11:50",
+    "idCard": "43232319890203123X",
+    "mobile": "13456731234",
+    "name": "张三",
+    "remark": "美团外卖",
+    "bid": 1,
+    "type": 1
+}, {
+    "leaveTime": "2018年12月01日 12:23",
+    "unit": "baidu",
+    "targetId": 2018120112,
+    "createTime": "2018年12月01日 12:15",
+    "idCard": "7405207400",
+    "mobile": "",
+    "name": "扫地机器人",
+    "remark": "baidu robot",
+    "bid": 1,
+    "type": 2
+}]
+
+
+
+var trailMock = {
+    "code": 0,
+    "obj": [{
+        "trailId": "7bfe69e977fa4fec8c5e95707715139f",
+        "targetId": 2018120111,
+        "nid": 1,
+        "startTime": "2018年12月01日 11:54:06",
+        "endTime": "2018年12月01日 11:56:46",
+        "points": [
+            [70.29427, 60.668797],
+            [68.02238, 61.820072],
+            [63.93297, 62.30849],
+            [58.81772, 62.440277],
+            [53.57338, 62.339615],
+            [47.522217, 62.138283],
+            [42.315815, 61.82151],
+            [35.45629, 61.92146],
+            [27.895796, 62.02141],
+            [21.12314, 62.01161],
+            [14.367441, 62.047737],
+            [8.019567, 62.13956],
+            [2.3156776, 61.129467],
+            [1.2116991, 55.60655],
+            [1.1798937, 51.29212],
+            [1.1680838, 46.873425],
+            [0.07715572, 42.768845]
+        ]
+    }, {
+        "trailId": "b4b7fe0896bc46d698156ee3b16ee1e9",
+        "targetId": 2018120111,
+        "nid": 1,
+        "startTime": "2018年12月01日 11:59:56",
+        "endTime": "2018年12月01日 12:00:16",
+        "points": [
+            [0.5430715, 46.025475],
+            [0.5557732, 49.44068],
+            [0.26943788, 54.06634]
+        ]
+    }],
+    "success": true,
+    "message": "操作成功",
+    "map": {}
 }

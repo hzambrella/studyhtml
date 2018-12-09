@@ -400,7 +400,7 @@ function sensorStyleFunction(feature) {
 }
 
 function sensorStyleClickFunction(feature) {
-    var style=sensorFeatureStyleMap['sensorSelect'];
+    var style = sensorFeatureStyleMap['sensorSelect'];
     var lastestData = feature.get('latestData');
     if (lastestData.id > 0) {
         if (lastestData.smog == true) {
@@ -415,6 +415,43 @@ function sensorStyleClickFunction(feature) {
         }
     }
     return style
+}
+
+var lineColorMap = ["#00b514", "#9933FF", "#FF9900", "#3366CC", "#99CC33", "#FF0033", "#663300"]
+
+function lineStyleFunction(feature) {
+    var pointColor = "#99CC33";
+    var lineIndex = feature.get("index") ? feature.get("index") : 0
+    if (feature.get("featureType") == "endPoint") {
+        pointColor = "red"
+    }
+
+    return new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 15,
+            stroke: new ol.style.Stroke({
+                color: 'black',
+                width: 2
+            }),
+            fill: new ol.style.Fill({
+                color: pointColor,
+            })
+        }),
+        stroke: new ol.style.Stroke({
+            width: 4,
+            color: lineColorMap[lineIndex % lineColorMap.length],
+            //lineDash: [10, 8],
+        }),
+        text: new ol.style.Text({
+            text: feature.name,
+            font: "bold 13px 微软雅黑",
+            fill: new ol.style.Fill({
+                color: 'white'
+            }),
+            textAlign: "center",
+            textBaseline: "middle"
+        })
+    })
 }
 
 // function anchorLayer() {
