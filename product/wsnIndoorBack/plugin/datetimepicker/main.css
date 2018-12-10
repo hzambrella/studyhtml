@@ -1,0 +1,22 @@
+      .p20{
+        padding:20px;
+      }
+      .mt20{
+        margin-top:20px;
+      }
+      .mt40{
+        margin-top:40px;
+      }
+      .mt10{
+        margin-top:10px;
+      }
+      .hide{
+        display: none;
+      }
+      body{
+        height:1000px;
+      }
+      .c999{
+        color:#999;
+        font-size:12px;
+      }

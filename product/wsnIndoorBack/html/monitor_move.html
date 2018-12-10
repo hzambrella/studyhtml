@@ -22,16 +22,24 @@
     <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>-->
 
     <!--Bootstrap3 -->
-    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../bootstrap-3.3.7/css/build.css">
     <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script src="../js/vendor/popper.min.js"></script>
-
+    <!--datetimepicker-->
+    <link rel="stylesheet" href="../plugin/datetimepicker/css/datepicker.css">
+    <link rel="stylesheet" href="../plugin/datetimepicker/main.css">
+    <script src="../plugin/datetimepicker/js/datepicker.all.js"></script>
+    <script src="../plugin/datetimepicker/js/plugins/moment.min.js"></script>
+    <script src="../plugin/datetimepicker/main.js"></script>
 
     <!--vue.js-->
     <script src="../js/vendor/vue.js"></script>
     <!--template.js-->
     <script src="../js/vendor/template.js"></script>
+    <!--moment.js-->
+    <script src="../js/lib/moment.js"></script>
 
     <!--路由-->
     <script src="../js/back/back_route.js"></script>
@@ -65,12 +73,12 @@
             <div class="top_navigation" style="display:block;height:60px;margin:10px 10px;float:left;"></div>
             <div class="user_info">
                 <img id="head_img" class="head_img" src="../images/head_default.png" />
-                <span class="nickname">no_name21312313</span>
+                <span class="nickname">administrator_hz</span>
 
                 <div id="user_info_detail" class="user_info_detail">
                     <div class="user_info_detail_head">
                         <img class="head_img" src="../images/head_default.png" />
-                        <span class="nickname">no_name21312313</span>
+                        <span class="nickname">administrator_hz</span>
                     </div>
                     <!--<div class="user_info_detail_middle"></div>-->
                     <ul>
@@ -146,8 +154,17 @@
                             </div>
                             <div class="target-info-container">
                                 <div class="target-info-table-operate">
-                                    <button type="button" style="float:right" class="btn btn-default" data-toggle="tooltip" title="刷新"><i class="fa fa-refresh"></i></button>
-                                    <div class="col-lg-6" style="float:right">
+                                    <button @click="getTarget" type="button" style="float:right" class="btn btn-default" data-toggle="tooltip" title="获取数据"><i class="fa fa-search"></i>查询</button>
+
+                                    <div style="float:left">
+                                        <div class="c-datepicker-date-editor J-datepickerTime-range">
+                                            <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+                                            <input id="datePickerStartTime" placeholder="开始日期" name="" class="c-datepicker-data-input" value="">
+                                            <span class="c-datepicker-range-separator">-</span>
+                                            <input id="datePickerEndTime" placeholder="结束日期" name="" class="c-datepicker-data-input" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" style="float:left">
                                         <div class="input-group">
                                             <input type="text" class="form-control">
                                             <span class="input-group-btn">

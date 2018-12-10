@@ -38,6 +38,7 @@ $(function () {
             baseMapData: defaultGisData,
             mapDetail: defaultMapDetail,
             floor: [],
+            GmapParamMeanMap:GmapParamMeanMap,
         },
         methods: {
             back: routerBack

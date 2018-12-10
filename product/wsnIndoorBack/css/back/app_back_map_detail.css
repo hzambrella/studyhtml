@@ -1,1 +1,7 @@
-
+.modify-button {
+    width: 22px;
+    height: 22px;
+    float: right;
+    background-image: url('../../fonts/iconfont/modify_2_22.png');
+    border:none;
+}

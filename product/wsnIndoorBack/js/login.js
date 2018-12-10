@@ -1,4 +1,8 @@
-function doLogin(el) {
+$("#login").on('click', function () {
+    doLogin()
+})
+
+function doLogin() {
     // var formData = new FormData($("#loginForm"));
     // alert(formData)
     var d = {};
@@ -7,12 +11,13 @@ function doLogin(el) {
         d[this.name] = this.value;
     });
 
-    d["remember"]=$("#remember").prop("checked");//checkbox是否被选中
+    d["remember"] = $("#remember").prop("checked"); //checkbox是否被选中
     //  ($("#remember"))
 
-    $.error_message(JSON.stringify(d));
+    //$.error_message(JSON.stringify(d));
     // $("#loginForm #account").addClass("red");
-    //TODO ajax
+    //TODO: ajax
+    location.href = "back_buildingByBMap.html";
 }
 
 function doRegister() {
@@ -24,12 +29,12 @@ function doRegister() {
     //  ($("#remember"))
 
     //TODO ajax
-     $.error_message(JSON.stringify(d));
+    $.error_message(JSON.stringify(d));
     //  $(".input.red").removeClass("red");
 }
 
 $.extend({
-    error_message:function(mess){
+    error_message: function (mess) {
         $("#error_message").html(mess);
     }
 })

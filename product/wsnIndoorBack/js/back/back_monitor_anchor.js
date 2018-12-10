@@ -307,7 +307,7 @@ $(function () {
 
     //任务模拟
     function newNetMock() {
-        alert('请点击无线网络管理--新建网络');
+        //alert('请点击无线网络管理--新建网络');
         vdata.network.anchorStatus++;
         vdata.network.anchorTaskStatus = Status.taskStatus.todo;
     }
@@ -333,7 +333,7 @@ $(function () {
         setTimeout(function () {
             vdata.network.anchorStatus++;
             vdata.network.anchorTaskStatus = Status.taskStatus.todo;
-        }, 1000)
+        }, 3000)
     }
 
     function trainingMock() {
@@ -341,7 +341,7 @@ $(function () {
         setTimeout(function () {
             vdata.network.anchorStatus++;
             vdata.network.anchorTaskStatus = Status.taskStatus.todo;
-        }, 1000)
+        }, 5000)
     }
 
     function restartMock() {

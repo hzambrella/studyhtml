@@ -1,13 +1,33 @@
+//静态页面的url
+var StaticPageUrl = {
+    buildInfoByTab: "back_buildingByTab.html",
+    BuildInfoByBMap: "back_buildingByBmap.html",
+    overview: "back_overview.html",
+    mapInfo: "back_map.html",
+    mapdetail: "back_mapdetail.html",
+
+    mOverview: "monitor_overview.html",
+    mNetwork: "monitor_network.html",
+    mAnchor: "monitor_anchor.html",
+    mSensor: "monitor_sensor.html",
+    mMove: "monitor_move.html",
+    backToIndex: "back_buildingByBmap.html",
+}
+
+//页面的URL。换环境时改动这里即可。
+var PageUrl = StaticPageUrl;
+
 //路由和通用
 //路由，通用数据格式，通用的方法
+
 var buildInfoRouter = {
     "buildInfoByTab": {
-        url: "back_buildingByTab.html",
+        url: PageUrl.buildInfoByTab,
         name: "表格展示",
         parentLevel: "buildInfo",
     },
     "BuildInfoByBMap": {
-        url: "back_buildingByBmap.html",
+        url: PageUrl.BuildInfoByBMap,
         name: "地图展示",
         parentLevel: "buildInfo",
     },
@@ -48,7 +68,7 @@ var hardwareRouter = {
 
 var leftNavRouter = {
     "overview": {
-        url: "back_overview.html",
+        url: PageUrl.overview,
         icon: "fa fa-th",
         name: "概览",
     },
@@ -60,7 +80,7 @@ var leftNavRouter = {
         level2: buildInfoRouter,
     },
     "mapInfo": {
-        url: "back_map.html",
+        url: PageUrl.mapInfo,
         icon: "fa fa-map",
         name: "地图管理",
     },
@@ -91,20 +111,20 @@ leftNavRouter.name = "信息总览"
 
 var commonRouter = {
     "mapdetail": {
-        url: "back_mapdetail.html",
+        url: PageUrl.mapdetail,
     },
 }
 
 var monitorDeviceRouter = {
     //地图，这里运行算法1
     "mAnchor": {
-        url: "monitor_anchor.html",
+        url:PageUrl.mAnchor,
         name: "定位设备管理",
         parentLevel: "mDevice",
     },
     //地图，这里运行算法2,进行固定目标的定位
     "mSensor": {
-        url: "monitor_sensor.html",
+        url: PageUrl.mSensor,
         name: "环境设备管理",
         parentLevel: "mDevice",
     },
@@ -115,12 +135,12 @@ var monitorNavRouter = {
     //每层协调器信息和网络状况(良好，拥塞)。
     //有时间最好画个拓扑
     "mOverview": {
-        url: "monitor_overview.html",
+        url: PageUrl.mOverview,
         icon: "fa fa-connectdevelop",
         name: "楼内概览",
     },
     "mNetwork": {
-        url: "monitor_network.html",
+        url: PageUrl.mNetwork,
         icon: "fa fa-rss",
         name: "无线网络管理",
         // level2Id: "mDeviceLevel2",
@@ -141,12 +161,12 @@ var monitorNavRouter = {
     // },
 
     "mMove": {
-        url: "monitor_move.html",
+        url:PageUrl.mMove,
         icon: "fa fa-random",
         name: "移动目标管理",
     },
     "backToIndex": {
-        url: "back_buildingByBmap.html",
+        url: PageUrl.backToIndex,
         icon: "fa fa-reply",
         name: "返回主页",
     }

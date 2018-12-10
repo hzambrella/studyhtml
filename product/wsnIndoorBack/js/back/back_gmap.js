@@ -6,6 +6,23 @@
 //TODO:变成每层的地图数组，做缓存。
 var GMap = null;
 
+var GmapParamMeanMap = {
+    "mapId": "地图编号",
+    "code": "空间参考标识符",
+    "host": "地图服务器域名",
+    "serverType": "服务器类型",
+    "workspace": "工作空间",
+    "requestType": "请求类型",
+    "layers": "图层名",
+    "x_min": "地图范围-横向最小值",
+    "x_max": "地图范围-横向最大值",
+    "y_min": "地图范围-纵向最小值",
+    "y_max": "地图范围-纵向最大值",
+    "zoom_default": "地图默认缩放值",
+    "zoom_max": "地图最大缩放值",
+    "zoom_min": "地图最小缩放值",
+}
+
 function loadMap(mapId, mapMess) {
     //先清空GMap
     if (GMap != null) {

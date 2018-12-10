@@ -211,18 +211,21 @@ $(function () {
 
     function doPopup(coordinate, feature) {
         //coordinate[1] = coordinate[1]+1 //往上挪点
+        var suffix = "";
         var index = feature.get("index") ? feature.get("index") + 1 : 1;
-        $("#trail-title").html("的轨迹" + index)
+
         if (feature.get("featureType") == "startPoint") {
             $("#time-title").html("开始时间")
             $("#time-val").html(feature.get("startTime"))
+            suffix = "-起点"
         }
 
         if (feature.get("featureType") == "endPoint") {
             $("#time-title").html("结束时间")
             $("#time-val").html(feature.get("endTime"))
+            suffix = "-终点"
         }
-
+        $("#trail-title").html("轨迹" + index + suffix)
         popup.setPosition(coordinate);
     }
 
@@ -245,8 +248,8 @@ $(function () {
         setTimeout(function () {
             vdata.network = getNetworkMock().obj;
             netStatusAndMessage(true, '', '加载完毕')
-
-            getTargetData();
+            targetStatusAndMessage(true, '', '输入时间段和关键词，点击查询按钮，即可查询目标');
+            // getTargetData();
         }, 20)
     }
 
@@ -264,9 +267,23 @@ $(function () {
         vdata.selectTargetId = 0
     }
 
+
     //加载数据
     function getTargetData() {
         targetStatusAndMessage(false, '加载移动目标数据中')
+        datePickerStartTime = $("#datePickerStartTime").val();
+        datePickerEndTime = $("#datePickerEndTime").val();
+        if (!datePickerStartTime || datePickerStartTime == '') {
+            //var datePickerStartTime = moment().format('YYYY-MM-DD, hh:mm');
+            //$("#datePickerStartTime").val('2018-11-30 12:00');
+        }
+
+        if (!datePickerEndTime || datePickerEndTime == '') {
+            var datePickerEndTime = moment().format('YYYY-MM-DD, hh:mm');
+            //$("#datePickerStartTime").val(datePickerEndTime);
+        }
+
+        console.log(datePickerStartTime, datePickerEndTime);
         setTimeout(function () {
             //TODO:ajax
             vdata.targets = getTargetMock();
@@ -353,8 +370,11 @@ $(function () {
             getTrail: getTrail,
             deleteTarget: function () {},
             refresh: function () {},
+            getTarget: getTargetData,
         },
-        mounted: function () {},
+        mounted: function () {
+            DATAPICKERAPI.initDatePicker()
+        },
         watch: {}
     })
 
