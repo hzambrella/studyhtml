@@ -41,7 +41,13 @@
   </div>
 
   <a style="color:blue;font-size:30px;" name="chapter0">0 引言</a>
-  <p>TODO：锚的#怎么打?</p>
+  <p>锚点怎么打:</p><a href="http://www.divcss5.com/html/h50842.shtml">http://www.divcss5.com/html/h50842.shtml</a>
+  <pre style="border:1px solid #999;">
+    //这里展示代码使用了pre标签而非code标签
+    &lta href="#charpter1">第一章&lt/a&gt
+    .......
+    &lta name="charpter1" target="blank">&lt/a&gt
+  </pre>
   <!--
   <div id="mao2">
     <maos v-for="item in brlist" v-bind:mao="item" v-bind:char="char"  ></maos>
@@ -362,7 +368,7 @@ var br = new Vue({
   </br>
   <p style="color:red;font-size:15px;">2 vue prop（子组件接受父组件的值）</p>
   <p>props选线代表组件需要的数据，这个选项可用于子组件使用父组件的数据。它可以理解成自定义组件的自定义属性</p>
-  <p><strong>注意：</strong>如果犯贱地使用camelCased (驼峰式) 命名的 prop ，当使用的不是字符串模版， 需要转换为相对应的 kebab-case (短横线隔开式) 命名 （详细见官文：组件camelCase
+  <p><strong style="color:red">注意：</strong>如果犯贱地使用camelCased (驼峰式) 命名的 prop ，当使用的不是字符串模版， 需要转换为相对应的 kebab-case (短横线隔开式) 命名 （详细见官文：组件camelCase
     vs. kebab-case）</p>
 
   <p>动态prop</p>
@@ -394,7 +400,7 @@ var br = new Vue({
   <pre>
   每个 Vue 实例都实现了<strong>事件接口 (Events interface)</strong>，即：
     使用 $on(eventName) 监听事件
-    使用 $emit(eventName) 触发事件
+    使用 $emit(eventName) 触发事件(有点像triggle)
     Vue 的事件系统分离自浏览器的 EventTarget API。尽管它们的运行类似，但是 $on 和 $emit 不是addEventListener 和 dispatchEvent 的别名。
     给组件绑定原生事件：可以使用 .native 修饰 v-on。例如：
     &ltmy-component v-on:click.native="doTheThing"&gt&lt/my-component&gt

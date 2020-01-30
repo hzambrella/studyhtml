@@ -307,7 +307,7 @@ $(function () {
 
     //任务模拟
     function newNetMock() {
-        //alert('请点击无线网络管理--新建网络');
+        alert('请点击无线网络管理--新建网络');
         vdata.network.anchorStatus++;
         vdata.network.anchorTaskStatus = Status.taskStatus.todo;
     }

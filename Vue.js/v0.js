@@ -6,7 +6,7 @@ var haha = new Vue({
 })
 
 
-
+//锚
 Vue.component('fmao', {
     props: ['anchor', 'title','fuhao'],
     template: '<div >\

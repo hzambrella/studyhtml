@@ -373,6 +373,7 @@ $(function () {
             getTarget: getTargetData,
         },
         mounted: function () {
+            //日期插件
             DATAPICKERAPI.initDatePicker()
         },
         watch: {}

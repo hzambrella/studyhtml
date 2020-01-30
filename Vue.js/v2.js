@@ -64,7 +64,7 @@ parentandchild = new Vue({
 // 注册全局组件my-component
 //!!注意，在实例化之前就要注册组件，否则报错！！
 Vue.component('my-component', {
-  template: '<div>全局组件!请看v2.js</div>'
+  template: '<div>全局组件!请看v2.js 67行</div>'
 })
 
 
@@ -80,7 +80,7 @@ var father2 = new Vue({
   components: {
     // <my-component> 将只在父模板可用
     'jubu-comp': {
-      template: '<div>局部组件!请看v2.js</div>'
+      template: '<div>局部组件!请看v2.js 83行</div>'
     }
   }
 })
@@ -195,7 +195,7 @@ Vue.component('button-counter', {
   methods: {
     increment: function () {
       this.counter += 1
-      this.$emit('report') //触发report事件
+      this.$emit('report') //触发自定义的report事件，有点像triggle
     }
   },
 })
