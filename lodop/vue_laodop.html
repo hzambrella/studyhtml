@@ -5,22 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vue打印</title>
+    <title> vue lodop打印 简单示例</title>
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
-    　<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script language="javascript" src="http://www.lodop.net/demolist/LodopFuncs.js"></script>
     <!-- <script language="javascript" src="LodopFuncs.js"></script> -->
-    <script language="javascript" src="http://www.lodop.net/demolist/LodopFuncs.js"></script>  
+
 </head>
 <style>
-    #help,#operation {
+    #operation,
+    #help {
         margin: 6px auto;
-        width: 1600px;
+        width: 95%;
     }
 
     #dataShow {
         margin: 5px auto;
-        width: 2100px;
-        height:920px;
+        width: 98%;
+        height: 720px;
     }
 
     #toPrint {
@@ -33,55 +36,108 @@
         margin: 10px;
     }
 
-    #tmplHideArea{
+    #tmplHideArea {
         margin: 5px auto;
-        width: 2100px;
+        width: 95%;
     }
 
+    #jsonData {
+        display: block;
+        width: 20%;
+        height: 100%;
+    }
+
+    #jsonData .dataText {
+        margin: 10px;
+        width: 100%;
+        height: 90%;
+    }
+
+    #tmplHTMLCode {
+        display: block;
+        width: 50%;
+        height: 100%;
+    }
+
+    #tmplHTMLCode .dataText {
+        margin: 10px;
+        width: 100%;
+    }
+
+    #cssResp {
+        display: block;
+        width: 20%;
+        height: 100%;
+    }
+
+    #cssResp .dataText {
+        margin: 10px;
+        height: 90%;
+        width: 100%;
+    }
+
+    [v-cloak] {
+        display: none;
+    }
 </style>
 
 <body>
-    <div id="app">
-        <div id="help" v-for="item in help"><span>{{item}}</span></div>
-        <br/>
+    <div id="app" v-cloak>
+        <h3>vue组件模板的例子： </h3>
         <div id="operation">
             <button class="btn" id="queryData" @click="doQueryData">查询</button>
-            <button class="btn" id="print" @click='doPrint'>打印</button>
+            <button class="btn" id="printView" @click='doPrintPreview'>预览打印</button>
+            <button class="btn" id="doPrint" @click='doPrint'>直接打印</button>
+            <button class="btn" id="design" @click='doDesign'>设计</button>
+            <span>单据:</span>
             <select v-model="reportType" @change="clearTMPL">
-                <option value="inbound">入库单</option>
-                <option value="outbound">出库单</option>
+                <option v-for='(report,index) in reports' :value="report.reportId">{{report.reportName}}</option>
+            </select>
+            <span>本地打印机:</span>
+            <select v-model='printerName'>
+                <option :value="printer" v-for="(printer,index) in printers">{{printer}}</option>
             </select>
         </div>
+
         <div id="dataShow">
-            <div id="jsonData" class="dataShowBlock" style="display:block;width: 490px;height: 490px">
+            <div id="jsonData" class="dataShowBlock">
                 <span>业务数据</span>
-                <textarea id="dataText" placeholder="返回的数据"
-                    style="margin:10px;width: 490px;height: 880px">{{tmplData}}</textarea>
+                <textarea class="dataText" placeholder="返回的数据" style="height: 35%" v-model='tmplDataJSONStr'>{{tmplDataJSONStr}}</textarea>
+                <span>保存的打印机数据</span>
+                <textarea class="dataText" placeholder="打印机" style="height: 5%" v-model='printerNameResp'>{{printerNameResp}}</textarea>
+                <span>保存的lodop打印指令</span>
+                <textarea class="dataText" placeholder="打印指令" style="height: 35%" v-model=lodopCode>{{lodopCode}}</textarea>
             </div>
-            <div id="tmplHTMLCode" class="dataShowBlock" style="display:block;width: 790px;height: 490px">
-                <span>模板</span>
+            <div id="tmplHTMLCode" class="dataShowBlock">
+                <span>保存的vue模板</span>
                 <br/>
                 <span>header</span>
-                <textarea id="dataText" placeholder="返回的模板头"
-                    style="margin:10px;width: 790px;height: 170px">{{templateHEADER}}</textarea>
+                <textarea class="dataText" placeholder="返回的模板头" style="height: 15%" v-model='templateHEADER'>{{templateHEADER}}</textarea>
                 <span>detail table</span>
-                <textarea id="dataText" placeholder="返回的模板详情"
-                    style="margin:10px;width: 790px;height: 430px">{{templateDETAIL}}</textarea>
+                <textarea class="dataText" placeholder="返回的模板详情" style="height: 40%" v-model='templateDETAIL'>{{templateDETAIL}}</textarea>
                 <span>footer</span>
-                <textarea id="dataText" placeholder="返回的模板脚"
-                    style="margin:10px;width: 790px;height: 140px">{{templateFOOTER}}</textarea>
+                <textarea class="dataText" placeholder="返回的模板脚" style="height: 15%" v-model='templateFOOTER'>{{templateFOOTER}}</textarea>
             </div>
 
-            <div id="cssResp" class="dataShowBlock" style="display:block;width: 490px;height: 490px">
-                <span>css</span>
-                <textarea id="dataText" placeholder="返回的css"
-                    style="margin:10px;width: 490px;height: 880px">{{templateCSS}}</textarea>
+            <div id="cssResp" class="dataShowBlock">
+                <span>保存的css,要压缩成一行</span>
+                <textarea class="dataText" placeholder="返回的css" style="height: 45%" v-model='templateCSS'>{{templateCSS}}</textarea>
+                <span>设计关闭后输出的指令</span>
+                <textarea id="lodopCode" class="dataText" style="height: 45%" placeholder="输出的指令"></textarea>
             </div>
             <br />
         </div>
-
+        <br/>
+        <h3>方案对比： </h3>
+        <div id="help" v-for="item in help">
+            <h4>{{item.title}}</h4>
+            <div v-for="content in item.content">
+                <p>{{content}}</p>
+            </div>
+        </div>
+        <br/>
+        <h3>vue渲染数据后的超文本html:</h3>
         <div id="tmplHideArea">
-            <p>vue绑定后:</p>
             <div id="toPrintHEADER"></div>
             <div id="toPrintDETAIL"></div>
             <div id="toPrintFOOTER"></div>
@@ -90,125 +146,213 @@
     </div>
 
     <script language="javascript" type="text/javascript">
-        var wantToSay=["1.前端用vue的组件做模板。html和css保存在数据库中 ",
-                    "2.后端返回业务数据和模板数据。用vue组件渲染数据，lodop用打印html和table的方式打印 ",
-                    "3.模板添加到dom后，没有更新可以不用再次去请求",
-                    "4.lodop自带的可视化设计不好用"]
-        var app = new Vue({
-            el: '#app',
-            data: {
-                reportType: 'inbound',
-                tmplData: null,
-                templateHEADER: ``,
-                templateDETAIL: ``,
-                templateFOOTER: ``,
-                templateCSS: ``,
-                help:wantToSay,
-            },
-            mounted: function () {
-            },
-            methods: {
-                //查询数据
-                doQueryData: function () {
-                    var tmplId = this.reportType;
-                    this.tmplData = $AjaxMock.getData(tmplId);
-                    var tmpl = $AjaxMock.getTMPL(tmplId);//可以考虑使用缓存，append到页面上后可以不需要重复请求，除非版本号变了。
-                    // console.log(tmpl)
-                    if (tmpl == null) {
-                        alert("模板为空")
-                        return;
-                    }
-                    this.templateHEADER = tmpl.HEADER;
-                    this.templateDETAIL = tmpl.DETAIL;
-                    this.templateFOOTER = tmpl.FOOTER;
-                    this.templateCSS = tmpl.CSS;
-                },
+        var printers;
 
-                //打印
-                //https://blog.csdn.net/zheyiw/article/details/97576477
-                doPrint: function () {
-                    var printObj = this.tmplData;
-                    var templateHEADER = this.templateHEADER;
-                    var templateDETAIL = this.templateDETAIL;
-                    var templateFOOTER = this.templateFOOTER;
+        let lodopTableTMPLDel = function (tpl, data) {
+            var result = tpl.replace(/<%\s*([^%>|\s]+)?\s*%>/g, function (s0, s1) {
+                return data[s1]
+            })
+            return result;
+        }
 
-                    if (printObj == null) {
-                        alert("打印数据为空");
-                        return;
-                    }
-
-                    if (templateHEADER == null && templateDETAIL == null && templateFOOTER == null) {
-                        alert("打印模板为空");
-                        return;
-                    }
-
-                    //组件渲染数据到模板
-                    renderByVueComponent('#toPrintHEADER', templateHEADER, printObj);
-                    renderByVueComponent('#toPrintDETAIL', templateDETAIL, printObj);
-                    renderByVueComponent('#toPrintFOOTER', templateFOOTER, printObj);
-
-                    this.lodopPrint();
-
-                    function renderByVueComponent(selector, tmpl, printObj) {
-                        var printTMPLComp = Vue.extend({
-                            data: function () {
-                                return {
-                                    printdata: printObj, //传入打印数据源
-                                }
-                            },
-                            template: tmpl, //打印模板
-                        })
-                        var component = new printTMPLComp().$mount()
-                        $(selector).empty();
-                        $(selector).append(component.$el)
-                    }
-                },
-                lodopPrint: function () {
-                    //console.log(document.getElementById("toPrint").innerHTML);
-                    //lodop打印 例子15
-                    /*
-                    LODOP = getLodop();
-                    LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_无边线表格");
-                    //LODOP.ADD_PRINT_TABLE(50, 10, "50%", 220, TMPL);
-                    var styleHTML = `<style>` + this.templateCSS + `</style>`;
-                    LODOP.ADD_PRINT_TABLE(50, 10, "50%", 220, styleHTML + document.getElementById("toPrint")
-                        .innerHTML);
-                    //LODOP.ADD_PRINT_HTM(88, 200, 350, 600, styleHTML + document.getElementById("toPrint").innerHTML);
-                    //LODOP.SET_PRINT_STYLEA(0,"Top2Offset",-40); //这句可让次页起点向上移
-                    // LODOP.ADD_PRINT_HTM(2,0,"50%",200,"<body style='margin-top:0'>表格后面用<font color=blue>ADD_PRINT_HTM</font>附加其它备注</body>");
-                    // LODOP.SET_PRINT_STYLEA(0,"LinkedItem",-1);
-                    LODOP.PREVIEW();
-                    */
-                    //lodop打印 例子43
-                    var LODOP = getLodop();
-                    LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_分页打印综合表格");
-                    var strStyle = "<style>" + this.templateCSS + " </style>";
-                    LODOP.ADD_PRINT_TABLE(128, "5%", "90%", 314, strStyle + document.getElementById(
-                        "toPrintDETAIL").innerHTML);
-                    LODOP.SET_PRINT_STYLEA(0, "Vorient", 3);
-                    LODOP.ADD_PRINT_HTM(26, "5%", "90%", 109, document.getElementById("toPrintHEADER")
-                        .innerHTML);
-                    LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
-                    LODOP.SET_PRINT_STYLEA(0, "LinkedItem", 1);
-                    LODOP.ADD_PRINT_HTM(444, "5%", "90%", 54, document.getElementById("toPrintFOOTER")
-                        .innerHTML);
-                    LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
-                    LODOP.SET_PRINT_STYLEA(0, "LinkedItem", 1);
-                    LODOP.PREVIEW();
-                },
-                clearTMPL:function(){
-                    this.tmplData=null;
-                    this.templateHEADER=null;
-                    this.templateDETAIL=null;
-                    this.templateFOOTER=null;
-                    this.templateCSS=null;
-                    //清空这里可以用id来做个缓存模板什么的
-                    $("#toPrintHEADER").empty();
-                    $("#toPrintDETAIL").empty();
-                    $("#toPrintFOOTER").empty();
-                }
+        window.onload = function () {
+            //获取本地打印机
+            var printCount = LODOP.GET_PRINTER_COUNT();
+            printers = [];
+            for (i = 0; i < printCount; i++) {
+                printers.push(LODOP.GET_PRINTER_NAME(i));
             }
-        })
+
+            //获取单据名
+            function $AjaxGetReport() {
+                return [{
+                    reportId: 'outbound',
+                    reportName: '出库单',
+                }, {
+                    reportId: 'inbound',
+                    reportName: '入库单',
+                }, {
+                    reportId: 'carton',
+                    reportName: '装箱单',
+                }];
+            }
+
+            //例子：
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    reports: [],
+                    reportType: '',
+                    tmplDataJSONStr: null,
+                    printerName: '',
+                    printerNameResp: '',
+                    templateHEADER: ``,
+                    templateDETAIL: ``,
+                    templateFOOTER: ``,
+                    templateCSS: ``,
+                    help: wantToSay,
+                    lodopCode: null,
+                    lodopCodeOutput: ``,
+                    printers: [],
+                },
+                mounted: function () {
+                    //this.getPrinters();
+                    this.printers = printers;
+                    if (this.printers.length > 0) {
+                        this.printerName = this.printers[0];
+                    }
+
+                    this.reports = $AjaxGetReport();
+                    if (this.reports.length > 0) {
+                        this.reportType = this.reports[0].reportId;
+                    }
+                },
+                methods: {
+                    getPrinters: function () {
+
+                        if (this.printers.length > 0) {
+                            this.printerName = this.printers[0];
+                        }
+                        //console.log(this.printers);
+                    },
+                    //查询数据
+                    doQueryData: function () {
+                        var tmplId = this.reportType;
+                        this.tmplDataJSONStr = $AjaxMock.getData(tmplId);
+                        var tmpl = $AjaxMock.getTMPL(tmplId); //可以考虑使用缓存，append到页面上后可以不需要重复请求，除非版本号变了。
+                        // console.log(tmpl)
+                        if (tmpl == null) {
+                            alert("模板为空")
+                            return;
+                        }
+                        this.templateHEADER = tmpl.HEADER;
+                        this.templateDETAIL = tmpl.DETAIL;
+                        this.templateFOOTER = tmpl.FOOTER;
+                        this.templateCSS = tmpl.CSS;
+                        this.lodopCode = tmpl.LODOPCODE;
+                        this.printerName = tmpl.PRINTERNAME;
+                        this.printerNameResp = tmpl.PRINTERNAME;
+                    },
+
+                    //打印预览
+                    //https://blog.csdn.net/zheyiw/article/details/97576477
+                    doPrintPreview: function () {
+                        this.Print(function () {
+                            LODOP.PREVIEW()
+                        });
+                    },
+                    //直接打印
+                    doPrint: function () {
+                        this.Print(function () {
+                            LODOP.PRINT()
+                        });
+                    },
+                    Print: function (callback) {
+                        if (!this.tmplDataJSONStr) {
+                            alert("打印数据为空");
+                            return;
+                        }
+
+                        if (this.templateHEADER == null && this.templateDETAIL == null && this.templateFOOTER ==
+                            null) {
+                            alert("打印模板为空");
+                            return;
+                        }
+
+                        if (this.lodopCode == null) {
+                            alert("lodop编码为空")
+                            return;
+                        }
+
+                        this.doRenderDataByVue();
+
+                        var strStyle = "<style>" + this.templateCSS + " </style>";
+
+                        lodopCodeToPrint = lodopTableTMPLDel(this.lodopCode, {
+                            header: document.getElementById("toPrintHEADER").innerHTML,
+                            details: strStyle + document.getElementById("toPrintDETAIL").innerHTML,
+                            footer: document.getElementById("toPrintFOOTER").innerHTML,
+                        });
+
+                        console.log(lodopCodeToPrint);
+                        eval(lodopCodeToPrint);
+                        if (this.printerName) LODOP.SET_PRINTER_INDEX(this.printerName);
+                        callback();
+                    },
+                    //用vue渲染table数据
+                    doRenderDataByVue: function () {
+                        var printObj = JSON.parse(this.tmplDataJSONStr);
+                        var templateHEADER = this.templateHEADER;
+                        var templateDETAIL = this.templateDETAIL;
+                        var templateFOOTER = this.templateFOOTER;
+                        //组件渲染数据到模板
+                        renderByVueComponent('#toPrintHEADER', templateHEADER, printObj);
+                        renderByVueComponent('#toPrintDETAIL', templateDETAIL, printObj);
+                        renderByVueComponent('#toPrintFOOTER', templateFOOTER, printObj);
+
+                        function renderByVueComponent(selector, tmpl, printObj) {
+                            var printTMPLComp = Vue.extend({
+                                data: function () {
+                                    return {
+                                        printdata: printObj, //传入打印数据源
+                                    }
+                                },
+                                template: tmpl, //打印模板
+                            })
+                            var component = new printTMPLComp().$mount()
+                            $(selector).empty();
+                            $(selector).append(component.$el)
+                        }
+                    },
+                    //设计
+                    doDesign: function () {
+                        var templateHEADER = this.templateHEADER;
+                        var templateDETAIL = this.templateDETAIL;
+                        var templateFOOTER = this.templateFOOTER;
+
+                        if (templateHEADER == null && templateDETAIL == null && templateFOOTER == null) {
+                            alert("打印模板为空");
+                            return;
+                        };
+                        if (this.lodopCode == null) {
+                            alert("lodop编码为空")
+                            return;
+                        };
+
+                        $('#toPrintHEADER').empty();
+                        $('#toPrintDETAIL').empty();
+                        $('#toPrintFOOTER').empty();
+
+                        $('#toPrintHEADER').append(templateHEADER);
+                        $('#toPrintDETAIL').append(templateDETAIL);
+                        $('#toPrintFOOTER').append(templateFOOTER);
+
+                        lodopCodeOutput = this.lodopCodeOutput;
+                        eval(this.lodopCode);
+                        if (LODOP.CVERSION) CLODOP.On_Return = function (TaskID, Value) {
+                            console.log("val:" + Value);
+                            document.getElementById("lodopCode").value = Value;
+                        };
+
+                        lodopCodeOutput = LODOP.PRINT_DESIGN();
+                        console.log(lodopCodeOutput);
+                    },
+                    clearTMPL: function () {
+                        this.tmplDataJSONStr = null;
+                        this.templateHEADER = null;
+                        this.templateDETAIL = null;
+                        this.templateFOOTER = null;
+                        this.templateCSS = null;
+                        this.lodopCode = null;
+                        this.printerNameResp = null;
+                        //清空这里可以用id来做个缓存模板什么的
+                        $("#toPrintHEADER").empty();
+                        $("#toPrintDETAIL").empty();
+                        $("#toPrintFOOTER").empty();
+                    }
+                }
+            })
+        };
 
         var $AjaxMock = {
             getTMPL: function (tmplID) {
@@ -219,38 +363,88 @@
             },
         }
 
+        //获取模板
         function getTMPL(tmplID) {
             switch (tmplID) {
                 case "inbound":
                     return inboundTMPL;
-                    break
                 case "outbound":
                     return outboundTMPL;
-                    break
+                case "carton":
+                    return cartonTMPL;
                 default:
                     return null;
-                    break
+
             }
         }
 
+        //获取数据
         function getData(tmplID) {
             switch (tmplID) {
                 case "inbound":
-                    return dataInbound;
-                    break;
+                    return JSON.stringify(dataInbound);
                 case "outbound":
-                    return dataOutbound;
-                    break;
+                    return JSON.stringify(dataOutbound);
+                case "carton":
+                    return JSON.stringify(dataCarton);
                 default:
                     break
             }
         }
 
         //----templateStr
+        //lodop code lodop打印 例子43
+        var lodopCodeTableMockInBound =
+            `
+        LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_分页打印综合表格");
+        LODOP.ADD_PRINT_TABLE(48, "5%", "90%",244, '<%details%>');
+        LODOP.SET_PRINT_STYLEA(0, "Vorient", 3);
+    `;
+        var lodopCodeTableMockOutBound =
+            `
+        LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_分页打印综合表格");
+        LODOP.ADD_PRINT_TABLE(128, "5%", "90%", 314,'<%details%>');
+        LODOP.SET_PRINT_STYLEA(0, "Vorient", 3);
+        LODOP.ADD_PRINT_HTM(26, "5%", "90%", 109, '<%header%>');
+        LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
+        LODOP.SET_PRINT_STYLEA(0, "LinkedItem", 1);
+        LODOP.ADD_PRINT_HTM(444, "5%", "90%", 54, '<%footer%>');
+        LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
+        LODOP.SET_PRINT_STYLEA(0, "LinkedItem", 1);
+    `;
+        var lodopCodeTableMockCarton =
+            `
+        LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_分页打印综合表格");
+        LODOP.ADD_PRINT_HTM(128, "5%", "90%", 314,'<%details%>');
+        LODOP.SET_PRINT_STYLEA(0, "Vorient", 3);
+        LODOP.ADD_PRINT_HTM(26, "5%", "90%", 109, '<%header%>');
+        LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
+        LODOP.SET_PRINT_STYLEA(0, "LinkedItem", 1);
+        LODOP.ADD_PRINT_HTM(444, "5%", "90%", 54, '<%footer%>');
+        LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
+        LODOP.SET_PRINT_STYLEA(0, "LinkedItem", 1);
+    `;
+
+        var lodopCodeTableMockCarton2 =
+            `
+        LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_分页打印综合表格");
+        var tableArray = document.getElementById("cartonDIV").childNodes;
+        for (var i = 0; i < tableArray.length; i++) {
+            LODOP.ADD_PRINT_TABLE(128, "5%", "90%", 314,tableArray[i].outerHTML);
+            LODOP.SET_PRINT_STYLEA(0, "Vorient", 3);
+        }
+        LODOP.ADD_PRINT_HTM(26, "5%", "90%", 109, '<%header%>');
+        LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
+        LODOP.SET_PRINT_STYLEA(0, "LinkedItem", 1);
+        LODOP.ADD_PRINT_HTM(444, "5%", "90%", 54, '<%footer%>');
+        LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
+        LODOP.SET_PRINT_STYLEA(0, "LinkedItem", 1);
+    `;
         //-------------inbound---------------
         //入库单 前端去设计
-        var tmplStrInbound = `
-                <table class="inboundTMPL" border=0 cellSpacing=0 cellPadding=0 width="100%" height="200"
+        var tmplStrInbound =
+            `
+                <table class="inboundTMPL" border=0 cellSpacing=0 cellPadding=0 width="100%"
                     bordercolor="#000000" style="border-collapse:collapse">
                     <caption><b>
                             <font face="黑体" size="4">产品入库汇总清单</font>
@@ -261,7 +455,7 @@
                             <th width="67%" colspan="2">部门名称:{{printdata.udf2}}</th>
                         </tr>
                         <tr>
-                            <td width="33%"><b>入库单编号</b></td>
+                            <td width="33%"><b>skuno</b></td>
                             <td width="33%"><b>产品名称</b></td>
                             <td width="32%"><b>数量</b></td>
                         </tr>
@@ -281,29 +475,26 @@
                             <th width="100%" colspan="3">　</th>
                         </tr>
                         <tr>
-                            <td width="100%" colspan="3"><b>带格线的每页备注：</b></td>
+                            <td width="60%" colspan="1"><b>带格线的每页备注：</b></td>
+                            <TD width="20%" tdata="pageNO" format="#" align="left">
+                            <p align="center"><b>第<font color="#0000FF">#</font>页</b></p>
+                            </TD>
+                            <TD width="20%" tdata="pageCount" format="#" align="left">
+                            <p align="center"><b>总<font color="#0000FF">##</font>页</b>
+                            </TD>    
                         </tr>
                     </tfoot>
                 </table>
-            `
-        var tmplStrInboundCSS = `
-            table,
-            th {
-                border: none;
-                height: 18px
-            }
-
-            td {
-                border: 1px solid #000;
-                height: 18px
-            }
-            `
+            `;
+        var tmplStrInboundCSS =
+            `table,th{border:none;height:38px}td{border:1px solid #000;height:38px}`;
 
         //-------------outbound---------------
 
-        var tmplStrOutboundHeader = `
+        var tmplStrOutboundHeader =
+            `
             <div id="div1">
-            <DIV style="LINE-HEIGHT: 30px" class=size16 align=center><STRONG><font color="#0000FF">销售发货单-01</font></STRONG></DIV>        
+            <DIV style="LINE-HEIGHT: 30px" class=size16 align=center><STRONG><font color="#0000FF">销售发货单-只第一页有</font></STRONG></DIV>        
             <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
             <TBODY>
             <TR>
@@ -322,12 +513,13 @@
             </div>
         `;
 
-        var tmplStrOutboundDetail = `
+        var tmplStrOutboundDetail =
+            `
         <TABLE border=1 cellSpacing=0 cellPadding=1 width="100%" style="border-collapse:collapse" bordercolor="#333333">
             <thead>
             <TR>
                 <TD width="10%">
-                <DIV align=center><b>表格页眉</b></DIV></TD>
+                <DIV align=center><b>序号</b></DIV></TD>
                 <TD width="25%">
                 <DIV align=center><b>品名</b></DIV></TD>
                 <TD width="10%">
@@ -342,8 +534,8 @@
                 <DIV align=center><b>金额</b></DIV></TD></TR>
             </thead>      
             <TBODY>      
-            <TR v-for="item in printdata.table">
-                <TD>&nbsp;TB_AMJ006</TD>
+            <TR v-for="(item,index) in printdata.table">
+                <TD>{{index}}</TD>
                 <TD>{{item.el1}}</TD>
                 <TD>{{item.el2}}</TD>
                 <TD>{{item.el3}}</TD>
@@ -351,6 +543,7 @@
                 <TD>{{item.el5}}</TD>
                 <TD>{{item.el6}}</TD>
             </TR>
+            </TBODY>
         <tfoot>
             <tr>
                 <TD ><b>表格页脚</b></TD>
@@ -367,27 +560,156 @@
         </tfoot>   
         `;
 
-        var tmplStrOutboundFooter = `
+        var tmplStrOutboundFooter =
+            `
         <DIV style="LINE-HEIGHT: 30px" align=center><font color="#0000FF">感谢您对我们雅瑞专卖店的支持，(发货单01的表格外“页脚”，紧跟表格)</font></DIV>
         `;
 
-        var tmplStrOutboundCSS = `table,td,th {border-width: 1px;border-style: solid;border-collapse: collapse}`;
+        var tmplStrOutboundCSS =
+            `table,td,th {border-width: 1px;border-style: solid;border-collapse: collapse}`;
 
-        //-------------data---------------
+
+        //-------------carton---------------
+        var tmplStrCartonHeader =
+            ` <div id="div1">
+                    <DIV style="LINE-HEIGHT: 30px" class=size16 align=center>
+                        <STRONG><font color="#0000FF">装箱单</font></STRONG>
+                    </DIV>
+                    <TABLE class="cartonHeaderTable" border=0 cellSpacing=0 cellPadding=0 width="100%">
+                        <TBODY>
+                            <TR>
+                                <TD width="43%">
+                                    <font color="#0000FF">所在店铺：{{printdata.udf1}}</font>
+                                </TD>
+                                <TD width="33%">
+                                    <font color="#0000FF">发货单号：{{printdata.udf2}}</font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">快递单号：{{printdata.udf3}}</font>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <font color="#0000FF">收 件 人：{{printdata.udf4}}</font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">网店单号：{{printdata.udf5}}</font>
+                                    <font color="#0000FF"></font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">发货日期：{{printdata.udf6}}</font>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <font color="#0000FF">电话号码：{{printdata.udf7}}</font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">收件人ID：{{printdata.udf8}}</font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">&nbsp;</font>
+                                </TD>
+                            </TR>
+                        </TBODY>
+                    </TABLE>
+                </div>`;
+
+        var tmplStrCartonDetail =
+            `<div id="cartonDetailTableDiv">
+        <TABLE class="cartonDetailTable" v-for="carton in printdata.table" border=0 cellSpacing=0 cellPadding=0  width="100%" height="200" bordercolor="#000000" style="border-collapse:collapse">
+                    <thead>
+                        <TR>
+                            <TD width="25%">
+                                <DIV align=center><b>箱号 {{carton.carton}}</b></DIV>
+                            </TD>
+                            <TD width="10%">
+                                <DIV align=center><b>数量</b></DIV>
+                            </TD>
+                            <TD width="10%">
+                                <DIV align=center><b>重量</b></DIV>
+                            </TD>
+                            <TD width="10%">
+                                <DIV align=center><b>体积</b></DIV>
+                            </TD>
+                            <TD width="10%">
+                                <DIV align=center><b>是否</b></DIV>
+                            </TD>
+                            <TD width="15%">
+                                <DIV align=center><b>单价</b></DIV>
+                            </TD>
+                            <TD width="20%">
+                                <DIV align=center><b>金额</b></DIV>
+                            </TD>
+                        </TR>
+                    </thead>
+                    <TBODY>
+                        <TR v-for="(item,index) in carton.skus">
+                            <TD align=center>{{item.sku}}</TD>
+                            <TD align=center>{{item.el1}}</TD>
+                            <TD align=center>{{item.el2}}</TD>
+                            <TD align=center>{{item.el3}}</TD>
+                            <TD align=center>{{item.el4}}</TD>
+                            <TD align=center>{{item.el5}}</TD>
+                            <TD align=center>{{item.el6}}</TD>
+                        </TR>
+                    </TBODY>
+                </TABLE>
+        </div> 
+            `;
+
+        var tmplStrCartonFooter =
+            `<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+                    <tfoot>
+                        <tr>
+                            <TD><b>表格页脚</b></TD>
+                            <TD><b>本页动态合计</b></TD>
+                            <TD><b>&nbsp;</b></TD>
+                            <TD tdata="pageNO" format="#" align="left">
+                                <p align="center"><b>第<font color="#0000FF">#</font>页</b></p>
+                            </TD>
+                            <TD tdata="pageCount" format="#" align="left">
+                                <p align="center"><b>总<font color="#0000FF">##</font>页</b></TD>
+                            <TD width="14%" align="right">　</TD>
+                            <TD width="19%" tdata="subSum" format="#,##0.00" align="right">
+                                <font color="#0000FF">###元</font>
+                            </TD>
+                        </tr>
+                    </tfoot>
+                </TABLE>`;
+
+        //坑：直接设置thead的border-bottom不行
+        var tmplStrCartonCSS =
+            `table,td{border:none;height:18px} thead td{border-bottom: 1px solid #000;height:18px}table{margin-bottom:30px}`;
+
         var inboundTMPL = {
             HEADER: "",
             DETAIL: tmplStrInbound,
             FOOTER: "",
             CSS: tmplStrInboundCSS,
-        }
+            LODOPCODE: lodopCodeTableMockInBound,
+            PRINTERNAME: '不存在的打印机',
+        };
 
         var outboundTMPL = {
             HEADER: tmplStrOutboundHeader,
             DETAIL: tmplStrOutboundDetail,
             FOOTER: tmplStrOutboundFooter,
             CSS: tmplStrOutboundCSS,
-        }
+            LODOPCODE: lodopCodeTableMockOutBound,
+            PRINTERNAME: 'Microsoft Print to PDF',
+        };
 
+        var cartonTMPL = {
+            HEADER: tmplStrCartonHeader,
+            DETAIL: tmplStrCartonDetail,
+            FOOTER: tmplStrCartonFooter,
+            CSS: tmplStrCartonCSS,
+            LODOPCODE: lodopCodeTableMockCarton,
+            PRINTERNAME: 'Microsoft Print to PDF',
+        };
+
+        //-------------data---------------
         var dataInbound = {
             title1: "123",
             udf1: "2019年9月9日",
@@ -405,6 +727,24 @@
                 },
             ]
         };
+        dataInboundboundTableMock();
+
+        function dataInboundboundTableMock() {
+            var num = 70;
+            var sum = 0;
+            var list = [];
+
+            for (var i = 0; i < num; i++) {
+                var obj = {};
+                obj.el1 = "A12321" + (i + 1);
+                obj.el2 = "产品" + i;
+                obj.el3 = i % 3 + 1;
+                list.push(obj);
+            }
+            dataInbound.table = list;
+            //dataOutbound.sum=sum;
+        };
+
         var dataOutbound = {
             title1: "123",
             udf1: "雅瑞专卖店",
@@ -438,7 +778,90 @@
             }
             dataOutbound.table = list;
             //dataOutbound.sum=sum;
-        }
+        };
+
+        var dataCarton = {
+            title1: "123",
+            udf1: "雅瑞专卖店",
+            udf2: "2011050810372",
+            udf3: "",
+            udf4: "张三",
+            udf5: "74235823905643",
+            udf6: "2011-5-10",
+            udf7: "13935429860",
+            udf8: "100100",
+            table: [],
+            //sum:0, lodop可以动态统计
+        };
+
+        dataCartoTableMock();
+
+        function dataCartoTableMock() {
+            var num = 10;
+            var maxSkuNum = 4;
+            var sum = 0;
+            var list = [];
+
+            for (var i = 0; i < num; i++) {
+                var obj = {};
+                obj.carton = 'NO.' + '20200205' + i;
+                obj.skus = [];
+
+                var numSku = i % maxSkuNum + 1;
+
+                for (var j = 0; j < numSku; j++) {
+                    var sku = {};
+                    sku.sku = "sku名称" + (j + 1);
+                    sku.el1 = i % 3 + 1;
+                    sku.el2 = '1kg';
+                    sku.el3 = '3';
+                    sku.el4 = 'Y';
+                    sku.el5 = 10;
+                    sku.el6 = sku.el1 * sku.el5;
+                    obj.skus.push(sku);
+                }
+
+                list.push(obj);
+            }
+            dataCarton.table = list;
+        };
+
+        var wantToSay = [{
+                title: "1.grid++",
+                content: [
+                    "grid++其实挺不错的，可以在线做模板，和jasper的模板制作很像。模板文件.grd本质是json。数据可为json、xml格式",
+                    "官方有四个方案：",
+                    "1.服务端方案不支持java,h5方案就是打印网页，不合适",
+                    "2.客户端方案本质是js的webSocket send数据到本地的客户端,本地客户端完成打印。源码和js写法见开发工具包WebSamples\jsp\webapp文件夹下",
+                    "3.插件方案支持浏览器编辑模板。不支持谷歌浏览器。源码和js写法见开发工具包WebSamples\jsp\plugins文件夹下",
+                    "支持group by分组，分页都是有的。子模板也支持。"
+                ],
+            }, {
+                title: "2.lodop",
+                content: [
+                    "lodop自带的可视化设计和jasper,grid++很不一样，不太符合我们的使用习惯。表格和变量要二次开发：",
+                    "1.表格的设计是采用超文本，可以设置每页打印，页眉页脚",
+                    "2.变量的设置是用的代码，设计界面上没找到定义变量的地方(参考例子35)。",
+                    "官方解释：'打印设计的目标用户是软件开发者，打印维护的目标用户是页面操作者'。打印维护：https://blog.csdn.net/zhangzhangjava/article/details/73203022",
+                    "lodop模板设计方案个人认为有三种:",
+                    "第一种后端返回base64图片",
+                    "第二种就是本页面所示的超文本。参考例子15和43",
+                    "第三种：用自带的设计，数据库保存指令。设计和变量参考例子35。指令画表格参考例A1",
+                    "第二种方案：",
+                    "1.前端用vue的组件、或者template.js art-template之类的做模板。html和css保存在数据库中,或者问问前端大佬有啥别的保存方式。",
+                    "2.后端返回业务数据和模板数据。渲染数据至模板，lodop用打印html和table的方式打印 ",
+                    "3.模板添加到dom后，没有更新可以不用再次去请求",
+                    "4.指令里的参数看需不需要可配置，关系到纸张之类的"
+                ]
+            },
+            {
+                title: "",
+                content: ["参考：https://www.cnblogs.com/werewolfBoy/archive/2019/06/20/11060156.html",
+                    "by:haozhao 20200120"
+                ]
+            }
+
+        ];
     </script>
 
 </body>

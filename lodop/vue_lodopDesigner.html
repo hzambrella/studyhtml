@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> vue lodop打印 简单示例</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <!-- <script language="javascript" src="LodopFuncs.js"></script> -->
+
+</head>
+<style>
+    #operation,
+    #help {
+        margin: 6px auto;
+        width: 95%;
+    }
+
+    #dataShow {
+        margin: 5px auto;
+        width: 98%;
+        height: 720px;
+    }
+
+    #toPrint {
+        width: 100%;
+        background-color: aquamarine;
+    }
+
+    .dataShowBlock {
+        float: left;
+        margin: 10px;
+    }
+
+    #tmplHideArea {
+        margin: 5px auto;
+        width: 95%;
+    }
+
+    #jsonData {
+        display: block;
+        width: 20%;
+        height: 100%;
+    }
+
+    #jsonData .dataText {
+        margin: 10px;
+        width: 100%;
+        height: 90%;
+    }
+
+    #tmplHTMLCode {
+        display: block;
+        width: 50%;
+        height: 100%;
+    }
+
+    #tmplHTMLCode .dataText {
+        margin: 10px;
+        width: 100%;
+    }
+
+    #cssResp {
+        display: block;
+        width: 20%;
+        height: 100%;
+    }
+
+    #cssResp .dataText {
+        margin: 10px;
+        height: 90%;
+        width: 100%;
+    }
+
+    [v-cloak] {
+        display: none;
+    }
+
+    .cartonHeaderTable,
+    .cartonDetailTable {
+        margin-bottom: 30px;
+    }
+
+    .cartonDetailTable,
+    .cartonDetailTable td {
+        border-width: 0px;
+        border-style: solid;
+        border-collapse: collapse
+    }
+
+    .cartonDetailTable thead {
+        border-width: 0 0 2px 0;
+        border-style: solid;
+        border-collapse: collapse
+    }
+</style>
+
+<body>
+    <div id="app" v-cloak>
+        <div id="tmplHideArea">
+            <div id="toPrintHEADER">
+                <div id="div1">
+                    <DIV style="LINE-HEIGHT: 30px" class=size16 align=center>
+                        <STRONG><font color="#0000FF">装箱单</font></STRONG>
+                    </DIV>
+                    <TABLE id="cartonHeaderTable" border=0 cellSpacing=0 cellPadding=0 width="100%">
+                        <TBODY>
+                            <TR>
+                                <TD width="43%">
+                                    <font color="#0000FF">所在店铺：
+                                        <SPAN id=rpt_Pro_Order_List_ctl00_lbl_eShop_Name>{{printdata.udf1}}</SPAN>
+                                    </font>
+                                </TD>
+                                <TD width="33%">
+                                    <font color="#0000FF">发货单号：
+                                        <SPAN>{{printdata.udf2}}</SPAN>
+                                    </font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">快递单号：{{printdata.udf3}}</font>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <font color="#0000FF">收 件 人：
+                                        <SPAN>{{printdata.udf4}}</SPAN>
+                                    </font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">网店单号：
+                                        <SPAN>{{printdata.udf5}}</SPAN>
+                                    </font>
+                                    <font color="#0000FF"></font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">发货日期：{{printdata.udf6}}</font>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <font color="#0000FF">电话号码：
+                                        <SPAN>{{printdata.udf7}}</SPAN>
+                                    </font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">收件人ID：
+                                        <SPAN>{{printdata.udf8}}</SPAN>
+                                    </font>
+                                </TD>
+                                <TD>
+                                    <font color="#0000FF">&nbsp;</font>
+                                </TD>
+                            </TR>
+                        </TBODY>
+                    </TABLE>
+                </div>
+            </div>
+            <div id="toPrintDETAIL">
+                <TABLE id="cartonDetailTable" v-for="carton in printdata.table" border=1 cellSpacing=0 cellPadding=1 width="100%" style="border-collapse:collapse"
+                    bordercolor="#333333">
+                    <thead>
+                        <TR>
+                            <TD width="10%">
+                                <DIV align=center><b>箱号 {{carton.carton}}</b></DIV>
+                            </TD>
+                            <TD width="25%">
+                                <DIV align=center><b>数量</b></DIV>
+                            </TD>
+                            <TD width="10%">
+                                <DIV align=center><b>重量</b></DIV>
+                            </TD>
+                            <TD width="10%">
+                                <DIV align=center><b>体积</b></DIV>
+                            </TD>
+                            <TD width="10%">
+                                <DIV align=center><b>是否</b></DIV>
+                            </TD>
+                            <TD width="15%">
+                                <DIV align=center><b>单价</b></DIV>
+                            </TD>
+                            <TD width="20%">
+                                <DIV align=center><b>金额</b></DIV>
+                            </TD>
+                        </TR>
+                    </thead>
+                    <TBODY>
+                        <TR v-for="(item,index) in carton.skus">
+                            <TD align=center>{{item.sku}}</TD>
+                            <TD align=center>{{item.el1}}</TD>
+                            <TD align=center>{{item.el2}}</TD>
+                            <TD align=center>{{item.el3}}</TD>
+                            <TD align=center>{{item.el4}}</TD>
+                            <TD align=center>{{item.el5}}</TD>
+                            <TD align=center>{{item.el6}}</TD>
+                        </TR>
+                    </TBODY>
+                </TABLE>
+            </div>
+            <div id="toPrintFOOTER">
+                <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+                    <tfoot>
+                        <tr>
+                            <TD><b>表格页脚</b></TD>
+                            <TD><b>本页动态合计</b></TD>
+                            <TD><b>&nbsp;</b></TD>
+                            <TD tdata="pageNO" format="#" align="left">
+                                <p align="center"><b>第<font color="#0000FF">#</font>页</b></p>
+                            </TD>
+                            <TD tdata="pageCount" format="#" align="left">
+                                <p align="center"><b>总<font color="#0000FF">##</font>页</b></TD>
+                            <TD width="14%" align="right">　</TD>
+                            <TD width="19%" tdata="subSum" format="#,##0.00" align="right">
+                                <font color="#0000FF">###元</font>
+                            </TD>
+                        </tr>
+                    </tfoot>
+                </TABLE>
+            </div>
+        </div>
+    </div>
+
+    <script language="javascript" type="text/javascript">
+        var dataStr =
+            '{"title1":"123","udf1":"雅瑞专卖店","udf2":"2011050810372","udf3":"","udf4":"李梦媛","udf5":"74235823905643","udf6":"2011-5-10","udf7":"13935429860","udf8":"100100","table":[{"carton":"NO.202002050","skus":[{"el1":"sku名称1","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10}]},{"carton":"NO.202002051","skus":[{"el1":"sku名称1","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称2","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20}]},{"carton":"NO.202002052","skus":[{"el1":"sku名称1","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30},{"el1":"sku名称2","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30},{"el1":"sku名称3","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30}]},{"carton":"NO.202002053","skus":[{"el1":"sku名称1","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称2","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称3","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称4","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10}]},{"carton":"NO.202002054","skus":[{"el1":"sku名称1","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20}]},{"carton":"NO.202002055","skus":[{"el1":"sku名称1","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30},{"el1":"sku名称2","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30}]},{"carton":"NO.202002056","skus":[{"el1":"sku名称1","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称2","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称3","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10}]},{"carton":"NO.202002057","skus":[{"el1":"sku名称1","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称2","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称3","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称4","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20}]},{"carton":"NO.202002058","skus":[{"el1":"sku名称1","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30}]},{"carton":"NO.202002059","skus":[{"el1":"sku名称1","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称2","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10}]},{"carton":"NO.2020020510","skus":[{"el1":"sku名称1","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称2","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称3","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20}]},{"carton":"NO.2020020511","skus":[{"el1":"sku名称1","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30},{"el1":"sku名称2","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30},{"el1":"sku名称3","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30},{"el1":"sku名称4","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30}]},{"carton":"NO.2020020512","skus":[{"el1":"sku名称1","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10}]},{"carton":"NO.2020020513","skus":[{"el1":"sku名称1","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称2","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20}]},{"carton":"NO.2020020514","skus":[{"el1":"sku名称1","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30},{"el1":"sku名称2","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30},{"el1":"sku名称3","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30}]},{"carton":"NO.2020020515","skus":[{"el1":"sku名称1","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称2","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称3","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称4","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10}]},{"carton":"NO.2020020516","skus":[{"el1":"sku名称1","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20}]},{"carton":"NO.2020020517","skus":[{"el1":"sku名称1","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30},{"el1":"sku名称2","el2":3,"el3":"1kg","el4":"Y","el5":10,"el6":30}]},{"carton":"NO.2020020518","skus":[{"el1":"sku名称1","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称2","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10},{"el1":"sku名称3","el2":1,"el3":"1kg","el4":"Y","el5":10,"el6":10}]},{"carton":"NO.2020020519","skus":[{"el1":"sku名称1","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称2","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称3","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20},{"el1":"sku名称4","el2":2,"el3":"1kg","el4":"Y","el5":10,"el6":20}]}]}'
+        var app = new Vue({
+            el: '#app',
+            data: {
+                printdata: JSON.parse(dataStr),
+            },
+            mounted: function () {
+                var tableArray = document.getElementById("toPrintDETAIL").childNodes;
+                alert(tableArray.length);
+                for (var i = 0; i < tableArray.length; i++) {
+                    console.log(tableArray[i].outerHTML);
+                }
+            }
+        });
+    </script>
+</body>
+
+
+
+</html>
